@@ -10,43 +10,86 @@
 <meta property="og:image" content="assets/og-banner.png">
 <meta property="og:type" content="website">
 <style>
-  :root { --navy: #0c184f; --blue: #0067d9; --ink: #1c1c1e; --muted: #5a5a5e; --bg: #faf9f7; --card: #ffffff; --line: #e8e6e1; }
+  :root { --navy: #0c184f; --blue: #0067d9; --ink: #1c1c1e; --muted: #5a5a5e; --bg: #faf9f7; --card: #ffffff; --line: #e8e6e1; --orange: #f5a03c; --purple: #6a6bf5; --violet: #9b5cf6; --sky: #3b82f6; }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
   a { color: var(--blue); }
   header { background: var(--navy); color: #fff; }
-  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
   nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
   nav .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 700; font-size: 20px; }
   nav .brand img { width: 40px; height: 40px; border-radius: 10px; }
-  nav .links a { color: #cdd6ff; text-decoration: none; margin-left: 20px; font-size: 15px; }
+  nav .links a { color: #cdd6ff; text-decoration: none; margin-left: 18px; font-size: 15px; }
   nav .links a:hover { color: #fff; }
-  .hero { padding: 48px 0 56px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; font-weight: 700; color: #9fb0ff; margin: 0 0 14px; }
+  .eyebrow.dark { color: var(--blue); }
+  .hero { padding: 44px 0 56px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
   .hero h1 { font-size: 52px; line-height: 1.08; margin: 0 0 16px; letter-spacing: -0.02em; }
   .hero p.lead { font-size: 19px; color: #cdd6ff; margin: 0 0 24px; }
   .btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; }
+  .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; border: 0; cursor: pointer; font-size: 15px; }
   .btn-primary { background: #fff; color: var(--navy); }
-  .btn-ghost { border: 1px solid #5a6bb8; color: #fff; }
+  .btn-ghost { border: 1px solid #5a6bb8; color: #fff; background: transparent; }
+  .btn-navy { background: var(--navy); color: #fff; }
+  .btn-line { border: 1px solid var(--line); color: var(--ink); background: #fff; }
   .hero img.mascot { width: 100%; max-width: 420px; border-radius: 24px; display: block; margin: 0 auto; }
+  .copychip { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); border: 1px solid #3a4a8c; border-radius: 10px; padding: 10px 14px; margin-top: 22px; font-family: ui-monospace, monospace; font-size: 14px; color: #e6ebff; }
+  .copychip button { background: #fff; color: var(--navy); border: 0; border-radius: 8px; padding: 5px 12px; font-weight: 700; cursor: pointer; }
   .notice { background: #fff3cd; border: 1px solid #f0d98a; border-radius: 12px; padding: 14px 18px; margin: 28px 0 0; color: #5a4a00; }
-  section { padding: 56px 0; }
-  section h2 { font-size: 32px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.01em; }
-  section .sub { color: var(--muted); font-size: 18px; margin: 0 0 32px; max-width: 680px; }
+  section { padding: 60px 0; }
+  section h2 { font-size: 34px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.01em; }
+  section .sub { color: var(--muted); font-size: 18px; margin: 0 0 32px; max-width: 700px; }
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid4 { grid-template-columns: repeat(4, 1fr); }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
   .card h3 { margin: 0 0 8px; font-size: 19px; }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .dot { display: inline-block; width: 34px; height: 34px; border-radius: 50%; margin-bottom: 12px; }
   .banner { width: 100%; border-radius: 18px; display: block; }
+  /* phone demo */
+  .demo { display: grid; grid-template-columns: 320px 1fr; gap: 36px; align-items: start; }
+  .phone { background: #111; border-radius: 36px; padding: 12px; box-shadow: 0 18px 50px rgba(12,24,79,0.25); }
+  .phone-screen { background: #fff; border-radius: 26px; overflow: hidden; }
+  .phone-top { background: var(--navy); color: #fff; padding: 16px; font-weight: 700; }
+  .tabs { display: flex; gap: 6px; padding: 10px; background: #f2f1ee; }
+  .tabs button { flex: 1; border: 0; border-radius: 999px; padding: 8px 4px; font-weight: 600; cursor: pointer; background: transparent; }
+  .tabs button.active { background: var(--navy); color: #fff; }
+  .thread { padding: 16px; min-height: 300px; }
+  .thread-pane { display: none; }
+  .thread-pane.active { display: block; }
+  .msg { margin: 0 0 12px; font-size: 14px; line-height: 1.5; }
+  .msg b { display: block; font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+  .msg.user { background: #eef1ff; border-radius: 14px 14px 14px 4px; padding: 10px 12px; }
+  .msg.bot { background: #f2f1ee; border-radius: 14px 14px 4px 14px; padding: 10px 12px; }
+  .msg.cardmsg { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+  .msg.cardmsg table { width: 100%; font-size: 13px; }
+  .msg.cardmsg td:first-child { color: var(--muted); padding-right: 10px; }
+  /* approval mock */
+  .approval { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .approval .meta { color: var(--muted); font-size: 14px; }
+  .approval .actions { display: flex; gap: 10px; margin-top: 14px; }
+  .approval .actions button { border: 0; border-radius: 999px; padding: 10px 20px; font-weight: 700; cursor: pointer; }
+  .approval .actions .ok { background: var(--blue); color: #fff; }
+  .approval .actions .no { background: #f2f1ee; }
   .how { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .how ol { margin: 0; padding-left: 22px; font-size: 17px; }
   .how li { margin-bottom: 10px; }
   code { background: #eef1ff; padding: 2px 7px; border-radius: 6px; font-size: 0.9em; }
+  .faq article { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; }
+  .faq h3 { margin: 0 0 6px; font-size: 18px; }
+  .faq p { margin: 0; color: var(--muted); }
+  .cta { background: var(--navy); color: #fff; border-radius: 24px; padding: 44px; text-align: center; }
+  .cta h2 { color: #fff; }
+  .cta p { color: #cdd6ff; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: #eef1ff; color: var(--blue); }
+  .tag.soon { background: #fff3cd; color: #5a4a00; }
   footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
-  @media (max-width: 760px) {
+  footer a { color: var(--muted); }
+  @media (max-width: 820px) {
     .hero { grid-template-columns: 1fr; }
     .hero h1 { font-size: 38px; }
-    .grid { grid-template-columns: 1fr; }
+    .grid, .grid4 { grid-template-columns: 1fr; }
+    .demo { grid-template-columns: 1fr; }
     nav .links { display: none; }
   }
 </style>
@@ -57,19 +100,25 @@
     <nav>
       <a class="brand" href="#"><img src="assets/mascot.png" alt="Hermes Bots mascot"> Hermes Bots</a>
       <div class="links">
-        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
         <a href="#team">Bot team</a>
-        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#host">Your host</a>
+        <a href="#faq">FAQ</a>
         <a href="https://github.com/galyarderlabs/hermes-bots">GitHub</a>
       </div>
     </nav>
     <div class="hero">
       <div>
+        <p class="eyebrow">Open source · AGPL-3.0</p>
         <h1>Talk to your bots, from your phone.</h1>
-        <p class="lead">A Grok-style bot control surface for Hermes hosts. Chat with your bots, manage sessions and scheduled tasks, and review approvals — while your Hermes host stays in charge.</p>
+        <p class="lead">Give your bots a job. Check in from any device. Hermes Bots is a Grok-style control surface for Hermes hosts — your bots keep working on the host, you steer them from your pocket.</p>
         <div class="btns">
           <a class="btn btn-primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
-          <a class="btn btn-ghost" href="https://github.com/galyarderlabs/hermes-bots">View on GitHub</a>
+          <a class="btn btn-ghost" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
+        </div>
+        <div>
+          <span class="copychip"><span>$</span><code style="background:transparent;color:#e6ebff;padding:0;">cd gateway &amp;&amp; cargo build --release</code><button id="copyBtn" type="button">Copy</button></span>
         </div>
       </div>
       <img class="mascot" src="assets/mascot.png" alt="Hermes Bots mascot — a blue Pou-style blob with a golden winged helmet and winged staff">
@@ -81,54 +130,145 @@
   <div class="wrap">
     <div class="notice"><strong>Status: preview.</strong> The core client is implemented and the Android build is green, but a live Hermes host connection has not been verified yet. See <a href="https://github.com/galyarderlabs/hermes-bots#current-limitations">Current limitations</a> before relying on it.</div>
 
+    <section id="demo">
+      <p class="eyebrow dark">Product demo</p>
+      <h2>One app, your whole bot team.</h2>
+      <p class="sub">Illustrative threads — this is what a bot conversation, a routine result, and an approval look like inside the app. Tap a tab.</p>
+      <div class="demo">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-top">Hermes Bots · Bots</div>
+            <div class="tabs">
+              <button class="tabbtn active" data-tab="t-chat">Chat</button>
+              <button class="tabbtn" data-tab="t-task">Routine</button>
+              <button class="tabbtn" data-tab="t-approval">Approval</button>
+            </div>
+            <div class="thread">
+              <div class="thread-pane active" id="t-chat">
+                <p class="msg user"><b>You · 11:40 PM</b>Work the research list overnight. Nothing sent without me.</p>
+                <p class="msg bot"><b>Research Scout</b>Understood. I will research, score, and draft. Everything lands in a review list at 6am.</p>
+                <p class="msg cardmsg"><b>Overnight result</b><table><tr><td>Researched</td><td>40 accounts</td></tr><tr><td>Drafted</td><td>18, held for review</td></tr><tr><td>Skipped</td><td>4, already in pipeline</td></tr></table></p>
+              </div>
+              <div class="thread-pane" id="t-task">
+                <p class="msg bot"><b>Routine · Morning sweep · Weekdays 6am</b>41 threads read since Friday.</p>
+                <p class="msg cardmsg"><b>Result</b><table><tr><td>Archived</td><td>26 newsletters + receipts</td></tr><tr><td>Replied</td><td>9 routine threads</td></tr><tr><td>Held</td><td>5 drafts for your read</td></tr></table></p>
+                <p class="msg user"><b>You</b>Send the renewal one, I'll take the rest tomorrow.</p>
+              </div>
+              <div class="thread-pane" id="t-approval">
+                <p class="msg bot"><b>Approval required</b>A bot wants to send 18 drafts to outside contacts. Review the list first?</p>
+                <p class="msg cardmsg"><b>Action</b>Send 18 drafts · Outside contacts · Needs your approval</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="grid" style="grid-template-columns:1fr;">
+            <div class="card"><h3>Turn journaling, not fire-and-forget</h3><p>An intent is persisted before it is sent. A failed write sends nothing, and a session held elsewhere shows as read-only instead of silently conflicting.</p></div>
+            <div class="card"><h3>One durable connection</h3><p>Chat, sessions, tasks and approvals ride one WebSocket (<code>/api/ws</code>, JSON-RPC) to the gateway — no polling, no duplicated state.</p></div>
+            <div class="card"><h3>Group chats, attributed</h3><p>Several bots in one conversation, each reply attributed to its sender. That is the app's version of peer-bot delegation.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section>
       <img class="banner" src="assets/og-banner.png" alt="Hermes Bots banner">
     </section>
 
     <section id="team">
+      <p class="eyebrow dark">Your bot team</p>
       <h2>Give each bot a job.</h2>
-      <p class="sub">One team, one phone. Each bot keeps its own conversations, sessions and routines — you just pick the bot and tell it what to do.</p>
-      <div class="grid">
-        <div class="card"><h3>Your bot team</h3><p>Roster, search, profiles, capabilities and routines — every bot in one place, each with its own history.</p></div>
-        <div class="card"><h3>Jobs, not just chats</h3><p>Schedule recurring work per bot, pause or trigger it on demand, and see the last result instead of only a status label.</p></div>
-        <div class="card"><h3>Many bots, one conversation</h3><p>Group chats put several bots in one thread, each reply attributed to its sender.</p></div>
+      <p class="sub">Start with a job. Make it yours. Starter templates are the next step after v0.1.2 — today each bot already keeps its own conversations, sessions and routines on the host, and the app shows them per bot.</p>
+      <div class="grid grid4">
+        <div class="card"><span class="dot" style="background:var(--orange)"></span><h3>Research Scout</h3><p>Research a list overnight, score it, draft in your voice — nothing sent without you.</p></div>
+        <div class="card"><span class="dot" style="background:var(--purple)"></span><h3>Inbox Manager</h3><p>Sweep the inbox, archive the noise, draft the rest, flag the one that actually needs you.</p></div>
+        <div class="card"><span class="dot" style="background:var(--violet)"></span><h3>Account Watcher</h3><p>Remember the account: who approves, what terms they sign, and what was promised last time.</p></div>
+        <div class="card"><span class="dot" style="background:var(--sky)"></span><h3>Task Runner</h3><p>Recurring work on a schedule — morning sweep, month-end close, pipeline refresh — with a result card every run.</p></div>
       </div>
     </section>
 
     <section id="features">
+      <p class="eyebrow dark">More than chat</p>
       <h2>What it does</h2>
       <p class="sub">Everything a control surface needs — and nothing it should not do.</p>
       <div class="grid">
-        <div class="card"><h3>Live chat</h3><p>Streamed bot replies over a single durable WebSocket, with turn journaling: an intent is persisted before it is sent, and a failed write sends nothing.</p></div>
+        <div class="card"><h3>Live chat</h3><p>Streamed bot replies over a single durable WebSocket, with turn journaling and never-auto-resubmit.</p></div>
         <div class="card"><h3>Sessions</h3><p>The full runtime session projection, including read-only sessions held elsewhere.</p></div>
-        <div class="card"><h3>Tasks</h3><p>Scheduled and recurring bot work, with pause, resume, trigger and delete.</p></div>
+        <div class="card"><h3>Tasks &amp; routines</h3><p>Scheduled and recurring bot work, with pause, resume, trigger and delete — preset schedules are coming next.</p></div>
         <div class="card"><h3>Approvals &amp; clarifications</h3><p>Review bot questions and sensitive actions before they run.</p></div>
         <div class="card"><h3>Computer view</h3><p>Read-only host display thumbnail. Take-control is not implemented yet.</p></div>
-        <div class="card"><h3>Private by design</h3><p>Provider credentials never enter the app. Tokens live only in SecureStore, and cleartext stays off by default.</p></div>
+        <div class="card"><h3>Private by design</h3><p>Provider credentials never enter the app. Tokens live only in SecureStore, cleartext stays off by default.</p></div>
       </div>
     </section>
   </div>
 
-  <section id="how" class="how">
+  <section id="host" class="how">
     <div class="wrap">
-      <h2>How it works</h2>
-      <p class="sub">Hermes Bots is a remote control surface, not an agent runtime. It runs no model, holds no provider credentials, and executes no tools.</p>
+      <p class="eyebrow dark">Your host, your control</p>
+      <h2>Your machine, your bots, your limits.</h2>
+      <p class="sub">Hermes Bots is a remote control surface, not an agent runtime. It runs no model, holds no provider credentials, and executes no tools. The Hermes host remains the sole authority.</p>
+      <div class="grid">
+        <div class="card"><h3>Your host's model</h3><p>Each bot uses the model its host is configured with. The app never picks a provider for you and never sees the key.</p></div>
+        <div class="card"><h3>Work on a schedule</h3><p>Recurring tasks run on the host while it stays on — the phone only checks in and reviews results.</p></div>
+        <div class="card"><h3>You set the limits</h3><p>Decide which actions need your approval. Nothing sensitive runs while you are not looking.</p></div>
+      </div>
+      <div class="approval" style="margin-top:18px;">
+        <p class="meta">Approval required · Weekdays 9:00 · Send 18 drafts</p>
+        <h3 style="margin:8px 0;">A bot wants to send outside the team. Approve?</h3>
+        <p style="color:var(--muted);margin:0;">This is the gate every sensitive action passes through. Approve sends it, Deny stops it — no silent middle ground.</p>
+        <div class="actions"><button class="ok" type="button">Approve</button><button class="no" type="button">Deny</button></div>
+      </div>
+      <h3 style="margin-top:36px;">Get connected</h3>
       <ol>
         <li>Run the Rust gateway on your Hermes host: <code>cd gateway &amp;&amp; cargo build --release</code></li>
         <li>Put your phone and host on the same Tailscale tailnet.</li>
         <li>In the app, go to Settings → Connection and enter the gateway's tailnet address — never <code>127.0.0.1</code> on the phone.</li>
-        <li>Probe <code>/api/status</code> and pair. The host remains the sole authority for agents, credentials, approvals, tools, sessions, files and history.</li>
+        <li>Probe <code>/api/status</code> and pair. PKCE pairing is still a stub in this preview — expect that step to be the first rough edge.</li>
       </ol>
     </div>
   </section>
 
   <div class="wrap">
     <section>
-      <h2>Download</h2>
-      <p class="sub">Android debug preview builds are published on GitHub Releases. Uninstall any older preview first, and download on Wi-Fi — a universal debug build is around 240 MB.</p>
+      <p class="eyebrow dark">Platforms</p>
+      <h2>Wherever you are — starting with Android.</h2>
+      <div class="grid">
+        <div class="card"><h3>Android <span class="tag">Available now</span></h3><p>Debug preview builds on GitHub Releases. Uninstall any older preview first, download on Wi-Fi — a universal debug build is around 240 MB.</p></div>
+        <div class="card"><h3>Web <span class="tag soon">This page only</span></h3><p>This landing page is web. A full web client is not shipped yet.</p></div>
+        <div class="card"><h3>iOS &amp; Desktop <span class="tag soon">Not yet</span></h3><p>Not shipped. Android first, because that is what can be tested on a real device today.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow dark">Open source</p>
+      <h2>AGPL-3.0. Run it, change it, make it yours.</h2>
+      <p class="sub">A port of CodeUpdaterBot/Hermes-Mobile-App (AGPL-3.0), reimplemented as an Expo React Native app with a Rust Axum gateway. The upstream licence is why this is AGPL-3.0, not MIT.</p>
       <div class="btns">
-        <a class="btn" style="background: var(--navy); color: #fff;" href="https://github.com/galyarderlabs/hermes-bots/releases">Get the latest release</a>
-        <a class="btn" style="border: 1px solid var(--line); color: var(--ink);" href="https://github.com/galyarderlabs/hermes-bots">Source code (AGPL-3.0)</a>
+        <a class="btn btn-navy" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
+        <a class="btn btn-line" href="https://github.com/galyarderlabs/hermes-bots">Read the README</a>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <p class="eyebrow dark">FAQ</p>
+      <h2>Frequently asked questions</h2>
+      <div>
+        <article><h3>Is this production-ready?</h3><p>No. It is a preview. The core client is implemented and the Android build is green, but a live Hermes host connection has not been verified yet, pairing is a stub, and voice, file picker, push and the tablet layout are not wired.</p></article>
+        <article><h3>Does the app hold my provider credentials?</h3><p>No. The host holds the model, credentials and history. Provider credentials never enter the app, and tokens live only in SecureStore.</p></article>
+        <article><h3>Do I need a Hermes host?</h3><p>Yes. Without a paired host the app shows “Connect Hermes first”. This is a control surface, not a standalone agent.</p></article>
+        <article><h3>Do I need Tailscale?</h3><p>It is the recommended path: phone and host on the same tailnet, then enter the gateway's tailnet address in Settings → Connection. The gateway listens on the host only by default.</p></article>
+        <article><h3>Why is the APK ~240 MB?</h3><p>It is a universal debug build with 4 ABIs, not a stripped release build. That size is a preview-build property, not the app's real footprint goal.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="cta">
+        <h2>Meet your first bot.</h2>
+        <p>Hand over your next task — and check in from your phone.</p>
+        <div class="btns" style="justify-content:center;">
+          <a class="btn btn-primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
+          <a class="btn btn-ghost" href="https://github.com/galyarderlabs/hermes-bots">View on GitHub</a>
+        </div>
       </div>
     </section>
   </div>
@@ -136,8 +276,22 @@
 
 <footer>
   <div class="wrap">
-    <p>Hermes Bots — a port of <a href="https://github.com/CodeUpdaterBot/Hermes-Mobile-App">CodeUpdaterBot/Hermes-Mobile-App</a> (AGPL-3.0), reimplemented as an Expo React Native app with a Rust Axum gateway. Licensed under AGPL-3.0. Not affiliated with Grok or xAI; “Grok-style” describes the bot-team interaction pattern only.</p>
+    <p>Hermes Bots · <a href="https://github.com/galyarderlabs/hermes-bots">GitHub</a> · <a href="https://github.com/galyarderlabs/hermes-bots/releases">Releases</a> · <a href="https://github.com/galyarderlabs/hermes-bots/blob/main/LICENSE">License (AGPL-3.0)</a> · Upstream: <a href="https://github.com/CodeUpdaterBot/Hermes-Mobile-App">Hermes-Mobile-App</a>. Not affiliated with Grok or xAI; “Grok-style” describes the bot-team interaction pattern only.</p>
   </div>
 </footer>
+<script>
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var text = 'cd gateway && cargo build --release';
+    if (navigator.clipboard) { navigator.clipboard.writeText(text).then(function(){ document.getElementById('copyBtn').textContent = 'Copied'; }); }
+  });
+  document.querySelectorAll('.tabbtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tabbtn').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.thread-pane').forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
