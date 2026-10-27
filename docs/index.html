@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hermes Bots — Talk to your bots, from your phone</title>
+<meta name="description" content="A Grok-style bot control surface for Hermes hosts. Talk to your bots, manage sessions and scheduled tasks, and review approvals — from your phone, while your Hermes host stays in charge.">
+<meta property="og:title" content="Hermes Bots">
+<meta property="og:description" content="Talk to your bots, from your phone.">
+<meta property="og:image" content="assets/og-banner.png">
+<meta property="og:type" content="website">
+<style>
+  :root { --navy: #0c184f; --blue: #0067d9; --ink: #1c1c1e; --muted: #5a5a5e; --bg: #faf9f7; --card: #ffffff; --line: #e8e6e1; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  a { color: var(--blue); }
+  header { background: var(--navy); color: #fff; }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  nav .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 700; font-size: 20px; }
+  nav .brand img { width: 40px; height: 40px; border-radius: 10px; }
+  nav .links a { color: #cdd6ff; text-decoration: none; margin-left: 20px; font-size: 15px; }
+  nav .links a:hover { color: #fff; }
+  .hero { padding: 48px 0 56px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .hero h1 { font-size: 52px; line-height: 1.08; margin: 0 0 16px; letter-spacing: -0.02em; }
+  .hero p.lead { font-size: 19px; color: #cdd6ff; margin: 0 0 24px; }
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; }
+  .btn-primary { background: #fff; color: var(--navy); }
+  .btn-ghost { border: 1px solid #5a6bb8; color: #fff; }
+  .hero img.mascot { width: 100%; max-width: 420px; border-radius: 24px; display: block; margin: 0 auto; }
+  .notice { background: #fff3cd; border: 1px solid #f0d98a; border-radius: 12px; padding: 14px 18px; margin: 28px 0 0; color: #5a4a00; }
+  section { padding: 56px 0; }
+  section h2 { font-size: 32px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.01em; }
+  section .sub { color: var(--muted); font-size: 18px; margin: 0 0 32px; max-width: 680px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+  .card h3 { margin: 0 0 8px; font-size: 19px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .banner { width: 100%; border-radius: 18px; display: block; }
+  .how { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .how ol { margin: 0; padding-left: 22px; font-size: 17px; }
+  .how li { margin-bottom: 10px; }
+  code { background: #eef1ff; padding: 2px 7px; border-radius: 6px; font-size: 0.9em; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 38px; }
+    .grid { grid-template-columns: 1fr; }
+    nav .links { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#"><img src="assets/mascot.png" alt="Hermes Bots mascot"> Hermes Bots</a>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#team">Bot team</a>
+        <a href="#how">How it works</a>
+        <a href="https://github.com/galyarderlabs/hermes-bots">GitHub</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <div>
+        <h1>Talk to your bots, from your phone.</h1>
+        <p class="lead">A Grok-style bot control surface for Hermes hosts. Chat with your bots, manage sessions and scheduled tasks, and review approvals — while your Hermes host stays in charge.</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
+          <a class="btn btn-ghost" href="https://github.com/galyarderlabs/hermes-bots">View on GitHub</a>
+        </div>
+      </div>
+      <img class="mascot" src="assets/mascot.png" alt="Hermes Bots mascot — a blue Pou-style blob with a golden winged helmet and winged staff">
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="notice"><strong>Status: preview.</strong> The core client is implemented and the Android build is green, but a live Hermes host connection has not been verified yet. See <a href="https://github.com/galyarderlabs/hermes-bots#current-limitations">Current limitations</a> before relying on it.</div>
+
+    <section>
+      <img class="banner" src="assets/og-banner.png" alt="Hermes Bots banner">
+    </section>
+
+    <section id="team">
+      <h2>Give each bot a job.</h2>
+      <p class="sub">One team, one phone. Each bot keeps its own conversations, sessions and routines — you just pick the bot and tell it what to do.</p>
+      <div class="grid">
+        <div class="card"><h3>Your bot team</h3><p>Roster, search, profiles, capabilities and routines — every bot in one place, each with its own history.</p></div>
+        <div class="card"><h3>Jobs, not just chats</h3><p>Schedule recurring work per bot, pause or trigger it on demand, and see the last result instead of only a status label.</p></div>
+        <div class="card"><h3>Many bots, one conversation</h3><p>Group chats put several bots in one thread, each reply attributed to its sender.</p></div>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2>What it does</h2>
+      <p class="sub">Everything a control surface needs — and nothing it should not do.</p>
+      <div class="grid">
+        <div class="card"><h3>Live chat</h3><p>Streamed bot replies over a single durable WebSocket, with turn journaling: an intent is persisted before it is sent, and a failed write sends nothing.</p></div>
+        <div class="card"><h3>Sessions</h3><p>The full runtime session projection, including read-only sessions held elsewhere.</p></div>
+        <div class="card"><h3>Tasks</h3><p>Scheduled and recurring bot work, with pause, resume, trigger and delete.</p></div>
+        <div class="card"><h3>Approvals &amp; clarifications</h3><p>Review bot questions and sensitive actions before they run.</p></div>
+        <div class="card"><h3>Computer view</h3><p>Read-only host display thumbnail. Take-control is not implemented yet.</p></div>
+        <div class="card"><h3>Private by design</h3><p>Provider credentials never enter the app. Tokens live only in SecureStore, and cleartext stays off by default.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section id="how" class="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="sub">Hermes Bots is a remote control surface, not an agent runtime. It runs no model, holds no provider credentials, and executes no tools.</p>
+      <ol>
+        <li>Run the Rust gateway on your Hermes host: <code>cd gateway &amp;&amp; cargo build --release</code></li>
+        <li>Put your phone and host on the same Tailscale tailnet.</li>
+        <li>In the app, go to Settings → Connection and enter the gateway's tailnet address — never <code>127.0.0.1</code> on the phone.</li>
+        <li>Probe <code>/api/status</code> and pair. The host remains the sole authority for agents, credentials, approvals, tools, sessions, files and history.</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section>
+      <h2>Download</h2>
+      <p class="sub">Android debug preview builds are published on GitHub Releases. Uninstall any older preview first, and download on Wi-Fi — a universal debug build is around 240 MB.</p>
+      <div class="btns">
+        <a class="btn" style="background: var(--navy); color: #fff;" href="https://github.com/galyarderlabs/hermes-bots/releases">Get the latest release</a>
+        <a class="btn" style="border: 1px solid var(--line); color: var(--ink);" href="https://github.com/galyarderlabs/hermes-bots">Source code (AGPL-3.0)</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Hermes Bots — a port of <a href="https://github.com/CodeUpdaterBot/Hermes-Mobile-App">CodeUpdaterBot/Hermes-Mobile-App</a> (AGPL-3.0), reimplemented as an Expo React Native app with a Rust Axum gateway. Licensed under AGPL-3.0. Not affiliated with Grok or xAI; “Grok-style” describes the bot-team interaction pattern only.</p>
+  </div>
+</footer>
+</body>
+</html>
