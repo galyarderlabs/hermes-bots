@@ -1,0 +1,145 @@
+# Hermes Mobile — design-contract lint gates (grep-based, deterministic).
+#
+# This is the SINGLE home of the §8.8 lint gates. They are NOT duplicated
+# in android-release.yml: app-check there covers typecheck/tests/
+# manifest/bundle-size, this workflow covers the design gates below.
+#
+# All three gates FAIL the build on a violation. No custom ESLint plugin:
+# these are plain greps (plus one comment-line filter), so they are
+# verifiable by reading this file. No secrets required.
+#
+# Triggers: push to main, pull_request to main.
+# Cancel in-progress runs for PRs only (see concurrency below).
+
+name: lint-gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint-gates:
+    name: lint-gates (raw hex, GlassSurface backdrop, light jade text)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Locate source tree
+        # The app agent owns the layout; gates scan src/ and/or app/
+        # (Expo Router routes) when present. If neither exists, fail
+        # honestly instead of reporting a vacuous pass.
+        run: |
+          SOURCES=""
+          [ -d src ] && SOURCES="$SOURCES src"
+          [ -d app ] && SOURCES="$SOURCES app"
+          if [ -z "$SOURCES" ]; then
+            echo "FAIL: no src/ or app/ source tree found at repo root; nothing to lint."
+            exit 1
+          fi
+          echo "SOURCES=$SOURCES" >> "$GITHUB_ENV"
+          echo "Linting source tree(s):$SOURCES"
+
+      - name: Gate A — no raw hex outside token files
+        # Design-contract §3.1: semantic tokens only in app code; a raw
+        # hex literal in a screen/component file is a defect.
+        # Allowed: any file named tokens.ts or material.ts (this covers
+        # src/theme/tokens.ts and the vendored glassyui token/material
+        # files), test files (tests may assert token values), and
+        # comment-only lines (a hex mentioned in a // or /* comment
+        # is documentation, not a literal in code).
+        # Known limitation: a hex inside a multi-line block comment
+        # whose continuation line does not start with '*' is still
+        # flagged; move such notes out of code or into tokens.ts.
+        run: |
+          # shellcheck disable=SC2086
+          MATCHES=$(grep -RInE \
+            --include='*.ts' --include='*.tsx' \
+            --include='*.js' --include='*.jsx' \
+            --exclude='tokens.ts' --exclude='material.ts' \
+            --exclude='*.test.ts' --exclude='*.test.tsx' \
+            --exclude='*.test.js' --exclude='*.test.jsx' \
+            --exclude='*.spec.ts' --exclude='*.spec.tsx' \
+            --exclude-dir='__tests__' --exclude-dir='node_modules' \
+            '#[0-9a-fA-F]{3,8}\b' $SOURCES || true)
+          FILTERED=$(printf '%s\n' "$MATCHES" | grep -vE '^[^:]+:[0-9]+:[[:space:]]*(//|\*)' || true)
+          if [ -n "$FILTERED" ]; then
+            echo "FAIL: raw hex colour literal(s) outside token files:"
+            printf '%s\n' "$FILTERED"
+            echo "Move the value into src/theme/tokens.ts (or the vendored glassyui token file) and reference the semantic token instead."
+            exit 1
+          fi
+          echo "Gate A ok: no raw hex outside token files."
+
+      - name: Gate B — GlassSurface without GlassBackdrop (best-effort)
+        # Design-contract §3.4/§8.6: on Android, a glass surface only
+        # blurs what sits in a GlassBackdrop. A GlassSurface import with
+        # no GlassBackdrop import in the same file is a clear violation
+        # and fails this gate.
+        # Best-effort scope, stated plainly: this checks same-file
+        # imports only. It does NOT prove JSX nesting (a surface could
+        # import the backdrop yet render outside it) and it does NOT
+        # cover a surface that legitimately receives its backdrop from
+        # a parent component — such a component will be flagged here
+        # and must either own its backdrop or be restructured.
+        # Follow-up: replace this with a real lint rule (AST-based,
+        # checking JSX ancestry) once the app tree exists; see
+        # CI-NOTES.md.
+        # Vendored glassyui sources and tests are excluded: glassyui
+        # defines GlassSurface itself, and tests may render it alone.
+        run: |
+          VIOLATIONS=""
+          while IFS= read -r file; do
+            case "$file" in
+              *src/components/glassyui/*|*.test.tsx|*.test.ts) continue ;;
+            esac
+            if ! grep -q 'GlassBackdrop' "$file"; then
+              VIOLATIONS="$VIOLATIONS$file"$'\n'
+            fi
+          done < <(grep -RIl --include='*.tsx' --exclude-dir='node_modules' 'GlassSurface' $SOURCES 2>/dev/null || true)
+          if [ -n "$VIOLATIONS" ]; then
+            echo "FAIL: GlassSurface used without GlassBackdrop in the same file:"
+            printf '%s' "$VIOLATIONS"
+            echo "On Android a glass surface without its backdrop does not blur (design-contract §3.4). Import and render GlassBackdrop around the surface."
+            exit 1
+          fi
+          echo "Gate B ok: every GlassSurface file also imports GlassBackdrop (best-effort import check)."
+
+      - name: Gate C — light jade must never be text
+        # Design-contract §3.1, measured: light jade #14a874 on light
+        # bg #faf9f7 is 2.90:1 — below even the 3:1 large-text floor.
+        # It is allowed only as a presence dot / badge fill paired with
+        # dark ink on a tinted background, and that pairing lives in
+        # the token file. Any other occurrence fails.
+        # Excluded (same rationale as Gate A): token/material files,
+        # test files asserting token values, and comment-only lines
+        # (a hex mentioned in a // or /* comment is documentation,
+        # not a colour used as text).
+        run: |
+          # shellcheck disable=SC2086
+          MATCHES=$(grep -RIni \
+            --include='*.ts' --include='*.tsx' \
+            --include='*.js' --include='*.jsx' \
+            --exclude='tokens.ts' --exclude='material.ts' \
+            --exclude='*.test.ts' --exclude='*.test.tsx' \
+            --exclude='*.test.js' --exclude='*.test.jsx' \
+            --exclude='*.spec.ts' --exclude='*.spec.tsx' \
+            --exclude-dir='__tests__' --exclude-dir='node_modules' \
+            '14a874' $SOURCES || true)
+          FILTERED=$(printf '%s\n' "$MATCHES" | grep -vE '^[^:]+:[0-9]+:[[:space:]]*(//|\*)' || true)
+          if [ -n "$FILTERED" ]; then
+            echo "FAIL: light jade #14a874 found outside token files:"
+            printf '%s\n' "$FILTERED"
+            echo "Light jade must never be used as text (2.90:1 on light bg, design-contract §3.1). Use it only as a presence dot / badge fill with dark ink on a tinted background, defined in the token file and re-measured before shipping."
+            exit 1
+          fi
+          echo "Gate C ok: no light jade outside token files."

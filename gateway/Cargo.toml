@@ -1,0 +1,29 @@
+[package]
+name = "hermes-gateway"
+version = "0.1.0"
+edition = "2021"
+description = "Axum gateway proxy for the Hermes Mobile Expo port: forwards REST and NDJSON JSON-RPC to a local Hermes host, verifies a device credential, mints short-lived tickets, and emits metadata-only Expo push notifications."
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "hermes-gateway"
+path = "src/main.rs"
+
+[dependencies]
+axum = { version = "0.8", features = ["ws", "multipart"] }
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.6", features = ["trace"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"] }
+tokio-tungstenite = "0.26"
+futures-util = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+base64 = "0.22"
+bytes = "1"
+rand = "0.8"
+hex = "0.4"
+subtle = "2"
+http = "1"
+chrono = "0.4"

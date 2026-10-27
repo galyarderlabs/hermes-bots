@@ -1,0 +1,231 @@
+# Hermes Mobile (Expo) — Android debug build + checks.
+#
+# Triggers:
+#   - push to main and tags v*  -> full path: checks + Gradle debug APK + upload
+#   - pull_request to main       -> check-only path: checks + Gradle build run,
+#                                    but NO artifact upload (see upload step)
+#
+# Hard gates (a failure here is a real failure, never faked green):
+#   typecheck, tests, manifest sanity, Expo prebuild, Gradle assembleDebug.
+# The bundle-size guard below is deliberately best-effort: it FAILS only
+# when it successfully measures a bundle over budget, and WARNS (exit 0)
+# when the export tooling is unavailable, so CI never goes red on
+# tooling absence alone.
+#
+# Debug signing only. Release signing is a separate step needing Galih's
+# keystore and is NOT in v1 (see CI-NOTES.md).
+#
+# ABI note: the debug APK is universal unless the app's Gradle config
+# configures splits. This workflow deliberately does NOT hardcode an
+# arm64-v8a-only split; if the app config adds splits, the artifact
+# upload picks up whatever assembleDebug produces under
+# android/app/build/outputs/apk/debug/.
+
+name: android-release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Cancel in-progress runs for PRs only; main/tag builds always run to
+# completion (a cancelled tag build must never look like a release).
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  app-check:
+    name: app-check (typecheck, tests, manifest, bundle-size guard)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        # Fails honestly if package.json / package-lock.json are absent
+        # or out of sync — the app agent must commit both.
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests
+        # Runs the app's own suite, which per port-spec §10 must cover:
+        # gateway envelope + terminal events, chat-reconcile,
+        # attachment-routing, cron-state, connection-state, group/room-id,
+        # turn-journal acceptance, and the fake-gateway test double.
+        # CI does not invent those suites; a missing suite is the app
+        # agent's gap, and an empty test run here must not be read as
+        # proof of them.
+        env:
+          CI: "true"
+        run: npm test
+
+      - name: Manifest sanity (scheme, package, no cleartext)
+        # Fails if app.json is missing, if the scheme is not hermes,
+        # if the Android package is not com.hermesagent.mobile, or if
+        # any cleartext flag appears in app.json or in a committed
+        # AndroidManifest template. The grep must find NOTHING.
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          try:
+              with open("app.json", encoding="utf-8") as f:
+                  data = json.load(f)
+          except FileNotFoundError:
+              print("FAIL: app.json not found at repo root")
+              sys.exit(1)
+          expo = data.get("expo", data)
+          scheme = expo.get("scheme")
+          schemes = scheme if isinstance(scheme, list) else [scheme]
+          if "hermes" not in schemes:
+              print(f"FAIL: app.json scheme must be 'hermes', got: {scheme!r}")
+              sys.exit(1)
+          package = (expo.get("android") or {}).get("package")
+          if package != "com.hermesagent.mobile":
+              print(f"FAIL: android package must be 'com.hermesagent.mobile', got: {package!r}")
+              sys.exit(1)
+          print("manifest ok: scheme=hermes package=com.hermesagent.mobile")
+          PY
+          FILES="app.json"
+          if [ -d android ]; then
+            while IFS= read -r manifest; do
+              FILES="$FILES $manifest"
+            done < <(find android -name 'AndroidManifest.xml' 2>/dev/null || true)
+          fi
+          # shellcheck disable=SC2086
+          if grep -n -i 'cleartext' $FILES; then
+            echo "FAIL: cleartext flag found in app.json / AndroidManifest template(s)."
+            echo "Cleartext HTTP traffic is forbidden; use the authenticated gateway over TLS/Tailscale."
+            exit 1
+          fi
+          echo "cleartext check ok: no matches in $FILES"
+
+      - name: Bundle-size guard (best-effort, warns on missing tooling)
+        # Design-contract §8.1 budget: initial JS < 1 MB gzipped.
+        # - If the app defines a "bundle-size" script, it is authoritative
+        #   and its exit code decides.
+        # - Otherwise: expo export to /tmp/export-check, gzip every .js
+        #   bundle, FAIL only if the measured total exceeds 1 MiB.
+        # - If the expo CLI is absent or the export cannot run, WARN and
+        #   exit 0: the hard gates (typecheck/tests/prebuild/APK) still
+        #   protect the build, and this guard must not go red on
+        #   tooling absence alone.
+        # Measurement caveat (conservative proxy): the fallback sums ALL
+        # exported route bundles, which can exceed the first screen's
+        # initial JS. A breach here is diagnosable from the per-file
+        # sizes printed below; the app agent's own "bundle-size" script,
+        # if added, replaces this proxy with a first-screen measurement.
+        run: |
+          if node -e "const s=require('./package.json').scripts||{}; process.exit(s['bundle-size'] ? 0 : 1)"; then
+            echo "Using app-defined 'bundle-size' script (authoritative)."
+            npm run bundle-size
+            exit $?
+          fi
+          if ! npx --no-install expo --version >/dev/null 2>&1; then
+            echo "::warning::expo CLI not available; bundle-size guard skipped (warn-only, not a failure)."
+            exit 0
+          fi
+          rm -rf /tmp/export-check
+          if ! npx expo export --platform android --output-dir /tmp/export-check; then
+            echo "::warning::expo export failed; bundle size could not be measured, guard skipped (warn-only)."
+            exit 0
+          fi
+          python3 - <<'PY'
+          import gzip, os, sys
+          total = 0
+          files = []
+          for root, _, names in os.walk("/tmp/export-check"):
+              for name in sorted(names):
+                  if name.endswith(".js"):
+                      path = os.path.join(root, name)
+                      with open(path, "rb") as f:
+                          size = len(gzip.compress(f.read(), compresslevel=9))
+                      files.append((size, path))
+                      total += size
+          if not files:
+              print("::warning::expo export produced no .js bundles; bundle-size guard skipped (warn-only).")
+              sys.exit(0)
+          for size, path in files:
+              print(f"  {size:>10} gzipped bytes  {path}")
+          print(f"total gzipped JS: {total} bytes (budget: 1048576)")
+          if total > 1048576:
+              print(f"FAIL: initial JS {total} bytes gzipped exceeds the 1 MB budget (design-contract §8.1).")
+              sys.exit(1)
+          print("bundle-size guard ok")
+          PY
+
+  android-debug-apk:
+    name: android-debug-apk (prebuild + Gradle assembleDebug)
+    needs: app-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null 2>&1 || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Expo prebuild (Android)
+        # Prefer the app's own prebuild script when it defines one;
+        # otherwise fall back to the stock expo prebuild command.
+        # Either way a failure here fails the job honestly — there is
+        # no prebuilt android/ directory checked in to fall back on.
+        run: |
+          if node -e "const s=require('./package.json').scripts||{}; process.exit(s.prebuild ? 0 : 1)"; then
+            echo "Using app-defined 'prebuild' script."
+            npm run prebuild
+          else
+            echo "No 'prebuild' script; using stock expo prebuild."
+            npx expo prebuild --platform android --non-interactive
+          fi
+
+      - name: Build debug APK
+        run: |
+          chmod +x android/gradlew
+          ./android/gradlew :app:assembleDebug --no-daemon
+          ls -lh android/app/build/outputs/apk/debug/
+
+      - name: Upload debug APK
+        # Check-only path for PRs: the APK is built (proving Gradle
+        # works) but never uploaded on pull_request events.
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hermes-mobile-expo-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          retention-days: 30
+          if-no-files-found: error

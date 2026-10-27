@@ -1,0 +1,1 @@
+{"compilerOptions":{"moduleResolution":"bundler","noUncheckedIndexedAccess":false,"resolveJsonModule":true,"skipLibCheck":true,"strict":true},"exclude":["node_modules"],"extends":"expo/tsconfig.base","include":["app/**/*","src/**/*","__tests__/**/*"]}
