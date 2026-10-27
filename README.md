@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/mascot.png" width="160" alt="Hermes Bots mascot"></p>
+
 # Hermes Bots
 
 [![Android CI](https://github.com/galyarderlabs/hermes-bots/actions/workflows/android-release.yml/badge.svg)](https://github.com/galyarderlabs/hermes-bots/actions/workflows/android-release.yml)
@@ -10,6 +12,8 @@
 A Grok-style bot control surface for Hermes hosts. Talk to your bots, manage
 sessions and scheduled tasks, and review approvals — from your phone, while
 your Hermes host stays in charge.
+
+![Hermes Bots banner](assets/og-banner.png)
 
 > **Status: preview.** The core client is implemented and the Android build
 > is green, but a live Hermes host connection has not been verified yet.
