@@ -6,8 +6,8 @@
 //! token, so the keyed buckets are effectively per-device; multi-device
 //! deployments get one bucket per distinct credential automatically.
 
-use std::collections::HashMap;
 use std::collections::hash_map::DefaultHasher;
+use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 use std::sync::Mutex;
 use std::time::Instant;
@@ -16,7 +16,7 @@ use axum::extract::{Request, State};
 use axum::http::header::AUTHORIZATION;
 use axum::http::{HeaderMap, StatusCode};
 use axum::middleware::Next;
-use axum::response::{IntoResponse, Response, Json};
+use axum::response::{IntoResponse, Json, Response};
 use serde::Serialize;
 
 use crate::state::AppState;
@@ -123,15 +123,15 @@ pub async fn rate_limit_middleware(
     } else {
         tracing::warn!("rate limit exceeded for a device credential");
         let mut headers = HeaderMap::new();
-    headers.insert("retry-after", "60".parse().unwrap());
-    (
-        StatusCode::TOO_MANY_REQUESTS,
-        headers,
-        Json(ErrorBody {
-            error: "rate_limited",
-        }),
-    )
-        .into_response()
+        headers.insert("retry-after", "60".parse().unwrap());
+        (
+            StatusCode::TOO_MANY_REQUESTS,
+            headers,
+            Json(ErrorBody {
+                error: "rate_limited",
+            }),
+        )
+            .into_response()
     }
 }
 

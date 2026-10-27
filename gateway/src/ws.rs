@@ -38,7 +38,7 @@ use std::time::Duration;
 use axum::extract::ws::{CloseFrame, Message, WebSocket, WebSocketUpgrade};
 use axum::extract::{Query, State};
 use axum::http::StatusCode;
-use axum::response::{IntoResponse, Response, Json};
+use axum::response::{IntoResponse, Json, Response};
 use futures_util::{SinkExt, StreamExt};
 use serde::Serialize;
 use tokio::sync::{mpsc, Mutex};
@@ -49,9 +49,8 @@ use crate::ratelimit::ConnectionBucket;
 use crate::state::{AppState, TicketPurpose};
 
 /// Upstream WebSocket stream type (plain ws/wss over TCP).
-pub type UpstreamSocket = tokio_tungstenite::WebSocketStream<
-    tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>,
->;
+pub type UpstreamSocket =
+    tokio_tungstenite::WebSocketStream<tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>>;
 
 /// Dial the Hermes host's `/api/ws`, attaching the host credential
 /// server-side (bearer and/or cookie from env/config). The phone's
@@ -436,7 +435,11 @@ async fn run_display_bridge(mut socket: WebSocket, state: AppState, viewer_id: S
                 tracing::info!("display bridge stub: binary frame dropped (RFB not implemented)");
             }
             Ok(Message::Ping(_)) => {
-                if socket.send(Message::Pong(bytes::Bytes::new())).await.is_err() {
+                if socket
+                    .send(Message::Pong(bytes::Bytes::new()))
+                    .await
+                    .is_err()
+                {
                     break;
                 }
             }

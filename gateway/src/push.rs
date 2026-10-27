@@ -87,20 +87,14 @@ fn current_hour_local() -> u32 {
 /// All proxy-side gates: push configured, outside quiet hours, Bot
 /// allowed by the include list, and no live mobile socket for the
 /// session. Returns false (silently, no log of content) otherwise.
-pub fn should_notify(
-    cfg: &PushConfig,
-    bot: &str,
-    session_live: bool,
-) -> bool {
+pub fn should_notify(cfg: &PushConfig, bot: &str, session_live: bool) -> bool {
     if !cfg.enabled() || session_live {
         return false;
     }
     if is_quiet_hour(current_hour_local(), cfg.quiet_start, cfg.quiet_end) {
         return false;
     }
-    if !cfg.include_profiles.is_empty()
-        && !cfg.include_profiles.iter().any(|p| p == bot)
-    {
+    if !cfg.include_profiles.is_empty() && !cfg.include_profiles.iter().any(|p| p == bot) {
         return false;
     }
     true
@@ -190,8 +184,7 @@ pub async fn run_push_watcher(state: AppState) {
                         Ok(v) => v,
                         Err(_) => continue,
                     };
-                    let is_event = value.get("method").and_then(|m| m.as_str())
-                        == Some("event");
+                    let is_event = value.get("method").and_then(|m| m.as_str()) == Some("event");
                     if !is_event {
                         continue;
                     }
@@ -199,10 +192,7 @@ pub async fn run_push_watcher(state: AppState) {
                         Some(p) => p,
                         None => continue,
                     };
-                    let event_type = params
-                        .get("type")
-                        .and_then(|t| t.as_str())
-                        .unwrap_or("");
+                    let event_type = params.get("type").and_then(|t| t.as_str()).unwrap_or("");
                     let kind = match event_type {
                         "message.complete" | "turn.end" => "finished",
                         _ => continue,
@@ -222,9 +212,7 @@ pub async fn run_push_watcher(state: AppState) {
                         state.is_live(session_id).await
                     };
                     if should_notify(&state.push, bot, live) {
-                        tracing::info!(
-                            "pushing kind={kind} bot={bot} session_live={live}"
-                        );
+                        tracing::info!("pushing kind={kind} bot={bot} session_live={live}");
                         send_push(&state, bot, kind, session_id).await;
                     }
                 }

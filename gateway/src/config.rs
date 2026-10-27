@@ -128,9 +128,11 @@ impl Config {
         let listen_addr: SocketAddr = listen_raw
             .parse()
             .map_err(|_| format!("LISTEN_ADDR is not a valid socket address: {listen_raw}"))?;
-        let allow_public_bind =
-            pick_bool(env_bool("HERMES_ALLOW_PUBLIC_BIND"), file_cfg.allow_public_bind)
-                .unwrap_or(false);
+        let allow_public_bind = pick_bool(
+            env_bool("HERMES_ALLOW_PUBLIC_BIND"),
+            file_cfg.allow_public_bind,
+        )
+        .unwrap_or(false);
         if listen_addr.ip().is_unspecified() && !allow_public_bind {
             return Err(
                 "refusing to bind 0.0.0.0 / [::] without HERMES_ALLOW_PUBLIC_BIND=1; \
@@ -139,9 +141,11 @@ impl Config {
             );
         }
 
-        let trust_proxy_auth =
-            pick_bool(env_bool("HERMES_TRUST_PROXY_AUTH"), file_cfg.trust_proxy_auth)
-                .unwrap_or(false);
+        let trust_proxy_auth = pick_bool(
+            env_bool("HERMES_TRUST_PROXY_AUTH"),
+            file_cfg.trust_proxy_auth,
+        )
+        .unwrap_or(false);
         let device_token = pick_str(env_str("HERMES_DEVICE_TOKEN"), file_cfg.device_token);
         if device_token.is_none() && !trust_proxy_auth {
             return Err(
@@ -164,8 +168,7 @@ impl Config {
                 .unwrap_or(32),
             rate_per_min: pick_u32(env_u32("HERMES_RATE_PER_MIN"), file_cfg.rate_per_min)
                 .unwrap_or(600),
-            rate_burst: pick_u32(env_u32("HERMES_RATE_BURST"), file_cfg.rate_burst)
-                .unwrap_or(120),
+            rate_burst: pick_u32(env_u32("HERMES_RATE_BURST"), file_cfg.rate_burst).unwrap_or(120),
             ws_channel_capacity: pick_usize(
                 env_usize("HERMES_WS_CHANNEL_CAPACITY"),
                 file_cfg.ws_channel_capacity,
@@ -211,8 +214,14 @@ mod tests {
 
     #[test]
     fn trims_trailing_slashes() {
-        assert_eq!(trim_origin("http://127.0.0.1:9119/"), "http://127.0.0.1:9119");
-        assert_eq!(trim_origin("http://127.0.0.1:9119"), "http://127.0.0.1:9119");
+        assert_eq!(
+            trim_origin("http://127.0.0.1:9119/"),
+            "http://127.0.0.1:9119"
+        );
+        assert_eq!(
+            trim_origin("http://127.0.0.1:9119"),
+            "http://127.0.0.1:9119"
+        );
     }
 
     #[test]

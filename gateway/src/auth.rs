@@ -18,7 +18,7 @@ use axum::extract::{Request, State};
 use axum::http::header::AUTHORIZATION;
 use axum::http::StatusCode;
 use axum::middleware::Next;
-use axum::response::{IntoResponse, Response, Json};
+use axum::response::{IntoResponse, Json, Response};
 use serde::Serialize;
 use subtle::ConstantTimeEq;
 
@@ -30,7 +30,13 @@ struct ErrorBody {
 }
 
 fn unauthorized() -> Response {
-    (StatusCode::UNAUTHORIZED, Json(ErrorBody { error: "unauthorized" })).into_response()
+    (
+        StatusCode::UNAUTHORIZED,
+        Json(ErrorBody {
+            error: "unauthorized",
+        }),
+    )
+        .into_response()
 }
 
 /// Extract a `Bearer <token>` value from headers. Returns None for any
@@ -51,11 +57,7 @@ pub fn verify_token(provided: &str, expected: &str) -> bool {
     if provided.len() != expected.len() {
         return false;
     }
-    provided
-        .as_bytes()
-        .ct_eq(expected.as_bytes())
-        .unwrap_u8()
-        == 1
+    provided.as_bytes().ct_eq(expected.as_bytes()).unwrap_u8() == 1
 }
 
 /// Axum middleware applied to the protected router. `/healthz`, `/api/ws`
@@ -120,9 +122,5 @@ struct RevokeResponse {
 pub async fn revoke_handler(State(state): State<AppState>) -> Response {
     state.revoke_all().await;
     tracing::info!("device token revoked (in-memory); outstanding tickets cleared");
-    (
-        StatusCode::OK,
-        Json(RevokeResponse { revoked: true }),
-    )
-        .into_response()
+    (StatusCode::OK, Json(RevokeResponse { revoked: true })).into_response()
 }

@@ -23,7 +23,7 @@ use axum::body::{to_bytes, Bytes};
 use axum::extract::{Multipart, Request, State};
 use axum::http::header::{ACCEPT, ACCEPT_LANGUAGE, CONTENT_TYPE, COOKIE, SET_COOKIE};
 use axum::http::{HeaderMap, StatusCode, Uri};
-use axum::response::{IntoResponse, Response, Json};
+use axum::response::{IntoResponse, Json, Response};
 use futures_util::SinkExt;
 use tokio::time::timeout;
 use tokio_tungstenite::tungstenite::protocol::Message as TungMessage;
@@ -47,11 +47,7 @@ pub async fn health_handler() -> Response {
 }
 
 fn plain_error(status: StatusCode, error: &'static str) -> Response {
-    (
-        status,
-        Json(serde_json::json!({ "error": error })),
-    )
-        .into_response()
+    (status, Json(serde_json::json!({ "error": error }))).into_response()
 }
 
 /// GET /api/status — the mobile probe target. Forwards to the host and,
@@ -71,10 +67,7 @@ pub async fn status_handler(State(state): State<AppState>, uri: Uri) -> Response
         }
     };
     let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get(CONTENT_TYPE)
-        .cloned();
+    let content_type = resp.headers().get(CONTENT_TYPE).cloned();
     let body = match resp.bytes().await {
         Ok(b) => b,
         Err(_) => return plain_error(StatusCode::BAD_GATEWAY, "upstream_unreachable"),
@@ -85,7 +78,10 @@ pub async fn status_handler(State(state): State<AppState>, uri: Uri) -> Response
         started.elapsed().as_millis()
     );
     let mut headers = HeaderMap::new();
-    headers.insert("x-hermes-proxy", format!("hermes-gateway/{VERSION}").parse().unwrap());
+    headers.insert(
+        "x-hermes-proxy",
+        format!("hermes-gateway/{VERSION}").parse().unwrap(),
+    );
     match serde_json::from_slice::<serde_json::Value>(&body) {
         Ok(mut value) if value.is_object() => {
             value.as_object_mut().unwrap().insert(
@@ -237,10 +233,7 @@ pub async fn passthrough_handler(State(state): State<AppState>, req: Request) ->
 
 /// Upload-flavoured passthrough (e.g. `/api/audio/*` transcription).
 /// Body cap = max_upload_mb.
-pub async fn passthrough_upload_handler(
-    State(state): State<AppState>,
-    req: Request,
-) -> Response {
+pub async fn passthrough_upload_handler(State(state): State<AppState>, req: Request) -> Response {
     let limit = state.config.max_upload_mb * 1024 * 1024;
     forward(&state, req, limit, false).await
 }
@@ -248,10 +241,7 @@ pub async fn passthrough_upload_handler(
 /// Host auth passthrough: password login, PKCE exchange, token refresh.
 /// Forwards the host session cookie and returns Set-Cookie verbatim.
 /// The proxy never stores provider keys and never sees them.
-pub async fn passthrough_auth_handler(
-    State(state): State<AppState>,
-    req: Request,
-) -> Response {
+pub async fn passthrough_auth_handler(State(state): State<AppState>, req: Request) -> Response {
     let limit = state.config.max_body_mb * 1024 * 1024;
     forward(&state, req, limit, true).await
 }
@@ -301,9 +291,7 @@ pub async fn attachment_handler(
                     let chunk = match field.chunk().await {
                         Ok(Some(c)) => c,
                         Ok(None) => break,
-                        Err(_) => {
-                            return plain_error(StatusCode::BAD_REQUEST, "invalid_multipart")
-                        }
+                        Err(_) => return plain_error(StatusCode::BAD_REQUEST, "invalid_multipart"),
                     };
                     if file_bytes.len() + chunk.len() > cap {
                         tracing::warn!("attachment rejected: over size cap");
@@ -319,9 +307,7 @@ pub async fn attachment_handler(
                     match field.chunk().await {
                         Ok(Some(c)) => text.extend_from_slice(&c),
                         Ok(None) => break,
-                        Err(_) => {
-                            return plain_error(StatusCode::BAD_REQUEST, "invalid_multipart")
-                        }
+                        Err(_) => return plain_error(StatusCode::BAD_REQUEST, "invalid_multipart"),
                     }
                 }
                 let value = String::from_utf8_lossy(&text).into_owned();
@@ -338,9 +324,7 @@ pub async fn attachment_handler(
                     match field.chunk().await {
                         Ok(Some(_)) => continue,
                         Ok(None) => break,
-                        Err(_) => {
-                            return plain_error(StatusCode::BAD_REQUEST, "invalid_multipart")
-                        }
+                        Err(_) => return plain_error(StatusCode::BAD_REQUEST, "invalid_multipart"),
                     }
                 }
             }
@@ -359,10 +343,7 @@ pub async fn attachment_handler(
     // Exactly one base64 pass, into the data URL the host expects.
     let data_url = format!(
         "data:{mime};base64,{}",
-        base64::Engine::encode(
-            &base64::engine::general_purpose::STANDARD,
-            &file_bytes
-        )
+        base64::Engine::encode(&base64::engine::general_purpose::STANDARD, &file_bytes)
     );
     drop(file_bytes);
 
@@ -388,9 +369,7 @@ pub async fn attachment_handler(
             match msg {
                 Ok(TungMessage::Text(text)) => return Some(text),
                 Ok(TungMessage::Ping(_)) => {
-                    let _ = socket
-                        .send(TungMessage::Pong(bytes::Bytes::new()))
-                        .await;
+                    let _ = socket.send(TungMessage::Pong(bytes::Bytes::new())).await;
                 }
                 Ok(_) => continue,
                 Err(_) => return None,

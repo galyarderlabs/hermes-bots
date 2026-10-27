@@ -133,9 +133,6 @@ impl AppState {
     }
 
     pub async fn is_live(&self, session_id: &str) -> bool {
-        self.live_sessions
-            .lock()
-            .await
-            .contains_key(session_id)
+        self.live_sessions.lock().await.contains_key(session_id)
     }
 }
