@@ -221,10 +221,15 @@ jobs:
           fi
 
       - name: Build debug APK
+        # Gradle resolves the project root from the working directory, not
+        # from the gradlew script path, so running ./android/gradlew from
+        # the repo root fails with "does not contain a Gradle build".
+        # Run inside android/ where settings.gradle lives.
+        working-directory: android
         run: |
-          chmod +x android/gradlew
-          ./android/gradlew :app:assembleDebug --no-daemon
-          ls -lh android/app/build/outputs/apk/debug/
+          chmod +x gradlew
+          ./gradlew :app:assembleDebug --no-daemon
+          ls -lh app/build/outputs/apk/debug/
 
       - name: Upload debug APK
         # Check-only path for PRs: the APK is built (proving Gradle
