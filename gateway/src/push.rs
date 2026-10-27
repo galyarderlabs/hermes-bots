@@ -5,6 +5,7 @@
 //!   - the Bot's name (title),
 //!   - a generic body per event kind ("Finished", "Needs your approval"),
 //!   - data: `{ kind, id }` (chat/group/task id).
+//!
 //! NEVER message content the user did not opt into, NEVER secrets,
 //! NEVER tokens. Quiet hours (default 22:00–07:00) and per-Bot
 //! preferences are enforced proxy-side, so a muted Bot cannot wake the

@@ -49,6 +49,9 @@ pub struct Config {
     /// Device credential the phone presents. Required unless the proxy sits
     /// behind an authenticated reverse proxy (`trust_proxy_auth`).
     pub device_token: Option<String>,
+    // Enforced at config load (device token required unless this is set);
+    // never read again afterwards.
+    #[allow(dead_code)]
     pub trust_proxy_auth: bool,
     /// Host credential attached server-side when talking to Hermes.
     /// NEVER sent to, or readable by, the phone.
@@ -64,6 +67,9 @@ pub struct Config {
     pub ws_channel_capacity: usize,
     /// Single-use ticket lifetime (seconds). Default 30.
     pub ticket_ttl_secs: u64,
+    // Enforced at config load (unspecified bind rejected unless set);
+    // never read again afterwards.
+    #[allow(dead_code)]
     pub allow_public_bind: bool,
 }
 

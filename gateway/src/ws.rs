@@ -56,6 +56,9 @@ pub type UpstreamSocket =
 /// server-side (bearer and/or cookie from env/config). The phone's
 /// device credential is NEVER forwarded upstream. Returns only the
 /// socket; the handshake response is discarded.
+// Callers only distinguish Ok/Err, never inspect the error; boxing it
+// would ripple through every caller for no behavioural gain.
+#[allow(clippy::result_large_err)]
 pub async fn dial_upstream(
     state: &AppState,
 ) -> Result<UpstreamSocket, tokio_tungstenite::tungstenite::Error> {
@@ -252,7 +255,6 @@ async fn run_connection_body(mut mobile: WebSocket, state: AppState) {
                     tracing::warn!("mobile ws binary frame dropped (NDJSON text only)");
                     continue;
                 }
-                Ok(_) => continue,
                 Err(_) => break,
             }
         }
@@ -277,7 +279,11 @@ async fn run_connection_body(mut mobile: WebSocket, state: AppState) {
                     }
                     // Backpressure: awaits while the channel is full, so a
                     // slow phone pauses upstream reads.
-                    if tx_down_r.send(MobileOut::Text(text)).await.is_err() {
+                    if tx_down_r
+                        .send(MobileOut::Text(text.to_string()))
+                        .await
+                        .is_err()
+                    {
                         break;
                     }
                 }
@@ -293,7 +299,6 @@ async fn run_connection_body(mut mobile: WebSocket, state: AppState) {
                     continue;
                 }
                 Ok(TungMessage::Frame(_)) => continue,
-                Ok(_) => continue,
                 Err(_) => break,
             }
         }
@@ -303,7 +308,7 @@ async fn run_connection_body(mut mobile: WebSocket, state: AppState) {
     let upstream_writer = async move {
         while let Some(out) = rx_up.recv().await {
             let res = match out {
-                UpOut::Text(line) => upstream_sink.send(TungMessage::Text(line)).await,
+                UpOut::Text(line) => upstream_sink.send(TungMessage::Text(line.into())).await,
                 UpOut::Pong => {
                     upstream_sink
                         .send(TungMessage::Pong(bytes::Bytes::new()))
@@ -445,7 +450,6 @@ async fn run_display_bridge(mut socket: WebSocket, state: AppState, viewer_id: S
             }
             Ok(Message::Pong(_)) => continue,
             Ok(Message::Close(_)) => break,
-            Ok(_) => continue,
             Err(_) => break,
         }
     }

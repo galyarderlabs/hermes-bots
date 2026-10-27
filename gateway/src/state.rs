@@ -46,14 +46,14 @@ pub struct AppState {
     /// In-memory device-token revocation. Restart restores the env token,
     /// so permanent revocation means rotating HERMES_DEVICE_TOKEN.
     pub revoked: Arc<Mutex<bool>>,
-    pub rate: RateState,
+    pub rate: Arc<RateState>,
     pub push: PushConfig,
 }
 
 impl AppState {
     pub fn new(config: Config, push: PushConfig) -> AppState {
         AppState {
-            rate: RateState::new(config.rate_per_min, config.rate_burst),
+            rate: Arc::new(RateState::new(config.rate_per_min, config.rate_burst)),
             config: Arc::new(config),
             http: reqwest::Client::new(),
             tickets: Arc::new(Mutex::new(HashMap::new())),
@@ -111,13 +111,6 @@ impl AppState {
     pub async fn mark_one(&self, session: &str) {
         let mut map = self.live_sessions.lock().await;
         *map.entry(session.to_string()).or_insert(0) += 1;
-    }
-
-    pub async fn mark_live(&self, sessions: &HashSet<String>) {
-        let mut map = self.live_sessions.lock().await;
-        for s in sessions {
-            *map.entry(s.clone()).or_insert(0) += 1;
-        }
     }
 
     pub async fn unmark_live(&self, sessions: &HashSet<String>) {

@@ -17,7 +17,7 @@
 //! - Structured logs carry method, path, status, and latency only —
 //!   never tokens, headers, or bodies.
 
-use std::time::Instant;
+use std::time::{Duration, Instant};
 
 use axum::body::{to_bytes, Bytes};
 use axum::extract::{Multipart, Request, State};
@@ -56,7 +56,7 @@ fn plain_error(status: StatusCode, error: &'static str) -> Response {
 /// proxy version in a response header instead. Host unreachable => 502.
 pub async fn status_handler(State(state): State<AppState>, uri: Uri) -> Response {
     let started = Instant::now();
-    let target = state.upstream_url(path_and_query(&uri));
+    let target = state.config.upstream_url(&path_and_query(&uri));
     let mut req = state.http.get(&target);
     req = attach_host_credential(req, &state);
     let resp = match req.send().await {
@@ -155,7 +155,7 @@ async fn forward(
     let method = parts.method.clone();
     let uri = parts.uri.clone();
     let path = uri.path().to_string();
-    let target = state.upstream_url(&path_and_query(&uri));
+    let target = state.config.upstream_url(&path_and_query(&uri));
 
     let bytes = match to_bytes(body, limit_bytes).await {
         Ok(b) => b,
@@ -356,11 +356,15 @@ pub async fn attachment_handler(
     let request_text = request.to_string();
     drop(request);
 
-    let (mut socket) = match dial_upstream(&state).await {
+    let mut socket = match dial_upstream(&state).await {
         Ok(socket) => socket,
         Err(_) => return plain_error(StatusCode::BAD_GATEWAY, "upstream_unreachable"),
     };
-    if socket.send(TungMessage::Text(request_text)).await.is_err() {
+    if socket
+        .send(TungMessage::Text(request_text.into()))
+        .await
+        .is_err()
+    {
         return plain_error(StatusCode::BAD_GATEWAY, "upstream_unreachable");
     }
     let reply = timeout(Duration::from_secs(120), async {

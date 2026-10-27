@@ -191,7 +191,14 @@ jobs:
           java-version: 17
 
       - name: Set up Android SDK
+        # setup-android@v3 defaults to packages "tools platform-tools",
+        # but the legacy "tools" package no longer exists, so sdkmanager
+        # fails with "Failed to find package 'tools'". Override with
+        # platform-tools only; platforms/build-tools are installed by
+        # the next step, and the runner's preinstalled SDK is reused.
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Install Android SDK packages
         run: |
