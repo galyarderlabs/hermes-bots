@@ -28,7 +28,7 @@
       "./plugins/withBundleInDebug"
     ],
     "scheme": "hermes",
-    "slug": "hermes-mobile-expo",
+    "slug": "hermes-bots",
     "userInterfaceStyle": "automatic",
     "version": "0.3.0",
     "web": {

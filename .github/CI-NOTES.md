@@ -46,7 +46,7 @@ Triggers: push to `main`, tags `v*`, pull requests to `main`.
   - The APK is **universal** unless the app's Gradle config adds
     splits — this workflow deliberately does not hardcode an
     arm64-v8a-only split.
-  - Upload (artifact `hermes-mobile-expo-debug-apk`,
+  - Upload (artifact `hermes-bots-debug-apk`,
     `android/app/build/outputs/apk/debug/*.apk`, 30-day retention)
     runs on push/tag only. On pull requests the APK is still built
     (proving Gradle works) but never uploaded — the check-only path.
@@ -86,7 +86,7 @@ exclusions and limitations). All three gates FAIL the build:
 
 Everything here is **debug signing only**. The uploaded APK is a debug
 build for testing on device/emulator. Release signing is a separate step
-needing Galih's keystore and is NOT in v1: no keystore, key alias, or
+requiring a release keystore, which is NOT in this preview: no keystore, key alias, or
 signing secret is referenced anywhere in these workflows, and none may
 be added without his explicit keystore decision.
 

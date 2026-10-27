@@ -1,4 +1,4 @@
-# Hermes Mobile (Expo) — Android debug build + checks.
+# Hermes Bots — Android debug build + checks.
 #
 # Triggers:
 #   - push to main and tags v*  -> full path: checks + Gradle debug APK + upload
@@ -12,8 +12,8 @@
 # when the export tooling is unavailable, so CI never goes red on
 # tooling absence alone.
 #
-# Debug signing only. Release signing is a separate step needing Galih's
-# keystore and is NOT in v1 (see CI-NOTES.md).
+# Debug signing only. Release signing is a separate step and is NOT
+# in this preview (see CI-NOTES.md).
 #
 # ABI note: the debug APK is universal unless the app's Gradle config
 # configures splits. This workflow deliberately does NOT hardcode an
@@ -237,7 +237,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: hermes-mobile-expo-debug-apk
+          name: hermes-bots-debug-apk
           path: android/app/build/outputs/apk/debug/*.apk
           retention-days: 30
           if-no-files-found: error

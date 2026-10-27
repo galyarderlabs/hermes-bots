@@ -143,7 +143,7 @@ below. Do not present this as production-ready against a live host.
 - `npm run typecheck` — clean (`tsc --noEmit`).
 - `npm test` — 7 files, 53 tests, all passing (vitest).
 - `npx expo config --type public` — validates; SDK 58.0.0, app name
-  `Hermes`, slug `hermes-mobile-expo`, scheme `hermes`, Android package
+  `Hermes`, slug `hermes-bots`, scheme `hermes`, Android package
   `com.hermesagent.mobile`, version 0.3.0.
 - `npx expo export -p android` — succeeds; Android Hermes bytecode bundle
   produced (2.9 MB `.hbc`). This is a bundling check, not a native build.
