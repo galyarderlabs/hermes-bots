@@ -1,5 +1,3 @@
-<p align="center"><img src="assets/mascot.png" width="160" alt="Hermes Bots mascot"></p>
-
 # Hermes Bots
 
 [![Android CI](https://github.com/galyarderlabs/hermes-bots/actions/workflows/android-release.yml/badge.svg)](https://github.com/galyarderlabs/hermes-bots/actions/workflows/android-release.yml)
