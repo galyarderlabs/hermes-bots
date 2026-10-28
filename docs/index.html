@@ -310,6 +310,7 @@
   .product-demo__bot-preview { overflow:hidden; color:var(--panel-muted); font-size:13px; text-overflow:ellipsis; white-space:nowrap; }
   .product-demo__user { display:flex; align-items:center; gap:10px; border-top:1px solid var(--panel-line); padding:13px 16px; color:#c9c9ce; font-size:14px; }
   .product-demo__user-badge { display:grid; width:28px; height:28px; place-items:center; border-radius:999px; background:var(--panel-line-2); color:#a8a8ad; font-size:11.5px; }
+  .product-demo__user-avatar { width:28px; height:28px; border-radius:999px; object-fit:cover; flex:none; }
   .product-demo__main { display:flex; min-width:0; flex-direction:column; }
   .product-demo__topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--panel-line); padding:16px 20px; }
   .product-demo__topbar-left { display:flex; min-width:0; align-items:center; gap:10px; }
@@ -509,7 +510,7 @@
       <h1>Every bot you run, one phone away.</h1>
       <p class="lead">GBots keeps your Hermes bots on your host — their chats, routines, approvals, and computer, in one phone app. Nothing to re-host, nothing to re-teach.</p>
       <div class="hero__actions">
-        <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
+        <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download</a>
         <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
       </div>
       <div class="hero__agent-setup">
@@ -534,7 +535,7 @@
           </div>
           <div class="product-demo__search"><span>⌕</span><input id="pdSearch" type="text" placeholder="Search" aria-label="Search bots"></div>
           <div class="product-demo__bot-list" id="pdBotList"></div>
-          <div class="product-demo__user"><span class="product-demo__user-badge">Y</span><span>You</span></div>
+          <div class="product-demo__user"><img class="product-demo__user-avatar" src="assets/galih-chibi.png" alt="Galih"><span>Galih</span></div>
         </aside>
         <div class="product-demo__main">
           <div class="product-demo__topbar">
@@ -588,10 +589,10 @@
           </ul>
         </div>
         <div class="chat-mock" aria-hidden="true">
-          <div class="chat-mock__bar"><span>Telegram · bot-team</span></div>
+          <div class="chat-mock__bar"><img src="assets/brands/slack.svg" alt="Slack logo" style="width:20px;height:20px;"><span>Slack · bot-team</span></div>
           <div class="chat-mock__message">
-            <img src="assets/bots/task-runner.png" alt="">
-            <div><div class="chat-mock__name">You <time>8:00 AM</time></div><p><mark>@Task Runner</mark> which job is still waiting on me?</p></div>
+            <img src="assets/galih-chibi.png" alt="Galih">
+            <div><div class="chat-mock__name">Galih <time>8:00 AM</time></div><p><mark>@Task Runner</mark> which job is still waiting on me?</p></div>
           </div>
           <div class="chat-mock__message">
             <img src="assets/bots/task-runner.png" alt="">
