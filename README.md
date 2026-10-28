@@ -98,13 +98,14 @@ debug build on every push to `main`.
 
 ## License and attribution
 
-- License: **AGPL-3.0** — see [LICENSE](LICENSE). The upstream project is
-  AGPL-3.0, and this port keeps that license.
-- Upstream: Hermes Mobile by CodeUpdaterBot, a Tauri + React client whose
-  protocol contracts this port reimplements; Hermes Agent by Nous Research;
-  `rusty4444/hermes-android` remote-gateway work, whose contract this port
-  follows. This is an independent community project, **not affiliated with
-  or endorsed by Nous Research**.
+- License: **AGPL-3.0** — see [LICENSE](LICENSE).
+- Reference: [Hermes Mobile by CodeUpdaterBot](https://github.com/CodeUpdaterBot/Hermes-Mobile-App),
+  a Tauri + React client whose protocol shape this app follows; Hermes
+  Agent by Nous Research; `rusty4444/hermes-android` remote-gateway work,
+  whose contract this app follows. Built from scratch as an Expo app with
+  a Rust gateway, inspired by the Hermes mobile experience — no code
+  copied from these projects. This is an independent community project,
+  **not affiliated with or endorsed by Nous Research**.
 - Glass components in `src/components/glassyui/` are inspired by
   [alexburlis/glassyui](https://github.com/alexburlis/glassyui) (MIT) and
   reimplemented for this repo — see `src/components/glassyui/README.md`
