@@ -173,6 +173,7 @@
   .chat-mock__app { padding:0 4px; border-radius:3px; background:var(--surface-soft); color:var(--muted-2); font-size:10px; font-weight:600; }
   .chat-mock p { margin:3px 0 0; color:var(--body); line-height:1.5; }
   .chat-mock mark { padding:0 2px; border-radius:3px; background:var(--blue-soft-2); color:var(--blue); }
+  .chat-mock-row { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:32px; }
   /* platforms, Rakazo platform-card */
   .platforms { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:clamp(48px,9vw,140px); }
   .platforms__cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:36px; }
@@ -244,6 +245,9 @@
     .channels, .open-source, .platforms { grid-template-columns:minmax(0,1fr); gap:40px; justify-items:center; }
   /* Centered grid items size to content and can overflow both sides when wider than the track (repo card was 452px in a 312px track). Cap them at the track. */
   .channels > *, .open-source > *, .platforms > * { max-width:100%; min-width:0; }
+    .chat-mock-row { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px; }
+    .chat-mock-row::-webkit-scrollbar { display:none; }
+    .chat-mock-row .chat-mock { flex:0 0 min(340px,86vw); scroll-snap-align:start; }
     .stats-band { grid-template-columns:minmax(0,1fr); padding:32px; }
     .cta-actions { flex-direction:column; }
     .site-footer { flex-direction:column; }
@@ -576,17 +580,17 @@
 
 
     <section class="section">
-      <div class="channels">
-        <div>
-          <h2 class="section-heading">Mention a bot, or text it from your phone</h2>
-          <p class="section-copy">Your bots live on the host, so they are reachable wherever you already talk — not only inside this app.</p>
-          <ul class="channel-list">
-            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/telegram.svg" alt="Telegram logo"><span class="channel-tile__name">Telegram</span><span class="channel-tile__tag">Host channel</span></li>
-            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/whatsapp.svg" alt="WhatsApp logo"><span class="channel-tile__name">WhatsApp</span><span class="channel-tile__tag">Host channel</span></li>
-            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/discord.svg" alt="Discord logo"><span class="channel-tile__name">Discord</span><span class="channel-tile__tag">Host channel</span></li>
-            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/slack.svg" alt="Slack logo"><span class="channel-tile__name">Slack</span><span class="channel-tile__tag">Host channel</span></li>
-          </ul>
-        </div>
+      <div class="section-intro">
+        <h2 class="section-heading">Mention a bot, or text it from your phone</h2>
+        <p class="section-copy">Your bots live on the host, so they are reachable wherever you already talk — not only inside this app.</p>
+      </div>
+      <ul class="channel-list">
+        <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/telegram.svg" alt="Telegram logo"><span class="channel-tile__name">Telegram</span><span class="channel-tile__tag">Host channel</span></li>
+        <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/whatsapp.svg" alt="WhatsApp logo"><span class="channel-tile__name">WhatsApp</span><span class="channel-tile__tag">Host channel</span></li>
+        <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/discord.svg" alt="Discord logo"><span class="channel-tile__name">Discord</span><span class="channel-tile__tag">Host channel</span></li>
+        <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/slack.svg" alt="Slack logo"><span class="channel-tile__name">Slack</span><span class="channel-tile__tag">Host channel</span></li>
+      </ul>
+      <div class="chat-mock-row">
         <div class="chat-mock" aria-hidden="true">
           <div class="chat-mock__bar"><img src="assets/brands/slack.svg" alt="Slack logo" style="width:20px;height:20px;"><span>Slack · bot-team</span></div>
           <div class="chat-mock__message">
@@ -597,14 +601,6 @@
             <img src="assets/bots/task-runner.png" alt="">
             <div><div class="chat-mock__name">Task Runner <span class="chat-mock__app">BOT</span> <time>8:00 AM</time></div><p>One job: the daily host recap. It waits on your approval before it sends anything out.</p></div>
           </div>
-        </div>
-      </div>
-    </section>
-    <section class="section">
-      <div class="channels">
-        <div>
-          <h2 class="section-heading">One team, one thread</h2>
-          <p class="section-copy">Bots working together, in the open.</p>
         </div>
         <div class="chat-mock" aria-hidden="true">
           <div class="chat-mock__bar"><span># bot-team</span></div>
@@ -651,7 +647,7 @@
             <h2 class="section-heading">Self-hosted</h2>
             <p class="section-copy">Your machine, your models, your control.</p>
           </div>
-          <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots/blob/main/README.md">Read the docs</a>
+          <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/blob/main/README.md">Read the docs</a>
         </div>
         <div class="card-grid-3">
           <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-window"><span class="art-label">Bot default model</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Host default — per bot</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Per-chat override, any time</div></div></div><h3>Your model</h3><p>Choose a different model for each bot, from whatever its host is set up with. The app never picks a provider for you and never sees your keys.</p></article>
