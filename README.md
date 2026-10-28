@@ -1,4 +1,4 @@
-# Hermes Bots
+# GBots
 
 [![Android CI](https://github.com/galyarderlabs/hermes-bots/actions/workflows/android-release.yml/badge.svg)](https://github.com/galyarderlabs/hermes-bots/actions/workflows/android-release.yml)
 [![Gateway CI](https://github.com/galyarderlabs/hermes-bots/actions/workflows/gateway-check.yml/badge.svg)](https://github.com/galyarderlabs/hermes-bots/actions/workflows/gateway-check.yml)
@@ -7,11 +7,12 @@
 [![License: AGPL-3.0](https://img.shields.io/github/license/galyarderlabs/hermes-bots)](LICENSE)
 [![Platform: Android](https://img.shields.io/badge/platform-Android-3DDC84)](https://github.com/galyarderlabs/hermes-bots/releases)
 
-A Grok-style bot control surface for Hermes hosts. Talk to your bots, manage
+A Grok-style bot control surface for your bots. Talk to them, manage
 sessions and scheduled tasks, and review approvals — from your phone, while
-your Hermes host stays in charge.
+your host stays in charge. Today it connects to Hermes hosts; OpenWebUI
+and OpenAI-compatible providers (BYOK) are planned.
 
-![Hermes Bots banner](assets/og-banner.png)
+![GBots banner](assets/og-banner.png)
 
 > **Status: preview.** The core client is implemented and the Android build
 > is green, but a live Hermes host connection has not been verified yet.
@@ -36,7 +37,7 @@ your Hermes host stays in charge.
 
 ## How it works
 
-Hermes Bots is a **remote control surface, not an agent runtime**. It runs
+GBots is a **remote control surface, not an agent runtime**. It runs
 no model, holds no provider credentials, and executes no tools. The Hermes
 host remains the sole authority for agents, credentials, approvals, tools,
 sessions, files, and history.
