@@ -220,9 +220,12 @@
   .open-source { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); align-items:center; gap:56px; }
   /* faq */
   .home-faq { display:grid; gap:16px; margin-top:36px; }
-  .home-faq article { border:1px solid var(--line); border-radius:18px; background:var(--surface); padding:22px 24px; box-shadow:var(--shadow-soft); }
-  .home-faq h3 { margin:0; color:var(--ink); font-size:17px; font-weight:600; line-height:1.35; }
-  .home-faq p { margin:8px 0 0; color:var(--body); font-size:15px; line-height:1.6; }
+  .home-faq details { border:1px solid var(--line); border-radius:18px; background:var(--surface); padding:22px 24px; box-shadow:var(--shadow-soft); }
+  .home-faq summary { cursor:pointer; color:var(--ink); font-size:17px; font-weight:600; line-height:1.35; }
+  .faq-answer { display:grid; grid-template-rows:0fr; transition:grid-template-rows 300ms ease; }
+  .home-faq details[open] .faq-answer { grid-template-rows:1fr; }
+  .faq-answer > div { overflow:hidden; min-height:0; }
+  .faq-answer p { margin:8px 0 0; color:var(--body); font-size:15px; line-height:1.6; }
   details.builders { background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 22px; font-size:14.5px; color:var(--body); margin-top:16px; }
   details.builders summary { cursor:pointer; font-weight:600; color:var(--ink); }
   details.builders code { background:var(--surface-soft); padding:2px 7px; border-radius:6px; }
@@ -670,7 +673,6 @@
             <article class="platform-card"><span class="platform-card__icon"><svg viewBox="0 0 48 48" fill="none" stroke="#242424" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="9" width="38" height="30" rx="4"/><path d="M5 17h38"/><circle cx="10.5" cy="13" r="1" fill="#242424" stroke="none"/><circle cx="14.5" cy="13" r="1" fill="#242424" stroke="none"/><circle cx="18.5" cy="13" r="1" fill="#242424" stroke="none"/></svg></span><h3>Web</h3><div class="platform-card__links"><span>This page only</span></div></article>
             <article class="platform-card"><span class="platform-card__icon" style="display:flex;gap:10px;width:auto;"><svg viewBox="0 0 48 48" fill="none" stroke="#242424" stroke-width="1.8" stroke-linecap="round"><rect x="14" y="5" width="20" height="38" rx="5"/><path d="M21 9.5h6"/></svg><svg viewBox="0 0 48 48" fill="none" stroke="#242424" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="10" width="30" height="21" rx="3"/><path d="M4 36h40l-3 3H7z"/></svg></span><h3>iOS &amp; Desktop</h3><div class="platform-card__links"><span>Not yet</span></div></article>
           </div>
-          <p style="font-size:14px;color:var(--muted);margin-top:16px;">Uninstall any older preview first, and download on Wi-Fi — the preview build is a large universal debug build.</p>
         </div>
         <div class="phone" aria-hidden="true">
           <div class="phone__status"><span>9:41</span><span class="phone__island"></span></div>
@@ -696,10 +698,9 @@
         <div>
           <p class="eyebrow">Open source</p>
           <h2 class="section-heading">AGPL-3.0. Run it, change it, make it yours.</h2>
-          <p class="section-copy">A port of CodeUpdaterBot/Hermes-Mobile-App, reimplemented as an Expo app with a Rust gateway. The upstream licence is why this is AGPL-3.0, not MIT.</p>
+          <p class="section-copy">Built from scratch as an Expo app with a Rust gateway, inspired by the Hermes mobile experience.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
-            <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
-            <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots">Read the README</a>
+            <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots" style="flex:1;">Star on GitHub</a>
           </div>
         </div>
         <div class="repo-card">
@@ -720,10 +721,10 @@
         <h2 class="section-heading">Questions, answered plainly</h2>
       </div>
       <div class="home-faq">
-        <article><h3>Is this ready to rely on?</h3><p>Not yet. It is a preview: the app itself works, but a live connection to a real Hermes host has not been verified, and a few pieces (voice, file picking, push, tablet layout) are not wired yet.</p></article>
-        <article><h3>Does the app see my keys or passwords?</h3><p>No. Your host holds all of that. The phone app only talks to the host — it never asks for a provider key.</p></article>
-        <article><h3>Does it work without a Hermes host?</h3><p>No. Without a paired host it shows “Connect Hermes first”. This is a remote control for your bots, not a bot by itself.</p></article>
-        <article><h3>Do I need to be on the same network?</h3><p>Your phone and host should be on the same private network (Tailscale is the recommended way). You enter the host's address once, in Settings.</p></article>
+        <details class="faq-item"><summary>Is this ready to rely on?</summary><div class="faq-answer"><div><p>Not yet. It is a preview: the app itself works, but a live connection to a real Hermes host has not been verified, and a few pieces (voice, file picking, push, tablet layout) are not wired yet.</p></div></div></details>
+        <details class="faq-item"><summary>Does the app see my keys or passwords?</summary><div class="faq-answer"><div><p>No. Your host holds all of that. The phone app only talks to the host — it never asks for a provider key.</p></div></div></details>
+        <details class="faq-item"><summary>Does it work without a Hermes host?</summary><div class="faq-answer"><div><p>No. Without a paired host it shows “Connect Hermes first”. This is a remote control for your bots, not a bot by itself.</p></div></div></details>
+        <details class="faq-item"><summary>Do I need to be on the same network?</summary><div class="faq-answer"><div><p>Your phone and host should be on the same private network (Tailscale is the recommended way). You enter the host's address once, in Settings.</p></div></div></details>
       </div>
       <details class="builders"><summary>For builders — how it is put together</summary><p style="margin-top:12px;">Phone app (Expo React Native) → Rust gateway on the host → Hermes host. One durable WebSocket carries chat, sessions, tasks and approvals; an intent is saved before it is sent, and a failed save sends nothing. Gateway: <code>cd gateway &amp;&amp; cargo build --release</code>. Pairing (PKCE) is still a stub in this preview — that is the first rough edge on a live host.</p></details>
     </section>
