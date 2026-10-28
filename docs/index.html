@@ -149,7 +149,6 @@
   .platform-card__icon { width:36px; height:36px; margin-bottom:18px; }
   .platform-card__icon img, .platform-card__icon svg { width:36px; height:36px; display:block; }
   /* stats band with landscape image */
-  .stats-band__img { width:100%; height:100%; min-height:260px; object-fit:cover; border-radius:20px; }
   /* works-with row, Rakazo selfHost worksWith pattern */
   .works-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:36px; font-size:14px; color:var(--muted); }
   .works-chip { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px; background:var(--surface); padding:7px 14px; color:var(--ink); font-weight:500; box-shadow:var(--shadow-soft); }
@@ -200,13 +199,16 @@
   .phone__input { flex:1; }
   .phone__send { display:grid; width:28px; height:28px; place-items:center; border-radius:999px; background:var(--panel-cream); color:#1a1a1a; font-size:14px; }
   /* stats band, Rakazo stats-band */
-  .stats-band { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,420px); align-items:center; gap:40px; margin-top:110px; padding:54px; border:1px solid var(--line); border-radius:26px; background:var(--surface-soft); }
-  .stats-band h2 { font-size:clamp(2rem,4vw,38px); line-height:1.1; color:var(--ink); font-weight:500; letter-spacing:-.02em; margin:0; }
-  .stats-band p { margin:14px 0 0; color:var(--muted); font-size:17px; line-height:1.55; }
+  .stats-band { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,420px); align-items:center; gap:40px; margin-top:110px; padding:54px; border:1px solid var(--line); border-radius:26px; position:relative; overflow:hidden; background-image:url(assets/roman-landscape.jpg); background-size:cover; background-position:center; }
+  .stats-band::before { content:""; position:absolute; inset:0; background:rgba(12,24,79,.62); }
+  .stats-band > * { position:relative; z-index:1; }
+  .stats-band h2 { font-size:clamp(2rem,4vw,38px); line-height:1.1; color:#fff; font-weight:500; letter-spacing:-.02em; margin:0; }
+  .stats-band p { margin:14px 0 0; color:rgba(255,255,255,.88); font-size:17px; line-height:1.55; }
   .stats-grid { display:grid; grid-template-columns:repeat(2,minmax(120px,auto)); gap:26px 44px; }
-  .stat-value { color:var(--ink); font-size:30px; letter-spacing:-.02em; font-weight:500; }
-  .stat-label { margin-top:6px; color:var(--muted); font-size:13.5px; }
+  .stat-value { color:#fff; font-size:30px; letter-spacing:-.02em; font-weight:500; }
+  .stat-label { margin-top:6px; color:rgba(255,255,255,.75); font-size:13.5px; }
   .cta-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+  .cta-actions .button { flex:1 1 0; }
   /* repo card, Rakazo repo-card (static) */
   .repo-card { overflow:hidden; border:1px solid var(--panel-line); border-radius:var(--radius-card); background:var(--panel); color:var(--panel-copy); box-shadow:var(--shadow-demo); font-size:14px; }
   .repo-card__head { display:flex; align-items:center; gap:10px; padding:18px 22px; border-bottom:1px solid var(--panel-line); }
@@ -242,6 +244,7 @@
   /* Centered grid items size to content and can overflow both sides when wider than the track (repo card was 452px in a 312px track). Cap them at the track. */
   .channels > *, .open-source > *, .platforms > * { max-width:100%; min-width:0; }
     .stats-band { grid-template-columns:minmax(0,1fr); padding:32px; }
+    .cta-actions { flex-direction:column; }
     .site-footer { flex-direction:column; }
   }
   @media (max-width: 900px) {
@@ -742,7 +745,6 @@
         <div><div class="stat-value">Open source</div><div class="stat-label">No seats, no gates</div></div>
         <div><div class="stat-value">Your host</div><div class="stat-label">Your machine</div></div>
       </div>
-      <img class="stats-band__img" src="assets/roman-landscape.jpg" alt="Roman hillside town in blue duotone">
     </section>
   </main>
 
