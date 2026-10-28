@@ -3,94 +3,150 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hermes Bots — Talk to your bots, from your phone</title>
-<meta name="description" content="A Grok-style bot control surface for Hermes hosts. Talk to your bots, manage sessions and scheduled tasks, and review approvals — from your phone, while your Hermes host stays in charge.">
+<title>Hermes Bots — Give your bots a job. Check in from your phone.</title>
+<meta name="description" content="Give your bots a job. Check in from your phone. Hermes Bots is how you talk to the bots on your Hermes host — chat, routines, approvals, all from your pocket.">
 <meta property="og:title" content="Hermes Bots">
-<meta property="og:description" content="Talk to your bots, from your phone.">
+<meta property="og:description" content="Give your bots a job. Check in from your phone.">
 <meta property="og:image" content="assets/og-banner.png">
 <meta property="og:type" content="website">
 <style>
-  :root { --navy: #0c184f; --blue: #0067d9; --ink: #1c1c1e; --muted: #5a5a5e; --bg: #faf9f7; --card: #ffffff; --line: #e8e6e1; --orange: #f5a03c; --purple: #6a6bf5; --violet: #9b5cf6; --sky: #3b82f6; }
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
-  a { color: var(--blue); }
-  header { background: var(--navy); color: #fff; }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-  nav .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 700; font-size: 20px; }
-  nav .brand img { width: 40px; height: 40px; border-radius: 10px; }
-  nav .links a { color: #cdd6ff; text-decoration: none; margin-left: 18px; font-size: 15px; }
-  nav .links a:hover { color: #fff; }
-  .eyebrow { text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; font-weight: 700; color: #9fb0ff; margin: 0 0 14px; }
-  .eyebrow.dark { color: var(--blue); }
-  .hero { padding: 44px 0 56px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
-  .hero h1 { font-size: 52px; line-height: 1.08; margin: 0 0 16px; letter-spacing: -0.02em; }
-  .hero p.lead { font-size: 19px; color: #cdd6ff; margin: 0 0 24px; }
-  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600; border: 0; cursor: pointer; font-size: 15px; }
-  .btn-primary { background: #fff; color: var(--navy); }
-  .btn-ghost { border: 1px solid #5a6bb8; color: #fff; background: transparent; }
-  .btn-navy { background: var(--navy); color: #fff; }
-  .btn-line { border: 1px solid var(--line); color: var(--ink); background: #fff; }
-  .hero img.mascot { width: 100%; max-width: 420px; border-radius: 24px; display: block; margin: 0 auto; }
-  .copychip { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); border: 1px solid #3a4a8c; border-radius: 10px; padding: 10px 14px; margin-top: 22px; font-family: ui-monospace, monospace; font-size: 14px; color: #e6ebff; }
-  .copychip button { background: #fff; color: var(--navy); border: 0; border-radius: 8px; padding: 5px 12px; font-weight: 700; cursor: pointer; }
-  .notice { background: #fff3cd; border: 1px solid #f0d98a; border-radius: 12px; padding: 14px 18px; margin: 28px 0 0; color: #5a4a00; }
-  section { padding: 60px 0; }
-  section h2 { font-size: 34px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.01em; }
-  section .sub { color: var(--muted); font-size: 18px; margin: 0 0 32px; max-width: 700px; }
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .grid4 { grid-template-columns: repeat(4, 1fr); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
-  .card h3 { margin: 0 0 8px; font-size: 19px; }
-  .card p { margin: 0; color: var(--muted); font-size: 15px; }
-  .dot { display: inline-block; width: 34px; height: 34px; border-radius: 50%; margin-bottom: 12px; }
-  .banner { width: 100%; border-radius: 18px; display: block; }
-  /* phone demo */
-  .demo { display: grid; grid-template-columns: 320px 1fr; gap: 36px; align-items: start; }
-  .phone { background: #111; border-radius: 36px; padding: 12px; box-shadow: 0 18px 50px rgba(12,24,79,0.25); }
-  .phone-screen { background: #fff; border-radius: 26px; overflow: hidden; }
-  .phone-top { background: var(--navy); color: #fff; padding: 16px; font-weight: 700; }
-  .tabs { display: flex; gap: 6px; padding: 10px; background: #f2f1ee; }
-  .tabs button { flex: 1; border: 0; border-radius: 999px; padding: 8px 4px; font-weight: 600; cursor: pointer; background: transparent; }
-  .tabs button.active { background: var(--navy); color: #fff; }
-  .thread { padding: 16px; min-height: 300px; }
-  .thread-pane { display: none; }
-  .thread-pane.active { display: block; }
-  .msg { margin: 0 0 12px; font-size: 14px; line-height: 1.5; }
-  .msg b { display: block; font-size: 12px; color: var(--muted); margin-bottom: 2px; }
-  .msg.user { background: #eef1ff; border-radius: 14px 14px 14px 4px; padding: 10px 12px; }
-  .msg.bot { background: #f2f1ee; border-radius: 14px 14px 4px 14px; padding: 10px 12px; }
-  .msg.cardmsg { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
-  .msg.cardmsg table { width: 100%; font-size: 13px; }
-  .msg.cardmsg td:first-child { color: var(--muted); padding-right: 10px; }
-  /* approval mock */
-  .approval { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
-  .approval .meta { color: var(--muted); font-size: 14px; }
-  .approval .actions { display: flex; gap: 10px; margin-top: 14px; }
-  .approval .actions button { border: 0; border-radius: 999px; padding: 10px 20px; font-weight: 700; cursor: pointer; }
-  .approval .actions .ok { background: var(--blue); color: #fff; }
-  .approval .actions .no { background: #f2f1ee; }
-  .how { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .how ol { margin: 0; padding-left: 22px; font-size: 17px; }
-  .how li { margin-bottom: 10px; }
-  code { background: #eef1ff; padding: 2px 7px; border-radius: 6px; font-size: 0.9em; }
-  .faq article { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; }
-  .faq h3 { margin: 0 0 6px; font-size: 18px; }
-  .faq p { margin: 0; color: var(--muted); }
-  .cta { background: var(--navy); color: #fff; border-radius: 24px; padding: 44px; text-align: center; }
-  .cta h2 { color: #fff; }
-  .cta p { color: #cdd6ff; }
-  .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: #eef1ff; color: var(--blue); }
-  .tag.soon { background: #fff3cd; color: #5a4a00; }
-  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
-  footer a { color: var(--muted); }
-  @media (max-width: 820px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 38px; }
-    .grid, .grid4 { grid-template-columns: 1fr; }
-    .demo { grid-template-columns: 1fr; }
-    nav .links { display: none; }
+  :root { --page:#fdfdfd; --surface:#fff; --surface-soft:#f7f7f7; --ink:#242424; --body:#3d3d3d; --muted:#848484; --line:#efefef; --line-2:#e6e6e6; --blue-top:#2965ec; --blue-bottom:#5c89f8; --blue-soft:#eff6ff; --navy:#0c184f; --panel:#0b0b0c; --panel-2:#0f0f10; --panel-line:#1b1b1d; --panel-line-2:#232326; --panel-copy:#dfdfe2; --panel-muted:#85858a; --panel-muted-2:#6c6c70; --panel-cream:#f1f1ef; --success:#30a24b; --shadow-soft:0 2px 16px rgba(0,0,0,.03); --shadow-demo:0 30px 80px -30px rgba(0,0,0,.35); --radius-card:20px; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; min-width:320px; background:var(--page); color:var(--body); font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; line-height:1.6; }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; max-width:100%; }
+  button { cursor:pointer; font:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+  /* header */
+  header { position:sticky; top:0; z-index:20; background:rgba(253,253,253,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+  .brand { display:flex; align-items:center; gap:10px; font-size:21px; font-weight:500; letter-spacing:-.02em; color:var(--ink); }
+  .brand img { width:34px; height:34px; border-radius:9px; background:var(--navy); }
+  .navlinks a { margin-left:20px; font-size:15px; color:var(--body); }
+  .navlinks a:hover { color:var(--ink); }
+  .star-pill { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); background:#fff; min-height:42px; border-radius:14px; padding:0 16px; font-size:14px; color:#525252; box-shadow:var(--shadow-soft); }
+  /* buttons */
+  .button { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 22px; border-radius:14px; border:1px solid transparent; font-size:16px; font-weight:500; transition:transform 180ms ease, box-shadow 180ms ease; }
+  .button:hover { transform:translateY(-1px); }
+  .button--primary { background:linear-gradient(to bottom,var(--blue-top),var(--blue-bottom)); color:#fff; box-shadow:0 2px 10px rgba(75,131,253,.2); }
+  .button--primary:hover { box-shadow:0 10px 28px rgba(41,101,236,.22); }
+  .button--secondary { background:#fff; border-color:var(--line); color:#525252; box-shadow:var(--shadow-soft); }
+  /* hero */
+  .hero { text-align:center; padding:72px 0 8px; }
+  .hero__pill { display:inline-flex; gap:8px; border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 14px; font-size:14px; color:#525252; box-shadow:var(--shadow-soft); }
+  .hero h1 { font-size:56px; line-height:1.05; letter-spacing:-.03em; color:var(--ink); margin:22px auto 16px; max-width:720px; font-weight:600; }
+  .hero .lead { font-size:20px; color:var(--body); margin:0 auto 28px; max-width:620px; }
+  .hero__actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .hero__status { margin-top:18px; font-size:14px; color:var(--muted); }
+  /* sections */
+  section { padding:72px 0; }
+  .section-intro { max-width:680px; margin:0 0 36px; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.1em; font-size:13px; font-weight:700; color:var(--blue-top); margin:0 0 12px; }
+  .section-heading { font-size:34px; line-height:1.15; letter-spacing:-.02em; color:var(--ink); margin:0 0 12px; font-weight:600; }
+  .section-copy { font-size:18px; color:var(--body); margin:0; }
+  .card-grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .card-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:24px; box-shadow:var(--shadow-soft); }
+  .card h3 { margin:0 0 8px; font-size:19px; color:var(--ink); }
+  .card p { margin:0; font-size:15px; color:var(--body); }
+  /* bot avatar: mascot on a per-bot colour, Rakazo roster-avatar style */
+  .bot-avatar { display:block; width:88px; height:88px; flex:0 0 auto; overflow:hidden; border-radius:18px; }
+  .bot-avatar img { width:100%; height:100%; object-fit:cover; }
+  .bot-avatar.sm { width:44px; height:44px; border-radius:12px; }
+  .bot-avatar.xs { width:32px; height:32px; border-radius:9px; }
+  .roster-card .bot-avatar { margin-bottom:14px; }
+  .chip { display:inline-block; font-size:12.5px; font-weight:600; padding:4px 10px; border-radius:999px; background:var(--surface-soft); color:#525252; }
+  .chip + .chip { margin-left:6px; }
+  /* interactive demo frame */
+  .demo-note { font-size:14px; color:var(--muted); margin:0 0 16px; }
+  .demo-frame { display:grid; grid-template-columns:250px 1fr 280px; border:1px solid var(--line-2); border-radius:26px; background:#fff; overflow:hidden; box-shadow:var(--shadow-demo); min-height:520px; }
+  .demo-sidebar { border-right:1px solid var(--line); padding:14px; background:var(--surface-soft); }
+  .demo-sidebar h4 { margin:4px 8px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+  .botrow { display:flex; gap:10px; align-items:center; width:100%; text-align:left; border:0; border-radius:14px; padding:10px; background:transparent; }
+  .botrow.active { background:#fff; box-shadow:var(--shadow-soft); }
+  .botrow b { display:block; font-size:14.5px; color:var(--ink); line-height:1.2; }
+  .botrow span { font-size:12.5px; color:var(--muted); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px; }
+  .demo-main { display:flex; flex-direction:column; min-width:0; }
+  .demo-main-head { display:flex; align-items:center; gap:10px; padding:16px 20px; border-bottom:1px solid var(--line); }
+  .demo-main-head b { color:var(--ink); font-size:16px; }
+  .demo-main-head span { font-size:13px; color:var(--muted); }
+  .demo-thread { flex:1; padding:20px; display:flex; flex-direction:column; gap:10px; overflow-y:auto; }
+  .demo-time { text-align:center; font-size:12px; color:var(--muted); padding:4px 0; }
+  .demo-bubble { max-width:82%; border-radius:18px; padding:10px 14px; font-size:14.5px; line-height:1.5; }
+  .demo-bubble.user { align-self:flex-end; background:var(--blue-soft); color:var(--ink); }
+  .demo-bubble.bot { align-self:flex-start; background:var(--surface-soft); color:var(--ink); }
+  .demo-bubble.typing { color:var(--muted); letter-spacing:2px; }
+  .demo-card { align-self:flex-start; max-width:90%; background:#fff; border:1px solid var(--line-2); border-radius:18px; padding:14px 16px; font-size:13.5px; }
+  .demo-card-line { display:flex; gap:8px; margin-top:6px; }
+  .demo-card-line .check { color:var(--success); font-weight:700; }
+  .demo-card-line strong { color:var(--ink); }
+  .demo-suggest { display:flex; gap:8px; flex-wrap:wrap; padding:0 20px 16px; }
+  .demo-suggest button { border:1px solid var(--line-2); background:#fff; border-radius:999px; padding:8px 14px; font-size:13.5px; color:var(--body); box-shadow:var(--shadow-soft); }
+  .demo-suggest button:hover { border-color:var(--blue-top); color:var(--ink); }
+  .demo-panel { border-left:1px solid var(--line); padding:16px; background:var(--surface-soft); }
+  .demo-tabs { display:flex; gap:6px; margin-bottom:16px; }
+  .demo-tabs button { flex:1; border:0; border-radius:999px; padding:8px 4px; font-size:13px; font-weight:600; background:transparent; color:var(--muted); }
+  .demo-tabs button.active { background:var(--ink); color:#fff; }
+  .routine { background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; margin-bottom:10px; }
+  .routine b { color:var(--ink); font-size:14.5px; }
+  .routine p { margin:2px 0 0; font-size:13px; color:var(--muted); }
+  .routine .when { font-size:12.5px; color:var(--blue-top); font-weight:600; }
+  .approval-box { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+  .approval-box b { color:var(--ink); }
+  .approval-box p { font-size:13.5px; color:var(--muted); margin:6px 0 12px; }
+  .approval-box .row { display:flex; gap:8px; }
+  .approval-box .row button { flex:1; border:0; border-radius:999px; padding:9px; font-weight:600; font-size:13.5px; }
+  .approval-box .row .ok { background:var(--blue-top); color:#fff; }
+  .approval-box .row .no { background:var(--surface-soft); color:var(--body); }
+  .approval-done { color:var(--success); font-weight:700; font-size:14px; }
+  /* feature illustrations */
+  .illustration { background:var(--surface-soft); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:16px; font-size:13px; }
+  .illustration .note { background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin-bottom:6px; color:var(--body); }
+  .illustration .sched { display:flex; gap:6px; flex-wrap:wrap; }
+  .illustration .sched span { background:var(--blue-soft); color:var(--blue-top); border-radius:999px; padding:3px 10px; font-weight:600; font-size:12px; }
+  /* phone, Rakazo phone CSS adapted */
+  .platforms { display:grid; grid-template-columns:1fr 300px; gap:56px; align-items:center; }
+  .phone { display:flex; flex-direction:column; width:300px; height:610px; overflow:hidden; border:9px solid var(--panel-line-2); border-radius:52px; background:var(--panel); box-shadow:0 0 0 1px var(--panel-line-2), var(--shadow-demo); user-select:none; }
+  .phone__status { position:relative; display:flex; align-items:center; height:44px; padding:0 28px; color:var(--panel-copy); font-size:13px; font-weight:600; }
+  .phone__island { position:absolute; top:10px; left:50%; width:86px; height:25px; border-radius:999px; background:var(--panel-line); transform:translateX(-50%); }
+  .phone__header { display:flex; align-items:center; gap:9px; padding:6px 16px 12px; border-bottom:1px solid var(--panel-line); color:var(--panel-copy); font-size:15px; font-weight:600; }
+  .phone__back { color:var(--panel-muted); font-size:26px; font-weight:400; line-height:1; }
+  .phone__thread { display:flex; flex:1; flex-direction:column; justify-content:flex-end; gap:8px; min-height:0; overflow:hidden; padding:12px 14px; mask-image:linear-gradient(transparent, black 48px); }
+  .phone__thread > * { flex-shrink:0; }
+  .phone__time { padding:4px 0; color:var(--panel-muted-2); font-size:11.5px; text-align:center; }
+  .phone__bubble { max-width:84%; border-radius:18px; padding:8px 13px; font-size:13px; line-height:1.4; }
+  .phone__bubble--user { align-self:flex-end; background:var(--panel-cream); color:#1a1a1a; }
+  .phone__bubble--bot { align-self:flex-start; background:var(--panel-line); color:var(--panel-copy); }
+  .phone__card { display:flex; flex-direction:column; gap:6px; max-width:92%; font-size:12.5px; }
+  .phone__card-line { display:flex; gap:7px; }
+  .phone__card-line strong { color:#fff; font-weight:600; }
+  .phone__card-check { color:var(--success); }
+  .phone__composer { display:flex; align-items:center; gap:10px; margin:0 12px 18px; border:1px solid var(--panel-line-2); border-radius:999px; background:var(--panel-2); padding:6px 6px 6px 14px; color:var(--panel-muted-2); font-size:17px; }
+  .phone__input { flex:1; }
+  .phone__send { display:grid; width:28px; height:28px; place-items:center; border-radius:999px; background:var(--panel-cream); color:#1a1a1a; font-size:14px; }
+  .banner { width:100%; border-radius:var(--radius-card); }
+  .faq article { background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 22px; margin-bottom:12px; }
+  .faq h3 { margin:0 0 6px; font-size:18px; color:var(--ink); }
+  .faq p { margin:0; color:var(--body); }
+  details.builders { background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 22px; font-size:14.5px; color:var(--body); }
+  details.builders summary { cursor:pointer; font-weight:600; color:var(--ink); }
+  details.builders code { background:var(--surface-soft); padding:2px 7px; border-radius:6px; }
+  .cta { background:var(--navy); color:#fff; border-radius:26px; padding:56px 32px; text-align:center; }
+  .cta h2 { color:#fff; font-size:36px; letter-spacing:-.02em; margin:0 0 10px; }
+  .cta p { color:#cdd6ff; margin:0 0 26px; font-size:18px; }
+  footer { padding:36px 0 48px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); margin-top:24px; }
+  footer a { color:var(--muted); }
+  @media (max-width: 900px) {
+    .hero h1 { font-size:40px; }
+    .card-grid-4, .card-grid-3 { grid-template-columns:1fr; }
+    .demo-frame { grid-template-columns:1fr; }
+    .demo-sidebar { border-right:0; border-bottom:1px solid var(--line); display:flex; gap:6px; overflow-x:auto; }
+    .demo-sidebar h4 { display:none; }
+    .botrow span { display:none; }
+    .demo-panel { border-left:0; border-top:1px solid var(--line); }
+    .platforms { grid-template-columns:1fr; justify-items:center; }
+    .navlinks { display:none; }
   }
 </style>
 </head>
@@ -99,74 +155,135 @@
   <div class="wrap">
     <nav>
       <a class="brand" href="#"><img src="assets/mascot.png" alt="Hermes Bots mascot"> Hermes Bots</a>
-      <div class="links">
+      <div class="navlinks">
         <a href="#demo">Demo</a>
         <a href="#team">Bot team</a>
         <a href="#features">Features</a>
         <a href="#host">Your host</a>
         <a href="#faq">FAQ</a>
-        <a href="https://github.com/galyarderlabs/hermes-bots">GitHub</a>
       </div>
+      <a class="star-pill" href="https://github.com/galyarderlabs/hermes-bots">★ Star on GitHub</a>
     </nav>
-    <div class="hero">
-      <div>
-        <p class="eyebrow">Open source · AGPL-3.0</p>
-        <h1>Talk to your bots, from your phone.</h1>
-        <p class="lead">Give your bots a job. Check in from any device. Hermes Bots is a Grok-style control surface for Hermes hosts — your bots keep working on the host, you steer them from your pocket.</p>
-        <div class="btns">
-          <a class="btn btn-primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
-          <a class="btn btn-ghost" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
-        </div>
-        <div>
-          <span class="copychip"><span>$</span><code style="background:transparent;color:#e6ebff;padding:0;">cd gateway &amp;&amp; cargo build --release</code><button id="copyBtn" type="button">Copy</button></span>
-        </div>
-      </div>
-      <img class="mascot" src="assets/mascot.png" alt="Hermes Bots mascot — a blue Pou-style blob with a golden winged helmet and winged staff">
-    </div>
   </div>
 </header>
 
 <main>
   <div class="wrap">
-    <div class="notice"><strong>Status: preview.</strong> The core client is implemented and the Android build is green, but a live Hermes host connection has not been verified yet. See <a href="https://github.com/galyarderlabs/hermes-bots#current-limitations">Current limitations</a> before relying on it.</div>
+    <section class="hero" style="padding-bottom:24px;">
+      <span class="hero__pill">Open source · Your bots, your host</span>
+      <h1>Give your bots a job. Check in from your phone.</h1>
+      <p class="lead">Your bots do the work on your Hermes host. You steer them, review their results, and say yes or no — from your pocket, whenever you want.</p>
+      <div class="hero__actions">
+        <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
+        <a class="button button--secondary" href="#demo">Try the demo</a>
+      </div>
+      <p class="hero__status">Preview — a live host connection is still being verified. The demo below is illustrative, not a live bot.</p>
+    </section>
 
-    <section id="demo">
-      <p class="eyebrow dark">Product demo</p>
-      <h2>One app, your whole bot team.</h2>
-      <p class="sub">Illustrative threads — this is what a bot conversation, a routine result, and an approval look like inside the app. Tap a tab.</p>
-      <div class="demo">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="phone-top">Hermes Bots · Bots</div>
-            <div class="tabs">
-              <button class="tabbtn active" data-tab="t-chat">Chat</button>
-              <button class="tabbtn" data-tab="t-task">Routine</button>
-              <button class="tabbtn" data-tab="t-approval">Approval</button>
-            </div>
-            <div class="thread">
-              <div class="thread-pane active" id="t-chat">
-                <p class="msg user"><b>You · 11:40 PM</b>Work the research list overnight. Nothing sent without me.</p>
-                <p class="msg bot"><b>Research Scout</b>Understood. I will research, score, and draft. Everything lands in a review list at 6am.</p>
-                <p class="msg cardmsg"><b>Overnight result</b><table><tr><td>Researched</td><td>40 accounts</td></tr><tr><td>Drafted</td><td>18, held for review</td></tr><tr><td>Skipped</td><td>4, already in pipeline</td></tr></table></p>
-              </div>
-              <div class="thread-pane" id="t-task">
-                <p class="msg bot"><b>Routine · Morning sweep · Weekdays 6am</b>41 threads read since Friday.</p>
-                <p class="msg cardmsg"><b>Result</b><table><tr><td>Archived</td><td>26 newsletters + receipts</td></tr><tr><td>Replied</td><td>9 routine threads</td></tr><tr><td>Held</td><td>5 drafts for your read</td></tr></table></p>
-                <p class="msg user"><b>You</b>Send the renewal one, I'll take the rest tomorrow.</p>
-              </div>
-              <div class="thread-pane" id="t-approval">
-                <p class="msg bot"><b>Approval required</b>A bot wants to send 18 drafts to outside contacts. Review the list first?</p>
-                <p class="msg cardmsg"><b>Action</b>Send 18 drafts · Outside contacts · Needs your approval</p>
-              </div>
+    <section id="demo" style="padding-top:24px;">
+      <p class="demo-note">Interactive demo — pick a bot, tap a suggestion, watch it work. Threads and results here are illustrative.</p>
+      <div class="demo-frame">
+        <div class="demo-sidebar">
+          <h4>Your bots</h4>
+          <div id="botList"></div>
+        </div>
+        <div class="demo-main">
+          <div class="demo-main-head">
+            <span class="bot-avatar xs" id="mainAvatar" style="background:#f5a03c;"><img src="assets/mascot.png" alt=""></span>
+            <div><b id="mainName">Inbox Manager</b><br><span id="mainJob">Sweeps the inbox, drafts the rest</span></div>
+          </div>
+          <div class="demo-thread" id="thread"></div>
+          <div class="demo-suggest" id="suggest"></div>
+        </div>
+        <div class="demo-panel">
+          <div class="demo-tabs">
+            <button class="ptab active" data-panel="routines">Routines</button>
+            <button class="ptab" data-panel="approvals">Approvals</button>
+          </div>
+          <div id="panel-routines"></div>
+          <div id="panel-approvals" style="display:none;">
+            <div class="approval-box" id="approvalBox">
+              <b>Send 18 drafts?</b>
+              <p>A bot wants to send drafts to outside contacts. Nothing goes out until you say so.</p>
+              <div class="row"><button class="ok" id="approveBtn">Approve</button><button class="no" id="denyBtn">Deny</button></div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="section-intro">
+        <p class="eyebrow">Your bot team</p>
+        <h2 class="section-heading">Give each bot a job</h2>
+        <p class="section-copy">Start with a job. Make it yours. Each bot keeps its own conversations, routines and history — and shows up in its own colour, like the family it is.</p>
+      </div>
+      <div class="card-grid-4">
+        <article class="card roster-card"><span class="bot-avatar" style="background:#f5a03c;"><img src="assets/mascot.png" alt="Research Scout"></span><h3>Research Scout</h3><p>Researches a list overnight, scores it, and drafts in your voice. Nothing sent without you.</p><p style="margin-top:12px;"><span class="chip">Nightly 1am</span><span class="chip">40 researched</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar" style="background:#6a6bf5;"><img src="assets/mascot.png" alt="Inbox Manager"></span><h3>Inbox Manager</h3><p>Sweeps the inbox, archives the noise, drafts the rest, and flags the one thread that actually needs you.</p><p style="margin-top:12px;"><span class="chip">Weekdays 6am</span><span class="chip">Inbox at zero</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar" style="background:#9b5cf6;"><img src="assets/mascot.png" alt="Account Watcher"></span><h3>Account Watcher</h3><p>Remembers the account: who approves, what terms they sign, and what was promised last time.</p><p style="margin-top:12px;"><span class="chip">Every week</span><span class="chip">5 drafts parked</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar" style="background:#3b82f6;"><img src="assets/mascot.png" alt="Task Runner"></span><h3>Task Runner</h3><p>Recurring work on a schedule — morning sweep, month-end close, pipeline refresh — with a result card every run.</p><p style="margin-top:12px;"><span class="chip">Hourly</span><span class="chip">Last run done</span></p></article>
+      </div>
+      <p style="font-size:14px;color:var(--muted);margin-top:16px;">Starter job templates are the next step after v0.1.2 — today the app already shows each bot's own conversations, sessions and routines from the host.</p>
+    </section>
+
+    <section id="features">
+      <div class="section-intro">
+        <p class="eyebrow">More than chat</p>
+        <h2 class="section-heading">It works while you are not looking</h2>
+        <p class="section-copy">Chat is the front door. The rest is what makes a bot a teammate.</p>
+      </div>
+      <div class="card-grid-3">
+        <article class="card"><div class="illustration"><div class="note">Prefers short replies, no fluff</div><div class="note">Renewal lives in the Q3 doc, not email</div></div><h3>Remembers</h3><p>Bots keep what they learn and share it with the team — so you never re-explain the same thing twice.</p></article>
+        <article class="card"><div class="illustration"><div class="sched"><span>Every hour</span><span>Weekdays</span><span>Every month</span></div><p style="margin:10px 0 0;font-size:13px;">Pick a rhythm in plain words. No cron syntax, no workflow builder.</p></div><h3>Wakes up on its own</h3><p>On a schedule you set. It runs, it reports back, and you only hear about it when it matters.</p></article>
+        <article class="card"><div class="illustration"><div class="note">Send 18 drafts to outside contacts — <strong>needs your approval</strong></div></div><h3>You set the limits</h3><p>Decide which actions need your approval. Sensitive work waits for you. Everything else just happens.</p></article>
+      </div>
+    </section>
+  </div>
+
+  <section id="host" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-intro">
+        <p class="eyebrow">Your host, your control</p>
+        <h2 class="section-heading">Your machine, your bots, your limits.</h2>
+        <p class="section-copy">Hermes Bots is not another agent. It is the phone app for the bots you already run on your Hermes host — the host stays in charge, the phone just checks in.</p>
+      </div>
+      <div class="card-grid-3">
+        <article class="card"><h3>Your host's bots</h3><p>Each bot uses whatever its host is set up with. The app never picks a provider for you and never sees your keys.</p></article>
+        <article class="card"><h3>Work on a schedule</h3><p>Recurring work runs on the host while it stays on. The phone only checks in and reviews results.</p></article>
+        <article class="card"><h3>One team, many bots</h3><p>Group chats put several bots in one thread, each reply attributed to its sender — bots working together, in the open.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section>
+      <div class="platforms">
         <div>
-          <div class="grid" style="grid-template-columns:1fr;">
-            <div class="card"><h3>Turn journaling, not fire-and-forget</h3><p>An intent is persisted before it is sent. A failed write sends nothing, and a session held elsewhere shows as read-only instead of silently conflicting.</p></div>
-            <div class="card"><h3>One durable connection</h3><p>Chat, sessions, tasks and approvals ride one WebSocket (<code>/api/ws</code>, JSON-RPC) to the gateway — no polling, no duplicated state.</p></div>
-            <div class="card"><h3>Group chats, attributed</h3><p>Several bots in one conversation, each reply attributed to its sender. That is the app's version of peer-bot delegation.</p></div>
+          <p class="eyebrow">Wherever you are</p>
+          <h2 class="section-heading">Starting with Android. The phone is the point.</h2>
+          <p class="section-copy">This is a phone app first — built for the moment you are away from your desk and a bot needs you, or you need it.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
+            <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
+            <span class="chip" style="align-self:center;">iOS &amp; desktop: not yet</span>
           </div>
+          <p style="font-size:14px;color:var(--muted);margin-top:16px;">Uninstall any older preview first, and download on Wi-Fi — the preview build is a large universal debug build.</p>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="phone__status"><span>9:41</span><span class="phone__island"></span></div>
+          <div class="phone__header"><span class="phone__back">‹</span><span class="bot-avatar xs" style="background:#6a6bf5;"><img src="assets/mascot.png" alt=""></span><span class="phone__name">Inbox Manager</span></div>
+          <div class="phone__thread">
+            <div class="phone__time">Today 6:00 AM</div>
+            <div class="phone__bubble phone__bubble--bot">Morning sweep done. 41 threads read since Friday.</div>
+            <div class="phone__bubble phone__bubble--bot phone__card">
+              <div class="phone__card-line"><span class="phone__card-check">✓</span><span><strong>Archived</strong> 26 newsletters + receipts</span></div>
+              <div class="phone__card-line"><span class="phone__card-check">✓</span><span><strong>Replied</strong> 9 routine threads</span></div>
+              <div class="phone__card-line"><span class="phone__card-check">✓</span><span><strong>Held</strong> 5 drafts for your read</span></div>
+            </div>
+            <div class="phone__bubble phone__bubble--user">Send the renewal one, I'll take the rest tomorrow.</div>
+            <div class="phone__bubble phone__bubble--bot">On it. The renewal is sent, the rest stay in review.</div>
+          </div>
+          <div class="phone__composer"><span>+</span><span class="phone__input"></span><span class="phone__send">↑</span></div>
         </div>
       </div>
     </section>
@@ -175,99 +292,37 @@
       <img class="banner" src="assets/og-banner.png" alt="Hermes Bots banner">
     </section>
 
-    <section id="team">
-      <p class="eyebrow dark">Your bot team</p>
-      <h2>Give each bot a job.</h2>
-      <p class="sub">Start with a job. Make it yours. Starter templates are the next step after v0.1.2 — today each bot already keeps its own conversations, sessions and routines on the host, and the app shows them per bot.</p>
-      <div class="grid grid4">
-        <div class="card"><span class="dot" style="background:var(--orange)"></span><h3>Research Scout</h3><p>Research a list overnight, score it, draft in your voice — nothing sent without you.</p></div>
-        <div class="card"><span class="dot" style="background:var(--purple)"></span><h3>Inbox Manager</h3><p>Sweep the inbox, archive the noise, draft the rest, flag the one that actually needs you.</p></div>
-        <div class="card"><span class="dot" style="background:var(--violet)"></span><h3>Account Watcher</h3><p>Remember the account: who approves, what terms they sign, and what was promised last time.</p></div>
-        <div class="card"><span class="dot" style="background:var(--sky)"></span><h3>Task Runner</h3><p>Recurring work on a schedule — morning sweep, month-end close, pipeline refresh — with a result card every run.</p></div>
-      </div>
-    </section>
-
-    <section id="features">
-      <p class="eyebrow dark">More than chat</p>
-      <h2>What it does</h2>
-      <p class="sub">Everything a control surface needs — and nothing it should not do.</p>
-      <div class="grid">
-        <div class="card"><h3>Live chat</h3><p>Streamed bot replies over a single durable WebSocket, with turn journaling and never-auto-resubmit.</p></div>
-        <div class="card"><h3>Sessions</h3><p>The full runtime session projection, including read-only sessions held elsewhere.</p></div>
-        <div class="card"><h3>Tasks &amp; routines</h3><p>Scheduled and recurring bot work, with pause, resume, trigger and delete — preset schedules are coming next.</p></div>
-        <div class="card"><h3>Approvals &amp; clarifications</h3><p>Review bot questions and sensitive actions before they run.</p></div>
-        <div class="card"><h3>Computer view</h3><p>Read-only host display thumbnail. Take-control is not implemented yet.</p></div>
-        <div class="card"><h3>Private by design</h3><p>Provider credentials never enter the app. Tokens live only in SecureStore, cleartext stays off by default.</p></div>
-      </div>
-    </section>
-  </div>
-
-  <section id="host" class="how">
-    <div class="wrap">
-      <p class="eyebrow dark">Your host, your control</p>
-      <h2>Your machine, your bots, your limits.</h2>
-      <p class="sub">Hermes Bots is a remote control surface, not an agent runtime. It runs no model, holds no provider credentials, and executes no tools. The Hermes host remains the sole authority.</p>
-      <div class="grid">
-        <div class="card"><h3>Your host's model</h3><p>Each bot uses the model its host is configured with. The app never picks a provider for you and never sees the key.</p></div>
-        <div class="card"><h3>Work on a schedule</h3><p>Recurring tasks run on the host while it stays on — the phone only checks in and reviews results.</p></div>
-        <div class="card"><h3>You set the limits</h3><p>Decide which actions need your approval. Nothing sensitive runs while you are not looking.</p></div>
-      </div>
-      <div class="approval" style="margin-top:18px;">
-        <p class="meta">Approval required · Weekdays 9:00 · Send 18 drafts</p>
-        <h3 style="margin:8px 0;">A bot wants to send outside the team. Approve?</h3>
-        <p style="color:var(--muted);margin:0;">This is the gate every sensitive action passes through. Approve sends it, Deny stops it — no silent middle ground.</p>
-        <div class="actions"><button class="ok" type="button">Approve</button><button class="no" type="button">Deny</button></div>
-      </div>
-      <h3 style="margin-top:36px;">Get connected</h3>
-      <ol>
-        <li>Run the Rust gateway on your Hermes host: <code>cd gateway &amp;&amp; cargo build --release</code></li>
-        <li>Put your phone and host on the same Tailscale tailnet.</li>
-        <li>In the app, go to Settings → Connection and enter the gateway's tailnet address — never <code>127.0.0.1</code> on the phone.</li>
-        <li>Probe <code>/api/status</code> and pair. PKCE pairing is still a stub in this preview — expect that step to be the first rough edge.</li>
-      </ol>
-    </div>
-  </section>
-
-  <div class="wrap">
     <section>
-      <p class="eyebrow dark">Platforms</p>
-      <h2>Wherever you are — starting with Android.</h2>
-      <div class="grid">
-        <div class="card"><h3>Android <span class="tag">Available now</span></h3><p>Debug preview builds on GitHub Releases. Uninstall any older preview first, download on Wi-Fi — a universal debug build is around 240 MB.</p></div>
-        <div class="card"><h3>Web <span class="tag soon">This page only</span></h3><p>This landing page is web. A full web client is not shipped yet.</p></div>
-        <div class="card"><h3>iOS &amp; Desktop <span class="tag soon">Not yet</span></h3><p>Not shipped. Android first, because that is what can be tested on a real device today.</p></div>
+      <div class="section-intro">
+        <p class="eyebrow">Open source</p>
+        <h2 class="section-heading">AGPL-3.0. Run it, change it, make it yours.</h2>
+        <p class="section-copy">A port of CodeUpdaterBot/Hermes-Mobile-App, reimplemented as an Expo app with a Rust gateway. The upstream licence is why this is AGPL-3.0, not MIT.</p>
       </div>
-    </section>
-
-    <section>
-      <p class="eyebrow dark">Open source</p>
-      <h2>AGPL-3.0. Run it, change it, make it yours.</h2>
-      <p class="sub">A port of CodeUpdaterBot/Hermes-Mobile-App (AGPL-3.0), reimplemented as an Expo React Native app with a Rust Axum gateway. The upstream licence is why this is AGPL-3.0, not MIT.</p>
-      <div class="btns">
-        <a class="btn btn-navy" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
-        <a class="btn btn-line" href="https://github.com/galyarderlabs/hermes-bots">Read the README</a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots">Star on GitHub</a>
+        <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots">Read the README</a>
       </div>
     </section>
 
     <section id="faq" class="faq">
-      <p class="eyebrow dark">FAQ</p>
-      <h2>Frequently asked questions</h2>
-      <div>
-        <article><h3>Is this production-ready?</h3><p>No. It is a preview. The core client is implemented and the Android build is green, but a live Hermes host connection has not been verified yet, pairing is a stub, and voice, file picker, push and the tablet layout are not wired.</p></article>
-        <article><h3>Does the app hold my provider credentials?</h3><p>No. The host holds the model, credentials and history. Provider credentials never enter the app, and tokens live only in SecureStore.</p></article>
-        <article><h3>Do I need a Hermes host?</h3><p>Yes. Without a paired host the app shows “Connect Hermes first”. This is a control surface, not a standalone agent.</p></article>
-        <article><h3>Do I need Tailscale?</h3><p>It is the recommended path: phone and host on the same tailnet, then enter the gateway's tailnet address in Settings → Connection. The gateway listens on the host only by default.</p></article>
-        <article><h3>Why is the APK ~240 MB?</h3><p>It is a universal debug build with 4 ABIs, not a stripped release build. That size is a preview-build property, not the app's real footprint goal.</p></article>
+      <div class="section-intro">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="section-heading">Questions, answered plainly</h2>
       </div>
+      <article><h3>Is this ready to rely on?</h3><p>Not yet. It is a preview: the app itself works, but a live connection to a real Hermes host has not been verified, and a few pieces (voice, file picking, push, tablet layout) are not wired yet.</p></article>
+      <article><h3>Does the app see my keys or passwords?</h3><p>No. Your host holds all of that. The phone app only talks to the host — it never asks for a provider key.</p></article>
+      <article><h3>Does it work without a Hermes host?</h3><p>No. Without a paired host it shows “Connect Hermes first”. This is a remote control for your bots, not a bot by itself.</p></article>
+      <article><h3>Do I need to be on the same network?</h3><p>Your phone and host should be on the same private network (Tailscale is the recommended way). You enter the host's address once, in Settings.</p></article>
+      <details class="builders"><summary>For builders — how it is put together</summary><p style="margin-top:12px;">Phone app (Expo React Native) → Rust gateway on the host → Hermes host. One durable WebSocket carries chat, sessions, tasks and approvals; an intent is saved before it is sent, and a failed save sends nothing. Gateway: <code>cd gateway &amp;&amp; cargo build --release</code>. Pairing (PKCE) is still a stub in this preview — that is the first rough edge on a live host.</p></details>
     </section>
 
     <section>
       <div class="cta">
         <h2>Meet your first bot.</h2>
         <p>Hand over your next task — and check in from your phone.</p>
-        <div class="btns" style="justify-content:center;">
-          <a class="btn btn-primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
-          <a class="btn btn-ghost" href="https://github.com/galyarderlabs/hermes-bots">View on GitHub</a>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
+          <a class="button button--secondary" style="background:transparent;color:#fff;border-color:#5a6bb8;" href="https://github.com/galyarderlabs/hermes-bots">View on GitHub</a>
         </div>
       </div>
     </section>
@@ -280,18 +335,55 @@
   </div>
 </footer>
 <script>
-  document.getElementById('copyBtn').addEventListener('click', function () {
-    var text = 'cd gateway && cargo build --release';
-    if (navigator.clipboard) { navigator.clipboard.writeText(text).then(function(){ document.getElementById('copyBtn').textContent = 'Copied'; }); }
+  var BOTS = [
+    { id: "inbox", name: "Inbox Manager", job: "Sweeps the inbox, drafts the rest", color: "#6a6bf5", preview: "Inbox at zero, 5 drafts parked", prompt: "Sweep the inbox and draft replies. Nothing sent without me.", reply: "Done. 41 threads read, 26 archived, 9 replied. 5 drafts are parked for your read — the renewal is the only one that needs you today.", card: [["Archived", "26 newsletters + receipts"], ["Replied", "9 routine threads"], ["Held", "5 drafts for your read"]], routines: [{ n: "Morning sweep", w: "Weekdays 6am", r: "Inbox at zero, 5 drafts parked" }, { n: "Reply Zero", w: "Hourly", r: "No thread older than 1 hour unanswered" }] },
+    { id: "research", name: "Research Scout", job: "Researches overnight, drafts in your voice", color: "#f5a03c", preview: "40 accounts researched, 18 drafts queued", prompt: "Work the research list overnight, my voice, nothing sent without me.", reply: "Understood. I will research, score, and draft. Everything lands in a review list at 6am — nothing goes out until you approve it.", card: [["Researched", "40 accounts · 22 with a live signal"], ["Drafted", "18 emails + 9 notes"], ["Skipped", "4 · already in pipeline"]], routines: [{ n: "Overnight sourcing", w: "Nightly 1am", r: "40 accounts researched, 18 drafts queued" }, { n: "Reply sweep", w: "Weekdays 8am", r: "Follow-ups queued for review" }] },
+    { id: "account", name: "Account Watcher", job: "Remembers every account, every promise", color: "#9b5cf6", preview: "Nora's renewal held for your read", prompt: "Who needs a follow-up this week?", reply: "Three accounts went quiet this week. Nora's renewal is the urgent one — draft is ready, terms match last quarter. The other two can wait until Monday.", card: [["Follow-ups", "3 accounts went quiet"], ["Urgent", "Nora's renewal, draft ready"], ["Waiting", "2 accounts, Monday is fine"]], routines: [{ n: "Account check", w: "Every week", r: "3 quiet accounts flagged" }, { n: "Renewal watch", w: "Every month", r: "Nora's renewal held for your read" }] },
+    { id: "task", name: "Task Runner", job: "Recurring work, reported every run", color: "#3b82f6", preview: "Month-end close done, 2 items flagged", prompt: "Run the month-end close and flag anything odd.", reply: "Month-end close is done. Everything reconciles except two items — both are timing differences, not errors. Summary is in the thread.", card: [["Reconciled", "All accounts except 2"], ["Flagged", "2 timing differences"], ["Filed", "Summary + receipts attached"]], routines: [{ n: "Month-end close", w: "Every month", r: "Done, 2 items flagged" }, { n: "Pipeline refresh", w: "Every week", r: "12 deals moved, 3 stalled" }] }
+  ];
+  var current = BOTS[0];
+  var threadEl = document.getElementById("thread");
+  var listEl = document.getElementById("botList");
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function bubble(cls, text) { var d = document.createElement("div"); d.className = "demo-bubble " + cls; d.textContent = text; threadEl.appendChild(d); threadEl.scrollTop = threadEl.scrollHeight; return d; }
+  function cardBubble(lines) { var d = document.createElement("div"); d.className = "demo-card"; var h = "<b>Result</b>"; lines.forEach(function (l) { h += '<div class="demo-card-line"><span class="check">✓</span><span><strong>' + esc(l[0]) + "</strong> " + esc(l[1]) + "</span></div>"; }); d.innerHTML = h; threadEl.appendChild(d); threadEl.scrollTop = threadEl.scrollHeight; }
+  function timeRow(t) { var d = document.createElement("div"); d.className = "demo-time"; d.textContent = t; threadEl.appendChild(d); }
+  function renderBot(bot) {
+    current = bot;
+    document.getElementById("mainName").textContent = bot.name;
+    document.getElementById("mainJob").textContent = bot.job;
+    document.getElementById("mainAvatar").style.background = bot.color;
+    listEl.querySelectorAll(".botrow").forEach(function (b) { b.classList.toggle("active", b.dataset.id === bot.id); });
+    threadEl.innerHTML = "";
+    timeRow("Today 6:00 AM");
+    bubble("bot", bot.preview + ".");
+    var s = document.getElementById("suggest"); s.innerHTML = "";
+    var btn = document.createElement("button"); btn.textContent = bot.prompt; btn.onclick = function () { runPrompt(bot); }; s.appendChild(btn);
+    var pr = document.getElementById("panel-routines"); pr.innerHTML = "";
+    bot.routines.forEach(function (r) { var d = document.createElement("div"); d.className = "routine"; d.innerHTML = "<b>" + esc(r.n) + '</b><p class="when">' + esc(r.w) + "</p><p>" + esc(r.r) + "</p>"; pr.appendChild(d); });
+  }
+  function runPrompt(bot) {
+    bubble("user", bot.prompt);
+    var t = bubble("bot typing", "•••");
+    setTimeout(function () { t.remove(); bubble("bot", bot.reply); setTimeout(function () { cardBubble(bot.card); }, 500); }, 900);
+  }
+  BOTS.forEach(function (bot) {
+    var b = document.createElement("button"); b.className = "botrow"; b.dataset.id = bot.id;
+    b.innerHTML = '<span class="bot-avatar sm" style="background:' + bot.color + ';"><img src="assets/mascot.png" alt=""></span><span style="text-align:left;"><b>' + esc(bot.name) + "</b><span>" + esc(bot.preview) + "</span></span>";
+    b.onclick = function () { renderBot(bot); };
+    listEl.appendChild(b);
   });
-  document.querySelectorAll('.tabbtn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      document.querySelectorAll('.tabbtn').forEach(function (b) { b.classList.remove('active'); });
-      document.querySelectorAll('.thread-pane').forEach(function (p) { p.classList.remove('active'); });
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    });
+  renderBot(BOTS[0]);
+  document.querySelectorAll(".ptab").forEach(function (tab) {
+    tab.onclick = function () {
+      document.querySelectorAll(".ptab").forEach(function (t) { t.classList.remove("active"); });
+      tab.classList.add("active");
+      document.getElementById("panel-routines").style.display = tab.dataset.panel === "routines" ? "block" : "none";
+      document.getElementById("panel-approvals").style.display = tab.dataset.panel === "approvals" ? "block" : "none";
+    };
   });
+  document.getElementById("approveBtn").onclick = function () { document.getElementById("approvalBox").innerHTML = '<p class="approval-done">✓ Approved — the drafts are sent.</p>'; };
+  document.getElementById("denyBtn").onclick = function () { document.getElementById("approvalBox").innerHTML = '<p class="approval-done" style="color:#b3261e;">✕ Denied — nothing was sent.</p>'; };
 </script>
 </body>
 </html>
