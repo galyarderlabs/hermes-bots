@@ -49,7 +49,7 @@
   .section-intro { max-width:660px; }
   .eyebrow { margin:0 0 12px; color:var(--blue); font-size:13px; font-weight:600; }
   .section-heading { margin:0; color:var(--ink); font-size:clamp(2.25rem,5vw,42px); line-height:1.1; font-weight:500; letter-spacing:-.02em; }
-  .section-copy { margin-top:16px; color:var(--muted); font-size:18px; line-height:1.55; }
+  .section-copy { margin-top:16px; color:var(--muted); font-size:18px; line-height:1.55; overflow-wrap:anywhere; }
   .card-grid-3, .card-grid-4 { display:grid; gap:20px; margin-top:44px; }
   .card-grid-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
   .card-grid-4 { grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
@@ -210,7 +210,7 @@
   /* repo card, Rakazo repo-card (static) */
   .repo-card { overflow:hidden; border:1px solid var(--panel-line); border-radius:var(--radius-card); background:var(--panel); color:var(--panel-copy); box-shadow:var(--shadow-demo); font-size:14px; }
   .repo-card__head { display:flex; align-items:center; gap:10px; padding:18px 22px; border-bottom:1px solid var(--panel-line); }
-  .repo-card__name { font-weight:600; color:#fff; }
+  .repo-card__name { font-weight:600; color:#fff; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .repo-card__meta { margin-left:auto; color:var(--panel-muted); white-space:nowrap; }
   .repo-card__changes { margin:0; padding:8px 0; list-style:none; }
   .repo-card__changes li { display:flex; align-items:center; gap:12px; padding:11px 22px; }
@@ -235,7 +235,7 @@
   .site-footer__column ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; color:var(--muted); font-size:14px; }
   .site-footer__column a:hover { color:var(--ink); }
   @media (max-width: 960px) {
-    .channels, .open-source, .platforms { grid-template-columns:1fr; gap:40px; justify-items:center; }
+    .channels, .open-source, .platforms { grid-template-columns:minmax(0,1fr); gap:40px; justify-items:center; }
     .stats-band { grid-template-columns:minmax(0,1fr); padding:32px; }
     .site-footer { flex-direction:column; }
   }
