@@ -82,7 +82,7 @@
   .art-approval span:last-child { background:var(--accent); color:#fff; border-color:var(--accent); }
   /* dark product demo, Rakazo product-demo__frame */
   .demo-note { font-size:14px; color:var(--muted); margin:0 0 16px; }
-  .demo-frame { display:grid; grid-template-columns:296px minmax(0,1fr) 340px; border-radius:var(--radius-frame); background:var(--panel); box-shadow:var(--shadow-demo); min-height:540px; overflow:hidden; }
+  .demo-frame { display:grid; grid-template-columns:296px minmax(0,1fr) 340px; height:660px; overflow:hidden; border:1px solid #1e1e20; border-radius:var(--radius-frame); background:var(--panel); box-shadow:var(--shadow-demo); }
   .demo-sidebar, .demo-main, .demo-panel { min-height:0; }
   .demo-sidebar { padding:0 0 12px; border-right:1px solid var(--panel-line); }
   .demo-chrome { display:flex; align-items:center; gap:10px; padding:16px 16px 12px; }
@@ -156,8 +156,8 @@
   .testimonial-card figcaption { display:flex; align-items:center; gap:10px; margin:0; color:var(--muted-2); font-size:14px; font-weight:500; }
   .testimonial-pause { display:grid; width:36px; height:36px; place-items:center; border:1px solid var(--line-2); border-radius:999px; background:var(--surface); color:var(--muted-2); padding:0; }
   /* computer mock in demo panel, Rakazo ComputerDesktop pattern, static */
-  .desk { position:relative; width:100%; aspect-ratio:4/3; border-radius:14px; background:#0e0e10; overflow:hidden; }
-  .desk-window { position:absolute; border-radius:8px; background:#1c1c1f; border:1px solid var(--panel-line-2); padding:10px 12px; color:var(--panel-copy); font-size:12px; }
+  .desk { position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; background:#0e0e10; overflow:hidden; }
+  .desk-window { position:absolute; display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(255,255,255,.07); border-radius:8px; background:#111113; box-shadow:0 8px 20px rgba(0,0,0,.45); color:var(--panel-copy); font-size:12px; }
   .desk-window b { color:#fff; display:block; margin-bottom:6px; }
   .desk-window i { display:block; height:8px; border-radius:4px; background:#2a2a2e; margin-top:6px; }
   .desk-dock { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:8px; background:#171719; border:1px solid var(--panel-line-2); border-radius:999px; padding:6px 10px; }
@@ -259,6 +259,31 @@
   .desk-window-url { margin-left:6px; color:var(--panel-muted); font-size:11.5px; }
   .desk-window-body { padding:10px 12px; }
   .desk.live .desk-dock span { cursor:pointer; }
+  /* thread computer message + takeover stage, Rakazo product-demo pattern */
+  .demo-computer { display:flex; width:min(86%,520px); flex-direction:column; gap:4px; border-radius:18px; background:#1c1c1f; padding:13px 14px 14px; color:var(--panel-copy); font-size:15px; align-self:flex-start; }
+  .demo-computer-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .demo-computer-head span { border-radius:999px; background:rgba(48,162,75,.14); padding:2px 10px; color:#4ecb71; font-size:13px; }
+  .demo-computer p { margin:0 0 8px; }
+  .demo-computer-shot { display:block; overflow:hidden; border:0; border-radius:12px; padding:0; text-align:left; cursor:pointer; background:transparent; }
+  .desk-window-split { display:flex; flex:1; min-height:0; }
+  .desk-window-side { width:32%; flex:none; border-right:1px solid var(--panel-line); padding:10px; display:flex; flex-direction:column; gap:8px; }
+  .desk-window-rows { flex:1; padding:10px; display:flex; flex-direction:column; gap:8px; min-width:0; }
+  .desk-window-row { display:flex; gap:8px; align-items:center; }
+  .desk-window-check { color:var(--success); font-size:12px; }
+  .desk-window-title { color:#fff; font-size:13px; font-weight:600; margin-bottom:6px; }
+  .desk-window-line { display:flex; gap:8px; padding:5px 0; }
+  .desk-window-line > span { width:6px; height:6px; flex:none; border-radius:50%; background:var(--panel-muted); margin-top:6px; }
+  .demo-stage { position:absolute; inset:0; z-index:8; background:rgba(4,4,5,.96); }
+  .demo-takeover { display:flex; height:100%; flex-direction:column; background:#050506; }
+  .demo-takeover-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid #171719; padding:14px 18px; }
+  .demo-takeover-who { display:flex; min-width:0; align-items:center; gap:12px; color:#ececee; font-size:15.5px; font-weight:500; }
+  .demo-takeover-pill { border-radius:999px; background:rgba(48,162,75,.14); padding:4px 11px; color:#4ecb71; font-size:13px; font-weight:400; }
+  .demo-takeover-actions { display:flex; align-items:center; gap:12px; }
+  .demo-outline-btn { border:1px solid var(--panel-line-2); background:transparent; color:var(--panel-copy); border-radius:999px; padding:7px 14px; font-size:13px; }
+  .demo-takeover-close { border:0; background:transparent; color:#85858a; font-size:16px; cursor:pointer; }
+  .demo-takeover-close:hover { color:#ececee; }
+  .demo-takeover-screen { display:grid; min-height:0; flex:1; place-items:center; padding:18px; }
+  .demo-takeover-screen .desk { width:100%; max-width:860px; }
   /* group chat mock, Rakazo slack-mock */
   .channels { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:56px; }
   .chat-mock { overflow:hidden; border:1px solid var(--line-2); border-radius:var(--radius-card); background:var(--surface); box-shadow:var(--shadow-demo); font-size:14px; }
@@ -443,7 +468,6 @@
             <button class="demo-panel-toggle" id="demoPanelToggle" type="button" aria-label="Toggle computer panel" title="Computer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg></button>
           </div>
           <div class="demo-thread" id="thread"></div>
-          <div class="demo-suggest" id="suggest"></div>
           <div class="demo-composer">
             <div class="demo-input-shell">
               <span style="color:var(--panel-muted-2);font-size:18px;">+</span>
@@ -461,11 +485,7 @@
             </div>
           </div>
           <div id="panel-computer">
-            <div class="desk" id="desk">
-              <div class="desk-window" data-win="tasks"><div class="desk-window-bar"><span></span><span></span><span></span><div class="desk-window-url">Host tasks</div></div><div class="desk-window-body"><b>Daily host recap — done</b><span style="color:var(--panel-muted);">3 sessions active · 1 waits on approval</span><i style="display:block;height:8px;border-radius:4px;background:#2a2a2e;margin-top:8px;width:70%;"></i><i style="display:block;height:8px;border-radius:4px;background:#2a2a2e;margin-top:6px;width:50%;"></i></div></div>
-              <div class="desk-window" data-win="screen"><div class="desk-window-bar"><span></span><span></span><span></span><div class="desk-window-url">Bot screen</div></div><div class="desk-window-body"><b>Session list · 3 active</b><span style="color:var(--panel-muted);">Inbox Manager · Research Scout · Task Runner</span><i style="display:block;height:8px;border-radius:4px;background:#2a2a2e;margin-top:8px;width:66%;"></i><i style="display:block;height:8px;border-radius:4px;background:#2a2a2e;margin-top:6px;width:44%;"></i></div></div>
-              <div class="desk-dock"><span data-dock="tasks">▦</span><span data-dock="screen">✉</span><span>◷</span></div>
-            </div>
+            <div class="desk" id="desk"></div>
             <div class="desk-meta"><span id="controlState">Watching — read-only</span><button id="controlBtn" type="button">Take control</button></div>
             <p style="font-size:12.5px;color:var(--panel-muted);margin:10px 0 0;">Demo mock: in the preview app the display is read-only; take-control via the host lease is still being wired.</p>
             <div class="demo-panel-label">Routines</div>
@@ -497,6 +517,15 @@
             <div class="demo-field">Run history<div id="routineRuns"></div></div>
           </div>
         </aside>
+        <div class="demo-stage" id="takeoverStage" style="display:none;">
+          <div class="demo-takeover">
+            <div class="demo-takeover-bar">
+              <div class="demo-takeover-who"><span class="bot-avatar xs" id="takeoverAvatar"><img src="assets/bots/inbox-manager.png" alt=""></span><span id="takeoverName">Inbox Manager's computer</span><span class="demo-takeover-pill">You have control</span></div>
+              <div class="demo-takeover-actions"><button class="demo-outline-btn" id="takeoverReleaseBtn" type="button">Release</button><button class="demo-takeover-close" id="takeoverCloseBtn" type="button" aria-label="Close computer">✕</button></div>
+            </div>
+            <div class="demo-takeover-screen"><div class="desk" id="takeoverDesk"></div></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -708,11 +737,19 @@
 </div>
 <script>
   var BOTS = [
-    { id: "inbox", name: "Inbox Manager", title: "Tidies the inbox, holds the important ones", desc: "Sweeps the inbox, archives the noise, drafts the rest, and holds the one thread that actually needs you.", color: "#6a6bf5", avatar: "assets/bots/inbox-manager.png", time: "7:00 AM", preview: "23 threads tidied, 1 invite needs you today", prompt: "Tidy my inbox. Anything that needs me today, hold it at the top.", reply: "Done. 23 threads tidied, 11 newsletters archived, 4 drafts written. One invite needs you today — a product demo invite asking for an answer before tonight. The rest can wait.", card: [["Tidied", "23 threads · 11 archived"], ["Drafted", "4 replies in your voice"], ["Held", "1 demo invite · answer before tonight"]], routines: [{ name: "Inbox tidy-up", instruction: "Tidy the inbox: archive newsletters, draft replies in my voice, and hold the one thread that needs me at the top.", freq: "Weekdays", time: "07:00", active: true, runs: [{ text: "Completed", time: "Today 7:00 AM" }] }, { name: "Evening recap", instruction: "Summarise the day: unread back to zero, drafts listed, held threads flagged.", freq: "Every day", time: "21:00", active: true, runs: [{ text: "Completed", time: "Yesterday 9:00 PM" }] }] },
-    { id: "research", name: "Research Scout", title: "Reads around a question, brings back options", desc: "Reads around a question and brings back options — never a verdict made for you.", color: "#f5a03c", avatar: "assets/bots/research-scout.png", time: "2:00 AM", preview: "12 sources read, 3 options compared", prompt: "Compare home-host vs VPS hosting for the gateway. Bring me options, not a verdict.", reply: "Read 12 sources overnight. Three options stand out: home host is cheapest and fully yours, VPS is steadier when your home connection drops, a small rented box sits in between. Comparison is in the thread — no decision made for you.", card: [["Read", "12 sources · docs, changelogs, setups"], ["Compared", "3 options · cost, uptime, control"], ["Recommended", "None yet · your call"]], routines: [{ name: "Nightly reading", instruction: "Read the day's sources on the open question and compare options without making a verdict.", freq: "Every day", time: "02:00", active: true, runs: [{ text: "Completed", time: "Today 2:00 AM" }] }, { name: "Changelog watch", instruction: "Watch host changelogs and summarise updates, flagging breaking changes.", freq: "Every week", time: "09:00", active: true, runs: [{ text: "Completed", time: "Monday 9:00 AM" }] }] },
-    { id: "account", name: "Account Watcher", title: "Watches who went quiet, and what was promised", desc: "Watches who went quiet, what was promised, and who asked for something new.", color: "#9b5cf6", avatar: "assets/bots/account-watcher.png", time: "Yesterday", preview: "2 contacts went quiet, 1 asked for a price revision", prompt: "Who went quiet this week, and who asked for something new?", reply: "Two contacts went quiet after you sent proposals — no reply in 6 days. One asked for a price revision instead of signing. I drafted a short follow-up for each, held for your read, and noted what each one was promised last time.", card: [["Quiet", "2 contacts · 6 days, no reply"], ["Revision", "1 price revision requested"], ["Drafted", "2 follow-ups · held for your read"]], routines: [{ name: "Quiet watch", instruction: "Flag contacts that went quiet after a proposal and draft a short follow-up for each.", freq: "Every week", time: "09:00", active: true, runs: [{ text: "Completed", time: "Monday 9:00 AM" }] }, { name: "Promise log", instruction: "Keep one list of what was promised, to whom, and when it is due.", freq: "Every day", time: "09:00", active: true, runs: [{ text: "Completed", time: "Today 9:00 AM" }] }] },
-    { id: "task", name: "Task Runner", title: "Runs the host's recurring jobs, reports every run", desc: "Runs the host's recurring jobs and reports every run — clean, or flagged with a reason.", color: "#3b82f6", avatar: "assets/bots/task-runner.png", time: "8:00 AM", preview: "Host recap done, 1 task waits on your approval", prompt: "Run the daily host recap and flag anything that needs me.", reply: "Host recap is done. 3 sessions were active, 2 scheduled tasks finished clean, 1 task is waiting on your approval before it sends anything out. Nothing was sent while you were away.", card: [["Sessions", "3 active · all healthy"], ["Finished", "2 scheduled tasks · clean"], ["Waiting", "1 task · needs your approval"]], routines: [{ name: "Daily host recap", instruction: "Recap sessions, finished tasks, and anything waiting on approval. Send nothing while I am away.", freq: "Every day", time: "08:00", active: true, runs: [{ text: "Completed", time: "Today 8:00 AM" }] }, { name: "Session sweep", instruction: "Close stale sessions and list the active ones with their health.", freq: "Every 6 hours", time: "08:00", active: true, runs: [{ text: "Completed", time: "Today 8:00 AM" }] }] }
+    { id: "inbox", name: "Inbox Manager", title: "Tidies the inbox, holds the important ones", desc: "Sweeps the inbox, archives the noise, drafts the rest, and holds the one thread that actually needs you.", color: "#6a6bf5", avatar: "assets/bots/inbox-manager.png", time: "7:00 AM", preview: "Demo reply sent, rest stay in review", prompt: "Tidy my inbox. Anything that needs me today, hold it at the top.", reply: "Done. 23 threads tidied, 11 newsletters archived, 4 drafts written. One invite needs you today — a product demo invite asking for an answer before tonight. The rest can wait.", card: [["Tidied", "23 threads · 11 archived"], ["Drafted", "4 replies in your voice"], ["Held", "1 demo invite · answer before tonight"]], routines: [{ name: "Inbox tidy-up", instruction: "Tidy the inbox: archive newsletters, draft replies in my voice, and hold the one thread that needs me at the top.", freq: "Weekdays", time: "07:00", active: true, runs: [{ text: "Completed", time: "Today 7:00 AM" }] }, { name: "Evening recap", instruction: "Summarise the day: unread back to zero, drafts listed, held threads flagged.", freq: "Every day", time: "21:00", active: true, runs: [{ text: "Completed", time: "Yesterday 9:00 PM" }] }] },
+    { id: "research", name: "Research Scout", title: "Reads around a question, brings back options", desc: "Reads around a question and brings back options — never a verdict made for you.", color: "#f5a03c", avatar: "assets/bots/research-scout.png", time: "2:00 AM", preview: "VPS stays on the table, rented box dropped", prompt: "Compare home-host vs VPS hosting for the gateway. Bring me options, not a verdict.", reply: "Read 12 sources overnight. Three options stand out: home host is cheapest and fully yours, VPS is steadier when your home connection drops, a small rented box sits in between. Comparison is in the thread — no decision made for you.", card: [["Read", "12 sources · docs, changelogs, setups"], ["Compared", "3 options · cost, uptime, control"], ["Recommended", "None yet · your call"]], routines: [{ name: "Nightly reading", instruction: "Read the day's sources on the open question and compare options without making a verdict.", freq: "Every day", time: "02:00", active: true, runs: [{ text: "Completed", time: "Today 2:00 AM" }] }, { name: "Changelog watch", instruction: "Watch host changelogs and summarise updates, flagging breaking changes.", freq: "Every week", time: "09:00", active: true, runs: [{ text: "Completed", time: "Monday 9:00 AM" }] }] },
+    { id: "account", name: "Account Watcher", title: "Watches who went quiet, and what was promised", desc: "Watches who went quiet, what was promised, and who asked for something new.", color: "#9b5cf6", avatar: "assets/bots/account-watcher.png", time: "Yesterday", preview: "Revision reply sent, follow-ups held", prompt: "Who went quiet this week, and who asked for something new?", reply: "Two contacts went quiet after you sent proposals — no reply in 6 days. One asked for a price revision instead of signing. I drafted a short follow-up for each, held for your read, and noted what each one was promised last time.", card: [["Quiet", "2 contacts · 6 days, no reply"], ["Revision", "1 price revision requested"], ["Drafted", "2 follow-ups · held for your read"]], routines: [{ name: "Quiet watch", instruction: "Flag contacts that went quiet after a proposal and draft a short follow-up for each.", freq: "Every week", time: "09:00", active: true, runs: [{ text: "Completed", time: "Monday 9:00 AM" }] }, { name: "Promise log", instruction: "Keep one list of what was promised, to whom, and when it is due.", freq: "Every day", time: "09:00", active: true, runs: [{ text: "Completed", time: "Today 9:00 AM" }] }] },
+    { id: "task", name: "Task Runner", title: "Runs the host's recurring jobs, reports every run", desc: "Runs the host's recurring jobs and reports every run — clean, or flagged with a reason.", color: "#3b82f6", avatar: "assets/bots/task-runner.png", time: "8:00 AM", preview: "Recap task approved, rest held", prompt: "Run the daily host recap and flag anything that needs me.", reply: "Host recap is done. 3 sessions were active, 2 scheduled tasks finished clean, 1 task is waiting on your approval before it sends anything out. Nothing was sent while you were away.", card: [["Sessions", "3 active · all healthy"], ["Finished", "2 scheduled tasks · clean"], ["Waiting", "1 task · needs your approval"]], routines: [{ name: "Daily host recap", instruction: "Recap sessions, finished tasks, and anything waiting on approval. Send nothing while I am away.", freq: "Every day", time: "08:00", active: true, runs: [{ text: "Completed", time: "Today 8:00 AM" }] }, { name: "Session sweep", instruction: "Close stale sessions and list the active ones with their health.", freq: "Every 6 hours", time: "08:00", active: true, runs: [{ text: "Completed", time: "Today 8:00 AM" }] }] }
   ];
+  BOTS[0].screen = { host: "inbox · host", title: "Inbox: 1 invite held", lines: ["23 threads tidied", "11 archived · 4 drafted", "1 demo invite held"] };
+  BOTS[0].thread = [{ type: "time", text: "Yesterday 7:00 PM" }, { type: "user", text: "My inbox got away from me this week — tidy it?" }, { type: "bot", text: "On it. 23 threads since yesterday. Archiving the noise, drafting the rest." }, { type: "computer", text: "Tidying the inbox back to yesterday." }, { type: "time", text: "Today 7:00 AM" }, { type: "card", lines: [["Tidied", "23 threads · 11 archived"], ["Drafted", "4 replies in your voice"], ["Held", "1 demo invite · answer before tonight"]] }, { type: "bot", text: "The demo invite is asking for an answer before tonight. Its draft is at the top of the held pile." }, { type: "user", text: "Send the demo reply, I'll take the rest tomorrow." }, { type: "bot", text: "Sent. The demo reply is out, the rest stay in review." }];
+  BOTS[1].screen = { host: "research · host", title: "Research: 3 options compared", lines: ["12 sources read", "3 options compared", "No verdict made"] };
+  BOTS[1].thread = [{ type: "time", text: "Yesterday 9:00 PM" }, { type: "user", text: "Compare home-host vs VPS hosting for the gateway. Bring me options, not a verdict." }, { type: "bot", text: "Reading around it now — docs, changelogs, setups." }, { type: "computer", text: "Reading 12 sources." }, { type: "time", text: "Today 2:00 AM" }, { type: "card", lines: [["Read", "12 sources · docs, changelogs, setups"], ["Compared", "3 options · cost, uptime, control"], ["Recommended", "None yet · your call"]] }, { type: "bot", text: "Home host is cheapest and fully yours, VPS is steadier when your home connection drops. The comparison is in the thread — no decision made for you." }, { type: "user", text: "Keep the VPS option open, drop the rented box." }, { type: "bot", text: "Done. VPS stays on the table, rented box dropped." }];
+  BOTS[2].screen = { host: "contacts · host", title: "Accounts: 2 quiet, 1 revision", lines: ["2 contacts quiet 6 days", "1 price revision requested", "2 follow-ups drafted"] };
+  BOTS[2].thread = [{ type: "time", text: "Yesterday 6:00 PM" }, { type: "user", text: "Who went quiet this week, and who asked for something new?" }, { type: "bot", text: "Checking proposals and replies now." }, { type: "computer", text: "Scanning proposals from the last 7 days." }, { type: "time", text: "Today 9:00 AM" }, { type: "card", lines: [["Quiet", "2 contacts · 6 days, no reply"], ["Revision", "1 price revision requested"], ["Drafted", "2 follow-ups · held for your read"]] }, { type: "bot", text: "Two contacts went quiet after proposals, one asked for a price revision. Follow-ups are drafted and held." }, { type: "user", text: "Send the revision reply only." }, { type: "bot", text: "Sent. The revision reply is out, the quiet follow-ups stay held." }];
+  BOTS[3].screen = { host: "host · tasks", title: "Host: 1 task waits", lines: ["3 sessions active", "2 tasks finished clean", "1 task waits on approval"] };
+  BOTS[3].thread = [{ type: "time", text: "Yesterday 8:00 PM" }, { type: "user", text: "Run the daily host recap and flag anything that needs me." }, { type: "bot", text: "Running it now across sessions and scheduled tasks." }, { type: "computer", text: "Running the host recap." }, { type: "time", text: "Today 8:00 AM" }, { type: "card", lines: [["Sessions", "3 active · all healthy"], ["Finished", "2 scheduled tasks · clean"], ["Waiting", "1 task · needs your approval"]] }, { type: "bot", text: "One task waits on your approval before it sends anything out. Nothing was sent while you were away." }, { type: "user", text: "Approve the recap task, hold the rest." }, { type: "bot", text: "Approved. The recap task is running, the rest stay held." }];
   var ONBOARD = [
     { q: "What should this bot mainly help with?", sub: "Pick whatever is closest, or type your own.", opts: ["Inbox & email", "Messages & follow-ups", "Coding & repos", "Research & writing", "A bit of everything"], ack: "{a} is a good place to start." },
     { q: "How should it write?", sub: "It will match this unless you say otherwise on a specific piece.", opts: ["Clear and tight", "Warm and conversational", "Polished / formal", "Match whatever I draft"], ack: "Got it — {a} it is." },
@@ -724,9 +761,9 @@
   var panelOpen = !window.matchMedia("(max-width: 860px)").matches;
   var panelMode = "computer";
   var hasControl = false;
-  var deskPos = { tasks: { x: 8, y: 8 }, screen: { x: 46, y: 26 } };
-  var deskOrder = ["tasks", "screen"];
-  var deskSize = { tasks: { w: 50, h: 58 }, screen: { w: 46, h: 52 } };
+  var deskPos = { list: { x: 8, y: 8 }, app: { x: 46, y: 26 } };
+  var deskOrder = ["list", "app"];
+  var deskSize = { list: { w: 50, h: 58 }, app: { w: 46, h: 52 } };
   var routineDraft = null, routineIndex = null;
   var threadEl = document.getElementById("thread");
   var listEl = document.getElementById("botList");
@@ -734,19 +771,32 @@
   function extra(botId) { if (!threadExtra[botId]) threadExtra[botId] = []; return threadExtra[botId]; }
   function addExtra(botId, msg) { extra(botId).push(msg); if (current.id === botId) renderThread(); }
   function bubbleNode(cls, text) { var d = document.createElement("div"); d.className = "demo-bubble " + cls; d.textContent = text; return d; }
+  function appendMsgNode(m) {
+    if (m.type === "time") { var t = document.createElement("div"); t.className = "demo-time"; t.textContent = m.text; threadEl.appendChild(t); return; }
+    if (m.type === "meta") { var md = document.createElement("div"); md.className = "demo-meta"; md.textContent = m.text; threadEl.appendChild(md); return; }
+    if (m.type === "card") {
+      var c = document.createElement("div"); c.className = "demo-card"; var h = "";
+      m.lines.forEach(function (l) { h += '<div class="demo-card-line"><span class="check">✓</span><strong>' + esc(l[0]) + '</strong><span class="arrow">→</span><span>' + esc(l[1]) + "</span></div>"; });
+      c.innerHTML = h; threadEl.appendChild(c); return;
+    }
+    if (m.type === "computer") {
+      var comp = document.createElement("div"); comp.className = "demo-computer";
+      comp.innerHTML = '<div class="demo-computer-head"><strong>Computer</strong><span>Done</span></div><p></p>';
+      comp.querySelector("p").textContent = m.text;
+      var shot = document.createElement("button"); shot.className = "demo-computer-shot"; shot.type = "button"; shot.setAttribute("aria-label", "Take control of computer");
+      var shotDesk = document.createElement("div"); shotDesk.className = "desk"; shot.appendChild(shotDesk); comp.appendChild(shot);
+      shot.onclick = openTakeover;
+      threadEl.appendChild(comp);
+      renderDeskInto(shotDesk, false);
+      return;
+    }
+    threadEl.appendChild(bubbleNode(m.type, m.text));
+  }
   function renderThread() {
     threadEl.innerHTML = "";
     if (current.onboarding && current.answers.length < ONBOARD.length) { renderOnboard(); threadEl.scrollTop = threadEl.scrollHeight; return; }
-    var t = document.createElement("div"); t.className = "demo-time"; t.textContent = "Today 7:00 AM"; threadEl.appendChild(t);
-    if (!current.onboarding) threadEl.appendChild(bubbleNode("bot", current.preview + "."));
-    extra(current.id).forEach(function (m) {
-      if (m.type === "meta") { var md = document.createElement("div"); md.className = "demo-meta"; md.textContent = m.text; threadEl.appendChild(md); }
-      else if (m.type === "card") {
-        var c = document.createElement("div"); c.className = "demo-card"; var h = "<b>Result</b>";
-        m.lines.forEach(function (l) { h += '<div class="demo-card-line"><span class="check">✓</span><strong>' + esc(l[0]) + '</strong><span class="arrow">→</span><span>' + esc(l[1]) + "</span></div>"; });
-        c.innerHTML = h; threadEl.appendChild(c);
-      } else threadEl.appendChild(bubbleNode(m.type, m.text));
-    });
+    (current.thread || []).forEach(appendMsgNode);
+    extra(current.id).forEach(appendMsgNode);
     threadEl.scrollTop = threadEl.scrollHeight;
   }
   function renderOnboard() {
@@ -816,9 +866,7 @@
     document.getElementById("mainName").textContent = bot.name;
     document.querySelector("#mainAvatar img").src = bot.avatar;
     document.getElementById("draftInput").placeholder = (bot.onboarding && bot.answers.length < ONBOARD.length) ? "Type your own answer" : "Message " + bot.name;
-    var sg = document.getElementById("suggest"); sg.innerHTML = "";
-    if (bot.prompt) { var btn = document.createElement("button"); btn.textContent = bot.prompt; btn.onclick = function () { sendText(bot.prompt); }; sg.appendChild(btn); }
-    renderBotList(); renderThread(); renderPanel(); closeSidebar();
+    renderBotList(); renderThread(); renderPanel(); closeSidebar(); syncTakeover();
   }
   function applyPanelVisibility() {
     document.getElementById("demoFrame").classList.toggle("is-collapsed", !panelOpen);
@@ -879,19 +927,74 @@
     if (routineIndex === null) { if (routineDraft.name.trim() || routineDraft.instruction.trim()) current.routines.push(routineDraft); }
     else current.routines[routineIndex] = routineDraft;
   }
-  function renderDesk() {
+  function deskHTML() {
+    var sc = current.screen || { host: "host", title: "Bot screen", lines: [] };
+    var listRows = [82, 64, 74, 52, 88, 68].map(function (w) { return '<div class="desk-window-row"><span class="desk-window-check">✓</span><i style="width:' + w + '%;"></i></div>'; }).join("");
+    var side = [80, 60, 70, 50, 90].map(function (w) { return '<i style="width:' + w + '%;"></i>'; }).join("");
+    var appLines = sc.lines.map(function (l, i) { return '<div class="desk-window-line"><span></span><div>' + esc(l) + '<i style="width:' + [66, 52, 74][i % 3] + '%;"></i></div></div>'; }).join("");
+    return '<div class="desk-window" data-win="list"><div class="desk-window-bar"><span></span><span></span><span></span><div class="desk-window-url">Files</div></div><div class="desk-window-split"><div class="desk-window-side">' + side + '</div><div class="desk-window-rows">' + listRows + '</div></div></div>'
+      + '<div class="desk-window" data-win="app"><div class="desk-window-bar"><span></span><span></span><span></span><div class="desk-window-url">' + esc(sc.host) + '</div></div><div class="desk-window-body"><div class="desk-window-title">' + esc(sc.title) + '</div>' + appLines + '</div></div>'
+      + '<div class="desk-dock"><span data-dock="list">▦</span><span data-dock="app">✉</span><span>◷</span></div>';
+  }
+  function applyDeskLayout(el) {
     deskOrder.forEach(function (id, i) {
-      var w = document.querySelector('.desk-window[data-win="' + id + '"]');
+      var w = el.querySelector('.desk-window[data-win="' + id + '"]');
       if (!w) return;
       w.style.left = deskPos[id].x + "%"; w.style.top = deskPos[id].y + "%";
       w.style.width = deskSize[id].w + "%"; w.style.height = deskSize[id].h + "%"; w.style.zIndex = i + 1;
     });
+  }
+  function bindDesk(el) {
+    el.querySelectorAll(".desk-window-bar").forEach(function (bar) {
+      bar.addEventListener("pointerdown", function (e) {
+        if (!hasControl || e.button !== 0) return;
+        var win = bar.parentElement, id = win.dataset.win;
+        var rect = el.getBoundingClientRect(), origin = deskPos[id], sx = e.clientX, sy = e.clientY, size = deskSize[id];
+        deskOrder = deskOrder.filter(function (x) { return x !== id; }); deskOrder.push(id); applyDeskLayout(el);
+        bar.setPointerCapture(e.pointerId);
+        var move = function (ev) {
+          if (ev.pointerId !== e.pointerId) return;
+          var x = origin.x + ((ev.clientX - sx) / rect.width) * 100;
+          var y = origin.y + ((ev.clientY - sy) / rect.height) * 100;
+          deskPos[id] = { x: Math.min(92, Math.max(8 - size.w, x)), y: Math.min(88, Math.max(0, y)) };
+          win.style.left = deskPos[id].x + "%"; win.style.top = deskPos[id].y + "%";
+        };
+        var stop = function (ev) { if (ev.pointerId !== e.pointerId) return; bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", stop); bar.removeEventListener("pointercancel", stop); };
+        bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", stop); bar.addEventListener("pointercancel", stop);
+      });
+    });
+    el.querySelectorAll(".desk-dock [data-dock]").forEach(function (d) {
+      d.onclick = function () { if (!hasControl) return; deskOrder = deskOrder.filter(function (x) { return x !== d.dataset.dock; }); deskOrder.push(d.dataset.dock); applyDeskLayout(el); };
+    });
+  }
+  function renderDeskInto(el, bind) {
+    el.innerHTML = deskHTML();
+    applyDeskLayout(el);
+    el.classList.toggle("live", hasControl);
+    if (bind) bindDesk(el);
+  }
+  function renderDesk() {
+    renderDeskInto(document.getElementById("desk"), true);
     document.getElementById("controlState").textContent = hasControl ? "You have control" : "Watching — read-only";
     document.getElementById("controlBtn").textContent = hasControl ? "Release" : "Take control";
-    document.getElementById("desk").classList.toggle("live", hasControl);
   }
-  function takeControl() { hasControl = true; renderDesk(); }
-  function releaseControl() { hasControl = false; renderDesk(); }
+  function openTakeover() {
+    hasControl = true;
+    document.querySelector("#takeoverAvatar img").src = current.avatar;
+    document.getElementById("takeoverName").textContent = current.name + "'s computer";
+    document.getElementById("takeoverStage").style.display = "block";
+    renderDeskInto(document.getElementById("takeoverDesk"), true);
+    renderDesk();
+  }
+  function closeTakeover() { document.getElementById("takeoverStage").style.display = "none"; }
+  function releaseControl() { hasControl = false; closeTakeover(); renderDesk(); }
+  function syncTakeover() {
+    var stage = document.getElementById("takeoverStage");
+    if (stage.style.display !== "block") return;
+    document.querySelector("#takeoverAvatar img").src = current.avatar;
+    document.getElementById("takeoverName").textContent = current.name + "'s computer";
+    renderDeskInto(document.getElementById("takeoverDesk"), true);
+  }
   document.getElementById("sendBtn").onclick = function () { var inp = document.getElementById("draftInput"); var v = inp.value.trim(); inp.value = ""; sendText(v); };
   document.getElementById("draftInput").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); var v = this.value.trim(); this.value = ""; sendText(v); } });
   document.getElementById("botSearch").addEventListener("input", renderBotList);
@@ -922,33 +1025,14 @@
   document.getElementById("setTitle").addEventListener("input", function () { current.title = this.value; });
   document.getElementById("setDesc").addEventListener("input", function () { current.desc = this.value; });
   document.getElementById("newRoutineBtn").onclick = function () { openRoutine(null); };
-  document.getElementById("controlBtn").onclick = function () { if (hasControl) releaseControl(); else takeControl(); };
+  document.getElementById("controlBtn").onclick = function () { if (hasControl) releaseControl(); else openTakeover(); };
   document.getElementById("desk").addEventListener("click", function (e) {
     if (hasControl) return;
     if (e.target.closest(".desk-dock")) return;
-    takeControl();
+    openTakeover();
   });
-  document.querySelectorAll(".desk-dock [data-dock]").forEach(function (d) {
-    d.onclick = function () { if (!hasControl) return; deskOrder = deskOrder.filter(function (x) { return x !== d.dataset.dock; }); deskOrder.push(d.dataset.dock); renderDesk(); };
-  });
-  document.querySelectorAll(".desk-window-bar").forEach(function (bar) {
-    bar.addEventListener("pointerdown", function (e) {
-      if (!hasControl || e.button !== 0) return;
-      var win = bar.parentElement, id = win.dataset.win, desk = document.getElementById("desk");
-      var rect = desk.getBoundingClientRect(), origin = deskPos[id], sx = e.clientX, sy = e.clientY, size = deskSize[id];
-      deskOrder = deskOrder.filter(function (x) { return x !== id; }); deskOrder.push(id); renderDesk();
-      bar.setPointerCapture(e.pointerId);
-      var move = function (ev) {
-        if (ev.pointerId !== e.pointerId) return;
-        var x = origin.x + ((ev.clientX - sx) / rect.width) * 100;
-        var y = origin.y + ((ev.clientY - sy) / rect.height) * 100;
-        deskPos[id] = { x: Math.min(92, Math.max(8 - size.w, x)), y: Math.min(88, Math.max(0, y)) };
-        renderDesk();
-      };
-      var stop = function (ev) { if (ev.pointerId !== e.pointerId) return; bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", stop); bar.removeEventListener("pointercancel", stop); };
-      bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", stop); bar.addEventListener("pointercancel", stop);
-    });
-  });
+  document.getElementById("takeoverReleaseBtn").onclick = releaseControl;
+  document.getElementById("takeoverCloseBtn").onclick = closeTakeover;
   var sidebar = document.getElementById("demoSidebar"), scrim = document.getElementById("demoScrim");
   function closeSidebar() { sidebar.classList.remove("is-open"); scrim.classList.remove("show"); }
   document.getElementById("demoMenuBtn").onclick = function () { sidebar.classList.add("is-open"); scrim.classList.add("show"); };
