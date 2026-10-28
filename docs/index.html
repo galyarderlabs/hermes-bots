@@ -81,63 +81,15 @@
   .art-approval span { flex:1; padding:7px 4px; border:1px solid var(--line-2); border-radius:6px; text-align:center; font-size:12px; }
   .art-approval span:last-child { background:var(--accent); color:#fff; border-color:var(--accent); }
   /* dark product demo, Rakazo product-demo__frame */
-  .demo-note { font-size:14px; color:var(--muted); margin:0 0 16px; }
-  .demo-frame { display:grid; grid-template-columns:296px minmax(0,1fr) 340px; height:660px; overflow:hidden; border:1px solid #1e1e20; border-radius:var(--radius-frame); background:var(--panel); box-shadow:var(--shadow-demo); }
-  .demo-sidebar, .demo-main, .demo-panel { min-height:0; }
-  .demo-sidebar { padding:0 0 12px; border-right:1px solid var(--panel-line); }
-  .demo-chrome { display:flex; align-items:center; gap:10px; padding:16px 16px 12px; }
-  .demo-traffic { display:flex; gap:6px; }
-  .demo-traffic span { width:11px; height:11px; border-radius:999px; }
-  .demo-traffic span:nth-child(1) { background:#ff5f57; } .demo-traffic span:nth-child(2) { background:#febc2e; } .demo-traffic span:nth-child(3) { background:#28c840; }
-  .demo-drawer-title { color:var(--panel-muted); font-size:13.5px; }
-  .demo-search { display:flex; align-items:center; gap:8px; margin:0 12px 10px; border-radius:10px; background:#171719; padding:8px 11px; color:var(--panel-muted); font-size:14px; }
-  .demo-search input { flex:1; min-width:0; border:0; outline:none; background:transparent; color:#e9e9ea; font-size:14px; }
-  .demo-bot-list { padding:0 8px 8px; }
   .botrow { display:flex; gap:10px; align-items:center; width:100%; text-align:left; border:0; border-radius:11px; padding:10px; background:transparent; color:var(--panel-copy); }
   .botrow:hover, .botrow.active { background:#151517; }
   .botrow b { display:block; font-size:14.5px; color:#fff; line-height:1.2; }
   .botrow span.prev { font-size:12.5px; color:var(--panel-muted); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:170px; }
-  .demo-user { display:flex; align-items:center; gap:10px; padding:13px 16px; color:var(--panel-copy); font-size:14px; border-top:1px solid var(--panel-line); margin-top:8px; }
-  .demo-user-badge { display:grid; place-items:center; width:32px; height:32px; border-radius:999px; background:var(--panel-line-2); color:#fff; font-size:12px; font-weight:600; }
-  .demo-main { display:flex; flex-direction:column; }
-  .demo-topbar { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--panel-line); }
-  .demo-topbar b { color:#fff; font-size:16px; }
-  .demo-topbar span { font-size:13px; color:var(--panel-muted); }
-  .demo-thread { display:flex; flex:1; flex-direction:column; gap:8px; overflow-y:auto; padding:20px 24px; }
-  .demo-time { text-align:center; font-size:12.5px; color:var(--panel-muted-2); padding:6px 0; }
-  .demo-bubble { max-width:min(78%,520px); border-radius:18px; padding:11px 16px; font-size:15px; line-height:1.5; }
-  .demo-bubble.user { align-self:flex-end; background:var(--panel-cream); color:var(--panel-cream-ink); }
-  .demo-bubble.bot { align-self:flex-start; background:#1c1c1f; color:var(--panel-copy); }
-  .demo-bubble.typing { color:var(--panel-muted); animation:pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { opacity:.5; } 50% { opacity:1; } }
-  .demo-card { align-self:flex-start; display:flex; flex-direction:column; gap:7px; border-radius:18px; padding:14px 18px; background:#1c1c1f; color:var(--panel-copy); font-size:14.5px; max-width:90%; }
-  .demo-card-line { display:flex; gap:9px; align-items:baseline; }
-  .demo-card-line .check { color:var(--success); }
-  .demo-card-line .arrow { color:var(--panel-muted); }
-  .demo-card-line strong { color:#fff; }
-  .demo-suggest { display:flex; gap:8px; flex-wrap:wrap; padding:0 20px 10px; }
-  .demo-suggest button { border:1px solid var(--panel-line-2); background:#171719; border-radius:999px; padding:7px 13px; font-size:13px; color:var(--panel-copy); }
-  .demo-composer { padding:14px 20px 20px; }
-  .demo-input-shell { display:flex; align-items:center; gap:12px; border:1px solid var(--panel-line-2); border-radius:999px; background:#131315; padding:8px 10px 8px 16px; }
-  .demo-input-shell input { flex:1; min-width:0; border:0; outline:none; background:transparent; color:#e9e9ea; font-size:15px; }
-  .demo-send { display:grid; width:32px; height:32px; place-items:center; border:0; border-radius:999px; background:var(--panel-cream); color:var(--panel-cream-ink); font-size:14px; }
-  .demo-panel { background:#0a0a0b; border-left:1px solid #141416; padding:17px 20px; overflow-y:auto; }
-  .demo-tabs { display:flex; gap:6px; margin-bottom:16px; }
-  .demo-tabs button { flex:1; border:0; border-radius:999px; padding:8px 4px; font-size:13px; font-weight:600; background:transparent; color:var(--panel-muted); }
-  .demo-tabs button.active { background:#fff; color:#111; }
-  .demo-panel-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; color:var(--panel-muted); font-size:13.5px; }
   .routine { background:#131315; border:1px solid var(--panel-line); border-radius:14px; padding:14px; margin-bottom:10px; }
   .routine b { color:#fff; font-size:14.5px; }
   .routine p { margin:2px 0 0; font-size:13px; color:var(--panel-muted); }
   .routine .when { font-size:12.5px; color:#7ea6ff; font-weight:600; }
-  .approval-box { background:#131315; border:1px solid var(--panel-line); border-radius:14px; padding:16px; }
-  .approval-box b { color:#fff; }
-  .approval-box p { font-size:13.5px; color:var(--panel-muted); margin:6px 0 12px; }
-  .approval-box .row { display:flex; gap:8px; }
-  .approval-box .row button { flex:1; border:0; border-radius:999px; padding:9px; font-weight:600; font-size:13.5px; }
-  .approval-box .row .ok { background:var(--blue-top); color:#fff; }
-  .approval-box .row .no { background:#232326; color:var(--panel-copy); }
-  .approval-done { color:var(--success); font-weight:700; font-size:14px; }
 
   /* channels tiles, Rakazo channel-tile pattern with text marks, no brand logos */
   .channel-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin:36px 0 0; padding:0; list-style:none; }
@@ -157,13 +109,6 @@
   .testimonial-pause { display:grid; width:36px; height:36px; place-items:center; border:1px solid var(--line-2); border-radius:999px; background:var(--surface); color:var(--muted-2); padding:0; }
   /* computer mock in demo panel, Rakazo ComputerDesktop pattern, static */
   .desk { position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; background:#0e0e10; overflow:hidden; }
-  .desk-window { position:absolute; display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(255,255,255,.07); border-radius:8px; background:#111113; box-shadow:0 8px 20px rgba(0,0,0,.45); color:var(--panel-copy); font-size:12px; }
-  .desk-window b { color:#fff; display:block; margin-bottom:6px; }
-  .desk-window i { display:block; height:8px; border-radius:4px; background:#2a2a2e; margin-top:6px; }
-  .desk-dock { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:8px; background:#171719; border:1px solid var(--panel-line-2); border-radius:999px; padding:6px 10px; }
-  .desk-dock span { width:24px; height:24px; border-radius:7px; background:#2a2a2e; display:grid; place-items:center; font-size:12px; color:var(--panel-copy); }
-  .desk-meta { display:flex; align-items:center; justify-content:space-between; margin-top:12px; color:var(--panel-muted); font-size:13px; }
-  .desk-meta button { border:1px solid var(--panel-line-2); background:#171719; color:var(--panel-copy); border-radius:999px; padding:7px 14px; font-size:13px; }
   .art-apps { display:grid; grid-template-columns:repeat(4,44px); gap:10px; }
   .art-apps__tile { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid var(--line-2); border-radius:11px; background:var(--surface); box-shadow:var(--shadow-soft); font-size:11px; font-weight:600; color:var(--accent); }
   .art-team { display:flex; align-items:center; }
@@ -210,80 +155,11 @@
   .works-chip img { width:20px; height:20px; border-radius:6px; }
   .works-chip span.tag { color:var(--muted); font-weight:400; font-size:12.5px; }
   /* demo mobile: one screen at a time, Rakazo product-demo pattern */
-  .demo-menu-btn, .demo-scrim { display:none; }
 
   /* demo panel modes, Rakazo product-demo pattern */
-  .demo-frame.is-collapsed { grid-template-columns:296px minmax(0,1fr); }
-  .demo-frame.is-collapsed .demo-panel { display:none; }
-  .demo-name-btn { display:flex; align-items:center; gap:10px; border:0; background:transparent; color:#fff; font-size:16px; font-weight:600; padding:0; }
-  .demo-panel-toggle { display:grid; width:34px; height:34px; place-items:center; border:1px solid var(--panel-line-2); border-radius:10px; background:#171719; color:var(--panel-copy); }
-  .demo-panel-toggle svg { width:18px; height:18px; }
-  .demo-new { display:grid; width:30px; height:30px; place-items:center; border:0; border-radius:999px; background:#232326; color:var(--panel-copy); font-size:18px; line-height:1; }
-  .demo-sidebar-close { display:none; }
-  .demo-bot-time { margin-left:auto; flex:none; font-size:12px; color:var(--panel-muted); }
-  .demo-meta { text-align:center; font-size:12.5px; color:var(--panel-muted-2); padding:6px 0; }
-  .demo-panel-actions { display:flex; align-items:center; gap:14px; color:#a8a8ad; }
-  .demo-panel-actions button { border:0; background:transparent; color:inherit; padding:0; line-height:1; font-size:16px; }
-  .demo-panel-label { color:var(--panel-muted); font-size:13.5px; margin:18px 0 12px; }
-  .demo-settings-avatar img { width:72px; height:72px; border-radius:18px; object-fit:cover; margin-bottom:16px; }
-  .demo-field { display:block; margin-bottom:14px; color:var(--panel-muted); font-size:13.5px; }
-  .demo-field input, .demo-field textarea, .demo-field select { display:block; width:100%; margin-top:6px; border:1px solid var(--panel-line-2); border-radius:10px; background:#131315; color:#e9e9ea; padding:10px 12px; font-size:14px; }
-  .demo-switch { width:44px; height:24px; flex:none; border:0; border-radius:999px; background:#2a2a2e; position:relative; padding:0; }
-  .demo-switch span { position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:999px; background:#85858a; transition:left .18s ease, background .18s ease; }
-  .demo-switch.is-on { background:var(--blue-top); }
-  .demo-switch.is-on span { left:23px; background:#fff; }
-  .demo-ghost-btn { border:1px solid var(--panel-line-2); background:transparent; color:var(--panel-copy); border-radius:999px; padding:7px 14px; font-size:13px; }
-  .demo-ghost-btn:disabled { opacity:.45; }
-  .demo-quiet { border:0; background:transparent; color:var(--panel-muted); font-size:13.5px; padding:8px 0; }
-  .demo-routine { display:flex; align-items:center; gap:10px; width:100%; text-align:left; border:1px solid var(--panel-line); border-radius:14px; background:#131315; color:var(--panel-copy); padding:12px 14px; margin-bottom:10px; }
-  .demo-routine b { color:#fff; font-size:14px; }
-  .demo-routine .when { margin-left:auto; flex:none; font-size:12.5px; color:#7ea6ff; font-weight:600; white-space:nowrap; }
-  .demo-routine-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; color:var(--panel-muted); font-size:13.5px; }
-  .demo-routine-nav button { border:0; background:transparent; color:var(--panel-copy); font-size:18px; padding:0 4px; }
-  .demo-routine-toolbar { display:flex; align-items:center; gap:10px; margin-bottom:16px; color:var(--panel-muted); font-size:13.5px; }
-  .demo-routine-toolbar .routine-active-label { flex:1; }
-  .demo-run { display:flex; gap:10px; padding:8px 0; font-size:13.5px; color:var(--panel-copy); }
-  .demo-run + .demo-run { border-top:1px solid var(--panel-line); }
-  .demo-run .dot { color:#4ecb71; }
-  .demo-choice-q { color:#fff; font-size:15px; font-weight:600; }
-  .demo-choice-sub { color:var(--panel-muted); font-size:13.5px; margin-top:4px; }
-  .demo-choice-opts { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
-  .demo-choice-opts button { display:flex; gap:10px; align-items:center; text-align:left; border:1px solid var(--panel-line-2); border-radius:12px; background:#171719; color:var(--panel-copy); padding:10px 12px; font-size:14px; }
-  .demo-choice-letter { display:grid; place-items:center; flex:none; width:22px; height:22px; border-radius:999px; background:#232326; color:#fff; font-size:12px; }
-  .demo-choice-picked { display:flex; gap:10px; align-items:center; color:#fff; font-size:14.5px; margin-top:10px; }
-  .demo-choice-check { color:var(--success); }
-  .demo-choice-own { color:var(--panel-muted); font-size:13px; margin-top:10px; }
-  .desk-window-bar { display:flex; align-items:center; gap:5px; padding:8px 10px; border-bottom:1px solid var(--panel-line-2); }
   .desk.live .desk-window-bar { cursor:grab; }
-  .desk-window-bar span { width:9px; height:9px; border-radius:999px; background:#2a2a2e; }
-  .desk-window-url { margin-left:6px; color:var(--panel-muted); font-size:11.5px; }
-  .desk-window-body { padding:10px 12px; }
   .desk.live .desk-dock span { cursor:pointer; }
   /* thread computer message + takeover stage, Rakazo product-demo pattern */
-  .demo-computer { display:flex; width:min(86%,520px); flex-direction:column; gap:4px; border-radius:18px; background:#1c1c1f; padding:13px 14px 14px; color:var(--panel-copy); font-size:15px; align-self:flex-start; }
-  .demo-computer-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  .demo-computer-head span { border-radius:999px; background:rgba(48,162,75,.14); padding:2px 10px; color:#4ecb71; font-size:13px; }
-  .demo-computer p { margin:0 0 8px; }
-  .demo-computer-shot { display:block; overflow:hidden; border:0; border-radius:12px; padding:0; text-align:left; cursor:pointer; background:transparent; }
-  .desk-window-split { display:flex; flex:1; min-height:0; }
-  .desk-window-side { width:32%; flex:none; border-right:1px solid var(--panel-line); padding:10px; display:flex; flex-direction:column; gap:8px; }
-  .desk-window-rows { flex:1; padding:10px; display:flex; flex-direction:column; gap:8px; min-width:0; }
-  .desk-window-row { display:flex; gap:8px; align-items:center; }
-  .desk-window-check { color:var(--success); font-size:12px; }
-  .desk-window-title { color:#fff; font-size:13px; font-weight:600; margin-bottom:6px; }
-  .desk-window-line { display:flex; gap:8px; padding:5px 0; }
-  .desk-window-line > span { width:6px; height:6px; flex:none; border-radius:50%; background:var(--panel-muted); margin-top:6px; }
-  .demo-stage { position:absolute; inset:0; z-index:8; background:rgba(4,4,5,.96); }
-  .demo-takeover { display:flex; height:100%; flex-direction:column; background:#050506; }
-  .demo-takeover-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid #171719; padding:14px 18px; }
-  .demo-takeover-who { display:flex; min-width:0; align-items:center; gap:12px; color:#ececee; font-size:15.5px; font-weight:500; }
-  .demo-takeover-pill { border-radius:999px; background:rgba(48,162,75,.14); padding:4px 11px; color:#4ecb71; font-size:13px; font-weight:400; }
-  .demo-takeover-actions { display:flex; align-items:center; gap:12px; }
-  .demo-outline-btn { border:1px solid var(--panel-line-2); background:transparent; color:var(--panel-copy); border-radius:999px; padding:7px 14px; font-size:13px; }
-  .demo-takeover-close { border:0; background:transparent; color:#85858a; font-size:16px; cursor:pointer; }
-  .demo-takeover-close:hover { color:#ececee; }
-  .demo-takeover-screen { display:grid; min-height:0; flex:1; place-items:center; padding:18px; }
-  .demo-takeover-screen .desk { width:100%; max-width:860px; }
   /* group chat mock, Rakazo slack-mock */
   .channels { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:56px; }
   .chat-mock { overflow:hidden; border:1px solid var(--line-2); border-radius:var(--radius-card); background:var(--surface); box-shadow:var(--shadow-demo); font-size:14px; }
@@ -373,18 +249,6 @@
   @media (max-width: 860px) {
     /* One screen at a time, like the mobile app: the bot list slides in
        from the hamburger and the panel covers the thread while open. */
-    .demo-frame { grid-template-columns:minmax(0,1fr); height:min(620px,82vh); position:relative; }
-    .demo-menu-btn { display:grid; width:34px; height:34px; place-items:center; border:1px solid var(--panel-line-2); border-radius:10px; background:#171719; color:var(--panel-copy); font-size:17px; }
-    .demo-sidebar-close { display:grid; width:30px; height:30px; place-items:center; border:0; border-radius:999px; background:#232326; color:var(--panel-copy); font-size:15px; }
-    .demo-frame.is-collapsed .demo-panel.is-open { display:block; }
-    .demo-traffic { display:none; }
-    .demo-sidebar { position:absolute; z-index:6; top:0; bottom:0; left:0; width:min(300px,86%); background:var(--panel); border-right:1px solid var(--panel-line); overflow-y:auto; visibility:hidden; transform:translateX(-100%); transition:transform .22s ease, visibility .22s ease; }
-    .demo-sidebar.is-open { visibility:visible; transform:none; }
-    .demo-scrim { position:absolute; z-index:5; inset:0; border:0; padding:0; background:rgba(4,4,5,.6); }
-    .demo-scrim.show { display:block; }
-    .demo-panel { position:absolute; z-index:4; inset:0; border-left:0; display:none; overflow-y:auto; }
-    .demo-panel.is-open { display:block; }
-    .demo-panel-close { display:grid; width:30px; height:30px; place-items:center; border:0; border-radius:999px; background:#232326; color:var(--panel-copy); font-size:15px; }
     .platforms__cards { grid-template-columns:minmax(0,1fr); }
     .platform-card { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; column-gap:16px; padding:16px; }
     .platform-card__icon { grid-row:span 2; margin-bottom:0; }
@@ -396,6 +260,211 @@
     .stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
     .stat-value { font-size:26px; }
   }
+  /* ProductDemo port: Rakazo demo CSS values. Substitutions only: bot portraits
+     (pd-avatar img) for color avatars; desktop background is the fallback color
+     (Rakazo's wallpaper asset not copied). */
+  .pd-avatar { display:block; flex:none; overflow:hidden; }
+  .pd-avatar img { display:block; width:100%; height:100%; object-fit:cover; }
+  .pd-avatar--38 { width:38px; height:38px; border-radius:11px; }
+  .pd-avatar--28 { width:28px; height:28px; border-radius:9px; }
+  .pd-avatar--72 { width:72px; height:72px; border-radius:18px; }
+  .pd-avatar--32 { width:32px; height:32px; border-radius:10px; }
+  .product-demo__frame { position:relative; display:grid; grid-template-columns:296px minmax(0,1fr) 340px; height:660px; overflow:hidden; border:1px solid #1e1e20; border-radius:var(--radius-frame); background:var(--panel); box-shadow:var(--shadow-demo); }
+  .product-demo__frame.is-collapsed { grid-template-columns:296px minmax(0,1fr); }
+  .product-demo__panel { background:#0a0a0b; }
+  .product-demo__sidebar, .product-demo__main, .product-demo__panel { min-height:0; height:100%; }
+  .product-demo__sidebar { display:flex; flex-direction:column; border-right:1px solid var(--panel-line); }
+  .product-demo__chrome { display:flex; align-items:center; justify-content:space-between; padding:16px 16px 12px; }
+  .product-demo__drawer-title { display:none; color:#e9e9ea; font-size:14.5px; font-weight:500; }
+  .product-demo__chrome-actions { display:flex; align-items:center; gap:10px; }
+  .product-demo__new, .product-demo__sidebar-close { border:0; background:transparent; color:var(--panel-muted-2); font-size:19px; line-height:1; cursor:pointer; }
+  .product-demo__sidebar-close { display:none; font-size:15px; }
+  .product-demo__new:hover, .product-demo__new:focus-visible, .product-demo__sidebar-close:hover, .product-demo__sidebar-close:focus-visible { color:#c9c9ce; }
+  .product-demo__traffic { display:flex; gap:7px; }
+  .product-demo__traffic span { display:inline-block; width:11px; height:11px; border-radius:999px; }
+  .product-demo__traffic span:nth-child(1) { background:#ff5f57; }
+  .product-demo__traffic span:nth-child(2) { background:#febc2e; }
+  .product-demo__traffic span:nth-child(3) { background:#28c840; }
+  .product-demo__search { display:flex; align-items:center; gap:9px; margin:4px 12px 10px; border:1px solid var(--panel-line-2); border-radius:10px; background:#171719; padding:8px 11px; color:var(--panel-muted-2); font-size:13.5px; }
+  .product-demo__search input { flex:1; min-width:0; border:0; background:transparent; color:#e9e9ea; font:inherit; outline:none; }
+  .product-demo__search input::placeholder { color:var(--panel-muted-2); }
+  .product-demo__bot-list { display:flex; flex:1; flex-direction:column; gap:2px; overflow-y:auto; padding:0 8px 8px; }
+  .product-demo__bot-list::-webkit-scrollbar, .product-demo__thread::-webkit-scrollbar { width:6px; }
+  .product-demo__bot-list::-webkit-scrollbar-thumb, .product-demo__thread::-webkit-scrollbar-thumb { border-radius:999px; background:#2a2a2a; }
+  .product-demo__bot-row { display:flex; gap:11px; align-items:center; width:100%; border:0; border-radius:11px; background:transparent; padding:10px; text-align:left; cursor:pointer; }
+  .product-demo__bot-row:hover, .product-demo__bot-row.is-active { background:#151517; }
+  .product-demo__bot-copy { display:flex; min-width:0; flex:1; flex-direction:column; }
+  .product-demo__bot-meta { display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
+  .product-demo__bot-name { color:#e9e9ea; font-size:14.5px; font-weight:500; }
+  .product-demo__bot-time { flex:none; color:var(--panel-muted-2); font-size:12px; }
+  .product-demo__bot-preview { overflow:hidden; color:var(--panel-muted); font-size:13px; text-overflow:ellipsis; white-space:nowrap; }
+  .product-demo__user { display:flex; align-items:center; gap:10px; border-top:1px solid var(--panel-line); padding:13px 16px; color:#c9c9ce; font-size:14px; }
+  .product-demo__user-badge { display:grid; width:28px; height:28px; place-items:center; border-radius:999px; background:var(--panel-line-2); color:#a8a8ad; font-size:11.5px; }
+  .product-demo__main { display:flex; min-width:0; flex-direction:column; }
+  .product-demo__topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--panel-line); padding:16px 20px; }
+  .product-demo__topbar-left { display:flex; min-width:0; align-items:center; gap:10px; }
+  .product-demo__menu-btn { display:none; width:32px; height:28px; place-items:center; border:0; border-radius:8px; background:#1b1b1e; color:#a8a8ad; cursor:pointer; }
+  .product-demo__menu-btn:hover, .product-demo__menu-btn:focus-visible { background:var(--panel-line-2); }
+  .product-demo__scrim { display:none; }
+  .product-demo__name-btn, .product-demo__active { display:flex; align-items:center; gap:11px; }
+  .product-demo__name-btn { border:0; background:transparent; padding:0; cursor:pointer; }
+  .product-demo__name-btn:hover .product-demo__active-name, .product-demo__name-btn:focus-visible .product-demo__active-name { color:#fff; }
+  .product-demo__active-name { color:#ececee; font-size:15.5px; font-weight:500; }
+  .product-demo__status { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--panel-line-2); border-radius:999px; padding:3px 9px; color:var(--panel-muted-2); font-size:12.5px; }
+  .product-demo__status-dot { width:6px; height:6px; border-radius:999px; background:var(--success); animation:pulse 2.4s ease-in-out infinite; }
+  .product-demo__panel-toggle { display:grid; width:32px; height:28px; place-items:center; border:0; border-radius:8px; background:#1b1b1e; color:#a8a8ad; cursor:pointer; }
+  .product-demo__panel-toggle[aria-pressed="true"] { background:#232326; }
+  .product-demo__panel-toggle:hover, .product-demo__panel-toggle:focus-visible { background:var(--panel-line-2); }
+  .product-demo__thread { display:flex; flex:1; flex-direction:column; gap:8px; overflow-y:auto; padding:20px 24px; }
+  .product-demo__time, .product-demo__meta { text-align:center; font-size:12.5px; }
+  .product-demo__time { color:var(--panel-muted-2); padding:6px 0; }
+  .product-demo__meta { color:var(--panel-muted); }
+  .product-demo__message { display:flex; }
+  .product-demo__message--user { justify-content:flex-end; }
+  .product-demo__message--bot { justify-content:flex-start; }
+  .product-demo__bubble { max-width:min(78%,520px); border-radius:18px; padding:11px 16px; font-size:15px; line-height:1.5; }
+  .product-demo__bubble--user { background:var(--panel-cream); color:var(--panel-cream-ink); }
+  .product-demo__bubble--bot, .product-demo__card, .product-demo__bubble--typing { background:#1c1c1f; color:var(--panel-copy); }
+  .product-demo__bubble--typing { color:var(--panel-muted); animation:pulse 1.2s ease-in-out infinite; }
+  .product-demo__card { display:flex; flex-direction:column; gap:7px; border-radius:18px; padding:14px 18px; }
+  .product-demo__card-line { display:flex; gap:9px; align-items:baseline; color:var(--panel-copy); font-size:14.5px; }
+  .product-demo__card-check { color:var(--success); }
+  .product-demo__card-arrow { color:var(--panel-muted); }
+  .product-demo__composer { padding:14px 20px 20px; }
+  .product-demo__input-shell { display:flex; align-items:center; gap:12px; border:1px solid var(--panel-line-2); border-radius:999px; background:#131315; padding:8px 10px 8px 16px; }
+  .product-demo__composer-plus { color:var(--panel-muted-2); font-size:18px; }
+  .product-demo__input-shell input { flex:1; min-width:0; border:0; outline:none; background:transparent; color:#e9e9ea; font-size:15px; }
+  .product-demo__send { display:grid; width:32px; height:32px; place-items:center; border:0; border-radius:999px; background:var(--panel-cream); color:var(--panel-cream-ink); cursor:pointer; }
+  .product-demo__panel { display:flex; flex-direction:column; overflow-y:auto; border-left:1px solid #141416; padding:17px 20px; }
+  .product-demo__panel::-webkit-scrollbar { width:6px; }
+  .product-demo__panel::-webkit-scrollbar-thumb { border-radius:999px; background:#2a2a2a; }
+  .product-demo__panel-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; color:var(--panel-muted); font-size:13.5px; }
+  .product-demo__panel-actions { display:flex; align-items:center; gap:14px; color:#a8a8ad; }
+  .product-demo__panel-actions button { border:0; background:transparent; color:inherit; padding:0; line-height:1; cursor:pointer; }
+  .product-demo__screen { display:block; width:100%; overflow:hidden; border:0; border-radius:14px; background:#0e0e10; padding:0; text-align:left; cursor:pointer; }
+  .product-demo__desktop { position:relative; width:100%; aspect-ratio:16/10; overflow:hidden; isolation:isolate; container-type:inline-size; background:#1a1420; user-select:none; }
+  .product-demo__window { position:absolute; display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(255,255,255,.07); border-radius:1.4cqw; background:#111113; box-shadow:0 2cqw 5cqw rgba(0,0,0,.45); }
+  .product-demo__window-bar { display:flex; flex-shrink:0; align-items:center; gap:0.7cqw; border-bottom:1px solid #1d1d20; padding:1.3cqw 1.6cqw; }
+  .product-demo__desktop.is-live .product-demo__window-bar { cursor:grab; touch-action:none; }
+  .product-demo__desktop.is-live .product-demo__window-bar:active { cursor:grabbing; }
+  .product-demo__window-bar span { width:1cqw; height:1cqw; border-radius:999px; background:#3a3a3e; }
+  .product-demo__window-url { flex:1; margin-right:3.4cqw; overflow:hidden; color:#6c6c70; font-family:"Geist Mono",ui-monospace,monospace; font-size:1.25cqw; text-align:center; text-overflow:ellipsis; white-space:nowrap; }
+  .product-demo__window-split { display:flex; min-height:0; flex:1; }
+  .product-demo__window-side { display:flex; width:24%; flex-direction:column; gap:1.5cqw; border-right:1px solid #1d1d20; padding:2.2cqw 1.8cqw; }
+  .product-demo__window-side i, .product-demo__window-rows i, .product-demo__window-line i { display:block; height:0.9cqw; border-radius:999px; background:#26262a; }
+  .product-demo__window-rows { display:flex; flex:1; flex-direction:column; padding:1.4cqw 2.2cqw; }
+  .product-demo__window-rows div { display:flex; align-items:center; gap:1.4cqw; border-bottom:1px solid #1a1a1d; padding:1.15cqw 0; }
+  .product-demo__window-check { display:grid; width:1.9cqw; height:1.9cqw; flex-shrink:0; place-items:center; border:1px solid #2f8f5b; border-radius:999px; color:#4ecb71; font-size:1.1cqw; line-height:1; }
+  .product-demo__window-body { display:flex; min-height:0; flex:1; flex-direction:column; padding:2.2cqw 2.6cqw; color:#ececee; font-size:1.55cqw; line-height:1.4; }
+  .product-demo__window-title { margin-bottom:0.6cqw; border-bottom:1px solid #1d1d20; padding-bottom:1.6cqw; font-size:1.75cqw; font-weight:500; }
+  .product-demo__window-line { display:flex; align-items:flex-start; gap:1.6cqw; border-bottom:1px solid #1a1a1d; padding:1.5cqw 0; }
+  .product-demo__window-line > span { width:2.6cqw; height:2.6cqw; flex-shrink:0; border-radius:999px; background:#26262a; }
+  .product-demo__window-line > div { display:flex; min-width:0; flex:1; flex-direction:column; gap:0.8cqw; }
+  .product-demo__dock { position:absolute; z-index:10; bottom:1.6cqw; left:50%; display:flex; gap:1cqw; transform:translateX(-50%); border:1px solid rgba(255,255,255,.14); border-radius:2.2cqw; background:rgba(30,30,34,.42); padding:0.9cqw; backdrop-filter:blur(14px); }
+  .product-demo__dock-icon { display:grid; width:5.4cqw; height:5.4cqw; place-items:center; border:0; border-radius:1.4cqw; padding:0; color:#fff; box-shadow:inset 0 1px 0 rgba(255,255,255,.35); }
+  .product-demo__dock-icon svg { width:62%; height:62%; }
+  .product-demo__dock-icon--app { background:linear-gradient(180deg,#5cb8ff 0%,#1f6fe0 100%); }
+  .product-demo__dock-icon--list { background:linear-gradient(180deg,#8f8f96 0%,#4a4a50 100%); }
+  button.product-demo__dock-icon { cursor:pointer; }
+  .product-demo__computer { display:flex; width:min(86%,520px); flex-direction:column; gap:4px; border-radius:18px; background:#1c1c1f; padding:13px 14px 14px; color:var(--panel-copy); font-size:15px; }
+  .product-demo__computer-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .product-demo__computer-head span { border-radius:999px; background:rgba(48,162,75,.14); padding:2px 10px; color:#4ecb71; font-size:13px; }
+  .product-demo__computer p { margin:0 0 8px; }
+  .product-demo__computer-shot { display:block; overflow:hidden; border:0; border-radius:12px; padding:0; text-align:left; cursor:pointer; background:transparent; }
+  .product-demo__stage { position:absolute; inset:0; z-index:8; background:rgba(4,4,5,.96); }
+  .product-demo__takeover { display:flex; height:100%; flex-direction:column; background:#050506; }
+  .product-demo__takeover-bar { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid #171719; padding:14px 18px; }
+  .product-demo__takeover-who { display:flex; min-width:0; align-items:center; gap:12px; color:#ececee; font-size:15.5px; font-weight:500; }
+  .product-demo__takeover-pill { border-radius:999px; background:rgba(48,162,75,.14); padding:4px 11px; color:#4ecb71; font-size:13px; font-weight:400; }
+  .product-demo__takeover-actions { display:flex; align-items:center; gap:12px; }
+  .product-demo__takeover-close { border:0; background:transparent; color:#85858a; font-size:16px; cursor:pointer; }
+  .product-demo__takeover-close:hover, .product-demo__takeover-close:focus-visible { color:#ececee; }
+  .product-demo__takeover-screen { display:grid; min-height:0; flex:1; place-items:center; container-type:size; padding:18px; }
+  .product-demo__takeover-screen .product-demo__desktop { width:min(100cqw,100cqh*1.6); border-radius:14px; }
+  .product-demo__screen-meta { display:flex; align-items:center; justify-content:flex-end; gap:12px; margin-top:10px; color:var(--panel-muted); font-size:13.5px; }
+  .product-demo__screen-meta > span { margin-right:auto; }
+  .product-demo__text-btn { border:0; border-radius:6px; background:transparent; padding:0; color:var(--panel-muted); font:inherit; line-height:20px; cursor:pointer; transition:color 120ms ease; }
+  .product-demo__text-btn:hover { color:var(--panel-copy); }
+  .product-demo__text-btn:focus { outline:none; }
+  .product-demo__text-btn:focus-visible { color:var(--panel-copy); outline:2px solid color-mix(in srgb,var(--panel-copy) 50%,transparent); outline-offset:3px; }
+  .product-demo__outline-btn { border:1px solid var(--panel-line-2); border-radius:10px; background:transparent; padding:5px 12px; color:var(--panel-copy); font:inherit; font-size:13px; font-weight:500; cursor:pointer; }
+  .product-demo__outline-btn:hover { background:var(--panel-line); }
+  .product-demo__outline-btn:focus { outline:none; }
+  .product-demo__outline-btn:focus-visible { outline:2px solid color-mix(in srgb,var(--panel-copy) 50%,transparent); outline-offset:2px; }
+  .product-demo__panel-label { margin:30px 0 12px; color:var(--panel-muted); font-size:14px; }
+  .product-demo__screen-meta + .product-demo__panel-label { margin-top:30px; }
+  .product-demo__routine { display:flex; align-items:center; gap:12px; width:100%; border:0; border-radius:11px; background:transparent; padding:10px; text-align:left; cursor:pointer; }
+  .product-demo__routine:hover, .product-demo__routine:focus-visible { background:#121214; }
+  .product-demo__routine-icon { color:#e65707; }
+  .product-demo__routine-name { flex:1; color:#ececee; font-size:14.5px; }
+  .product-demo__routine-when { color:var(--panel-muted-2); font-size:13px; }
+  .product-demo__quiet { display:flex; align-items:center; width:100%; margin-top:6px; border:0; border-radius:11px; background:transparent; padding:10px; color:#7a7a80; font-size:14.5px; text-align:left; cursor:pointer; }
+  .product-demo__quiet:hover, .product-demo__quiet:focus-visible { background:#121214; color:#ececee; }
+  .product-demo__empty-thread { margin:auto 0; color:var(--panel-muted-2); font-size:14.5px; text-align:center; }
+  .product-demo__empty-routines { padding:18px 24px 4px; color:#7a7a80; font-size:14px; line-height:1.55; text-align:center; }
+  .product-demo__empty-routines p { margin:0; }
+  .product-demo__ghost-btn { display:inline-block; margin-top:16px; border:1px solid #26262a; border-radius:11px; background:transparent; padding:9px 18px; color:#ececee; font-size:14px; cursor:pointer; }
+  .product-demo__ghost-btn:hover, .product-demo__ghost-btn:focus-visible { background:#17171a; }
+  .product-demo__ghost-btn:disabled { color:#5a5a60; cursor:default; }
+  .product-demo__settings { display:flex; flex-direction:column; }
+  .product-demo__settings-avatar { display:flex; justify-content:center; }
+  .product-demo__field { display:flex; flex-direction:column; gap:8px; margin-top:18px; color:var(--panel-muted); font-size:14px; }
+  .product-demo__settings .product-demo__field:first-of-type { margin-top:26px; }
+  .product-demo__field input, .product-demo__field textarea, .product-demo__add-schedule { width:100%; box-sizing:border-box; border:1px solid #26262a; border-radius:11px; background:transparent; padding:12px 14px; color:#ececee; font:inherit; font-size:15px; outline:none; }
+  .product-demo__field textarea { resize:none; line-height:1.5; }
+  .product-demo__field input::placeholder, .product-demo__field textarea::placeholder { color:#6c6c70; }
+  .product-demo__routine-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; color:#f1f1f2; font-size:15.5px; font-weight:500; }
+  .product-demo__routine-nav button { width:24px; border:0; background:transparent; color:#9a9aa0; font-size:17px; cursor:pointer; }
+  .product-demo__routine-nav button:last-child { color:#6c6c70; text-align:right; }
+  .product-demo__routine-toolbar { display:flex; align-items:center; gap:12px; margin-bottom:8px; color:#ececee; font-size:15px; }
+  .product-demo__routine-toolbar .product-demo__ghost-btn { margin-top:0; padding:8px 16px; background:#1e1e21; border-color:transparent; }
+  .product-demo__routine-toolbar > span { flex:1; }
+  .product-demo__switch { position:relative; flex:none; width:46px; height:26px; border:0; border-radius:999px; background:#26262a; cursor:pointer; }
+  .product-demo__switch span { position:absolute; top:2px; left:2px; width:22px; height:22px; border-radius:999px; background:#3a3a40; transition:left 0.18s; }
+  .product-demo__switch.is-on { background:#3a6b4c; }
+  .product-demo__switch.is-on span { left:22px; background:#f1f1ef; }
+  .product-demo__add-schedule { color:#9a9aa0; text-align:left; cursor:pointer; }
+  .product-demo__add-schedule:hover, .product-demo__add-schedule:focus-visible { background:#121214; color:#ececee; }
+  .product-demo__triggers { display:flex; flex-direction:column; gap:10px; border:1px solid #26262a; border-radius:13px; padding:12px; }
+  .product-demo__trigger-head { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#ececee; font-size:14.5px; }
+  .product-demo__trigger-head button { border:0; background:transparent; color:#5a5a60; cursor:pointer; }
+  .product-demo__trigger-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:9px; border-radius:11px; background:#16161a; padding:9px 10px; color:#7a7a80; font-size:14px; }
+  .product-demo__trigger-row select, .product-demo__trigger-row input { appearance:none; border:0; border-radius:8px; background:#24242a; padding:7px 11px; color:#ececee; font:inherit; font-size:14px; outline:none; }
+  .product-demo__muted { margin:0; color:#6c6c70; font-size:14.5px; }
+  .product-demo__runs { margin:0; padding:0; list-style:none; }
+  .product-demo__runs li { display:flex; align-items:center; gap:12px; border-bottom:1px solid #141416; padding:10px 0; color:#ececee; font-size:14px; }
+  .product-demo__runs li span:last-child { margin-left:auto; color:#6c6c70; font-size:13px; }
+  .product-demo__choice { max-width:78%; border-radius:20px; background:#1a1a1d; padding:18px 20px; }
+  .product-demo__choice--done { background:#151517; }
+  .product-demo__choice-q { color:#f1f1f2; font-size:17px; font-weight:500; }
+  .product-demo__choice--done .product-demo__choice-q { color:#c9c9ce; }
+  .product-demo__choice-sub { margin-top:4px; color:var(--panel-muted); font-size:15px; }
+  .product-demo__choice-opts { display:flex; flex-direction:column; overflow:hidden; margin-top:14px; border:1px solid #232326; border-radius:13px; }
+  .product-demo__choice-opts button { display:flex; align-items:center; gap:14px; border:0; border-bottom:1px solid #202023; background:transparent; padding:14px 16px; color:#ececee; font-size:15.5px; text-align:left; cursor:pointer; }
+  .product-demo__choice-opts button:last-child { border-bottom:0; }
+  .product-demo__choice-opts button:hover, .product-demo__choice-opts button:focus-visible { background:#222226; }
+  .product-demo__choice-letter { display:grid; width:22px; height:22px; flex:none; place-items:center; border-radius:6px; background:#232327; color:#9a9aa0; font-size:12.5px; }
+  .product-demo__choice-picked { display:flex; align-items:center; gap:14px; margin-top:12px; border:1px solid #202023; border-radius:13px; padding:13px 16px; color:#85858a; font-size:15.5px; }
+  .product-demo__choice-picked .product-demo__choice-letter { background:#1e1e21; color:#6c6c70; }
+  .product-demo__choice-check { margin-left:auto; color:#c9c9ce; font-size:14px; }
+  .product-demo__choice-own { margin-top:12px; border:1px solid #232326; border-radius:12px; background:#0e0e10; padding:13px 16px; color:#6c6c70; font-size:15px; }
+  @media (max-width:1100px) {
+    .product-demo__frame { grid-template-columns:240px minmax(0,1fr) 280px; }
+    .product-demo__frame.is-collapsed { grid-template-columns:240px minmax(0,1fr); }
+  }
+  @media (max-width:860px) {
+    .product-demo__frame, .product-demo__frame.is-collapsed { grid-template-columns:minmax(0,1fr); height:min(620px,82vh); }
+    .product-demo__menu-btn { display:grid; }
+    .product-demo__sidebar { position:absolute; z-index:6; top:0; bottom:0; left:0; width:min(300px,86%); background:var(--panel); box-shadow:0 0 40px rgba(0,0,0,.5); visibility:hidden; transform:translateX(-100%); transition:transform 0.22s ease, visibility 0.22s ease; }
+    .product-demo__sidebar.is-open { visibility:visible; transform:none; }
+    .product-demo__traffic { display:none; }
+    .product-demo__drawer-title, .product-demo__sidebar-close { display:block; }
+    .product-demo__scrim { position:absolute; z-index:5; inset:0; border:0; padding:0; background:rgba(4,4,5,.6); }
+    .product-demo__scrim.show { display:block; }
+    .product-demo__panel { position:absolute; z-index:4; inset:0; border-left:0; display:none; }
+    .product-demo__panel.is-open { display:flex; }
+  }
+
 </style>
 </head>
 <body>
@@ -441,91 +510,40 @@
     </section>
 
     <section id="demo" class="section">
-      <div class="demo-frame" id="demoFrame">
-        <button class="demo-scrim" id="demoScrim" type="button" aria-label="Close menu"></button>
-        <aside class="demo-sidebar" id="demoSidebar">
-          <div class="demo-chrome">
-            <div class="demo-traffic" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="demo-drawer-title">Bots</span>
-            <div style="margin-left:auto;display:flex;gap:8px;">
-              <button class="demo-new" id="demoNewBtn" type="button" aria-label="New bot">+</button>
-              <button class="demo-sidebar-close" id="demoSidebarClose" type="button" aria-label="Hide bots">✕</button>
+      <div class="product-demo__frame" id="pdFrame">
+        <aside class="product-demo__sidebar" id="pdSidebar">
+          <div class="product-demo__chrome">
+            <div class="product-demo__traffic"><span></span><span></span><span></span></div>
+            <span class="product-demo__drawer-title">Bots</span>
+            <div class="product-demo__chrome-actions">
+              <button class="product-demo__new" id="pdNewBtn" type="button" aria-label="New bot">+</button>
+              <button class="product-demo__sidebar-close" id="pdSidebarClose" type="button" aria-label="Close bot list">✕</button>
             </div>
           </div>
-          <label class="demo-search"><span aria-hidden="true">⌕</span><input id="botSearch" type="search" placeholder="Search"></label>
-          <div class="demo-bot-list" id="botList"></div>
-          <div class="demo-user"><span class="demo-user-badge">You</span><span>You</span></div>
+          <div class="product-demo__search"><span>⌕</span><input id="pdSearch" type="text" placeholder="Search" aria-label="Search bots"></div>
+          <div class="product-demo__bot-list" id="pdBotList"></div>
+          <div class="product-demo__user"><span class="product-demo__user-badge">Y</span><span>You</span></div>
         </aside>
-        <div class="demo-main">
-          <div class="demo-topbar">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <button class="demo-menu-btn" id="demoMenuBtn" type="button" aria-label="Bots">☰</button>
-              <button class="demo-name-btn" id="demoNameBtn" type="button">
-                <span class="bot-avatar xs" id="mainAvatar"><img src="assets/bots/inbox-manager.png" alt=""></span>
-                <span id="mainName">Inbox Manager</span>
-              </button>
+        <div class="product-demo__main">
+          <div class="product-demo__topbar">
+            <div class="product-demo__topbar-left">
+              <button class="product-demo__menu-btn" id="pdMenuBtn" type="button" aria-label="Open bot list"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+              <button class="product-demo__name-btn" id="pdNameBtn" type="button"><span class="pd-avatar pd-avatar--28"><img id="pdTopAvatar" src="assets/bots/inbox-manager.png" alt=""></span><span class="product-demo__active-name" id="pdTopName">Inbox Manager</span></button>
             </div>
-            <button class="demo-panel-toggle" id="demoPanelToggle" type="button" aria-label="Toggle computer panel" title="Computer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" /></svg></button>
+            <button class="product-demo__panel-toggle" id="pdPanelToggle" type="button" aria-label="Toggle computer panel" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 15h5M9 12.5V15" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
           </div>
-          <div class="demo-thread" id="thread"></div>
-          <div class="demo-composer">
-            <div class="demo-input-shell">
-              <span style="color:var(--panel-muted-2);font-size:18px;">+</span>
-              <input id="draftInput" type="text" placeholder="Message Inbox Manager">
-              <button class="demo-send" id="sendBtn" type="button" aria-label="Send">↑</button>
+          <div class="product-demo__thread" id="pdThread"></div>
+          <div class="product-demo__composer">
+            <div class="product-demo__input-shell">
+              <span class="product-demo__composer-plus">+</span>
+              <input id="pdInput" type="text" placeholder="Message Inbox Manager" aria-label="Message">
+              <button class="product-demo__send" id="pdSendBtn" type="button" aria-label="Send">↑</button>
             </div>
           </div>
         </div>
-        <aside class="demo-panel" id="demoPanel">
-          <div class="demo-panel-head" id="panelHead">
-            <span id="panelHeadLabel">Inbox Manager's computer</span>
-            <div class="demo-panel-actions">
-              <button type="button" id="panelSettingsBtn" aria-label="Bot settings"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg></button>
-              <button type="button" id="panelCloseBtn" aria-label="Close panel">✕</button>
-            </div>
-          </div>
-          <div id="panel-computer">
-            <div class="desk" id="desk"></div>
-            <div class="desk-meta"><span id="controlState">Watching — read-only</span><button id="controlBtn" type="button">Take control</button></div>
-            <p style="font-size:12.5px;color:var(--panel-muted);margin:10px 0 0;">Demo mock: in the preview app the display is read-only; take-control via the host lease is still being wired.</p>
-            <div class="demo-panel-label">Routines</div>
-            <div id="routineList"></div>
-            <button class="demo-quiet" id="newRoutineBtn" type="button">+ New routine</button>
-          </div>
-          <div id="panel-settings" style="display:none;">
-            <div class="demo-settings-avatar"><img id="settingsAvatar" src="assets/bots/inbox-manager.png" alt=""></div>
-            <label class="demo-field">Name<input id="setName" type="text" placeholder="Name this bot"></label>
-            <label class="demo-field">Title<input id="setTitle" type="text" placeholder="Describe what this bot does"></label>
-            <label class="demo-field">Description<textarea id="setDesc" rows="4" placeholder="What this bot is for"></textarea></label>
-          </div>
-          <div id="panel-routine" style="display:none;">
-            <div class="demo-routine-nav"><button id="routineBackBtn" type="button" aria-label="Back to computer">‹</button><span>Routine</span><button id="routineCloseBtn" type="button" aria-label="Close panel">✕</button></div>
-            <div class="demo-routine-toolbar">
-              <button class="demo-switch is-on" id="routineActiveBtn" type="button" aria-pressed="true"><span></span></button>
-              <span class="routine-active-label" id="routineActiveLabel">Active</span>
-              <button class="demo-ghost-btn" id="routineDeleteBtn" type="button">Delete</button>
-              <button class="demo-ghost-btn" id="routineTestBtn" type="button">Test run</button>
-            </div>
-            <label class="demo-field">Name<input id="routineName" type="text" placeholder="Name this routine"></label>
-            <label class="demo-field">Instruction<textarea id="routineInstr" rows="4" placeholder="What should this routine do each time it runs?"></textarea></label>
-            <div class="demo-field">When to run
-              <div style="display:flex;gap:8px;">
-                <select id="routineFreq"><option>Every hour</option><option>Every 6 hours</option><option>Every day</option><option>Weekdays</option><option>Every week</option><option>Every month</option></select>
-                <input id="routineTime" type="time">
-              </div>
-            </div>
-            <div class="demo-field">Run history<div id="routineRuns"></div></div>
-          </div>
-        </aside>
-        <div class="demo-stage" id="takeoverStage" style="display:none;">
-          <div class="demo-takeover">
-            <div class="demo-takeover-bar">
-              <div class="demo-takeover-who"><span class="bot-avatar xs" id="takeoverAvatar"><img src="assets/bots/inbox-manager.png" alt=""></span><span id="takeoverName">Inbox Manager's computer</span><span class="demo-takeover-pill">You have control</span></div>
-              <div class="demo-takeover-actions"><button class="demo-outline-btn" id="takeoverReleaseBtn" type="button">Release</button><button class="demo-takeover-close" id="takeoverCloseBtn" type="button" aria-label="Close computer">✕</button></div>
-            </div>
-            <div class="demo-takeover-screen"><div class="desk" id="takeoverDesk"></div></div>
-          </div>
-        </div>
+        <aside class="product-demo__panel" id="pdPanel"></aside>
+        <button class="product-demo__scrim" id="pdScrim" type="button" aria-label="Close bot list"></button>
+        <div class="product-demo__stage" id="pdStage" style="display:none;"></div>
       </div>
     </section>
 
@@ -736,309 +754,477 @@
   </footer>
 </div>
 <script>
+  /* ProductDemo port: Rakazo ProductDemo.tsx state machine, vanilla JS.
+     Substitutions only: bot portraits for color avatars, GBots bot names,
+     Hermes-original demo text (threads, replies, routines, screens). */
   var BOTS = [
-    { id: "inbox", name: "Inbox Manager", title: "Tidies the inbox, holds the important ones", desc: "Sweeps the inbox, archives the noise, drafts the rest, and holds the one thread that actually needs you.", color: "#6a6bf5", avatar: "assets/bots/inbox-manager.png", time: "7:00 AM", preview: "Demo reply sent, rest stay in review", prompt: "Tidy my inbox. Anything that needs me today, hold it at the top.", reply: "Done. 23 threads tidied, 11 newsletters archived, 4 drafts written. One invite needs you today — a product demo invite asking for an answer before tonight. The rest can wait.", card: [["Tidied", "23 threads · 11 archived"], ["Drafted", "4 replies in your voice"], ["Held", "1 demo invite · answer before tonight"]], routines: [{ name: "Inbox tidy-up", instruction: "Tidy the inbox: archive newsletters, draft replies in my voice, and hold the one thread that needs me at the top.", freq: "Weekdays", time: "07:00", active: true, runs: [{ text: "Completed", time: "Today 7:00 AM" }] }, { name: "Evening recap", instruction: "Summarise the day: unread back to zero, drafts listed, held threads flagged.", freq: "Every day", time: "21:00", active: true, runs: [{ text: "Completed", time: "Yesterday 9:00 PM" }] }] },
-    { id: "research", name: "Research Scout", title: "Reads around a question, brings back options", desc: "Reads around a question and brings back options — never a verdict made for you.", color: "#f5a03c", avatar: "assets/bots/research-scout.png", time: "2:00 AM", preview: "VPS stays on the table, rented box dropped", prompt: "Compare home-host vs VPS hosting for the gateway. Bring me options, not a verdict.", reply: "Read 12 sources overnight. Three options stand out: home host is cheapest and fully yours, VPS is steadier when your home connection drops, a small rented box sits in between. Comparison is in the thread — no decision made for you.", card: [["Read", "12 sources · docs, changelogs, setups"], ["Compared", "3 options · cost, uptime, control"], ["Recommended", "None yet · your call"]], routines: [{ name: "Nightly reading", instruction: "Read the day's sources on the open question and compare options without making a verdict.", freq: "Every day", time: "02:00", active: true, runs: [{ text: "Completed", time: "Today 2:00 AM" }] }, { name: "Changelog watch", instruction: "Watch host changelogs and summarise updates, flagging breaking changes.", freq: "Every week", time: "09:00", active: true, runs: [{ text: "Completed", time: "Monday 9:00 AM" }] }] },
-    { id: "account", name: "Account Watcher", title: "Watches who went quiet, and what was promised", desc: "Watches who went quiet, what was promised, and who asked for something new.", color: "#9b5cf6", avatar: "assets/bots/account-watcher.png", time: "Yesterday", preview: "Revision reply sent, follow-ups held", prompt: "Who went quiet this week, and who asked for something new?", reply: "Two contacts went quiet after you sent proposals — no reply in 6 days. One asked for a price revision instead of signing. I drafted a short follow-up for each, held for your read, and noted what each one was promised last time.", card: [["Quiet", "2 contacts · 6 days, no reply"], ["Revision", "1 price revision requested"], ["Drafted", "2 follow-ups · held for your read"]], routines: [{ name: "Quiet watch", instruction: "Flag contacts that went quiet after a proposal and draft a short follow-up for each.", freq: "Every week", time: "09:00", active: true, runs: [{ text: "Completed", time: "Monday 9:00 AM" }] }, { name: "Promise log", instruction: "Keep one list of what was promised, to whom, and when it is due.", freq: "Every day", time: "09:00", active: true, runs: [{ text: "Completed", time: "Today 9:00 AM" }] }] },
-    { id: "task", name: "Task Runner", title: "Runs the host's recurring jobs, reports every run", desc: "Runs the host's recurring jobs and reports every run — clean, or flagged with a reason.", color: "#3b82f6", avatar: "assets/bots/task-runner.png", time: "8:00 AM", preview: "Recap task approved, rest held", prompt: "Run the daily host recap and flag anything that needs me.", reply: "Host recap is done. 3 sessions were active, 2 scheduled tasks finished clean, 1 task is waiting on your approval before it sends anything out. Nothing was sent while you were away.", card: [["Sessions", "3 active · all healthy"], ["Finished", "2 scheduled tasks · clean"], ["Waiting", "1 task · needs your approval"]], routines: [{ name: "Daily host recap", instruction: "Recap sessions, finished tasks, and anything waiting on approval. Send nothing while I am away.", freq: "Every day", time: "08:00", active: true, runs: [{ text: "Completed", time: "Today 8:00 AM" }] }, { name: "Session sweep", instruction: "Close stale sessions and list the active ones with their health.", freq: "Every 6 hours", time: "08:00", active: true, runs: [{ text: "Completed", time: "Today 8:00 AM" }] }] }
+    { id: "inbox", name: "Inbox Manager", avatar: "assets/bots/inbox-manager.png", time: "7:00 AM", preview: "Demo reply sent, rest stay in review",
+      reply: "Sent. The demo reply is out, the rest stay in review.",
+      screen: { host: "inbox · host", title: "Inbox: 1 invite held", lines: ["23 threads tidied", "11 archived · 4 drafted", "1 demo invite held"] },
+      thread: [{ type: "time", text: "Yesterday 7:00 PM" }, { type: "user", text: "My inbox got away from me this week — tidy it?" }, { type: "bot", text: "On it. 23 threads since yesterday. Archiving the noise, drafting the rest." }, { type: "computer", text: "Tidying the inbox back to yesterday." }, { type: "time", text: "Today 7:00 AM" }, { type: "card", lines: [["Tidied", "23 threads · 11 archived"], ["Drafted", "4 replies in your voice"], ["Held", "1 demo invite · answer before tonight"]] }, { type: "bot", text: "The demo invite is asking for an answer before tonight. Its draft is at the top of the held pile." }, { type: "user", text: "Send the demo reply, I'll take the rest tomorrow." }, { type: "bot", text: "Sent. The demo reply is out, the rest stay in review." }],
+      routines: [
+        { name: "Inbox tidy-up", when: "Weekdays at 7:00 AM", instruction: "Archive newsletters and notifications, draft replies in my voice, hold anything that needs a decision.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Today 7:00 AM" }] },
+        { name: "Evening recap", when: "Every day at 9:00 PM", instruction: "Summarise what arrived today and what still needs an answer.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Yesterday 9:00 PM" }] } ] },
+    { id: "research", name: "Research Scout", avatar: "assets/bots/research-scout.png", time: "2:00 AM", preview: "VPS stays on the table, rented box dropped",
+      reply: "Done. VPS stays on the table, rented box dropped.",
+      screen: { host: "research · host", title: "Research: 3 options compared", lines: ["12 sources read", "3 options compared", "No verdict made"] },
+      thread: [{ type: "time", text: "Yesterday 9:00 PM" }, { type: "user", text: "Compare home-host vs VPS hosting for the gateway. Bring me options, not a verdict." }, { type: "bot", text: "Reading around it now — docs, changelogs, setups." }, { type: "computer", text: "Reading 12 sources." }, { type: "time", text: "Today 2:00 AM" }, { type: "card", lines: [["Read", "12 sources · docs, changelogs, setups"], ["Compared", "3 options · cost, uptime, control"], ["Recommended", "None yet · your call"]] }, { type: "bot", text: "Home host is cheapest and fully yours, VPS is steadier when your home connection drops. The comparison is in the thread — no decision made for you." }, { type: "user", text: "Keep the VPS option open, drop the rented box." }, { type: "bot", text: "Done. VPS stays on the table, rented box dropped." }],
+      routines: [
+        { name: "Nightly reading", when: "Every day at 2:00 AM", instruction: "Read the docs and changelogs I follow and file anything worth a second look.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Today 2:00 AM" }] },
+        { name: "Changelog watch", when: "Every Monday at 9:00 AM", instruction: "Summarise the week's upstream changes in one short note.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Monday 9:00 AM" }] } ] },
+    { id: "account", name: "Account Watcher", avatar: "assets/bots/account-watcher.png", time: "9:00 AM", preview: "Revision reply sent, follow-ups held",
+      reply: "Sent. The revision reply is out, the quiet follow-ups stay held.",
+      screen: { host: "contacts · host", title: "Accounts: 2 quiet, 1 revision", lines: ["2 contacts quiet 6 days", "1 price revision requested", "2 follow-ups drafted"] },
+      thread: [{ type: "time", text: "Yesterday 6:00 PM" }, { type: "user", text: "Who went quiet this week, and who asked for something new?" }, { type: "bot", text: "Checking proposals and replies now." }, { type: "computer", text: "Scanning proposals from the last 7 days." }, { type: "time", text: "Today 9:00 AM" }, { type: "card", lines: [["Quiet", "2 contacts · 6 days, no reply"], ["Revision", "1 price revision requested"], ["Drafted", "2 follow-ups · held for your read"]] }, { type: "bot", text: "Two contacts went quiet after proposals, one asked for a price revision. Follow-ups are drafted and held." }, { type: "user", text: "Send the revision reply only." }, { type: "bot", text: "Sent. The revision reply is out, the quiet follow-ups stay held." }],
+      routines: [
+        { name: "Quiet watch", when: "Every Monday at 9:00 AM", instruction: "Flag contacts that went quiet after a proposal and draft a follow-up for each.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Monday 9:00 AM" }] },
+        { name: "Promise log", when: "Every day at 9:00 AM", instruction: "Note every promise made in a reply and check it against what actually happened.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Today 9:00 AM" }] } ] },
+    { id: "task", name: "Task Runner", avatar: "assets/bots/task-runner.png", time: "8:00 AM", preview: "Recap task approved, rest held",
+      reply: "Approved. The recap task is running, the rest stay held.",
+      screen: { host: "host · tasks", title: "Host: 1 task waits", lines: ["3 sessions active", "2 tasks finished clean", "1 task waits on approval"] },
+      thread: [{ type: "time", text: "Yesterday 8:00 PM" }, { type: "user", text: "Run the daily host recap and flag anything that needs me." }, { type: "bot", text: "Running it now across sessions and scheduled tasks." }, { type: "computer", text: "Running the host recap." }, { type: "time", text: "Today 8:00 AM" }, { type: "card", lines: [["Sessions", "3 active · all healthy"], ["Finished", "2 scheduled tasks · clean"], ["Waiting", "1 task · needs your approval"]] }, { type: "bot", text: "One task waits on your approval before it sends anything out. Nothing was sent while you were away." }, { type: "user", text: "Approve the recap task, hold the rest." }, { type: "bot", text: "Approved. The recap task is running, the rest stay held." }],
+      routines: [
+        { name: "Daily host recap", when: "Every day at 8:00 AM", instruction: "Check sessions and scheduled tasks, then report what needs a human.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Today 8:00 AM" }] },
+        { name: "Session sweep", when: "Every 6 hours", instruction: "Sweep idle sessions and report anything unhealthy.", active: true, runs: [{ mark: "●", color: "#4ECB71", text: "Completed", time: "Today 2:00 PM" }] } ] }
   ];
-  BOTS[0].screen = { host: "inbox · host", title: "Inbox: 1 invite held", lines: ["23 threads tidied", "11 archived · 4 drafted", "1 demo invite held"] };
-  BOTS[0].thread = [{ type: "time", text: "Yesterday 7:00 PM" }, { type: "user", text: "My inbox got away from me this week — tidy it?" }, { type: "bot", text: "On it. 23 threads since yesterday. Archiving the noise, drafting the rest." }, { type: "computer", text: "Tidying the inbox back to yesterday." }, { type: "time", text: "Today 7:00 AM" }, { type: "card", lines: [["Tidied", "23 threads · 11 archived"], ["Drafted", "4 replies in your voice"], ["Held", "1 demo invite · answer before tonight"]] }, { type: "bot", text: "The demo invite is asking for an answer before tonight. Its draft is at the top of the held pile." }, { type: "user", text: "Send the demo reply, I'll take the rest tomorrow." }, { type: "bot", text: "Sent. The demo reply is out, the rest stay in review." }];
-  BOTS[1].screen = { host: "research · host", title: "Research: 3 options compared", lines: ["12 sources read", "3 options compared", "No verdict made"] };
-  BOTS[1].thread = [{ type: "time", text: "Yesterday 9:00 PM" }, { type: "user", text: "Compare home-host vs VPS hosting for the gateway. Bring me options, not a verdict." }, { type: "bot", text: "Reading around it now — docs, changelogs, setups." }, { type: "computer", text: "Reading 12 sources." }, { type: "time", text: "Today 2:00 AM" }, { type: "card", lines: [["Read", "12 sources · docs, changelogs, setups"], ["Compared", "3 options · cost, uptime, control"], ["Recommended", "None yet · your call"]] }, { type: "bot", text: "Home host is cheapest and fully yours, VPS is steadier when your home connection drops. The comparison is in the thread — no decision made for you." }, { type: "user", text: "Keep the VPS option open, drop the rented box." }, { type: "bot", text: "Done. VPS stays on the table, rented box dropped." }];
-  BOTS[2].screen = { host: "contacts · host", title: "Accounts: 2 quiet, 1 revision", lines: ["2 contacts quiet 6 days", "1 price revision requested", "2 follow-ups drafted"] };
-  BOTS[2].thread = [{ type: "time", text: "Yesterday 6:00 PM" }, { type: "user", text: "Who went quiet this week, and who asked for something new?" }, { type: "bot", text: "Checking proposals and replies now." }, { type: "computer", text: "Scanning proposals from the last 7 days." }, { type: "time", text: "Today 9:00 AM" }, { type: "card", lines: [["Quiet", "2 contacts · 6 days, no reply"], ["Revision", "1 price revision requested"], ["Drafted", "2 follow-ups · held for your read"]] }, { type: "bot", text: "Two contacts went quiet after proposals, one asked for a price revision. Follow-ups are drafted and held." }, { type: "user", text: "Send the revision reply only." }, { type: "bot", text: "Sent. The revision reply is out, the quiet follow-ups stay held." }];
-  BOTS[3].screen = { host: "host · tasks", title: "Host: 1 task waits", lines: ["3 sessions active", "2 tasks finished clean", "1 task waits on approval"] };
-  BOTS[3].thread = [{ type: "time", text: "Yesterday 8:00 PM" }, { type: "user", text: "Run the daily host recap and flag anything that needs me." }, { type: "bot", text: "Running it now across sessions and scheduled tasks." }, { type: "computer", text: "Running the host recap." }, { type: "time", text: "Today 8:00 AM" }, { type: "card", lines: [["Sessions", "3 active · all healthy"], ["Finished", "2 scheduled tasks · clean"], ["Waiting", "1 task · needs your approval"]] }, { type: "bot", text: "One task waits on your approval before it sends anything out. Nothing was sent while you were away." }, { type: "user", text: "Approve the recap task, hold the rest." }, { type: "bot", text: "Approved. The recap task is running, the rest stay held." }];
   var ONBOARD = [
-    { q: "What should this bot mainly help with?", sub: "Pick whatever is closest, or type your own.", opts: ["Inbox & email", "Messages & follow-ups", "Coding & repos", "Research & writing", "A bit of everything"], ack: "{a} is a good place to start." },
-    { q: "How should it write?", sub: "It will match this unless you say otherwise on a specific piece.", opts: ["Clear and tight", "Warm and conversational", "Polished / formal", "Match whatever I draft"], ack: "Got it — {a} it is." },
-    { q: "Where does most of that work live?", sub: "So it knows where to pull from and drop drafts.", opts: ["Email", "Notion", "Just chat / paste here", "A mix"], ack: "Noted — it will pull from {a} and leave drafts there too." }
+    { q: "What should this bot do for you?", sub: "Pick a job, or type your own below.", opts: ["Watch the inbox", "Do research", "Run the host", "Watch accounts"], ack: "Got it — {answer}. I'll own that job." },
+    { q: "When should it run?", sub: "Set the rhythm now, change it anytime.", opts: ["Every morning", "Every evening", "Every hour", "On a schedule"], ack: "Noted — {answer}." },
+    { q: "How should it reach you?", sub: "Where do you want its reports to land?", opts: ["Messages & follow-ups", "Daily summary", "Only when stuck", "Ask me first"], ack: "Understood — {answer}. Nothing leaves the host without your word." }
   ];
-  var current = BOTS[0];
-  var threadExtra = {};
-  var sendSeq = 0;
-  var panelOpen = !window.matchMedia("(max-width: 860px)").matches;
-  var panelMode = "computer";
-  var hasControl = false;
-  var deskPos = { list: { x: 8, y: 8 }, app: { x: 46, y: 26 } };
-  var deskOrder = ["list", "app"];
-  var deskSize = { list: { w: 50, h: 58 }, app: { w: 46, h: 52 } };
-  var routineDraft = null, routineIndex = null;
-  var threadEl = document.getElementById("thread");
-  var listEl = document.getElementById("botList");
-  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
-  function extra(botId) { if (!threadExtra[botId]) threadExtra[botId] = []; return threadExtra[botId]; }
-  function addExtra(botId, msg) { extra(botId).push(msg); if (current.id === botId) renderThread(); }
-  function bubbleNode(cls, text) { var d = document.createElement("div"); d.className = "demo-bubble " + cls; d.textContent = text; return d; }
-  function appendMsgNode(m) {
-    if (m.type === "time") { var t = document.createElement("div"); t.className = "demo-time"; t.textContent = m.text; threadEl.appendChild(t); return; }
-    if (m.type === "meta") { var md = document.createElement("div"); md.className = "demo-meta"; md.textContent = m.text; threadEl.appendChild(md); return; }
-    if (m.type === "card") {
-      var c = document.createElement("div"); c.className = "demo-card"; var h = "";
-      m.lines.forEach(function (l) { h += '<div class="demo-card-line"><span class="check">✓</span><strong>' + esc(l[0]) + '</strong><span class="arrow">→</span><span>' + esc(l[1]) + "</span></div>"; });
-      c.innerHTML = h; threadEl.appendChild(c); return;
-    }
-    if (m.type === "computer") {
-      var comp = document.createElement("div"); comp.className = "demo-computer";
-      comp.innerHTML = '<div class="demo-computer-head"><strong>Computer</strong><span>Done</span></div><p></p>';
-      comp.querySelector("p").textContent = m.text;
-      var shot = document.createElement("button"); shot.className = "demo-computer-shot"; shot.type = "button"; shot.setAttribute("aria-label", "Take control of computer");
-      var shotDesk = document.createElement("div"); shotDesk.className = "desk"; shot.appendChild(shotDesk); comp.appendChild(shot);
-      shot.onclick = openTakeover;
-      threadEl.appendChild(comp);
-      renderDeskInto(shotDesk, false);
-      return;
-    }
-    threadEl.appendChild(bubbleNode(m.type, m.text));
+  var FREQS = ["Every hour", "Every day", "Weekdays", "Every week", "Every month", "Interval", "Advanced"];
+  var UNITS = ["minutes", "hours", "days"];
+  var NUMBERS = [1, 2, 3, 5, 10, 15, 30, 45];
+  var TIMES = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "12:00 PM", "3:00 PM", "6:00 PM", "9:00 PM"];
+  var DEFAULT_DESK = { pos: { list: { x: 12, y: 8 }, app: { x: 38, y: 22 } }, order: ["list", "app"] };
+  var DESK_SIZE = { list: { w: 50, h: 64 }, app: { w: 48, h: 60 } };
+  var LIST_ROWS = [62, 48, 70, 54, 66, 44, 58];
+  function defaultTrigger() { return { freq: "Every day", n: 3, unit: "minutes", time: "9:00 AM", cron: "" }; }
+  function parseWhen(when) {
+    var trigger = defaultTrigger();
+    if (!when) return trigger;
+    var interval = /every\s+(\d+)\s*(min(?:ute)?s?|h(?:our)?s?|days?)/i.exec(when);
+    if (interval) { trigger.freq = "Interval"; trigger.n = Number(interval[1]); var unit = interval[2] || ""; trigger.unit = /^h/i.test(unit) ? "hours" : /^d/i.test(unit) ? "days" : "minutes"; return trigger; }
+    var cron = /^cron\s+(.+)$/i.exec(when.trim());
+    if (cron) { trigger.freq = "Advanced"; trigger.cron = (cron[1] || "").trim(); return trigger; }
+    if (/hourly/i.test(when)) { trigger.freq = "Every hour"; return trigger; }
+    if (/weekday/i.test(when)) { trigger.freq = "Weekdays"; }
+    else if (/monday|week/i.test(when)) { trigger.freq = "Every week"; }
+    else if (/month/i.test(when)) { trigger.freq = "Every month"; }
+    var time = /(\d{1,2})(?::(\d{2}))?\s*(am|pm)/i.exec(when);
+    if (time) trigger.time = time[1] + ":" + (time[2] || "00") + " " + (time[3] || "").toUpperCase();
+    return trigger;
   }
-  function renderThread() {
-    threadEl.innerHTML = "";
-    if (current.onboarding && current.answers.length < ONBOARD.length) { renderOnboard(); threadEl.scrollTop = threadEl.scrollHeight; return; }
-    (current.thread || []).forEach(appendMsgNode);
-    extra(current.id).forEach(appendMsgNode);
-    threadEl.scrollTop = threadEl.scrollHeight;
+  function describeTrigger(trigger) {
+    if (trigger.freq === "Interval") return { lead: "Every", detail: trigger.n + " " + trigger.unit };
+    if (trigger.freq === "Every hour") return { lead: "Every hour", detail: "" };
+    if (trigger.freq === "Advanced") return { lead: "Cron", detail: trigger.cron || "*/3 * * * *" };
+    if (trigger.freq === "Weekdays") return { lead: "Weekdays", detail: "at " + trigger.time };
+    if (trigger.freq === "Every week") return { lead: "Every Monday", detail: "at " + trigger.time };
+    if (trigger.freq === "Every month") return { lead: "Monthly", detail: "on the 1st at " + trigger.time };
+    return { lead: "Every day", detail: "at " + trigger.time };
   }
-  function renderOnboard() {
-    var t = document.createElement("div"); t.className = "demo-time"; t.textContent = "Today"; threadEl.appendChild(t);
-    threadEl.appendChild(bubbleNode("bot", "Hey. Good to meet you — let's set this bot up."));
-    ONBOARD.forEach(function (step, index) {
-      var answer = current.answers[index];
-      if (answer !== undefined) {
-        var letter = step.opts.indexOf(answer) >= 0 ? String.fromCharCode(65 + step.opts.indexOf(answer)) : "✎";
-        var done = document.createElement("div");
-        done.innerHTML = '<div class="demo-choice-q">' + esc(step.q) + '</div><div class="demo-choice-picked"><span class="demo-choice-letter">' + letter + "</span><span>" + esc(answer) + '</span><span class="demo-choice-check">✓</span></div>';
-        threadEl.appendChild(done);
-        threadEl.appendChild(bubbleNode("bot", step.ack.replace("{a}", answer)));
-        return;
-      }
-      if (current.answers.length !== index) return;
-      var box = document.createElement("div");
-      var optsHtml = step.opts.map(function (opt, i) { return '<button type="button" data-opt="' + esc(opt) + '"><span class="demo-choice-letter">' + String.fromCharCode(65 + i) + "</span><span>" + esc(opt) + "</span></button>"; }).join("");
-      box.innerHTML = '<div class="demo-choice-q">' + esc(step.q) + '</div><div class="demo-choice-sub">' + esc(step.sub) + '</div><div class="demo-choice-opts">' + optsHtml + '</div><div class="demo-choice-own">Type your own answer</div>';
-      box.querySelectorAll("[data-opt]").forEach(function (b) { b.onclick = function () { answerOnboard(b.dataset.opt); }; });
-      threadEl.appendChild(box);
-    });
+  function whenLabel(triggers) {
+    if (triggers.length === 0) return "Unscheduled";
+    var d = describeTrigger(triggers[0] || defaultTrigger());
+    return [d.lead, d.detail].filter(Boolean).join(" ");
   }
-  function answerOnboard(value) {
-    current.answers.push(value);
-    if (current.answers.length >= ONBOARD.length) {
-      current.onboarding = false;
-      current.title = current.answers[0];
-      current.preview = "Ready for a first job";
-      addExtra(current.id, { type: "bot", text: "That's everything I need. Give me a first job whenever you're ready — I'll ask before anything leaves the host." });
-      renderBotList(); renderBot(current);
-    } else renderThread();
+  function resolveRoutineWhen(triggers, sourceWhen) {
+    if (sourceWhen && JSON.stringify(triggers) === JSON.stringify([parseWhen(sourceWhen)])) return sourceWhen;
+    return whenLabel(triggers);
   }
-  function sendText(text) {
-    if (!text) return;
-    if (current.onboarding && current.answers.length < ONBOARD.length) { answerOnboard(text); return; }
-    var botId = current.id, seq = sendSeq;
-    addExtra(botId, { type: "user", text: text });
-    setTimeout(function () { if (current.id === botId && sendSeq === seq) addExtra(botId, { type: "bot typing", text: "working…" }); }, 280);
-    setTimeout(function () {
-      if (current.id !== botId || sendSeq !== seq) return;
-      var list = extra(botId).filter(function (m) { return m.type !== "bot typing"; });
-      threadExtra[botId] = list;
-      addExtra(botId, { type: "bot", text: current.reply });
-      setTimeout(function () { if (current.id === botId && sendSeq === seq) addExtra(botId, { type: "card", lines: current.card }); }, 600);
-    }, 1350);
+  function displayRoutineWhen(when) {
+    var parsed = parseWhen(when);
+    if (whenLabel([parsed]) !== when) return when;
+    var d = describeTrigger(parsed);
+    return [d.lead, d.detail].filter(Boolean).join(" ");
   }
-  function renderBotList() {
-    var q = (document.getElementById("botSearch").value || "").trim().toLowerCase();
-    listEl.innerHTML = "";
-    BOTS.forEach(function (bot) {
-      if (q && (bot.name + " " + bot.preview).toLowerCase().indexOf(q) < 0) return;
-      var b = document.createElement("button"); b.className = "botrow" + (bot.id === current.id ? " active" : ""); b.dataset.id = bot.id;
-      b.innerHTML = '<span class="bot-avatar sm"><img src="' + bot.avatar + '" alt=""></span><span style="text-align:left;min-width:0;"><b>' + esc(bot.name) + '</b><span class="prev">' + esc(bot.preview) + '</span></span><span class="demo-bot-time">' + esc(bot.time) + "</span>";
-      b.onclick = function () { selectBot(bot); };
-      listEl.appendChild(b);
-    });
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function cloneDesk() { return { pos: { list: Object.assign({}, DEFAULT_DESK.pos.list), app: Object.assign({}, DEFAULT_DESK.pos.app) }, order: DEFAULT_DESK.order.slice() }; }
+  var bots = BOTS.map(function (b) { return Object.assign({}, b, { title: "", description: "", onboarding: false, answers: [], routines: b.routines.map(function (r) { return Object.assign({}, r, { runs: (r.runs || []).slice() }); }) }); });
+  var activeId = "inbox", panelOpen = true, menuOpen = false, panelMode = "computer", hasControl = false, takeover = false;
+  var desk = cloneDesk(), draft = "", query = "", extra = {}, routineDraft = null, sendSeq = 0, widePanelOpen = true;
+  var frameEl = document.getElementById("pdFrame"), sidebarEl = document.getElementById("pdSidebar"), botListEl = document.getElementById("pdBotList");
+  var threadEl = document.getElementById("pdThread"), inputEl = document.getElementById("pdInput"), panelEl = document.getElementById("pdPanel");
+  var stageEl = document.getElementById("pdStage"), scrimEl = document.getElementById("pdScrim"), toggleEl = document.getElementById("pdPanelToggle");
+  var topNameEl = document.getElementById("pdTopName"), topAvatarEl = document.getElementById("pdTopAvatar");
+  function current() { return bots.filter(function (b) { return b.id === activeId; })[0] || bots[0]; }
+  function onboardingOpen(bot) { return Boolean(bot.onboarding && bot.answers.length < ONBOARD.length); }
+  function previewForBot(bot) {
+    var list = extra[bot.id] || [];
+    var last = list[list.length - 1];
+    if (last && "text" in last) return last.text;
+    if (bot.onboarding && bot.answers.length > 0) return bot.answers[bot.answers.length - 1];
+    return bot.preview;
   }
-  function selectBot(bot) {
-    sendSeq++;
-    current = bot;
-    if (panelMode === "routine") { panelMode = "computer"; routineDraft = null; }
-    renderBot(bot);
-  }
-  function renderBot(bot) {
-    current = bot;
-    document.getElementById("mainName").textContent = bot.name;
-    document.querySelector("#mainAvatar img").src = bot.avatar;
-    document.getElementById("draftInput").placeholder = (bot.onboarding && bot.answers.length < ONBOARD.length) ? "Type your own answer" : "Message " + bot.name;
-    renderBotList(); renderThread(); renderPanel(); closeSidebar(); syncTakeover();
-  }
-  function applyPanelVisibility() {
-    document.getElementById("demoFrame").classList.toggle("is-collapsed", !panelOpen);
-    document.getElementById("demoPanel").classList.toggle("is-open", panelOpen);
-  }
-  function setPanelMode(mode) {
-    panelMode = mode; panelOpen = true; applyPanelVisibility(); renderPanel();
-  }
-  function closePanel() { panelOpen = false; applyPanelVisibility(); }
-  function toggleComputer() {
-    if (panelOpen && panelMode === "computer") closePanel(); else setPanelMode("computer");
-  }
-  function renderPanel() {
-    var head = document.getElementById("panelHead");
-    head.style.display = panelMode === "routine" ? "none" : "flex";
-    document.getElementById("panel-computer").style.display = panelMode === "computer" ? "block" : "none";
-    document.getElementById("panel-settings").style.display = panelMode === "settings" ? "block" : "none";
-    document.getElementById("panel-routine").style.display = panelMode === "routine" ? "block" : "none";
-    document.getElementById("panelHeadLabel").textContent = panelMode === "settings" ? "settings" : current.name + "'s computer";
-    if (panelMode === "computer") { renderRoutineList(); renderDesk(); }
-    if (panelMode === "settings") {
-      document.getElementById("settingsAvatar").src = current.avatar;
-      document.getElementById("setName").value = current.name;
-      document.getElementById("setTitle").value = current.title;
-      document.getElementById("setDesc").value = current.desc;
-    }
-    if (panelMode === "routine" && routineDraft) {
-      document.getElementById("routineName").value = routineDraft.name;
-      document.getElementById("routineInstr").value = routineDraft.instruction;
-      document.getElementById("routineFreq").value = routineDraft.freq;
-      document.getElementById("routineTime").value = routineDraft.time;
-      var sw = document.getElementById("routineActiveBtn");
-      sw.classList.toggle("is-on", routineDraft.active); sw.setAttribute("aria-pressed", routineDraft.active);
-      document.getElementById("routineActiveLabel").textContent = routineDraft.active ? "Active" : "Paused";
-      document.getElementById("routineTestBtn").disabled = !routineDraft.name.trim();
-      var runs = document.getElementById("routineRuns"); runs.innerHTML = "";
-      (routineDraft.runs || []).forEach(function (r) { var d = document.createElement("div"); d.className = "demo-run"; d.innerHTML = '<span class="dot">●</span><span>' + esc(r.text) + '</span><span style="margin-left:auto;color:var(--panel-muted);">' + esc(r.time) + "</span>"; runs.appendChild(d); });
-      if (!routineDraft.runs || !routineDraft.runs.length) runs.innerHTML = '<div class="demo-run"><span style="color:var(--panel-muted);">No runs yet — hit Test run.</span></div>';
-    }
-  }
-  function renderRoutineList() {
-    var rl = document.getElementById("routineList"); rl.innerHTML = "";
-    if (!current.routines.length) { rl.innerHTML = '<p style="font-size:13.5px;color:var(--panel-muted);">Routines are recurring tasks this bot runs on a schedule.</p>'; return; }
-    current.routines.forEach(function (r, i) {
-      var b = document.createElement("button"); b.className = "demo-routine";
-      b.innerHTML = '<span>◷</span><span><b>' + esc(r.name) + '</b></span><span class="when">' + esc(r.freq) + " " + esc(r.time) + "</span>";
-      b.onclick = function () { openRoutine(i); };
-      rl.appendChild(b);
-    });
-  }
-  function openRoutine(index) {
-    routineIndex = index;
-    routineDraft = index === null ? { name: "", instruction: "", freq: "Every day", time: "09:00", active: true, runs: [] } : JSON.parse(JSON.stringify(current.routines[index]));
-    setPanelMode("routine");
-  }
-  function persistRoutine() {
-    if (!routineDraft) return;
-    if (routineIndex === null) { if (routineDraft.name.trim() || routineDraft.instruction.trim()) current.routines.push(routineDraft); }
-    else current.routines[routineIndex] = routineDraft;
-  }
-  function deskHTML() {
-    var sc = current.screen || { host: "host", title: "Bot screen", lines: [] };
-    var listRows = [82, 64, 74, 52, 88, 68].map(function (w) { return '<div class="desk-window-row"><span class="desk-window-check">✓</span><i style="width:' + w + '%;"></i></div>'; }).join("");
-    var side = [80, 60, 70, 50, 90].map(function (w) { return '<i style="width:' + w + '%;"></i>'; }).join("");
-    var appLines = sc.lines.map(function (l, i) { return '<div class="desk-window-line"><span></span><div>' + esc(l) + '<i style="width:' + [66, 52, 74][i % 3] + '%;"></i></div></div>'; }).join("");
-    return '<div class="desk-window" data-win="list"><div class="desk-window-bar"><span></span><span></span><span></span><div class="desk-window-url">Files</div></div><div class="desk-window-split"><div class="desk-window-side">' + side + '</div><div class="desk-window-rows">' + listRows + '</div></div></div>'
-      + '<div class="desk-window" data-win="app"><div class="desk-window-bar"><span></span><span></span><span></span><div class="desk-window-url">' + esc(sc.host) + '</div></div><div class="desk-window-body"><div class="desk-window-title">' + esc(sc.title) + '</div>' + appLines + '</div></div>'
-      + '<div class="desk-dock"><span data-dock="list">▦</span><span data-dock="app">✉</span><span>◷</span></div>';
+  function deskHTML(bot) {
+    var sc = bot.screen || { host: "desktop", title: "Computer is stopped", lines: [] };
+    var side = LIST_ROWS.slice(0, 5).map(function (w) { return '<i style="width:' + w + '%;"></i>'; }).join("");
+    var rows = LIST_ROWS.map(function (w) { return '<div><span class="product-demo__window-check">✓</span><i style="width:' + w + '%;"></i></div>'; }).join("");
+    var appLines = sc.lines.map(function (l, i) { return '<div class="product-demo__window-line"><span></span><div>' + esc(l) + '<i style="width:' + (LIST_ROWS[i] || 50) + '%;"></i></div></div>'; }).join("");
+    var appSvg = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8z" fill="currentColor"/></svg>';
+    var listSvg = '<svg viewBox="0 0 24 24" fill="none"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z" fill="currentColor"/></svg>';
+    var dockApp = '<button class="product-demo__dock-icon product-demo__dock-icon--app" data-dock="app" type="button">' + appSvg + '</button>';
+    var dockList = '<button class="product-demo__dock-icon product-demo__dock-icon--list" data-dock="list" type="button">' + listSvg + '</button>';
+    return '<div class="product-demo__window" data-win="list"><div class="product-demo__window-bar"><span></span><span></span><span></span><div class="product-demo__window-url">Files</div></div><div class="product-demo__window-split"><div class="product-demo__window-side">' + side + '</div><div class="product-demo__window-rows">' + rows + '</div></div></div>'
+      + '<div class="product-demo__window" data-win="app"><div class="product-demo__window-bar"><span></span><span></span><span></span><div class="product-demo__window-url">' + esc(sc.host) + '</div></div><div class="product-demo__window-body"><div class="product-demo__window-title">' + esc(sc.title) + '</div>' + appLines + '</div></div>'
+      + '<div class="product-demo__dock">' + dockApp + dockList + '</div>';
   }
   function applyDeskLayout(el) {
-    deskOrder.forEach(function (id, i) {
-      var w = el.querySelector('.desk-window[data-win="' + id + '"]');
+    desk.order.forEach(function (id, i) {
+      var w = el.querySelector('.product-demo__window[data-win="' + id + '"]');
       if (!w) return;
-      w.style.left = deskPos[id].x + "%"; w.style.top = deskPos[id].y + "%";
-      w.style.width = deskSize[id].w + "%"; w.style.height = deskSize[id].h + "%"; w.style.zIndex = i + 1;
+      w.style.left = desk.pos[id].x + "%"; w.style.top = desk.pos[id].y + "%";
+      w.style.width = DESK_SIZE[id].w + "%"; w.style.height = DESK_SIZE[id].h + "%"; w.style.zIndex = i + 1;
     });
   }
   function bindDesk(el) {
-    el.querySelectorAll(".desk-window-bar").forEach(function (bar) {
+    el.querySelectorAll(".product-demo__window-bar").forEach(function (bar) {
       bar.addEventListener("pointerdown", function (e) {
-        if (!hasControl || e.button !== 0) return;
+        if (e.button !== 0) return;
         var win = bar.parentElement, id = win.dataset.win;
-        var rect = el.getBoundingClientRect(), origin = deskPos[id], sx = e.clientX, sy = e.clientY, size = deskSize[id];
-        deskOrder = deskOrder.filter(function (x) { return x !== id; }); deskOrder.push(id); applyDeskLayout(el);
+        var rect = el.getBoundingClientRect(), origin = desk.pos[id], sx = e.clientX, sy = e.clientY, size = DESK_SIZE[id];
+        desk.order = desk.order.filter(function (x) { return x !== id; }); desk.order.push(id); applyDeskLayout(el);
         bar.setPointerCapture(e.pointerId);
         var move = function (ev) {
           if (ev.pointerId !== e.pointerId) return;
           var x = origin.x + ((ev.clientX - sx) / rect.width) * 100;
           var y = origin.y + ((ev.clientY - sy) / rect.height) * 100;
-          deskPos[id] = { x: Math.min(92, Math.max(8 - size.w, x)), y: Math.min(88, Math.max(0, y)) };
-          win.style.left = deskPos[id].x + "%"; win.style.top = deskPos[id].y + "%";
+          desk.pos[id] = { x: Math.min(92, Math.max(8 - size.w, x)), y: Math.min(88, Math.max(0, y)) };
+          win.style.left = desk.pos[id].x + "%"; win.style.top = desk.pos[id].y + "%";
         };
         var stop = function (ev) { if (ev.pointerId !== e.pointerId) return; bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", stop); bar.removeEventListener("pointercancel", stop); };
         bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", stop); bar.addEventListener("pointercancel", stop);
       });
     });
-    el.querySelectorAll(".desk-dock [data-dock]").forEach(function (d) {
-      d.onclick = function () { if (!hasControl) return; deskOrder = deskOrder.filter(function (x) { return x !== d.dataset.dock; }); deskOrder.push(d.dataset.dock); applyDeskLayout(el); };
+    el.querySelectorAll(".product-demo__dock [data-dock]").forEach(function (d) {
+      d.onclick = function () { desk.order = desk.order.filter(function (x) { return x !== d.dataset.dock; }); desk.order.push(d.dataset.dock); applyDeskLayout(el); };
     });
   }
-  function renderDeskInto(el, bind) {
-    el.innerHTML = deskHTML();
+  function renderDeskInto(el, live) {
+    el.innerHTML = deskHTML(current());
     applyDeskLayout(el);
-    el.classList.toggle("live", hasControl);
-    if (bind) bindDesk(el);
+    el.classList.toggle("is-live", live);
+    if (live) bindDesk(el);
+    else el.querySelectorAll(".product-demo__dock-icon").forEach(function (icon) {
+      var span = document.createElement("span"); span.className = icon.className; span.innerHTML = icon.innerHTML;
+      icon.parentNode.replaceChild(span, icon);
+    });
   }
-  function renderDesk() {
-    renderDeskInto(document.getElementById("desk"), true);
-    document.getElementById("controlState").textContent = hasControl ? "You have control" : "Watching — read-only";
-    document.getElementById("controlBtn").textContent = hasControl ? "Release" : "Take control";
+  function renderSidebar() {
+    var needle = query.trim().toLowerCase();
+    var list = needle ? bots.filter(function (b) { return (b.name + " " + b.preview).toLowerCase().indexOf(needle) !== -1; }) : bots;
+    botListEl.innerHTML = list.map(function (b) {
+      return '<button class="product-demo__bot-row' + (b.id === activeId ? ' is-active' : '') + '" data-bot="' + b.id + '" type="button"><span class="pd-avatar pd-avatar--38"><img src="' + esc(b.avatar) + '" alt=""></span><span class="product-demo__bot-copy"><span class="product-demo__bot-meta"><span class="product-demo__bot-name">' + esc(b.name) + '</span><span class="product-demo__bot-time">' + esc(b.time) + '</span></span><span class="product-demo__bot-preview">' + esc(previewForBot(b)) + '</span></span></button>';
+    }).join("");
+    botListEl.querySelectorAll("[data-bot]").forEach(function (btn) { btn.onclick = function () { selectBot(btn.dataset.bot); }; });
   }
-  function openTakeover() {
-    hasControl = true;
-    document.querySelector("#takeoverAvatar img").src = current.avatar;
-    document.getElementById("takeoverName").textContent = current.name + "'s computer";
-    document.getElementById("takeoverStage").style.display = "block";
-    renderDeskInto(document.getElementById("takeoverDesk"), true);
-    renderDesk();
+  function renderOnboard(bot) {
+    var h = '<div class="product-demo__time">Today</div><div class="product-demo__message product-demo__message--bot"><div class="product-demo__bubble product-demo__bubble--bot">Hey. Good to meet you.</div></div>';
+    ONBOARD.forEach(function (step, index) {
+      var answer = bot.answers[index];
+      if (answer !== undefined) {
+        var letter = String.fromCharCode(65 + Math.max(0, step.opts.indexOf(answer)));
+        h += '<div class="product-demo__choice product-demo__choice--done"><div class="product-demo__choice-q">' + esc(step.q) + '</div><div class="product-demo__choice-picked"><span class="product-demo__choice-letter">' + letter + '</span><span>' + esc(answer) + '</span><span class="product-demo__choice-check">✓</span></div></div>';
+        h += '<div class="product-demo__message product-demo__message--bot"><div class="product-demo__bubble product-demo__bubble--bot">' + esc(step.ack.replace("{answer}", answer)) + '</div></div>';
+        return;
+      }
+      if (bot.answers.length !== index) return;
+      h += '<div class="product-demo__choice"><div class="product-demo__choice-q">' + esc(step.q) + '</div><div class="product-demo__choice-sub">' + esc(step.sub) + '</div><div class="product-demo__choice-opts">';
+      step.opts.forEach(function (opt, oi) { h += '<button type="button" data-answer="' + esc(opt) + '"><span class="product-demo__choice-letter">' + String.fromCharCode(65 + oi) + '</span><span>' + esc(opt) + '</span></button>'; });
+      h += '</div><div class="product-demo__choice-own">Type your own answer</div></div>';
+    });
+    if (bot.answers.length === ONBOARD.length) h += '<div class="product-demo__message product-demo__message--bot"><div class="product-demo__bubble product-demo__bubble--bot">That’s everything I need. Give me a first job whenever you’re ready. I’ll ask before anything leaves the host.</div></div>';
+    return h;
   }
-  function closeTakeover() { document.getElementById("takeoverStage").style.display = "none"; }
-  function releaseControl() { hasControl = false; closeTakeover(); renderDesk(); }
-  function syncTakeover() {
-    var stage = document.getElementById("takeoverStage");
-    if (stage.style.display !== "block") return;
-    document.querySelector("#takeoverAvatar img").src = current.avatar;
-    document.getElementById("takeoverName").textContent = current.name + "'s computer";
-    renderDeskInto(document.getElementById("takeoverDesk"), true);
+  function renderThread() {
+    var bot = current(), h = "";
+    if (bot.onboarding) { h = renderOnboard(bot); }
+    else {
+      var messages = bot.thread.concat(extra[bot.id] || []);
+      if (messages.length === 0) { h = '<div class="product-demo__empty-thread">Message ' + esc(bot.name) + ' to give it a first job.</div>'; }
+      messages.forEach(function (m) {
+        if (m.type === "time") h += '<div class="product-demo__time">' + esc(m.text) + '</div>';
+        else if (m.type === "meta") h += '<div class="product-demo__meta">' + esc(m.text) + '</div>';
+        else if (m.type === "card") {
+          h += '<div class="product-demo__card">';
+          m.lines.forEach(function (l) { h += '<div class="product-demo__card-line"><span class="product-demo__card-check">✓</span><strong>' + esc(l[0]) + '</strong><span class="product-demo__card-arrow">→</span><span>' + esc(l[1]) + '</span></div>'; });
+          h += '</div>';
+        }
+        else if (m.type === "computer") {
+          h += '<div class="product-demo__computer"><div class="product-demo__computer-head"><strong>Computer</strong><span>Done</span></div><p>' + esc(m.text) + '</p><button class="product-demo__computer-shot" type="button" aria-label="Take control of computer"><div class="product-demo__desktop" data-shot-desk="1"></div></button></div>';
+        }
+        else if (m.type === "typing") h += '<div class="product-demo__message product-demo__message--bot"><div class="product-demo__bubble product-demo__bubble--typing">working…</div></div>';
+        else h += '<div class="product-demo__message product-demo__message--' + m.type + '"><div class="product-demo__bubble product-demo__bubble--' + m.type + '">' + esc(m.text) + '</div></div>';
+      });
+    }
+    threadEl.innerHTML = h;
+    threadEl.querySelectorAll("[data-shot-desk]").forEach(function (shotDesk) { renderDeskInto(shotDesk, false); });
+    threadEl.querySelectorAll(".product-demo__computer-shot").forEach(function (shot) { shot.onclick = takeControl; });
+    threadEl.querySelectorAll("[data-answer]").forEach(function (btn) { btn.onclick = function () { answerOnboard(btn.dataset.answer); }; });
+    threadEl.scrollTop = threadEl.scrollHeight;
   }
-  document.getElementById("sendBtn").onclick = function () { var inp = document.getElementById("draftInput"); var v = inp.value.trim(); inp.value = ""; sendText(v); };
-  document.getElementById("draftInput").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); var v = this.value.trim(); this.value = ""; sendText(v); } });
-  document.getElementById("botSearch").addEventListener("input", renderBotList);
-  document.getElementById("demoNewBtn").onclick = function () {
-    var bot = { id: "new-" + Date.now(), name: "New bot", title: "Give it a first job", desc: "", color: "#0c184f", avatar: "assets/mascot.png", time: "Now", preview: "Answer three questions to set it up", prompt: "", reply: "On it — I'll take that as my first job and report back here.", card: [["First job", "Received · I'll report back here"]], routines: [], onboarding: true, answers: [] };
-    BOTS.push(bot); sendSeq++; selectBot(bot);
-  };
-  document.getElementById("demoNameBtn").onclick = function () { setPanelMode("settings"); };
-  document.getElementById("demoPanelToggle").onclick = toggleComputer;
-  document.getElementById("panelSettingsBtn").onclick = function () { setPanelMode("settings"); };
-  document.getElementById("panelCloseBtn").onclick = closePanel;
-  document.getElementById("routineCloseBtn").onclick = closePanel;
-  document.getElementById("routineBackBtn").onclick = function () { persistRoutine(); setPanelMode("computer"); };
-  document.getElementById("routineDeleteBtn").onclick = function () { if (routineIndex !== null) current.routines.splice(routineIndex, 1); routineDraft = null; setPanelMode("computer"); };
-  document.getElementById("routineTestBtn").onclick = function () {
-    if (!routineDraft || !routineDraft.name.trim()) return;
-    routineDraft.runs.push({ text: "Completed", time: "Just now" });
-    persistRoutine();
-    addExtra(current.id, { type: "meta", text: "Routine ran · " + routineDraft.name });
+  function renderComposer() {
+    var bot = current();
+    inputEl.placeholder = onboardingOpen(bot) ? "Type your own answer" : "Message " + bot.name;
+  }
+  function panelHeadHTML(bot, label) {
+    return '<div class="product-demo__panel-head"><span>' + esc(label) + '</span><div class="product-demo__panel-actions"><button type="button" data-panel-action="settings" aria-label="Bot settings"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.03-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1.03H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1.03 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6c.55.29 1.22.24 1.72-.14A1.7 1.7 0 0 0 11.9 3H12a2 2 0 1 1 4 0v.09c.02.65.42 1.23 1.03 1.47.5.2 1.07.12 1.5-.22l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87c.24.6.8 1.01 1.44 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1.03z"/></svg></button><button type="button" data-panel-action="close" aria-label="Close panel">✕</button></div></div>';
+  }
+  function triggerHeadHTML(trigger) { var d = describeTrigger(trigger); return esc(d.lead + (d.detail ? " " + d.detail : "")); }
+  function triggerRowHTML(trigger, index) {
+    var timed = ["Every day", "Weekdays", "Every week", "Every month"].indexOf(trigger.freq) !== -1;
+    var h = '<div class="product-demo__trigger" data-trigger="' + index + '"><div class="product-demo__trigger-head"><span>' + triggerHeadHTML(trigger) + '</span><button type="button" aria-label="Remove schedule" data-remove-trigger="' + index + '">✕</button></div><div class="product-demo__trigger-row"><select data-trigger-field="freq">';
+    FREQS.forEach(function (f) { h += '<option value="' + f + '"' + (f === trigger.freq ? ' selected' : '') + '>' + f + '</option>'; });
+    h += '</select>';
+    if (trigger.freq === "Interval") {
+      h += '<span>every</span><select data-trigger-field="n">';
+      NUMBERS.forEach(function (n) { h += '<option value="' + n + '"' + (n === trigger.n ? ' selected' : '') + '>' + n + '</option>'; });
+      h += '</select><select data-trigger-field="unit">';
+      UNITS.forEach(function (u) { h += '<option value="' + u + '"' + (u === trigger.unit ? ' selected' : '') + '>' + u + '</option>'; });
+      h += '</select>';
+    }
+    if (timed) {
+      h += '<span>at</span><select data-trigger-field="time">';
+      TIMES.forEach(function (t) { h += '<option value="' + t + '"' + (t === trigger.time ? ' selected' : '') + '>' + t + '</option>'; });
+      h += '</select>';
+    }
+    if (trigger.freq === "Advanced") h += '<input data-trigger-field="cron" value="' + esc(trigger.cron) + '" placeholder="*/3 * * * *">';
+    h += '</div></div>';
+    return h;
+  }
+  function renderPanel() {
+    if (!panelOpen) { panelEl.innerHTML = ""; return; }
+    var bot = current(), h = "";
+    if (panelMode === "routine" && routineDraft) {
+      var d = routineDraft;
+      h += '<div class="product-demo__routine-nav"><button type="button" data-routine-action="back" aria-label="Back to computer">‹</button><span>Routine</span><button type="button" data-routine-action="close" aria-label="Close panel">✕</button></div>';
+      h += '<div class="product-demo__routine-toolbar"><button class="product-demo__switch' + (d.active ? ' is-on' : '') + '" type="button" data-routine-action="toggle" aria-label="Toggle routine"><span></span></button><span>' + (d.active ? "Active" : "Paused") + '</span><button class="product-demo__ghost-btn" type="button" data-routine-action="delete">Delete</button><button class="product-demo__ghost-btn" type="button" data-routine-action="test"' + (d.name.trim() ? '' : ' disabled') + '>Test run</button></div>';
+      h += '<label class="product-demo__field">Name<input id="pdRoutineName" value="' + esc(d.name) + '" placeholder="Name this routine"></label>';
+      h += '<label class="product-demo__field">Instruction<textarea id="pdRoutineInstruction" rows="4" placeholder="What should this routine do each time it runs?">' + esc(d.instruction) + '</textarea></label>';
+      h += '<div class="product-demo__field"><span>When to run</span>';
+      if (d.triggers.length === 0) h += '<button class="product-demo__add-schedule" type="button" data-routine-action="add-schedule">+ Add schedule</button>';
+      else {
+        h += '<div class="product-demo__triggers">';
+        d.triggers.forEach(function (t, i) { h += triggerRowHTML(t, i); });
+        h += '<button class="product-demo__quiet" type="button" data-routine-action="add-another">+ Add another</button></div>';
+      }
+      h += '</div>';
+      h += '<div class="product-demo__field"><span>Run history</span>';
+      if (d.runs.length === 0) h += '<p class="product-demo__muted">No runs yet</p>';
+      else {
+        h += '<ul class="product-demo__runs">';
+        d.runs.forEach(function (r) { h += '<li><span style="color:' + r.color + ';">' + r.mark + '</span><span>' + esc(r.text) + '</span><span>' + esc(r.time) + '</span></li>'; });
+        h += '</ul>';
+      }
+      h += '</div>';
+      panelEl.innerHTML = h;
+      panelEl.querySelectorAll("[data-routine-action]").forEach(function (btn) {
+        btn.onclick = function () {
+          var a = btn.dataset.routineAction;
+          if (a === "back") saveRoutine();
+          else if (a === "close") { panelOpen = false; applyVisibility(); }
+          else if (a === "toggle") { changeRoutine({ active: !routineDraft.active }); renderPanel(); }
+          else if (a === "delete") deleteRoutine();
+          else if (a === "test") testRun();
+          else if (a === "add-schedule") { changeRoutine({ triggers: [defaultTrigger()] }); renderPanel(); }
+          else if (a === "add-another") { changeRoutine({ triggers: routineDraft.triggers.concat([defaultTrigger()]) }); renderPanel(); }
+        };
+      });
+      var nameInput = document.getElementById("pdRoutineName");
+      nameInput.oninput = function () { routineDraft.name = nameInput.value; var test = panelEl.querySelector('[data-routine-action="test"]'); if (test) test.disabled = !nameInput.value.trim(); };
+      var insInput = document.getElementById("pdRoutineInstruction");
+      insInput.oninput = function () { routineDraft.instruction = insInput.value; };
+      panelEl.querySelectorAll("[data-remove-trigger]").forEach(function (btn) {
+        btn.onclick = function () { changeRoutine({ triggers: routineDraft.triggers.filter(function (_, i) { return i !== Number(btn.dataset.removeTrigger); }) }); renderPanel(); };
+      });
+      panelEl.querySelectorAll("[data-trigger]").forEach(function (box) {
+        var ti = Number(box.dataset.trigger);
+        box.querySelectorAll("[data-trigger-field]").forEach(function (field) {
+          field.onchange = function () {
+            var patch = {}; var key = field.dataset.triggerField;
+            patch[key] = key === "n" ? Number(field.value) : field.value;
+            patchTrigger(ti, patch);
+            var head = box.querySelector(".product-demo__trigger-head span");
+            if (head) head.textContent = triggerHeadHTML(routineDraft.triggers[ti]);
+            if (key === "freq") renderPanel();
+          };
+          if (field.dataset.triggerField === "cron") field.oninput = function () { patchTrigger(ti, { cron: field.value }); var head = box.querySelector(".product-demo__trigger-head span"); if (head) head.textContent = triggerHeadHTML(routineDraft.triggers[ti]); };
+        });
+      });
+      return;
+    }
+    if (panelMode === "settings") {
+      h += panelHeadHTML(bot, "Settings");
+      h += '<div class="product-demo__settings"><div class="product-demo__settings-avatar"><span class="pd-avatar pd-avatar--72"><img src="' + esc(bot.avatar) + '" alt=""></span></div>';
+      h += '<label class="product-demo__field">Name<input id="pdSetName" value="' + esc(bot.name) + '"></label>';
+      h += '<label class="product-demo__field">Title<input id="pdSetTitle" value="' + esc(bot.title) + '"></label>';
+      h += '<label class="product-demo__field">Description<textarea id="pdSetDesc" rows="4">' + esc(bot.description) + '</textarea></label></div>';
+      panelEl.innerHTML = h;
+      bindPanelHead();
+      document.getElementById("pdSetName").oninput = function (e) { patchActive({ name: e.target.value }); };
+      document.getElementById("pdSetTitle").oninput = function (e) { patchActive({ title: e.target.value }); };
+      document.getElementById("pdSetDesc").oninput = function (e) { patchActive({ description: e.target.value }); };
+      return;
+    }
+    h += panelHeadHTML(bot, bot.name + "'s computer");
+    h += '<button class="product-demo__screen" type="button" data-panel-screen="1"><div class="product-demo__desktop" id="pdPanelDesk"></div></button>';
+    h += '<div class="product-demo__screen-meta">' + (hasControl ? '<span>You have control</span>' : '') + '<button class="product-demo__text-btn" type="button" data-panel-control="1">' + (hasControl ? "Release" : "Take control") + '</button></div>';
+    h += '<div class="product-demo__panel-label">Routines</div>';
+    if (bot.routines.length === 0) h += '<div class="product-demo__empty-routines"><p>Routines are recurring tasks this agent runs on a schedule.</p><button class="product-demo__ghost-btn" type="button" data-new-routine="1">Create routine</button></div>';
+    else {
+      bot.routines.forEach(function (r, i) {
+        h += '<button class="product-demo__routine" type="button" data-routine="' + i + '"><span class="product-demo__routine-icon">◷</span><span class="product-demo__routine-name">' + esc(r.name) + '</span><span class="product-demo__routine-when">' + esc(displayRoutineWhen(r.when)) + '</span></button>';
+      });
+      h += '<button class="product-demo__quiet" type="button" data-new-routine="1">+ New routine</button>';
+    }
+    panelEl.innerHTML = h;
+    renderDeskInto(document.getElementById("pdPanelDesk"), false);
+    bindPanelHead();
+    panelEl.querySelector("[data-panel-screen]").onclick = takeControl;
+    panelEl.querySelector("[data-panel-control]").onclick = function () { if (hasControl) releaseControl(); else takeControl(); };
+    panelEl.querySelectorAll("[data-routine]").forEach(function (btn) { btn.onclick = function () { openRoutine(bot.routines[Number(btn.dataset.routine)], Number(btn.dataset.routine)); }; });
+    panelEl.querySelectorAll("[data-new-routine]").forEach(function (btn) { btn.onclick = function () { openRoutine(null, null); }; });
+  }
+  function bindPanelHead() {
+    panelEl.querySelectorAll("[data-panel-action]").forEach(function (btn) {
+      btn.onclick = function () {
+        if (btn.dataset.panelAction === "settings") openSettings();
+        else { panelOpen = false; applyVisibility(); }
+      };
+    });
+  }
+  function renderTakeover() {
+    var bot = current();
+    if (!takeover) { stageEl.style.display = "none"; stageEl.innerHTML = ""; return; }
+    stageEl.style.display = "block";
+    stageEl.innerHTML = '<div class="product-demo__takeover"><div class="product-demo__takeover-bar"><div class="product-demo__takeover-who"><span class="pd-avatar pd-avatar--32"><img src="' + esc(bot.avatar) + '" alt=""></span><span>' + esc(bot.name) + '\'s computer</span><span class="product-demo__takeover-pill">You have control</span></div><div class="product-demo__takeover-actions"><button class="product-demo__outline-btn" type="button" data-takeover-release="1">Release</button><button class="product-demo__takeover-close" type="button" data-takeover-close="1" aria-label="Close computer">✕</button></div></div><div class="product-demo__takeover-screen"><div class="product-demo__desktop" id="pdTakeoverDesk"></div></div></div>';
+    renderDeskInto(document.getElementById("pdTakeoverDesk"), true);
+    stageEl.querySelector("[data-takeover-release]").onclick = releaseControl;
+    stageEl.querySelector("[data-takeover-close]").onclick = closeOverlay;
+  }
+  function applyVisibility() {
+    frameEl.classList.toggle("is-collapsed", !panelOpen);
+    panelEl.classList.toggle("is-open", panelOpen);
+    sidebarEl.classList.toggle("is-open", menuOpen);
+    scrimEl.classList.toggle("show", menuOpen);
+    toggleEl.setAttribute("aria-pressed", panelOpen && panelMode === "computer" ? "true" : "false");
     renderPanel();
-  };
-  document.getElementById("routineActiveBtn").onclick = function () { routineDraft.active = !routineDraft.active; renderPanel(); };
-  document.getElementById("routineName").addEventListener("input", function () { routineDraft.name = this.value; document.getElementById("routineTestBtn").disabled = !this.value.trim(); });
-  document.getElementById("routineInstr").addEventListener("input", function () { routineDraft.instruction = this.value; });
-  document.getElementById("routineFreq").addEventListener("change", function () { routineDraft.freq = this.value; });
-  document.getElementById("routineTime").addEventListener("change", function () { routineDraft.time = this.value; });
-  document.getElementById("setName").addEventListener("input", function () { current.name = this.value; document.getElementById("mainName").textContent = this.value; renderBotList(); });
-  document.getElementById("setTitle").addEventListener("input", function () { current.title = this.value; });
-  document.getElementById("setDesc").addEventListener("input", function () { current.desc = this.value; });
-  document.getElementById("newRoutineBtn").onclick = function () { openRoutine(null); };
-  document.getElementById("controlBtn").onclick = function () { if (hasControl) releaseControl(); else openTakeover(); };
-  document.getElementById("desk").addEventListener("click", function (e) {
-    if (hasControl) return;
-    if (e.target.closest(".desk-dock")) return;
-    openTakeover();
+  }
+  function closeMenu() { menuOpen = false; applyVisibility(); }
+  function openComputer() { panelOpen = true; panelMode = "computer"; routineDraft = null; applyVisibility(); }
+  function toggleComputer() { if (panelOpen && panelMode === "computer") { panelOpen = false; applyVisibility(); return; } openComputer(); }
+  function openSettings() { panelOpen = true; panelMode = "settings"; routineDraft = null; applyVisibility(); }
+  function openRoutine(routine, index) {
+    panelOpen = true; panelMode = "routine";
+    routineDraft = { index: index, name: routine ? routine.name : "", instruction: routine ? routine.instruction || "" : "", active: routine ? routine.active !== false : true, triggers: routine ? [parseWhen(routine.when)] : [], runs: routine ? (routine.runs || []).slice() : [], sourceWhen: routine ? routine.when : undefined };
+    applyVisibility();
+  }
+  function patchActive(patch) { Object.assign(current(), patch); topNameEl.textContent = current().name; renderSidebar(); }
+  function changeRoutine(patch) {
+    if (!routineDraft) return;
+    if (patch.triggers !== undefined) routineDraft.sourceWhen = undefined;
+    Object.assign(routineDraft, patch);
+  }
+  function patchTrigger(index, patch) {
+    routineDraft.triggers[index] = Object.assign({}, routineDraft.triggers[index], patch);
+    routineDraft.sourceWhen = undefined;
+  }
+  function persistRoutine(d) {
+    var bot = current();
+    var index = d.index === null || d.index === undefined ? bot.routines.length : d.index;
+    var next = { name: d.name.trim() || "Untitled routine", when: resolveRoutineWhen(d.triggers, d.sourceWhen), instruction: d.instruction, active: d.active, runs: d.runs };
+    if (index === bot.routines.length) bot.routines.push(next); else bot.routines[index] = next;
+    return index;
+  }
+  function saveRoutine() { if (!routineDraft) return; persistRoutine(routineDraft); openComputer(); }
+  function deleteRoutine() {
+    var bot = current();
+    if (routineDraft && routineDraft.index !== null && routineDraft.index !== undefined) bot.routines = bot.routines.filter(function (_, i) { return i !== routineDraft.index; });
+    openComputer();
+  }
+  function takeControl() { hasControl = true; takeover = true; renderTakeover(); renderPanel(); }
+  function closeOverlay() { takeover = false; renderTakeover(); }
+  function releaseControl() { hasControl = false; takeover = false; renderTakeover(); renderPanel(); }
+  function testRun() {
+    if (!routineDraft || !routineDraft.name.trim()) return;
+    var index = persistRoutine(routineDraft);
+    routineDraft.index = index;
+    routineDraft.runs = routineDraft.runs.concat([{ mark: "●", color: "#4ECB71", text: "Completed", time: "Just now" }]);
+    var list = extra[activeId] || (extra[activeId] = []);
+    list.push({ type: "meta", text: "Routine ran · " + (routineDraft.name.trim() || "Untitled routine") });
+    renderThread(); renderPanel();
+  }
+  function selectBot(id) {
+    activeId = id; desk = cloneDesk(); closeMenu();
+    if (panelMode === "routine") { panelMode = "computer"; routineDraft = null; }
+    hasControl = false; takeover = false;
+    topAvatarEl.src = current().avatar; topNameEl.textContent = current().name;
+    renderSidebar(); renderThread(); renderComposer(); applyVisibility(); renderTakeover();
+  }
+  function answerOnboard(value) {
+    var bot = current();
+    bot.answers.push(value);
+    renderThread(); renderSidebar(); renderComposer();
+  }
+  function sendText(text) {
+    var bot = current();
+    if (!text || !text.trim()) return;
+    if (onboardingOpen(bot)) { answerOnboard(text.trim()); draft = ""; inputEl.value = ""; return; }
+    var list = extra[bot.id] || (extra[bot.id] = []);
+    list.push({ type: "user", text: text.trim() });
+    draft = ""; inputEl.value = "";
+    renderThread(); renderSidebar();
+    var seq = ++sendSeq;
+    setTimeout(function () {
+      if (seq !== sendSeq) return;
+      var l2 = extra[bot.id] || (extra[bot.id] = []);
+      l2.push({ type: "typing" });
+      renderThread();
+      setTimeout(function () {
+        if (seq !== sendSeq) return;
+        var l3 = extra[bot.id] || [];
+        if (l3.length && l3[l3.length - 1].type === "typing") l3.pop();
+        l3.push({ type: "bot", text: bot.reply });
+        renderThread(); renderSidebar();
+      }, 1350);
+    }, 280);
+  }
+  function startNewBot() {
+    var bot = { id: "bot-" + Date.now(), name: "New bot", avatar: "assets/mascot.png", time: "Now", preview: "Answer three questions to set it up", title: "", description: "", onboarding: true, answers: [], routines: [], screen: { host: "desktop", title: "Computer is stopped", lines: [] }, thread: [], reply: "On it — I'll take that as my first job and report back here." };
+    bots.unshift(bot);
+    activeId = bot.id; desk = cloneDesk(); closeMenu();
+    panelMode = "computer"; routineDraft = null; hasControl = false; takeover = false; draft = ""; inputEl.value = "";
+    topAvatarEl.src = bot.avatar; topNameEl.textContent = bot.name;
+    renderSidebar(); renderThread(); renderComposer(); applyVisibility(); renderTakeover();
+  }
+  document.getElementById("pdMenuBtn").onclick = function () { menuOpen = true; applyVisibility(); };
+  document.getElementById("pdSidebarClose").onclick = closeMenu;
+  scrimEl.onclick = closeMenu;
+  document.getElementById("pdNewBtn").onclick = startNewBot;
+  document.getElementById("pdNameBtn").onclick = openSettings;
+  toggleEl.onclick = toggleComputer;
+  document.getElementById("pdSearch").oninput = function (e) { query = e.target.value; renderSidebar(); };
+  inputEl.oninput = function (e) { draft = e.target.value; };
+  inputEl.onkeydown = function (e) { if (e.key === "Enter") sendText(draft); };
+  document.getElementById("pdSendBtn").onclick = function () { sendText(draft); };
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    if (menuOpen) closeMenu();
+    if (takeover) closeOverlay();
   });
-  document.getElementById("takeoverReleaseBtn").onclick = releaseControl;
-  document.getElementById("takeoverCloseBtn").onclick = closeTakeover;
-  var sidebar = document.getElementById("demoSidebar"), scrim = document.getElementById("demoScrim");
-  function closeSidebar() { sidebar.classList.remove("is-open"); scrim.classList.remove("show"); }
-  document.getElementById("demoMenuBtn").onclick = function () { sidebar.classList.add("is-open"); scrim.classList.add("show"); };
-  scrim.onclick = closeSidebar;
-  document.getElementById("demoSidebarClose").onclick = closeSidebar;
-  renderBotList(); renderBot(BOTS[0]); applyPanelVisibility();
+  (function initCompact() {
+    var mq = window.matchMedia("(max-width: 860px)");
+    var sync = function () {
+      if (mq.matches) { widePanelOpen = panelOpen; panelOpen = false; }
+      else { menuOpen = false; panelOpen = widePanelOpen; }
+      applyVisibility();
+    };
+    if (mq.matches) { widePanelOpen = panelOpen; panelOpen = false; }
+    if (mq.addEventListener) mq.addEventListener("change", sync); else mq.addListener(sync);
+  })();
+  renderSidebar(); renderThread(); renderComposer(); applyVisibility(); renderTakeover();
+
   var QUOTES = [
     { q: "I stopped opening my laptop to check on the bots. The phone tells me what finished, what waits, and what needs a yes — that is the whole job now.", n: "Rani, runs a home host", img: "assets/bots/inbox-manager.png" },
     { q: "The recap lands every morning before I ask for it. I read one card, approve one thing, and the day starts clean.", n: "Dimas, three bots on one host", img: "assets/bots/task-runner.png" },
