@@ -23,7 +23,8 @@
   button { cursor:pointer; }
   .container { max-width:1080px; margin:0 auto; padding:0 24px; }
   /* header, Rakazo site-header pattern */
-  .site-header { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; padding:14px 0; background:rgba(253,253,253,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .site-header { position:sticky; top:0; z-index:20; padding:14px 0; background:rgba(253,253,253,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .site-header__bar { display:flex; align-items:center; justify-content:space-between; }
   .site-header__left, .site-header__right { display:flex; align-items:center; gap:20px; }
   .brand { display:flex; align-items:center; gap:10px; font-size:21px; font-weight:500; letter-spacing:-.02em; color:var(--ink); }
   .brand img { width:34px; height:34px; border-radius:9px; background:var(--navy); }
@@ -244,7 +245,7 @@
     .card-grid-4, .card-grid-3 { grid-template-columns:1fr; }
     .site-nav, .site-header__right > .star-pill { display:none; }
     .nav-toggle { display:grid; }
-    .site-header { flex-wrap:wrap; }
+    .site-header__bar { flex-wrap:wrap; }
   }
   @media (max-width: 860px) {
     /* One screen at a time, like the mobile app: the bot list slides in
@@ -468,8 +469,8 @@
 </style>
 </head>
 <body>
-<div class="container">
-  <header class="site-header">
+<header class="site-header">
+  <div class="container site-header__bar">
     <div class="site-header__left">
       <a class="brand" href="#"><img src="assets/mascot.png" alt="GBots mascot"> GBots</a>
       <nav class="site-nav" aria-label="Primary">
@@ -485,12 +486,14 @@
       <a class="button button--primary button--small" href="https://github.com/galyarderlabs/hermes-bots/releases">Get started</a>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">☰</button>
     </div>
-    <div class="site-menu-panel" id="siteMenuPanel">
+  </div>
+  <div class="site-menu-panel" id="siteMenuPanel">
       <a href="https://github.com/galyarderlabs/hermes-bots/blob/main/README.md">Docs</a>
       <a href="https://github.com/galyarderlabs">Blog</a>
       <a href="https://github.com/galyarderlabs">GitHub</a>
-    </div>
-  </header>
+  </div>
+</header>
+<div class="container">
 
   <main id="main">
     <section class="hero">
