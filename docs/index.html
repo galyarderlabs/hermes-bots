@@ -646,8 +646,12 @@
 
     <section id="host" class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-bottom:110px;">
       <div class="container" style="padding:0;">
-        <div class="section-intro">
-          <h2 class="section-heading">Self-hosted</h2>
+        <div class="section-intro" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;max-width:none;">
+          <div>
+            <h2 class="section-heading">Self-hosted</h2>
+            <p class="section-copy">Your machine, your models, your control.</p>
+          </div>
+          <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots/blob/main/README.md">Read the docs</a>
         </div>
         <div class="card-grid-3">
           <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-window"><span class="art-label">Bot default model</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Host default — per bot</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Per-chat override, any time</div></div></div><h3>Your model</h3><p>Choose a different model for each bot, from whatever its host is set up with. The app never picks a provider for you and never sees your keys.</p></article>
@@ -661,9 +665,7 @@
     <section class="section">
       <div class="platforms">
         <div>
-          <p class="eyebrow">Wherever you are</p>
-          <h2 class="section-heading">Starting with Android. The phone is the point.</h2>
-          <p class="section-copy">This is a phone app first — built for the moment you are away from your desk and a bot needs you, or you need it.</p>
+          <h2 class="section-heading">Wherever you are</h2>
           <div class="platforms__cards">
             <article class="platform-card"><span class="platform-card__icon"><svg viewBox="0 0 48 48" fill="none" stroke="#242424" stroke-width="1.8" stroke-linecap="round"><rect x="14" y="5" width="20" height="38" rx="5"/><path d="M21 9.5h6"/></svg></span><h3>Android</h3><div class="platform-card__links"><a href="https://github.com/galyarderlabs/hermes-bots/releases">Download</a></div></article>
             <article class="platform-card"><span class="platform-card__icon"><svg viewBox="0 0 48 48" fill="none" stroke="#242424" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="9" width="38" height="30" rx="4"/><path d="M5 17h38"/><circle cx="10.5" cy="13" r="1" fill="#242424" stroke="none"/><circle cx="14.5" cy="13" r="1" fill="#242424" stroke="none"/><circle cx="18.5" cy="13" r="1" fill="#242424" stroke="none"/></svg></span><h3>Web</h3><div class="platform-card__links"><span>This page only</span></div></article>
@@ -693,6 +695,7 @@
       <div class="open-source">
         <div>
           <h2 class="section-heading">Open source</h2>
+          <p class="section-copy">AGPL-3.0. Run it, change it, make it yours.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
             <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots" style="flex:1;">Star on GitHub</a>
           </div>
