@@ -236,6 +236,8 @@
   .site-footer__column a:hover { color:var(--ink); }
   @media (max-width: 960px) {
     .channels, .open-source, .platforms { grid-template-columns:minmax(0,1fr); gap:40px; justify-items:center; }
+  /* Centered grid items size to content and can overflow both sides when wider than the track (repo card was 452px in a 312px track). Cap them at the track. */
+  .channels > *, .open-source > *, .platforms > * { max-width:100%; min-width:0; }
     .stats-band { grid-template-columns:minmax(0,1fr); padding:32px; }
     .site-footer { flex-direction:column; }
   }
