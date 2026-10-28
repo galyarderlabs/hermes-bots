@@ -139,6 +139,52 @@
   .approval-box .row .ok { background:var(--blue-top); color:#fff; }
   .approval-box .row .no { background:#232326; color:var(--panel-copy); }
   .approval-done { color:var(--success); font-weight:700; font-size:14px; }
+
+  /* channels tiles, Rakazo channel-tile pattern with text marks, no brand logos */
+  .channel-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; margin:36px 0 0; padding:0; list-style:none; }
+  .channel-tile { display:flex; align-items:center; gap:12px; min-height:64px; padding:12px 14px; border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow-soft); }
+  .channel-tile__mark { display:grid; place-items:center; flex:none; width:36px; height:36px; border-radius:10px; color:#fff; font-size:12px; font-weight:700; }
+  .channel-tile__name { color:var(--ink); font-size:15px; font-weight:500; }
+  .channel-tile__tag { margin-left:auto; padding:2px 7px; border:1px solid var(--line-2); border-radius:999px; color:var(--muted-2); font-size:11px; white-space:nowrap; }
+  /* testimonials marquee, Rakazo testimonial pattern with original quotes */
+  .testimonial-viewport { margin-top:32px; max-width:100%; overflow:hidden; mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+  .testimonial-track { display:flex; width:max-content; gap:16px; padding:4px 0 24px; animation:scroll 60s linear infinite; }
+  .testimonial-viewport:hover .testimonial-track, .testimonial-viewport.paused .testimonial-track { animation-play-state:paused; }
+  @keyframes scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  .testimonial-card { display:flex; flex-direction:column; gap:20px; width:340px; flex:none; margin:0; border:1px solid var(--line); border-radius:var(--radius-card); background:var(--surface); padding:24px; box-shadow:var(--shadow-soft); }
+  .testimonial-card blockquote { flex:1; margin:0; }
+  .testimonial-card p { margin:0; color:var(--ink); font-size:15px; line-height:1.6; }
+  .testimonial-card figcaption { display:flex; align-items:center; gap:10px; margin:0; color:var(--muted-2); font-size:14px; font-weight:500; }
+  .testimonial-pause { display:grid; width:36px; height:36px; place-items:center; border:1px solid var(--line-2); border-radius:999px; background:var(--surface); color:var(--muted-2); padding:0; }
+  /* computer mock in demo panel, Rakazo ComputerDesktop pattern, static */
+  .desk { position:relative; width:100%; aspect-ratio:4/3; border-radius:14px; background:#0e0e10; overflow:hidden; }
+  .desk-window { position:absolute; border-radius:8px; background:#1c1c1f; border:1px solid var(--panel-line-2); padding:10px 12px; color:var(--panel-copy); font-size:12px; }
+  .desk-window b { color:#fff; display:block; margin-bottom:6px; }
+  .desk-window i { display:block; height:8px; border-radius:4px; background:#2a2a2e; margin-top:6px; }
+  .desk-dock { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:8px; background:#171719; border:1px solid var(--panel-line-2); border-radius:999px; padding:6px 10px; }
+  .desk-dock span { width:24px; height:24px; border-radius:7px; background:#2a2a2e; display:grid; place-items:center; font-size:12px; color:var(--panel-copy); }
+  .desk-meta { display:flex; align-items:center; justify-content:space-between; margin-top:12px; color:var(--panel-muted); font-size:13px; }
+  .desk-meta button { border:1px solid var(--panel-line-2); background:#171719; color:var(--panel-copy); border-radius:999px; padding:7px 14px; font-size:13px; }
+  .art-apps { display:grid; grid-template-columns:repeat(4,44px); gap:10px; }
+  .art-apps__tile { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid var(--line-2); border-radius:11px; background:var(--surface); box-shadow:var(--shadow-soft); font-size:11px; font-weight:600; color:var(--accent); }
+  .art-team { display:flex; align-items:center; }
+  .art-team img { width:52px; height:52px; border-radius:50%; background:var(--surface); box-shadow:var(--shadow-soft); object-fit:cover; }
+  .art-team__line { position:relative; width:72px; height:2px; margin:0 8px; background:var(--line-2); }
+  .art-team__line i { position:absolute; top:-3px; left:50%; width:8px; height:8px; margin-left:-4px; border-radius:50%; background:var(--accent); }
+  .art-call { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:12px 14px; width:100%; max-width:240px; padding:14px; border-radius:18px; background:var(--panel); color:var(--panel-copy); box-shadow:var(--shadow-demo); }
+  .art-call__ring { position:relative; display:block; width:44px; height:44px; }
+  .art-call__ring img { width:44px; height:44px; border-radius:50%; object-fit:cover; }
+  .art-call__ring::after { content:""; position:absolute; inset:-5px; border:2px solid var(--success); border-radius:50%; opacity:.55; }
+  .art-call__who b { font-size:13px; font-weight:600; color:#fff; display:block; }
+  .art-call__who span { color:var(--panel-muted); font-size:12px; }
+  .art-call__actions { grid-column:1 / -1; display:flex; gap:10px; }
+  .art-call__actions span { flex:1; display:flex; justify-content:center; padding:7px; border-radius:999px; color:#fff; font-size:12px; }
+  .art-call__decline { background:var(--coral); } .art-call__accept { background:var(--success); }
+  .capability-art--voice { --accent:var(--green); --accent-soft:var(--green-soft); }
+  .capability-art--apps { --accent:var(--blue); --accent-soft:var(--blue-soft-2); }
+  .capability-art--team { --accent:var(--rose); --accent-soft:var(--rose-soft); }
+  .capability-art--teach { --accent:var(--coral); --accent-soft:var(--coral-soft); }
+
   /* group chat mock, Rakazo slack-mock */
   .channels { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:56px; }
   .chat-mock { overflow:hidden; border:1px solid var(--line-2); border-radius:var(--radius-card); background:var(--surface); box-shadow:var(--shadow-demo); font-size:14px; }
@@ -292,9 +338,20 @@
           <div class="demo-tabs">
             <button class="ptab active" data-panel="routines">Routines</button>
             <button class="ptab" data-panel="approvals">Approvals</button>
+            <button class="ptab" data-panel="computer">Computer</button>
           </div>
           <div class="demo-panel-head"><span id="panelHead">Inbox Manager's routines</span></div>
           <div id="panel-routines"></div>
+          <div id="panel-computer" style="display:none;">
+            <div class="demo-panel-head"><span id="computerHead">Inbox Manager's computer</span></div>
+            <div class="desk">
+              <div class="desk-window" style="left:8%;top:8%;width:50%;height:58%;"><b>Host tasks</b><span>Daily host recap — done</span><i style="width:70%;"></i><i style="width:50%;"></i><i style="width:62%;"></i></div>
+              <div class="desk-window" style="left:46%;top:26%;width:46%;height:52%;"><b>Bot screen</b><span>Session list · 3 active</span><i style="width:66%;"></i><i style="width:44%;"></i></div>
+              <div class="desk-dock"><span>▦</span><span>✉</span><span>◷</span></div>
+            </div>
+            <div class="desk-meta"><span id="controlState">Watching — read-only</span><button id="controlBtn" type="button">Take control</button></div>
+            <p style="font-size:12.5px;color:var(--panel-muted);margin:10px 0 0;">Demo mock: in the preview app the display is read-only; take-control via the host lease is still being wired.</p>
+          </div>
           <div id="panel-approvals" style="display:none;">
             <div class="approval-box" id="approvalBox">
               <b>Send 7 drafts?</b>
@@ -310,7 +367,7 @@
       <div class="section-intro">
         <p class="eyebrow">Your bot team</p>
         <h2 class="section-heading">Give each bot a job</h2>
-        <p class="section-copy">Start with a job. Make it yours. Each bot keeps its own conversations, routines and history — and shows up in its own portrait, like the family it is.</p>
+        <p class="section-copy">Start with a role. Make it yours. New bots start from a role preset — Researcher, Coder, Writer, Analyst, or your own — then get their own name, description, SOUL, model and portrait.</p>
       </div>
       <div class="card-grid-4">
         <article class="roster-card"><span class="bot-avatar"><img src="assets/bots/research-scout.png" alt="Research Scout"></span><h3>Research Scout</h3><p>Reads around a question and brings back options — never a verdict made for you.</p><p style="margin-top:12px;"><span class="chip">Nightly 2am</span><span class="chip">3 options compared</span></p></article>
@@ -318,9 +375,36 @@
         <article class="roster-card"><span class="bot-avatar"><img src="assets/bots/account-watcher.png" alt="Account Watcher"></span><h3>Account Watcher</h3><p>Watches who went quiet, what was promised, and who asked for something new.</p><p style="margin-top:12px;"><span class="chip">Every week</span><span class="chip">2 quiet contacts</span></p></article>
         <article class="roster-card"><span class="bot-avatar"><img src="assets/bots/task-runner.png" alt="Task Runner"></span><h3>Task Runner</h3><p>Runs the host's recurring jobs and reports every run — clean, or flagged with a reason.</p><p style="margin-top:12px;"><span class="chip">Every 6 hours</span><span class="chip">1 task waits</span></p></article>
       </div>
-      <p style="font-size:14px;color:var(--muted);margin-top:16px;">Starter job templates are the next step after v0.1.2 — today the app already shows each bot's own conversations, sessions and routines from the host.</p>
+      <p style="font-size:14px;color:var(--muted);margin-top:16px;">Task blueprints work the same way: save a task once, reuse it for every bot. Today the app already shows each bot's own conversations, sessions and routines from the host.</p>
     </section>
 
+
+    <section class="section">
+      <div class="channels">
+        <div>
+          <p class="eyebrow">Message them anywhere</p>
+          <h2 class="section-heading">Mention a bot, or text it from your phone</h2>
+          <p class="section-copy">Your bots live on the host, so they are reachable wherever you already talk — not only inside this app.</p>
+          <ul class="channel-list">
+            <li class="channel-tile"><span class="channel-tile__mark" style="background:#229ed9;">TG</span><span class="channel-tile__name">Telegram</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><span class="channel-tile__mark" style="background:#25d366;">WA</span><span class="channel-tile__name">WhatsApp</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><span class="channel-tile__mark" style="background:#5865f2;">DC</span><span class="channel-tile__name">Discord</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><span class="channel-tile__mark" style="background:#611f69;">SL</span><span class="channel-tile__name">Slack</span><span class="channel-tile__tag">Host channel</span></li>
+          </ul>
+        </div>
+        <div class="chat-mock" aria-hidden="true">
+          <div class="chat-mock__bar"><span>Telegram · bot-team</span></div>
+          <div class="chat-mock__message">
+            <img src="assets/bots/task-runner.png" alt="">
+            <div><div class="chat-mock__name">You <time>8:00 AM</time></div><p><mark>@Task Runner</mark> which job is still waiting on me?</p></div>
+          </div>
+          <div class="chat-mock__message">
+            <img src="assets/bots/task-runner.png" alt="">
+            <div><div class="chat-mock__name">Task Runner <span class="chat-mock__app">BOT</span> <time>8:00 AM</time></div><p>One job: the daily host recap. It waits on your approval before it sends anything out.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="section">
       <div class="channels">
         <div>
@@ -349,10 +433,24 @@
         <p class="section-copy">Chat is the front door. The rest is what makes a bot a teammate.</p>
       </div>
       <div class="card-grid-3">
-        <article class="feature-card"><div class="capability-art capability-art--memory"><div class="art-window"><span class="art-label">Memory</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Never sends outside without approval</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Daily recap arrives at 8am, not at midnight</div></div></div><h3>Remembers</h3><p>Bots keep what they learn and share it with the team — so you never re-explain the same thing twice.</p></article>
-        <article class="feature-card"><div class="capability-art capability-art--triggers"><div class="art-window"><span class="art-label">Triggers</span><div class="art-row"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M7 3v4m10-4v4M3 11h18" /></svg>Weekdays at 7:00</div><div class="art-row"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" /><circle cx="6" cy="18" r="2.5" /><circle cx="18" cy="12" r="2.5" /><path d="M6 8.5v7M8.5 6H12a3.5 3.5 0 0 1 3.5 3.5" /></svg>Host task finished</div><div class="art-sched" style="margin-top:8px;"><span>Every day</span><span>Weekdays</span><span>Every 6 hours</span></div></div></div><h3>Wakes up on its own</h3><p>On a schedule you set, in plain words. It runs, it reports back, and you only hear about it when it matters.</p></article>
-        <article class="feature-card"><div class="capability-art capability-art--approval"><div class="art-window"><span class="art-label">Approval required</span><div>Send 7 drafts to outside contacts</div><div class="art-approval"><span>Deny</span><span>Approve ✓</span></div></div></div><h3>You set the limits</h3><p>Decide which actions need your approval. Sensitive work waits for you. Everything else just happens.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--voice"><div class="art-call"><span class="art-call__ring"><img src="assets/bots/inbox-manager.png" alt=""></span><div class="art-call__who"><b>Inbox Manager</b><span>Dictating…</span></div><div class="art-call__actions"><span class="art-call__decline">✕</span><span class="art-call__accept">✓ Send</span></div></div></div><h3>Talk to it</h3><p>Dictate a message instead of typing it. Tap to review the transcript first, hold to send straight through — and when on-device transcription is not available, the host transcribes it. Audio goes to your host only, never to a third-party vendor.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-apps"><span class="art-apps__tile">Files</span><span class="art-apps__tile">Web</span><span class="art-apps__tile">Code</span><span class="art-apps__tile">Mail</span><span class="art-apps__tile">Cal</span><span class="art-apps__tile">Tasks</span><span class="art-apps__tile">Shell</span><span class="art-apps__tile">MCP</span></div></div><h3>Works in your apps</h3><p>Skills and toolsets, installed from the hub and toggled per bot. If a bot has toolsets at all, at least one stays enabled — so a bot can never be left with nothing it can do.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--memory"><div class="art-window"><span class="art-label">Memory</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Never sends outside without approval</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Daily recap arrives at 8am, not at midnight</div></div></div><h3>Remembers</h3><p>Bots keep what they learn — in their SOUL, their description, and their durable history — and share it with the team, so you never re-explain the same thing twice.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--triggers"><div class="art-window"><span class="art-label">Triggers</span><div class="art-row"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M7 3v4m10-4v4M3 11h18" /></svg>Weekdays at 7:00</div><div class="art-row"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" /><circle cx="6" cy="18" r="2.5" /><circle cx="18" cy="12" r="2.5" /><path d="M6 8.5v7M8.5 6H12a3.5 3.5 0 0 1 3.5 3.5" /></svg>Host task finished</div><div class="art-sched" style="margin-top:8px;"><span>Every day</span><span>Weekdays</span><span>Every 6 hours</span></div></div></div><h3>Wakes up on its own</h3><p>On a schedule, or when the host finishes something. Tasks pause, resume, trigger now, or delete — with run history on every one, so a routine never runs silently.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--team"><div class="art-team"><img src="assets/bots/task-runner.png" alt=""><span class="art-team__line"><i></i></span><img src="assets/bots/inbox-manager.png" alt=""></div></div><h3>Hands off work</h3><p>Bots delegate to each other and work together in groups. Mention a bot in a group chat and that bot picks the job up itself — no fan-out from the app, the host routes it.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--teach"><div class="art-window"><span class="art-label">Blueprint</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Daily host recap — saved as a blueprint</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Reusable for every bot, editable any time</div></div></div><h3>Teach it once</h3><p>Save a task as a blueprint and reuse it for every bot. Write the prompt once, set the schedule once, and every bot that needs it runs the same job.</p></article>
       </div>
+    </section>
+
+    <section class="section">
+      <div class="section-intro" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;max-width:none;">
+        <h2 class="section-heading">People run their bots on it</h2>
+        <button class="testimonial-pause" id="tPause" type="button" aria-label="Pause">❚❚</button>
+      </div>
+      <div class="testimonial-viewport" id="tViewport">
+        <div class="testimonial-track" id="tTrack"></div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:4px;">Draft quotes for the preview page — replace with real tester quotes before launch.</p>
     </section>
 
     <section id="host" class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-bottom:110px;">
@@ -489,6 +587,7 @@
     document.getElementById("mainJob").textContent = bot.job;
     document.getElementById("mainRoutine").textContent = bot.routines[0].w;
     document.getElementById("panelHead").textContent = bot.name + "'s routines";
+    document.getElementById("computerHead").textContent = bot.name + "'s computer";
     document.querySelector("#mainAvatar img").src = bot.avatar;
     document.getElementById("draftInput").placeholder = "Message " + bot.name;
     listEl.querySelectorAll(".botrow").forEach(function (b) { b.classList.toggle("active", b.dataset.id === bot.id); });
@@ -525,8 +624,24 @@
       tab.classList.add("active");
       document.getElementById("panel-routines").style.display = tab.dataset.panel === "routines" ? "block" : "none";
       document.getElementById("panel-approvals").style.display = tab.dataset.panel === "approvals" ? "block" : "none";
+      document.getElementById("panel-computer").style.display = tab.dataset.panel === "computer" ? "block" : "none";
     };
   });
+
+  var QUOTES = [
+    { q: "I stopped opening my laptop to check on the bots. The phone tells me what finished, what waits, and what needs a yes — that is the whole job now.", n: "Rani, runs a home host", img: "assets/bots/inbox-manager.png" },
+    { q: "The recap lands every morning before I ask for it. I read one card, approve one thing, and the day starts clean.", n: "Dimas, three bots on one host", img: "assets/bots/task-runner.png" },
+    { q: "A bot that drafts and waits beats a bot that sends. The approval step is the reason I trust it with outside messages.", n: "Sari, manages client follow-ups", img: "assets/bots/account-watcher.png" },
+    { q: "I gave it one research question at night and woke up to three compared options, not a verdict. That distinction matters.", n: "Bimo, night-shift researcher", img: "assets/bots/research-scout.png" },
+    { q: "Group chat is where it clicked for me. One bot finishes, hands off to the next, and I just watch the thread.", n: "Tari, coordinates a bot team", img: "assets/bots/task-runner.png" }
+  ];
+  var track = document.getElementById("tTrack");
+  function quoteCard(item) { return '<figure class="testimonial-card"><blockquote><p>' + esc(item.q) + '</p></blockquote><figcaption><span class="bot-avatar xs"><img src="' + item.img + '" alt=""></span><span>' + esc(item.n) + "</span></figcaption></figure>"; }
+  var cardsHtml = QUOTES.map(quoteCard).join("");
+  track.innerHTML = cardsHtml + cardsHtml;
+  document.getElementById("tPause").onclick = function () { var v = document.getElementById("tViewport"); v.classList.toggle("paused"); this.textContent = v.classList.contains("paused") ? "▶" : "❚❚"; };
+  document.getElementById("controlBtn").onclick = function () { var on = this.textContent === "Take control"; this.textContent = on ? "Release" : "Take control"; document.getElementById("controlState").textContent = on ? "You have control (demo)" : "Watching — read-only"; };
+
   document.getElementById("approveBtn").onclick = function () { document.getElementById("approvalBox").innerHTML = '<p class="approval-done">✓ Approved — the drafts are sent.</p>'; };
   document.getElementById("denyBtn").onclick = function () { document.getElementById("approvalBox").innerHTML = '<p class="approval-done" style="color:#b3261e;">✕ Denied — nothing was sent.</p>'; };
 </script>
