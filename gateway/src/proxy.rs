@@ -20,7 +20,7 @@
 use std::time::{Duration, Instant};
 
 use axum::body::{to_bytes, Bytes};
-use axum::extract::{Multipart, Request, State};
+use axum::extract::{Extension, Multipart, Request, State};
 use axum::http::header::{ACCEPT, ACCEPT_LANGUAGE, CONTENT_TYPE, COOKIE, SET_COOKIE};
 use axum::http::{HeaderMap, StatusCode, Uri};
 use axum::response::{IntoResponse, Json, Response};
@@ -28,6 +28,7 @@ use futures_util::SinkExt;
 use tokio::time::timeout;
 use tokio_tungstenite::tungstenite::protocol::Message as TungMessage;
 
+use crate::auth::AuthDevice;
 use crate::state::AppState;
 use crate::ws::{dial_upstream, mint_display_ticket};
 
@@ -116,8 +117,11 @@ pub async fn status_handler(State(state): State<AppState>, uri: Uri) -> Response
 /// opens `/api/display/ws?ticket=…` with that viewer_id; the host lease
 /// itself is still acquired by the app via WS RPC
 /// (`display.lease.acquire`), which remains authoritative.
-pub async fn display_ticket_handler(State(state): State<AppState>) -> Response {
-    let info = mint_display_ticket(&state).await;
+pub async fn display_ticket_handler(
+    State(state): State<AppState>,
+    Extension(AuthDevice(device)): Extension<AuthDevice>,
+) -> Response {
+    let info = mint_display_ticket(&state, device).await;
     tracing::info!("display ticket minted");
     (StatusCode::OK, Json(info)).into_response()
 }

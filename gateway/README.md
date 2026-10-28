@@ -52,7 +52,8 @@ see `config.example.json`). `RUST_LOG` controls log verbosity
 |---|---|---|
 | `HERMES_ORIGIN` | *(required)* | Hermes host origin, e.g. `http://127.0.0.1:9119` |
 | `LISTEN_ADDR` | `127.0.0.1:9120` | Socket address to bind |
-| `HERMES_DEVICE_TOKEN` | *(required unless `HERMES_TRUST_PROXY_AUTH=1`)* | Bearer device credential the phone presents |
+| `HERMES_DEVICE_TOKEN` | *(required unless `HERMES_TRUST_PROXY_AUTH=1`)* | Bootstrap device credential. Accepted only while zero devices are paired; once the first device pairs, per-device tokens replace it (see Pairing) |
+| `GBOTS_STORE_PATH` | `gbots-store.db` | SQLite device-store path (pair codes, devices, server keys). Keep this file on the host, mode `0600` |
 | `HERMES_TRUST_PROXY_AUTH` | `0` | `1` only when an authenticated reverse proxy in front already verifies the device |
 | `HERMES_HOST_BEARER` | — | Host credential attached server-side to Hermes (REST + WS). Never sent to the phone |
 | `HERMES_HOST_COOKIE` | — | Host session cookie attached server-side, if the host uses cookie auth |
@@ -72,6 +73,8 @@ see `config.example.json`). `RUST_LOG` controls log verbosity
 | Route | Auth | Behaviour |
 |---|---|---|
 | `GET /healthz` | none | Proxy's own health: `{status, service, version}` |
+| `GET /api/gbots` | none | Pairing discovery: `{app: "gbots", version, server_id, fingerprint, identity, sealing}`. The phone checks the fingerprint against the QR before pairing |
+| `POST /api/pair` | none, attempt-limited per peer IP | Redeem a one-time pair code (sealed request) and return `{device_id, token}`. Wrong/expired/used codes all return the same `401` |
 | `GET /api/status` | device | Host `/api/status` passthrough + a `proxy` info object (`version`, `ws`, `push_enabled`, `turn_recovery: conditional-on-gateway-ready`). Mobile probe target. Host unreachable → `502` plain error |
 | `GET /api/profiles/sessions` | device | REST passthrough |
 | `GET /api/sessions/{…}` | device | REST passthrough (incl. `/messages` transcript) |
@@ -80,7 +83,7 @@ see `config.example.json`). `RUST_LOG` controls log verbosity
 | `ANY /api/cron/{…}` | device | REST passthrough: jobs, runs, trigger, create, blueprints, `blueprints/instantiate`, delivery-targets, prompt update |
 | `ANY /auth/{…}`, `ANY /api/auth/{…}` | device | Host auth passthrough: password login, PKCE exchange, token refresh. Host session cookie forwarded and `Set-Cookie` returned verbatim; the proxy stores no provider keys |
 | `POST /api/auth/ws-ticket` | device | Mint a short-lived (30 s), single-use ticket for the proxy's own `/api/ws`. The proxy attaches the host credential server-side when dialling upstream, so the phone never needs a host ticket |
-| `POST /api/auth/revoke` | device | Invalidate the device-token entry in memory + clear all tickets. Permanent revocation = rotate `HERMES_DEVICE_TOKEN` and restart |
+| `POST /api/auth/revoke` | device | Revoke the calling device: delete it from the store and purge its tickets. In bootstrap/trust-proxy mode, clears tickets only |
 | `GET /api/ws` | device bearer **or** single-use `?ticket=` | NDJSON JSON-RPC proxy (below) |
 | `POST /api/display/ticket` | device | Mint a single-use display ticket + `viewer_id` for `/api/display/ws` |
 | `GET /api/display/ws?ticket=…` | display ticket | RFB bridge **STUB** (below) |
@@ -89,6 +92,43 @@ see `config.example.json`). `RUST_LOG` controls log verbosity
 All forwarding preserves method, path, query, and body, returns the
 host's status/body/errors verbatim, and strips the phone's device
 credential before contacting the host.
+
+## Pairing
+
+Phones pair by QR, not by pasting a token. The gateway must already be
+running; the `pair` command only mints the code in the store:
+
+```sh
+hermes-gateway pair --public-url http://100.x.y.z:9120
+```
+
+This prints an ASCII QR plus the link and the code grouped 4-4. The
+code works once and expires after 10 minutes. The phone scans the QR,
+checks the fingerprint against `GET /api/gbots`, then posts a sealed
+pair request to `POST /api/pair` and stores the returned per-device
+credential. Full design: `gbots-pairing-design.md` (maintainer
+analysis notes, kept alongside the repo workspace, not shipped in
+this repo).
+
+```sh
+hermes-gateway devices          # list paired devices
+hermes-gateway unpair <id>      # revoke one device (tokens + tickets die)
+```
+
+Notes:
+
+- The QR URL must be reachable from the phone (Tailscale/LAN
+  address). If `LISTEN_ADDR` is still loopback, `pair` warns: restart
+  the gateway with `LISTEN_ADDR=<tailnet-ip>:9120` first.
+- Never share a screenshot of the QR: anyone holding it can pair a
+  phone until the code expires or is used.
+- The server keys in the store (`gbots-store.db`) are the pairing
+  identity. If the file is lost, every device must re-pair; back it
+  up with the rest of the host's secrets.
+- `HERMES_DEVICE_TOKEN` is bootstrap-only: it authenticates while
+  zero devices are paired, and stops working once the first device
+  pairs. Headless/CI setups that relied on the env token should pair
+  one device and switch to its token.
 
 ## WebSocket proxy (`/api/ws`)
 
@@ -169,10 +209,11 @@ and latency only — never tokens, headers, bodies, or message content.
 - **No `0.0.0.0` on a public host** without an authenticated reverse
   proxy in front (`HERMES_ALLOW_PUBLIC_BIND=1` is an explicit,
   deliberate opt-in, and still assumes the proxy in front).
-- **Device credential on every request** (except `/healthz`, and the
-  two WS routes which authenticate in-handler: bearer-or-ticket /
-  ticket). Rotate it regularly; revoke in-memory via
-  `POST /api/auth/revoke`, permanently via env rotation + restart.
+- **Device credential on every request** (except `/healthz`,
+  `/api/gbots`, `/api/pair`, and the two WS routes which authenticate
+  in-handler: bearer-or-ticket / ticket). Per-device tokens from QR
+  pairing; revoke one device via `hermes-gateway unpair <id>` or
+  `POST /api/auth/revoke` from the device itself.
 - **Provider credentials never pass through** in a form the app can
   read. `profiles.create`'s `mirror_credentials`/`share_auth` are
   host-side flags; the proxy never sees provider keys.
@@ -183,7 +224,8 @@ and latency only — never tokens, headers, bodies, or message content.
 |---|---|
 | REST passthrough (status, sessions, model, audio, cron, auth) | **Live** (forwarding; needs a real Hermes host to verify end-to-end) |
 | WS proxy (`/api/ws`) | **Live** (fan-in/fan-out, backpressure, backoff dial, ticket/bearer auth) |
-| Ticket minting + revocation | **Live** (in-memory; restart restores env token) |
+| Ticket minting + revocation | **Live** (tickets in-memory, device-bound; revocation per-device, persistent) |
+| QR pairing (`/api/gbots`, `/api/pair`, CLI below) | **Live** (needs a real phone + host to verify end-to-end) |
 | Push watcher + Expo tickets | **Live** code, **disabled** unless `HERMES_PUSH_TOKENS` is set; metadata-only |
 | Attachment intake → `file.attach` | **Live** code (single bounded buffer, one base64 pass, 120 s upstream RPC) |
 | RFB bridge | **STUB** — ticket + lease gate real, frame forwarding TODO(RFB) |

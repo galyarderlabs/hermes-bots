@@ -26,6 +26,7 @@ pub struct FileConfig {
     pub hermes_origin: Option<String>,
     pub listen_addr: Option<String>,
     pub device_token: Option<String>,
+    pub store_path: Option<String>,
     pub trust_proxy_auth: Option<bool>,
     pub host_bearer: Option<String>,
     pub host_cookie: Option<String>,
@@ -48,7 +49,12 @@ pub struct Config {
     pub listen_addr: SocketAddr,
     /// Device credential the phone presents. Required unless the proxy sits
     /// behind an authenticated reverse proxy (`trust_proxy_auth`).
+    /// Bootstrap-only: once the first device pairs, per-device tokens
+    /// replace it (see auth.rs).
     pub device_token: Option<String>,
+    /// SQLite device-store path (pair codes, devices, server keys).
+    /// Env `GBOTS_STORE_PATH` wins; default `gbots-store.db`.
+    pub store_path: String,
     // Enforced at config load (device token required unless this is set);
     // never read again afterwards.
     #[allow(dead_code)]
@@ -165,6 +171,8 @@ impl Config {
             hermes_origin,
             listen_addr,
             device_token,
+            store_path: pick_str(env_str("GBOTS_STORE_PATH"), file_cfg.store_path)
+                .unwrap_or_else(|| "gbots-store.db".to_string()),
             trust_proxy_auth,
             host_bearer: pick_str(env_str("HERMES_HOST_BEARER"), file_cfg.host_bearer),
             host_cookie: pick_str(env_str("HERMES_HOST_COOKIE"), file_cfg.host_cookie),
@@ -236,6 +244,7 @@ mod tests {
             hermes_origin: "http://127.0.0.1:9119".to_string(),
             listen_addr: "127.0.0.1:9120".parse().unwrap(),
             device_token: None,
+            store_path: "gbots-store.db".to_string(),
             trust_proxy_auth: true,
             host_bearer: None,
             host_cookie: None,

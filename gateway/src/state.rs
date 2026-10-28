@@ -1,9 +1,11 @@
 //! Shared application state: config, HTTP client, single-use tickets,
-//! live-session registry (for push suppression), and revocation flag.
+//! live-session registry (for push suppression), and the QR-pairing
+//! device store.
 //!
 //! Nothing in this module stores LLM provider credentials, message content,
 //! or tokens in a readable-back form. Tickets are random values kept only
-//! until first use or expiry.
+//! until first use or expiry. Device tokens are verified against hashes
+//! in the store, never kept in memory here.
 
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
@@ -14,6 +16,7 @@ use tokio::sync::Mutex;
 use crate::config::Config;
 use crate::push::PushConfig;
 use crate::ratelimit::RateState;
+use crate::store::PairStore;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum TicketPurpose {
@@ -28,6 +31,9 @@ pub struct Ticket {
     pub purpose: TicketPurpose,
     /// Viewer id bound to a display ticket; None for WS tickets.
     pub viewer_id: Option<String>,
+    /// Device that minted the ticket; None for env-bootstrap /
+    /// trust-proxy auth. Unpairing the device purges its tickets.
+    pub device_id: Option<String>,
     pub expires_at: Instant,
 }
 
@@ -43,15 +49,14 @@ pub struct AppState {
     /// Display-bridge lease holder: the single viewer_id currently
     /// holding a display-ws connection, if any.
     pub display_holder: Arc<Mutex<Option<String>>>,
-    /// In-memory device-token revocation. Restart restores the env token,
-    /// so permanent revocation means rotating HERMES_DEVICE_TOKEN.
-    pub revoked: Arc<Mutex<bool>>,
+    /// QR-pairing device store (SQLite, host-local file).
+    pub pair_store: PairStore,
     pub rate: Arc<RateState>,
     pub push: PushConfig,
 }
 
 impl AppState {
-    pub fn new(config: Config, push: PushConfig) -> AppState {
+    pub fn new(config: Config, push: PushConfig, pair_store: PairStore) -> AppState {
         AppState {
             rate: Arc::new(RateState::new(config.rate_per_min, config.rate_burst)),
             config: Arc::new(config),
@@ -59,7 +64,7 @@ impl AppState {
             tickets: Arc::new(Mutex::new(HashMap::new())),
             live_sessions: Arc::new(Mutex::new(HashMap::new())),
             display_holder: Arc::new(Mutex::new(None)),
-            revoked: Arc::new(Mutex::new(false)),
+            pair_store,
             push,
         }
     }
@@ -68,6 +73,7 @@ impl AppState {
         &self,
         purpose: TicketPurpose,
         viewer_id: Option<String>,
+        device_id: Option<String>,
     ) -> (String, u64) {
         let bytes: [u8; 32] = rand::random();
         let ticket = hex::encode(bytes);
@@ -78,6 +84,7 @@ impl AppState {
             Ticket {
                 purpose,
                 viewer_id,
+                device_id,
                 expires_at: Instant::now() + std::time::Duration::from_secs(ttl),
             },
         );
@@ -99,13 +106,17 @@ impl AppState {
         Some(ticket.viewer_id)
     }
 
-    pub async fn revoke_all(&self) {
-        *self.revoked.lock().await = true;
-        self.tickets.lock().await.clear();
+    /// Drop every outstanding ticket minted by one device. Called on
+    /// unpair, so a revoked device cannot use a ticket minted just
+    /// before revocation (tickets are short-lived anyway, but the
+    /// window closes immediately rather than at expiry).
+    pub async fn purge_device_tickets(&self, device_id: &str) {
+        let mut map = self.tickets.lock().await;
+        map.retain(|_, ticket| ticket.device_id.as_deref() != Some(device_id));
     }
 
-    pub async fn is_revoked(&self) -> bool {
-        *self.revoked.lock().await
+    pub async fn clear_tickets(&self) {
+        self.tickets.lock().await.clear();
     }
 
     pub async fn mark_one(&self, session: &str) {

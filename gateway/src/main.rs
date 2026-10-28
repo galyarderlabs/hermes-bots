@@ -8,11 +8,15 @@
 
 mod auth;
 mod config;
+mod pair;
 mod proxy;
 mod push;
 mod ratelimit;
 mod state;
+mod store;
 mod ws;
+
+use std::net::SocketAddr;
 
 use axum::middleware::from_fn_with_state;
 use axum::routing::{any, get, post};
@@ -23,9 +27,20 @@ use tracing_subscriber::EnvFilter;
 use crate::config::Config;
 use crate::push::PushConfig;
 use crate::state::AppState;
+use crate::store::PairStore;
 
 #[tokio::main]
 async fn main() {
+    // Pairing CLI subcommands run without a server and without a full
+    // config: they only touch the device store.
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    match args.first().map(|s| s.as_str()) {
+        Some("pair") => std::process::exit(pair::cli_pair(&args[1..])),
+        Some("devices") => std::process::exit(pair::cli_devices()),
+        Some("unpair") => std::process::exit(pair::cli_unpair(&args[1..])),
+        _ => {}
+    }
+
     tracing_subscriber::fmt()
         .with_env_filter(
             EnvFilter::try_from_default_env()
@@ -56,7 +71,14 @@ async fn main() {
         tracing::info!("push disabled: no HERMES_PUSH_TOKENS configured (not an error)");
     }
 
-    let state = AppState::new(config, push);
+    let store = match PairStore::open(&config.store_path) {
+        Ok(s) => s,
+        Err(e) => {
+            eprintln!("hermes-gateway: {e}");
+            std::process::exit(1);
+        }
+    };
+    let state = AppState::new(config, push, store);
     let listen = state.config.listen_addr;
     let origin = state.config.redacted_origin();
 
@@ -68,9 +90,11 @@ async fn main() {
     }
 
     // Protected routes: device auth + rate limit middleware.
-    // /healthz, /api/ws, and /api/display/ws are NOT here: /healthz is
-    // public by design, and the two WS routes authenticate inside their
-    // handlers (bearer-or-ticket / ticket respectively).
+    // /healthz, /api/gbots, /api/pair, /api/ws, and /api/display/ws
+    // are NOT here: /healthz is public by design, /api/gbots and
+    // /api/pair are the public pairing surface (pair has its own
+    // per-IP attempt limit), and the two WS routes authenticate inside
+    // their handlers (bearer-or-ticket / ticket respectively).
     let protected = Router::new()
         .route("/api/status", get(proxy::status_handler))
         .route("/api/auth/ws-ticket", post(auth::mint_ticket_handler))
@@ -98,6 +122,8 @@ async fn main() {
 
     let app = Router::new()
         .route("/healthz", get(proxy::health_handler))
+        .route("/api/gbots", get(pair::gbots_info_handler))
+        .route("/api/pair", post(pair::pair_handler))
         .route("/api/ws", get(ws::ws_handler))
         .route("/api/display/ws", get(ws::display_ws_handler))
         .merge(protected)
@@ -113,7 +139,7 @@ async fn main() {
     };
     tracing::info!("hermes-gateway listening on {listen}, forwarding to {origin}");
 
-    if let Err(e) = axum::serve(listener, app)
+    if let Err(e) = axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>())
         .with_graceful_shutdown(async {
             let _ = tokio::signal::ctrl_c().await;
             tracing::info!("shutdown signal received");

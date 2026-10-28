@@ -177,6 +177,17 @@ export type GatewayInfo = {
   auth_providers?: unknown[];
 };
 
+/// GET /api/gbots discovery payload. The fingerprint is what the phone
+/// compares against the QR before pairing.
+export type GbotInfo = {
+  app: string;
+  version: string;
+  server_id: string;
+  fingerprint: string;
+  identity: string;
+  sealing: string;
+};
+
 export type RosterEntry =
   | { kind: 'bot'; profile: RosterProfile; lastActive: number }
   | { kind: 'group'; name: string; members: string[]; lastActive: number };

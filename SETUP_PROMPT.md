@@ -25,9 +25,11 @@ a Rust gateway on the host, plus the Android preview app on the phone.
    ```
 
 2. Run the gateway. By default it listens on `127.0.0.1:9120` on the
-   host only. Do not bind it publicly unless you know what you are
-   doing — public binding requires `HERMES_ALLOW_PUBLIC_BIND=1` and is
-   refused otherwise.
+   host only. For pairing, restart it on the tailnet address instead
+   (`LISTEN_ADDR=<tailnet-ip>:9120`), so the phone can reach it. Do
+   not bind it publicly unless you know what you are doing — public
+   binding requires `HERMES_ALLOW_PUBLIC_BIND=1` and is refused
+   otherwise.
 
 3. Install the Android preview from the latest release:
 
@@ -36,14 +38,21 @@ a Rust gateway on the host, plus the Android preview app on the phone.
    Uninstall any older preview first, and download on Wi-Fi — the
    preview build is a large universal debug build.
 
-4. On the phone, open Settings → Connection and enter the gateway's
-   Tailscale address (never `127.0.0.1`). Probe `/api/status` and
-   report the result.
+4. Pair the phone with the host. On the host, run:
 
-5. Pair the phone with the host. Pairing (PKCE) is still a stub in
-   the v0.1.2 preview — expect the first pairing attempt to fail.
-   Report the probe result and the `gateway.ready` payload instead of
-   claiming the connection works.
+   ```sh
+   ./target/release/hermes-gateway pair --public-url http://<tailnet-ip>:9120
+   ```
+
+   It prints a QR code plus a one-time code (works once, expires
+   after 10 minutes). On the phone, open Settings → Connection →
+   Scan QR code and scan it. If the phone cannot scan (same-device
+   case), use Enter code manually with the URL and the code from the
+   terminal. Never share a screenshot of the QR.
+
+5. After pairing, the app connects and waits for `gateway.ready`.
+   Report the `gateway.ready` payload instead of claiming the
+   connection works.
 
 ## What is verified, and what is not
 
@@ -58,7 +67,7 @@ a Rust gateway on the host, plus the Android preview app on the phone.
 ## Rules
 
 - Never put provider credentials in the app. The host owns them.
-- Never claim the setup works without the `/api/status` probe result
+- Never claim the setup works without the `gateway.ready` payload
   as evidence.
 - Never invent a token, address, or payload. If a step fails, report
   exactly what failed and stop there.

@@ -9,7 +9,7 @@
 //  - server->client requests are always answered (clarify -> {} if
 //    unparseable, unknown -> -32601, handler error -> -32603)
 
-import type { GatewayInfo } from './types';
+import type { GbotInfo, GatewayInfo } from './types';
 
 export const CONNECT_TIMEOUT_MS = 15_000;
 export const READY_TIMEOUT_MS = 15_000;
@@ -417,6 +417,45 @@ export class GatewayClient {
 
   probeStatus(): Promise<GatewayInfo> {
     return this.rest<GatewayInfo>('/api/status');
+  }
+
+  /** GET /api/gbots — public pairing discovery. No credential yet, so
+   * the REST helper sends no Authorization header when getAuthToken
+   * returns null. */
+  gbotsInfo(): Promise<GbotInfo> {
+    return this.rest<GbotInfo>('/api/gbots');
+  }
+
+  /** POST /api/pair — exchange a sealed pair request for a per-device
+   * credential. Status-mapped errors: 401 means the code is invalid,
+   * expired, or already used; 429 means the per-IP attempt limit. */
+  async pairRequest(sealed: string): Promise<{ device_id: string; token: string }> {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), STATUS_PROBE_TIMEOUT_MS);
+    try {
+      const res = await fetch(`${this.baseUrl}/api/pair`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sealed }),
+        signal: controller.signal,
+      });
+      if (res.status === 401) {
+        throw new Error('That code is invalid, expired, or already used. Ask the server for a fresh QR.');
+      }
+      if (res.status === 429) {
+        throw new Error('Too many pairing attempts. Wait a minute and try again.');
+      }
+      if (!res.ok) {
+        throw new Error(`Pairing failed (${res.status}).`);
+      }
+      const data = (await res.json()) as { device_id?: unknown; token?: unknown };
+      if (typeof data.device_id !== 'string' || typeof data.token !== 'string') {
+        throw new Error('Pairing failed: unexpected server response.');
+      }
+      return { device_id: data.device_id, token: data.token };
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   fetchSessions(): Promise<unknown> {

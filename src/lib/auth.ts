@@ -68,6 +68,10 @@ function credentialKey(hostId: string): string {
   return `hermes.device-credential.${hostId}`;
 }
 
+function signKeyCredentialKey(hostId: string): string {
+  return `hermes.device-sign-key.${hostId}`;
+}
+
 export async function listHosts(): Promise<SavedHost[]> {
   const raw = await AsyncStorage.getItem(HOSTS_KEY);
   if (!raw) return [];
@@ -89,6 +93,7 @@ export async function removeHost(hostId: string): Promise<void> {
   const hosts = await listHosts();
   await AsyncStorage.setItem(HOSTS_KEY, JSON.stringify(hosts.filter((h) => h.id !== hostId)));
   await deleteCredential(credentialKey(hostId));
+  await deleteCredential(signKeyCredentialKey(hostId));
 }
 
 export async function getActiveHostId(): Promise<string | null> {
@@ -108,6 +113,17 @@ export async function readDeviceCredential(hostId: string): Promise<string | nul
   return getCredential(credentialKey(hostId));
 }
 
+/// The phone's Ed25519 signing private key for a host, base64url.
+/// SecureStore only, like the device credential. The public half is
+/// what the gateway stores at pair time.
+export async function storeDeviceSignKey(hostId: string, secretKeyB64u: string): Promise<void> {
+  await saveCredential(signKeyCredentialKey(hostId), secretKeyB64u);
+}
+
+export async function readDeviceSignKey(hostId: string): Promise<string | null> {
+  return getCredential(signKeyCredentialKey(hostId));
+}
+
 /**
  * Disconnect: delete the stored credential, close the socket (via the
  * callback the connection store passes in), and clear pending journal
@@ -118,6 +134,7 @@ export async function readDeviceCredential(hostId: string): Promise<string | nul
 export async function disconnectHost(hostId: string, closeSocket: () => void, clearJournal: (host: string) => Promise<void>): Promise<void> {
   closeSocket();
   await deleteCredential(credentialKey(hostId));
+  await deleteCredential(signKeyCredentialKey(hostId));
   await clearJournal(hostId);
   const active = await getActiveHostId();
   if (active === hostId) await setActiveHostId(null);

@@ -44,7 +44,7 @@ use serde::Serialize;
 use tokio::sync::{mpsc, Mutex};
 use tokio_tungstenite::tungstenite::protocol::Message as TungMessage;
 
-use crate::auth::{extract_bearer, verify_token};
+use crate::auth::authenticate;
 use crate::ratelimit::ConnectionBucket;
 use crate::state::{AppState, TicketPurpose};
 
@@ -168,30 +168,24 @@ async fn authorize_ws(
     headers: &axum::http::HeaderMap,
     params: &std::collections::HashMap<String, String>,
 ) -> bool {
-    if state.is_revoked().await {
-        return false;
+    // Bearer path: per-device token, env-bootstrap token (store empty),
+    // or trust-proxy mode (no device token configured). Ticket path:
+    // single-use, consumed here; unpaired devices had their tickets
+    // purged at unpair time.
+    if authenticate(state, headers).await.is_ok() {
+        return true;
     }
-    match &state.config.device_token {
-        None => true, // HERMES_TRUST_PROXY_AUTH=1: reverse proxy verifies.
-        Some(expected) => {
-            if let Some(provided) = extract_bearer(headers) {
-                if verify_token(&provided, expected) {
-                    return true;
-                }
-            }
-            if let Some(ticket) = params.get("ticket") {
-                if state
-                    .consume_ticket(ticket, TicketPurpose::Ws)
-                    .await
-                    .is_some()
-                {
-                    tracing::info!("ws ticket accepted (single-use, consumed)");
-                    return true;
-                }
-            }
-            false
+    if let Some(ticket) = params.get("ticket") {
+        if state
+            .consume_ticket(ticket, TicketPurpose::Ws)
+            .await
+            .is_some()
+        {
+            tracing::info!("ws ticket accepted (single-use, consumed)");
+            return true;
         }
     }
+    false
 }
 
 async fn run_connection_body(mut mobile: WebSocket, state: AppState) {
@@ -464,11 +458,15 @@ async fn run_display_bridge(mut socket: WebSocket, state: AppState, viewer_id: S
 }
 
 /// Helper used by proxy.rs: mint a display ticket + viewer_id pair.
-pub async fn mint_display_ticket(state: &AppState) -> DisplayTicketInfo {
+/// Bound to the calling device, like WS tickets.
+pub async fn mint_display_ticket(
+    state: &AppState,
+    device_id: Option<String>,
+) -> DisplayTicketInfo {
     let bytes: [u8; 8] = rand::random();
     let viewer_id = format!("viewer-{}", hex::encode(bytes));
     let (ticket, ttl) = state
-        .mint_ticket(TicketPurpose::Display, Some(viewer_id.clone()))
+        .mint_ticket(TicketPurpose::Display, Some(viewer_id.clone()), device_id)
         .await;
     DisplayTicketInfo {
         ticket,
