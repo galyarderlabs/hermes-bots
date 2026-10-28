@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hermes Bots — Give your bots a job. Check in from your phone.</title>
-<meta name="description" content="Give your bots a job. Check in from your phone. Hermes Bots is how you talk to the bots on your Hermes host — chat, routines, approvals, all from your pocket.">
-<meta property="og:title" content="Hermes Bots">
-<meta property="og:description" content="Give your bots a job. Check in from your phone.">
+<title>Gots — Give your bots a job. Check in from your phone.</title>
+<meta name="description" content="Give your bots a job. Check in from your phone. Gots is how you talk to the bots on your hosts — Hermes first, with OpenWebUI and more hosts to come.">
+<meta property="og:title" content="Gots">
+<meta property="og:description" content="Give your bots a job. Check in from your phone. Gots — Galyarder Bots.">
 <meta property="og:image" content="assets/og-banner.png">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -185,6 +185,34 @@
   .capability-art--team { --accent:var(--rose); --accent-soft:var(--rose-soft); }
   .capability-art--teach { --accent:var(--coral); --accent-soft:var(--coral-soft); }
 
+
+  /* hamburger menu, Rakazo site-menu pattern: nav + actions hide on mobile, menu panel drops down */
+  .nav-toggle { display:none; width:42px; height:42px; place-items:center; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--ink); font-size:20px; }
+  .site-menu-panel { display:none; }
+  .site-header.menu-open .site-menu-panel { display:flex; flex-direction:column; gap:4px; position:absolute; top:100%; left:0; right:0; background:var(--page); border-bottom:1px solid var(--line); padding:12px 24px 16px; }
+  .site-menu-panel a { padding:10px 4px; font-size:16px; color:var(--body); }
+  .site-menu-panel .button { margin-top:8px; }
+  /* setup copy chip, Rakazo setup-prompt pattern */
+  .setup-chip { display:flex; align-items:center; gap:12px; max-width:640px; margin:22px auto 0; border:1px solid var(--line-2); border-radius:14px; background:#fff; padding:12px 14px; box-shadow:var(--shadow-soft); text-align:left; }
+  .setup-chip__label { flex:none; color:var(--ink); font-size:14px; font-weight:600; }
+  .setup-chip__text { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--muted); font-size:13px; }
+  .setup-chip__copy { flex:none; border:0; border-radius:999px; background:var(--blue-soft); color:var(--blue); padding:6px 14px; font-size:13px; font-weight:600; }
+  /* brand logos in channel tiles + app tiles */
+  .channel-tile__logo { width:28px; height:28px; flex:none; }
+  .art-apps__tile img { width:22px; height:22px; }
+  .platform-card__icon { width:36px; height:36px; margin-bottom:18px; }
+  .platform-card__icon img, .platform-card__icon svg { width:36px; height:36px; display:block; }
+  /* stats band with landscape image */
+  .stats-band { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,420px); }
+  .stats-band__img { width:100%; height:100%; min-height:260px; object-fit:cover; border-radius:20px; }
+  /* works-with row, Rakazo selfHost worksWith pattern */
+  .works-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:36px; font-size:14px; color:var(--muted); }
+  .works-chip { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px; background:var(--surface); padding:7px 14px; color:var(--ink); font-weight:500; box-shadow:var(--shadow-soft); }
+  .works-chip img { width:20px; height:20px; border-radius:6px; }
+  .works-chip span.tag { color:var(--muted); font-weight:400; font-size:12.5px; }
+  /* demo mobile: one screen at a time, Rakazo product-demo pattern */
+  .demo-menu-btn, .demo-panel-btn, .demo-scrim, .demo-panel-close { display:none; }
+
   /* group chat mock, Rakazo slack-mock */
   .channels { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:56px; }
   .chat-mock { overflow:hidden; border:1px solid var(--line-2); border-radius:var(--radius-card); background:var(--surface); box-shadow:var(--shadow-demo); font-size:14px; }
@@ -266,10 +294,27 @@
   @media (max-width: 900px) {
     .hero h1 { font-size:40px; }
     .card-grid-4, .card-grid-3 { grid-template-columns:1fr; }
-    .demo-frame { grid-template-columns:1fr; }
-    .demo-sidebar { border-right:0; border-bottom:1px solid var(--panel-line); }
-    .demo-panel { border-left:0; border-top:1px solid #141416; }
-    .site-nav { display:none; }
+    .site-nav, .site-header__right > .star-pill, .site-header__right > .button { display:none; }
+    .nav-toggle { display:grid; }
+    .site-header { flex-wrap:wrap; }
+  }
+  @media (max-width: 860px) {
+    /* One screen at a time, like the mobile app: the bot list slides in
+       from the hamburger and the panel covers the thread while open. */
+    .demo-frame { grid-template-columns:minmax(0,1fr); height:min(620px,82vh); position:relative; }
+    .demo-menu-btn, .demo-panel-btn { display:grid; width:34px; height:34px; place-items:center; border:1px solid var(--panel-line-2); border-radius:10px; background:#171719; color:var(--panel-copy); font-size:17px; }
+    .demo-traffic { display:none; }
+    .demo-sidebar { position:absolute; z-index:6; top:0; bottom:0; left:0; width:min(300px,86%); background:var(--panel); border-right:1px solid var(--panel-line); overflow-y:auto; visibility:hidden; transform:translateX(-100%); transition:transform .22s ease, visibility .22s ease; }
+    .demo-sidebar.is-open { visibility:visible; transform:none; }
+    .demo-scrim { position:absolute; z-index:5; inset:0; border:0; padding:0; background:rgba(4,4,5,.6); }
+    .demo-scrim.show { display:block; }
+    .demo-panel { position:absolute; z-index:4; inset:0; border-left:0; display:none; overflow-y:auto; }
+    .demo-panel.is-open { display:block; }
+    .demo-panel-close { display:grid; width:30px; height:30px; place-items:center; border:0; border-radius:999px; background:#232326; color:var(--panel-copy); font-size:15px; }
+    .platforms__cards { grid-template-columns:minmax(0,1fr); }
+    .platform-card { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; column-gap:16px; padding:16px; }
+    .platform-card__icon { grid-row:span 2; margin-bottom:0; }
+    .platform-card h3 { margin:0 0 8px; }
   }
 </style>
 </head>
@@ -277,7 +322,7 @@
 <div class="container">
   <header class="site-header">
     <div class="site-header__left">
-      <a class="brand" href="#"><img src="assets/mascot.png" alt="Hermes Bots mascot"> Hermes Bots</a>
+      <a class="brand" href="#"><img src="assets/mascot.png" alt="Gots mascot"> Gots</a>
       <nav class="site-nav" aria-label="Primary">
         <a href="#demo">Demo</a>
         <a href="#team">Bot team</a>
@@ -289,25 +334,41 @@
     <div class="site-header__right">
       <a class="star-pill" href="https://github.com/galyarderlabs/hermes-bots">★ Star on GitHub</a>
       <a class="button button--primary button--small" href="https://github.com/galyarderlabs/hermes-bots/releases">Get started</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">☰</button>
+    </div>
+    <div class="site-menu-panel" id="siteMenuPanel">
+      <a href="#demo">Demo</a>
+      <a href="#team">Bot team</a>
+      <a href="#features">Features</a>
+      <a href="#host">Your host</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/galyarderlabs/hermes-bots">★ Star on GitHub</a>
+      <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Get started</a>
     </div>
   </header>
 
   <main id="main">
     <section class="hero">
-      <span class="hero__pill">Open source · Your bots, your host</span>
+      <span class="hero__pill">Gots · Galyarder Bots — open source</span>
       <h1>Give your bots a job. Check in from your phone.</h1>
-      <p class="lead">Your bots do the work on your Hermes host. You steer them, review their results, and say yes or no — from your pocket, whenever you want.</p>
+      <p class="lead">Your bots do the work on your host. You steer them, review their results, and say yes or no — from your pocket, whenever you want. Hermes first, with OpenWebUI and more hosts to come.</p>
       <div class="hero__actions">
         <a class="button button--primary" href="https://github.com/galyarderlabs/hermes-bots/releases">Download for Android</a>
-        <a class="button button--secondary" href="#demo">Try the demo</a>
+        <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots">★ Star on GitHub</a>
       </div>
-      <p class="hero__status">Preview — a live host connection is still being verified. The demo below is illustrative, not a live bot.</p>
+      <button class="setup-chip" id="setupChip" type="button">
+        <span class="setup-chip__label">Set up Gots for me</span>
+        <span class="setup-chip__text">Follow the setup prompt at github.com/galyarderlabs/hermes-bots/blob/main/SETUP_PROMPT.md</span>
+        <span class="setup-chip__copy" id="setupCopy">Copy</span>
+      </button>
+      <p class="hero__status">Preview — a live host connection is still being verified. The demo below is illustrative, not a live bot. Paste the prompt above into your agent to set up the gateway.</p>
     </section>
 
     <section id="demo" class="section">
       <p class="demo-note">Interactive demo — pick a bot, type a message, watch it work. Threads and results here are illustrative.</p>
       <div class="demo-frame">
-        <aside class="demo-sidebar">
+        <button class="demo-scrim" id="demoScrim" type="button" aria-label="Close menu"></button>
+        <aside class="demo-sidebar" id="demoSidebar">
           <div class="demo-chrome">
             <div class="demo-traffic" aria-hidden="true"><span></span><span></span><span></span></div>
             <span class="demo-drawer-title">Bots</span>
@@ -319,10 +380,12 @@
         <div class="demo-main">
           <div class="demo-topbar">
             <div style="display:flex;align-items:center;gap:10px;">
+              <button class="demo-menu-btn" id="demoMenuBtn" type="button" aria-label="Bots">☰</button>
               <span class="bot-avatar xs" id="mainAvatar"><img src="assets/bots/inbox-manager.png" alt=""></span>
               <div><b id="mainName">Inbox Manager</b><br><span id="mainJob">Tidies the inbox, holds the important ones</span></div>
             </div>
             <span id="mainRoutine">Weekdays 7am</span>
+            <button class="demo-panel-btn" id="demoPanelBtn" type="button" aria-label="Panels">▦</button>
           </div>
           <div class="demo-thread" id="thread"></div>
           <div class="demo-suggest" id="suggest"></div>
@@ -334,8 +397,12 @@
             </div>
           </div>
         </div>
-        <aside class="demo-panel">
-          <div class="demo-tabs">
+        <aside class="demo-panel" id="demoPanel">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="color:var(--panel-muted);font-size:13.5px;">Bot panels</span>
+            <button class="demo-panel-close" id="demoPanelClose" type="button" aria-label="Close panels">✕</button>
+          </div>
+          <div class="demo-tabs" style="margin-top:10px;">
             <button class="ptab active" data-panel="routines">Routines</button>
             <button class="ptab" data-panel="approvals">Approvals</button>
             <button class="ptab" data-panel="computer">Computer</button>
@@ -386,10 +453,10 @@
           <h2 class="section-heading">Mention a bot, or text it from your phone</h2>
           <p class="section-copy">Your bots live on the host, so they are reachable wherever you already talk — not only inside this app.</p>
           <ul class="channel-list">
-            <li class="channel-tile"><span class="channel-tile__mark" style="background:#229ed9;">TG</span><span class="channel-tile__name">Telegram</span><span class="channel-tile__tag">Host channel</span></li>
-            <li class="channel-tile"><span class="channel-tile__mark" style="background:#25d366;">WA</span><span class="channel-tile__name">WhatsApp</span><span class="channel-tile__tag">Host channel</span></li>
-            <li class="channel-tile"><span class="channel-tile__mark" style="background:#5865f2;">DC</span><span class="channel-tile__name">Discord</span><span class="channel-tile__tag">Host channel</span></li>
-            <li class="channel-tile"><span class="channel-tile__mark" style="background:#611f69;">SL</span><span class="channel-tile__name">Slack</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/telegram.svg" alt="Telegram logo"><span class="channel-tile__name">Telegram</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/whatsapp.svg" alt="WhatsApp logo"><span class="channel-tile__name">WhatsApp</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/discord.svg" alt="Discord logo"><span class="channel-tile__name">Discord</span><span class="channel-tile__tag">Host channel</span></li>
+            <li class="channel-tile"><img class="channel-tile__logo" src="assets/brands/slack.svg" alt="Slack logo"><span class="channel-tile__name">Slack</span><span class="channel-tile__tag">Host channel</span></li>
           </ul>
         </div>
         <div class="chat-mock" aria-hidden="true">
@@ -434,7 +501,7 @@
       </div>
       <div class="card-grid-3">
         <article class="feature-card"><div class="capability-art capability-art--voice"><div class="art-call"><span class="art-call__ring"><img src="assets/bots/inbox-manager.png" alt=""></span><div class="art-call__who"><b>Inbox Manager</b><span>Dictating…</span></div><div class="art-call__actions"><span class="art-call__decline">✕</span><span class="art-call__accept">✓ Send</span></div></div></div><h3>Talk to it</h3><p>Dictate a message instead of typing it. Tap to review the transcript first, hold to send straight through — and when on-device transcription is not available, the host transcribes it. Audio goes to your host only, never to a third-party vendor.</p></article>
-        <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-apps"><span class="art-apps__tile">Files</span><span class="art-apps__tile">Web</span><span class="art-apps__tile">Code</span><span class="art-apps__tile">Mail</span><span class="art-apps__tile">Cal</span><span class="art-apps__tile">Tasks</span><span class="art-apps__tile">Shell</span><span class="art-apps__tile">MCP</span></div></div><h3>Works in your apps</h3><p>Skills and toolsets, installed from the hub and toggled per bot. If a bot has toolsets at all, at least one stays enabled — so a bot can never be left with nothing it can do.</p></article>
+        <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-apps"><span class="art-apps__tile"><img src="assets/brands/gmail.svg" alt="Gmail"></span><span class="art-apps__tile"><img src="assets/brands/github.svg" alt="GitHub"></span><span class="art-apps__tile"><img src="assets/brands/notion.svg" alt="Notion"></span><span class="art-apps__tile"><img src="assets/brands/slack.svg" alt="Slack"></span><span class="art-apps__tile"><img src="assets/brands/linear.svg" alt="Linear"></span><span class="art-apps__tile"><img src="assets/brands/googlecalendar.svg" alt="Google Calendar"></span><span class="art-apps__tile art-apps__mcp">MCP</span></div></div><h3>Works in your apps</h3><p>Connect Gmail, GitHub, Notion, Slack, Linear, Calendar, and any MCP server. Skills and toolsets are installed from the hub and toggled per bot — and if a bot has toolsets at all, at least one stays enabled.</p></article>
         <article class="feature-card"><div class="capability-art capability-art--memory"><div class="art-window"><span class="art-label">Memory</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Never sends outside without approval</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Daily recap arrives at 8am, not at midnight</div></div></div><h3>Remembers</h3><p>Bots keep what they learn — in their SOUL, their description, and their durable history — and share it with the team, so you never re-explain the same thing twice.</p></article>
         <article class="feature-card"><div class="capability-art capability-art--triggers"><div class="art-window"><span class="art-label">Triggers</span><div class="art-row"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M7 3v4m10-4v4M3 11h18" /></svg>Weekdays at 7:00</div><div class="art-row"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" /><circle cx="6" cy="18" r="2.5" /><circle cx="18" cy="12" r="2.5" /><path d="M6 8.5v7M8.5 6H12a3.5 3.5 0 0 1 3.5 3.5" /></svg>Host task finished</div><div class="art-sched" style="margin-top:8px;"><span>Every day</span><span>Weekdays</span><span>Every 6 hours</span></div></div></div><h3>Wakes up on its own</h3><p>On a schedule, or when the host finishes something. Tasks pause, resume, trigger now, or delete — with run history on every one, so a routine never runs silently.</p></article>
         <article class="feature-card"><div class="capability-art capability-art--team"><div class="art-team"><img src="assets/bots/task-runner.png" alt=""><span class="art-team__line"><i></i></span><img src="assets/bots/inbox-manager.png" alt=""></div></div><h3>Hands off work</h3><p>Bots delegate to each other and work together in groups. Mention a bot in a group chat and that bot picks the job up itself — no fan-out from the app, the host routes it.</p></article>
@@ -456,15 +523,16 @@
     <section id="host" class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-bottom:110px;">
       <div class="container" style="padding:0;">
         <div class="section-intro">
-          <p class="eyebrow">Your host, your control</p>
-          <h2 class="section-heading">Your machine, your bots, your limits.</h2>
-          <p class="section-copy">Hermes Bots is not another agent. It is the phone app for the bots you already run on your Hermes host — the host stays in charge, the phone just checks in.</p>
+          <p class="eyebrow">Self-hosted</p>
+          <h2 class="section-heading">Your machine, your models, your control.</h2>
+          <p class="section-copy">Gots is not another agent. It is the phone app for the bots you already run — the host stays in charge, the phone just checks in.</p>
         </div>
         <div class="card-grid-3">
-          <article class="feature-card"><h3>Your host's bots</h3><p>Each bot uses whatever its host is set up with. The app never picks a provider for you and never sees your keys.</p></article>
-          <article class="feature-card"><h3>Work on a schedule</h3><p>Recurring work runs on the host while it stays on. The phone only checks in and reviews results.</p></article>
-          <article class="feature-card"><h3>One team, many bots</h3><p>Group chats put several bots in one thread, each reply attributed to its sender — bots working together, in the open.</p></article>
+          <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-window"><span class="art-label">Bot default model</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Host default — per bot</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Per-chat override, any time</div></div></div><h3>Your model</h3><p>Choose a different model for each bot, from whatever its host is set up with. The app never picks a provider for you and never sees your keys.</p></article>
+          <article class="feature-card"><div class="capability-art capability-art--triggers"><div class="art-window"><span class="art-label">Triggers</span><div class="art-row"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M7 3v4m10-4v4M3 11h18" /></svg>Weekdays at 7:00</div><div class="art-row"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5" /><circle cx="6" cy="18" r="2.5" /><circle cx="18" cy="12" r="2.5" /><path d="M6 8.5v7M8.5 6H12a3.5 3.5 0 0 1 3.5 3.5" /></svg>Host task finished</div><div class="art-sched" style="margin-top:8px;"><span>Every day</span><span>Weekdays</span><span>Every 6 hours</span></div></div></div><h3>Work on a schedule</h3><p>Run recurring tasks while your host stays on. The phone only checks in and reviews results.</p></article>
+          <article class="feature-card"><div class="capability-art capability-art--approval"><div class="art-window"><span class="art-label">Approval required</span><div>Send 7 drafts to outside contacts</div><div class="art-approval"><span>Deny</span><span>Approve ✓</span></div></div></div><h3>You set the limits</h3><p>Decide which actions need your approval. Sensitive work waits for you. Everything else just happens.</p></article>
         </div>
+        <div class="works-row"><span>Works with</span><span class="works-chip"><img src="assets/mascot.png" alt=""> Hermes <span class="tag">now</span></span><span class="works-chip">OpenWebUI <span class="tag">soon</span></span><span class="works-chip">More hosts <span class="tag">later</span></span></div>
       </div>
     </section>
 
@@ -475,9 +543,9 @@
           <h2 class="section-heading">Starting with Android. The phone is the point.</h2>
           <p class="section-copy">This is a phone app first — built for the moment you are away from your desk and a bot needs you, or you need it.</p>
           <div class="platforms__cards">
-            <article class="platform-card"><h3>Android</h3><div class="platform-card__links"><a href="https://github.com/galyarderlabs/hermes-bots/releases">Download</a></div></article>
-            <article class="platform-card"><h3>Web</h3><div class="platform-card__links"><span>This page only</span></div></article>
-            <article class="platform-card"><h3>iOS &amp; Desktop</h3><div class="platform-card__links"><span>Not yet</span></div></article>
+            <article class="platform-card"><span class="platform-card__icon"><img src="assets/brands/android.svg" alt="Android"></span><h3>Android</h3><div class="platform-card__links"><a href="https://github.com/galyarderlabs/hermes-bots/releases">Download</a></div></article>
+            <article class="platform-card"><span class="platform-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span><h3>Web</h3><div class="platform-card__links"><span>This page only</span></div></article>
+            <article class="platform-card"><span class="platform-card__icon" style="display:flex;gap:10px;width:auto;"><img src="assets/brands/apple.svg" alt="Apple" style="width:36px;height:36px;"><svg viewBox="0 0 24 24" fill="none" stroke="#242424" stroke-width="1.7" style="width:36px;height:36px;"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg></span><h3>iOS &amp; Desktop</h3><div class="platform-card__links"><span>Not yet</span></div></article>
           </div>
           <p style="font-size:14px;color:var(--muted);margin-top:16px;">Uninstall any older preview first, and download on Wi-Fi — the preview build is a large universal debug build.</p>
         </div>
@@ -552,12 +620,13 @@
         <div><div class="stat-value">Open source</div><div class="stat-label">No seats, no gates</div></div>
         <div><div class="stat-value">Your host</div><div class="stat-label">Your machine</div></div>
       </div>
+      <img class="stats-band__img" src="assets/roman-landscape.jpg" alt="Roman hillside town in blue duotone">
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="site-footer__brand">
-      <a class="brand" href="#"><img src="assets/mascot.png" alt="Hermes Bots mascot"> Hermes Bots</a>
+      <a class="brand" href="#"><img src="assets/mascot.png" alt="Gots mascot"> Gots</a>
       <span class="site-footer__legal"><span>© 2026 Galyarder Labs</span><span>AGPL-3.0</span></span>
     </div>
     <nav class="site-footer__columns" aria-label="Footer">
@@ -641,6 +710,24 @@
   track.innerHTML = cardsHtml + cardsHtml;
   document.getElementById("tPause").onclick = function () { var v = document.getElementById("tViewport"); v.classList.toggle("paused"); this.textContent = v.classList.contains("paused") ? "▶" : "❚❚"; };
   document.getElementById("controlBtn").onclick = function () { var on = this.textContent === "Take control"; this.textContent = on ? "Release" : "Take control"; document.getElementById("controlState").textContent = on ? "You have control (demo)" : "Watching — read-only"; };
+
+
+  document.getElementById("navToggle").onclick = function () { document.querySelector(".site-header").classList.toggle("menu-open"); };
+  document.querySelectorAll("#siteMenuPanel a").forEach(function (a) { a.addEventListener("click", function () { document.querySelector(".site-header").classList.remove("menu-open"); }); });
+  var sidebar = document.getElementById("demoSidebar"), scrim = document.getElementById("demoScrim"), panel = document.getElementById("demoPanel");
+  function closeSidebar() { sidebar.classList.remove("is-open"); scrim.classList.remove("show"); }
+  document.getElementById("demoMenuBtn").onclick = function () { sidebar.classList.add("is-open"); scrim.classList.add("show"); };
+  scrim.onclick = closeSidebar;
+  document.getElementById("demoPanelBtn").onclick = function () { panel.classList.add("is-open"); };
+  document.getElementById("demoPanelClose").onclick = function () { panel.classList.remove("is-open"); };
+  var origRenderBot = renderBot;
+  renderBot = function (bot) { origRenderBot(bot); closeSidebar(); };
+  document.getElementById("setupChip").onclick = function () {
+    var text = "Set up Gots for me. Follow the setup prompt at https://github.com/galyarderlabs/hermes-bots/blob/main/SETUP_PROMPT.md";
+    var done = function () { var c = document.getElementById("setupCopy"); c.textContent = "Copied ✓"; setTimeout(function () { c.textContent = "Copy"; }, 2000); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, done); }
+    else { var t = document.createElement("textarea"); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch (e) {} document.body.removeChild(t); done(); }
+  };
 
   document.getElementById("approveBtn").onclick = function () { document.getElementById("approvalBox").innerHTML = '<p class="approval-done">✓ Approved — the drafts are sent.</p>'; };
   document.getElementById("denyBtn").onclick = function () { document.getElementById("approvalBox").innerHTML = '<p class="approval-done" style="color:#b3261e;">✕ Denied — nothing was sent.</p>'; };
