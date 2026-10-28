@@ -240,6 +240,13 @@
   .site-footer { display:flex; justify-content:space-between; gap:48px; margin-top:70px; padding:60px 0 70px; border-top:1px solid var(--line); }
   .site-footer__brand { display:flex; flex-direction:column; align-items:flex-start; gap:16px; }
   .site-footer__legal { display:flex; flex-wrap:wrap; gap:4px 16px; color:#a0a0a0; font-size:13.5px; }
+  .lang-picker { position:relative; }
+  .lang-picker__btn { border:1px solid var(--line-2); border-radius:999px; background:var(--surface); color:var(--body); padding:6px 12px; font-size:13.5px; font-weight:500; cursor:pointer; }
+  .lang-picker__panel { display:none; position:absolute; bottom:calc(100% + 8px); left:0; min-width:180px; border:1px solid var(--line-2); border-radius:12px; background:var(--surface); box-shadow:var(--shadow-soft); padding:6px; z-index:5; }
+  .lang-picker.open .lang-picker__panel { display:block; }
+  .lang-picker__panel span, .lang-picker__panel a { display:block; border-radius:8px; padding:8px 10px; color:var(--body); font-size:13.5px; text-decoration:none; }
+  .lang-picker__panel a:hover { background:var(--surface-soft); color:var(--ink); }
+  .lang-picker__current { color:var(--muted); }
   .site-footer__columns { display:grid; grid-template-columns:repeat(3,minmax(140px,auto)); gap:48px; }
   .site-footer__column h2 { margin:0 0 14px; color:var(--ink); font-size:14px; font-weight:500; }
   .site-footer__column ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; color:var(--muted); font-size:14px; }
@@ -745,6 +752,13 @@
   <footer class="site-footer">
     <div class="site-footer__brand">
       <a class="brand" href="#"><img src="assets/mascot.png" alt="GBots mascot"> GBots</a>
+      <div class="lang-picker" id="langPicker">
+        <button class="lang-picker__btn" type="button" aria-haspopup="true" aria-expanded="false">English <span aria-hidden="true">▾</span></button>
+        <div class="lang-picker__panel">
+          <span class="lang-picker__current" aria-current="true">English</span>
+          <a href="id/">Bahasa Indonesia</a>
+        </div>
+      </div>
       <span class="site-footer__legal"><span>© 2026 Galyarder Labs</span><span>AGPL-3.0</span></span>
     </div>
     <nav class="site-footer__columns" aria-label="Footer">
@@ -1242,6 +1256,13 @@
 
 
   document.getElementById("navToggle").onclick = function () { document.querySelector(".site-header").classList.toggle("menu-open"); };
+  (function () {
+    var lp = document.getElementById("langPicker"); if (!lp) return;
+    var lb = lp.querySelector(".lang-picker__btn");
+    lb.onclick = function (e) { e.stopPropagation(); var open = lp.classList.toggle("open"); lb.setAttribute("aria-expanded", open ? "true" : "false"); };
+    document.addEventListener("click", function (e) { if (!lp.contains(e.target)) { lp.classList.remove("open"); lb.setAttribute("aria-expanded", "false"); } });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { lp.classList.remove("open"); lb.setAttribute("aria-expanded", "false"); } });
+  })();
   document.querySelectorAll("#siteMenuPanel a").forEach(function (a) { a.addEventListener("click", function () { document.querySelector(".site-header").classList.remove("menu-open"); }); });
   (function () {
     var btn = document.getElementById("setupCopyBtn"); if (!btn) return;
