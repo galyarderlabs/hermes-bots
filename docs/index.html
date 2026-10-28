@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gots — Give your bots a job. Check in from your phone.</title>
-<meta name="description" content="Give your bots a job. Check in from your phone. Gots is how you talk to the bots on your hosts — Hermes first, with OpenWebUI and more hosts to come.">
-<meta property="og:title" content="Gots">
-<meta property="og:description" content="Give your bots a job. Check in from your phone. Gots — Galyarder Bots.">
+<title>GBots — Give your bots a job. Check in from your phone.</title>
+<meta name="description" content="Give your bots a job. Check in from your phone. GBots is how you talk to the bots on your hosts — Hermes first, with OpenWebUI and more hosts to come.">
+<meta property="og:title" content="GBots">
+<meta property="og:description" content="Give your bots a job. Check in from your phone. GBots — Galyarder Bots.">
 <meta property="og:image" content="assets/og-banner.png">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -322,7 +322,7 @@
 <div class="container">
   <header class="site-header">
     <div class="site-header__left">
-      <a class="brand" href="#"><img src="assets/mascot.png" alt="Gots mascot"> Gots</a>
+      <a class="brand" href="#"><img src="assets/mascot.png" alt="GBots mascot"> GBots</a>
       <nav class="site-nav" aria-label="Primary">
         <a href="#demo">Demo</a>
         <a href="#team">Bot team</a>
@@ -349,7 +349,7 @@
 
   <main id="main">
     <section class="hero">
-      <span class="hero__pill">Gots · Galyarder Bots — open source</span>
+      <span class="hero__pill">GBots · Galyarder Bots — open source</span>
       <h1>Give your bots a job. Check in from your phone.</h1>
       <p class="lead">Your bots do the work on your host. You steer them, review their results, and say yes or no — from your pocket, whenever you want. Hermes first, with OpenWebUI and more hosts to come.</p>
       <div class="hero__actions">
@@ -357,7 +357,7 @@
         <a class="button button--secondary" href="https://github.com/galyarderlabs/hermes-bots">★ Star on GitHub</a>
       </div>
       <button class="setup-chip" id="setupChip" type="button">
-        <span class="setup-chip__label">Set up Gots for me</span>
+        <span class="setup-chip__label">Set up GBots for me</span>
         <span class="setup-chip__text">Follow the setup prompt at github.com/galyarderlabs/hermes-bots/blob/main/SETUP_PROMPT.md</span>
         <span class="setup-chip__copy" id="setupCopy">Copy</span>
       </button>
@@ -525,7 +525,7 @@
         <div class="section-intro">
           <p class="eyebrow">Self-hosted</p>
           <h2 class="section-heading">Your machine, your models, your control.</h2>
-          <p class="section-copy">Gots is not another agent. It is the phone app for the bots you already run — the host stays in charge, the phone just checks in.</p>
+          <p class="section-copy">GBots is not another agent. It is the phone app for the bots you already run — the host stays in charge, the phone just checks in.</p>
         </div>
         <div class="card-grid-3">
           <article class="feature-card"><div class="capability-art capability-art--apps"><div class="art-window"><span class="art-label">Bot default model</span><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Host default — per bot</div><div class="art-row"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>Per-chat override, any time</div></div></div><h3>Your model</h3><p>Choose a different model for each bot, from whatever its host is set up with. The app never picks a provider for you and never sees your keys.</p></article>
@@ -626,7 +626,7 @@
 
   <footer class="site-footer">
     <div class="site-footer__brand">
-      <a class="brand" href="#"><img src="assets/mascot.png" alt="Gots mascot"> Gots</a>
+      <a class="brand" href="#"><img src="assets/mascot.png" alt="GBots mascot"> GBots</a>
       <span class="site-footer__legal"><span>© 2026 Galyarder Labs</span><span>AGPL-3.0</span></span>
     </div>
     <nav class="site-footer__columns" aria-label="Footer">
@@ -723,7 +723,7 @@
   var origRenderBot = renderBot;
   renderBot = function (bot) { origRenderBot(bot); closeSidebar(); };
   document.getElementById("setupChip").onclick = function () {
-    var text = "Set up Gots for me. Follow the setup prompt at https://github.com/galyarderlabs/hermes-bots/blob/main/SETUP_PROMPT.md";
+    var text = "Set up GBots for me. Follow the setup prompt at https://github.com/galyarderlabs/hermes-bots/blob/main/SETUP_PROMPT.md";
     var done = function () { var c = document.getElementById("setupCopy"); c.textContent = "Copied ✓"; setTimeout(function () { c.textContent = "Copy"; }, 2000); };
     if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, done); }
     else { var t = document.createElement("textarea"); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch (e) {} document.body.removeChild(t); done(); }

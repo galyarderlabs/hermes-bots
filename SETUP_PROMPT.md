@@ -1,6 +1,6 @@
-# Set up Gots for me
+# Set up GBots for me
 
-Gots is the phone app for the bots on your hosts — Hermes first, with
+GBots is the phone app for the bots on your hosts — Hermes first, with
 OpenWebUI and more hosts to come. This prompt sets up the Hermes path:
 a Rust gateway on the host, plus the Android preview app on the phone.
 
@@ -8,7 +8,7 @@ a Rust gateway on the host, plus the Android preview app on the phone.
 
 - A host PC already running Hermes Agent by Nous Research
   (https://hermes-agent.nousresearch.com/) — the host holds the bots,
-  sessions, tools, approvals, and credentials. Gots never holds them.
+  sessions, tools, approvals, and credentials. GBots never holds them.
 - A Rust toolchain on the host (`cargo`).
 - Phone and host on the same private network. Tailscale is the
   recommended way — the phone must never use `127.0.0.1` as the gateway
