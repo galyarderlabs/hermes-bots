@@ -22,6 +22,11 @@ const DEFAULT_STORE_PATH: &str = "gbots-store.db";
 
 #[derive(Debug, Clone)]
 pub struct ServerKeys {
+    // Retained, not read in v1: the persistent server identity. Only
+    // the public half is published (fingerprint), but regenerating the
+    // secret would invalidate every paired fingerprint, so it stays in
+    // the store and in this struct for future signed responses.
+    #[allow(dead_code)]
     pub identity_sk: [u8; 32],
     pub identity_pk: [u8; 32],
     pub sealing_sk: [u8; 32],
@@ -168,7 +173,7 @@ impl PairStore {
             let code: String = (0..8)
                 .map(|_| {
                     let b: u8 = rand::random();
-                    PAIR_CODE_ALPHABET[(b % 32) as usize] as char
+                    PAIR_CODE_ALPHABET[(b % PAIR_CODE_ALPHABET.len() as u8) as usize] as char
                 })
                 .collect();
             let now = now_secs();
@@ -203,17 +208,20 @@ impl PairStore {
             params![now],
         )
         .map_err(|e| format!("device store write failed: {e}"))?;
-        let role: Option<String> = conn
+        // v1: every device is owner; the role lives on the device
+        // record, not on the code, so the code row carries no role.
+        let found: Option<i64> = conn
             .query_row(
-                "SELECT role FROM pair_codes WHERE code_hash = ? AND used = 0 AND expires_at >= ?",
+                "SELECT 1 FROM pair_codes WHERE code_hash = ? AND used = 0 AND expires_at >= ?",
                 params![hash_secret(&normalized), now],
                 |r| r.get(0),
             )
             .optional()
             .map_err(|e| format!("device store read failed: {e}"))?;
-        let Some(role) = role else {
+        if found.is_none() {
             return Ok(None);
-        };
+        }
+        let role = "owner".to_string();
         let changed = conn
             .execute(
                 "UPDATE pair_codes SET used = 1 WHERE code_hash = ? AND used = 0",
@@ -319,25 +327,23 @@ mod tests {
         let _ = std::fs::create_dir_all(dir);
         let path = dir.join(format!("{name}-{}.db", std::process::id()));
         let _ = std::fs::remove_file(&path);
-        (
-            PairStore::open(path.to_str().unwrap()).unwrap(),
-            path,
-        )
+        (PairStore::open(path.to_str().unwrap()).unwrap(), path)
     }
 
     #[test]
     fn code_redeems_exactly_once() {
         let (store, _path) = temp_store("redeem");
         let code = store.create_pair_code().unwrap();
-        assert_eq!(store.redeem_pair_code(&code).unwrap(), Some("owner".to_string()));
+        assert_eq!(
+            store.redeem_pair_code(&code).unwrap(),
+            Some("owner".to_string())
+        );
         assert_eq!(store.redeem_pair_code(&code).unwrap(), None);
         assert_eq!(store.redeem_pair_code("ZZZZZZZZ").unwrap(), None);
         // Codes normalize: lowercase input redeems an uppercase code.
         let code2 = store.create_pair_code().unwrap();
         assert_eq!(
-            store
-                .redeem_pair_code(&code2.to_ascii_lowercase())
-                .unwrap(),
+            store.redeem_pair_code(&code2.to_ascii_lowercase()).unwrap(),
             Some("owner".to_string())
         );
     }
@@ -382,7 +388,10 @@ mod tests {
         let second = store.server_keys().unwrap();
         assert_eq!(first.identity_pk, second.identity_pk);
         assert_eq!(first.sealing_pk, second.sealing_pk);
-        assert_eq!(store.fingerprint_hex().unwrap(), hash_bytes(&first.identity_pk));
+        assert_eq!(
+            store.fingerprint_hex().unwrap(),
+            hash_bytes(&first.identity_pk)
+        );
         assert_eq!(store.fingerprint_hex().unwrap().len(), 64);
     }
 }

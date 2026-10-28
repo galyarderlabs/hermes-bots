@@ -4,8 +4,8 @@
 //! server prints a QR -> phone scans -> fingerprint check against
 //! /api/gbots -> sealed pair request -> /api/pair redeems the code and
 //! returns a per-device credential. The sealed request is a libsodium
-//! sealed box (X25519 + XSalsa20-Poly1305, nonce = BLAKE2b-24 of
-//! ephemeral_pk || recipient_pk), so the phone side (tweetnacl) and
+//! sealed box (X25519, HSalsa20-derived key, XSalsa20-Poly1305,
+//! nonce = BLAKE2b-24 of ephemeral_pk || recipient_pk), so the phone side (tweetnacl) and
 //! this side must agree byte-for-byte; the vector test in this module
 //! pins the construction against a libsodium-generated vector.
 
@@ -29,7 +29,7 @@ pub fn b64u(bytes: &[u8]) -> String {
 pub fn decode_b64u(value: &str) -> Result<Vec<u8>, String> {
     let stripped = value.trim_end_matches('=');
     let mut padded = stripped.to_string();
-    while padded.len() % 4 != 0 {
+    while !padded.len().is_multiple_of(4) {
         padded.push('=');
     }
     base64::engine::general_purpose::URL_SAFE
@@ -53,26 +53,30 @@ pub fn sealed_box_open(sealing_sk: &[u8; 32], sealed: &[u8]) -> Result<Vec<u8>, 
         .try_into()
         .map_err(|_| "sealed payload malformed".to_string())?;
     let ciphertext = &sealed[32..];
-    let secret = x25519_dalek::StaticSecret::from(*sealing_sk);
-    let recipient_pk = x25519_dalek::PublicKey::from(&secret);
-    let shared = secret.diffie_hellman(&x25519_dalek::PublicKey::from(ephemeral_pk));
+    // The recipient public key feeds the nonce; the shared box key is
+    // derived by SalsaBox (X25519 + HSalsa20), exactly like libsodium
+    // crypto_box_seal — the raw DH output is NOT the box key.
+    let recipient_pk = crypto_box::PublicKey::from(
+        x25519_dalek::PublicKey::from(&x25519_dalek::StaticSecret::from(*sealing_sk)).to_bytes(),
+    );
     let mut nonce_bytes = [0u8; 24];
     {
         use blake2::digest::{Update, VariableOutput};
         let mut hasher =
             blake2::Blake2bVar::new(24).map_err(|e| format!("blake2 init failed: {e}"))?;
-        hasher.update(ephemeral_pk);
+        hasher.update(&ephemeral_pk);
         hasher.update(recipient_pk.as_bytes());
         hasher
             .finalize_variable(&mut nonce_bytes)
             .map_err(|e| format!("blake2 finalize failed: {e}"))?;
     }
-    use aead::{Aead, KeyInit};
-    let cipher = crypto_secretbox::XSalsa20Poly1305::new_from_slice(shared.as_bytes())
-        .map_err(|e| format!("secretbox init failed: {e}"))?;
-    let nonce = aead::Nonce::<crypto_secretbox::XSalsa20Poly1305>::from_slice(&nonce_bytes);
-    cipher
-        .decrypt(nonce, ciphertext)
+    use aead::Aead;
+    let bx = crypto_box::SalsaBox::new(
+        &crypto_box::PublicKey::from(ephemeral_pk),
+        &crypto_box::SecretKey::from(*sealing_sk),
+    );
+    let nonce = crypto_box::Nonce::from_slice(&nonce_bytes);
+    bx.decrypt(nonce, ciphertext)
         .map_err(|_| "sealed box open failed".to_string())
 }
 
@@ -153,7 +157,7 @@ pub async fn gbots_info_handler(State(state): State<AppState>) -> Response {
 }
 
 #[derive(Deserialize)]
-struct PairRequest {
+pub(crate) struct PairRequest {
     sealed: String,
 }
 

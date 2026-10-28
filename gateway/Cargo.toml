@@ -30,7 +30,8 @@ chrono = "0.4"
 rusqlite = { version = "0.32", features = ["bundled"] }
 qrcode = "0.14"
 ed25519-dalek = "2"
-x25519-dalek = "2"
-crypto_secretbox = "0.1"
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+crypto_box = "0.9"
+aead = "0.5"
 blake2 = "0.10"
 sha2 = "0.10"

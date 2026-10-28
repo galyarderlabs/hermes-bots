@@ -459,10 +459,7 @@ async fn run_display_bridge(mut socket: WebSocket, state: AppState, viewer_id: S
 
 /// Helper used by proxy.rs: mint a display ticket + viewer_id pair.
 /// Bound to the calling device, like WS tickets.
-pub async fn mint_display_ticket(
-    state: &AppState,
-    device_id: Option<String>,
-) -> DisplayTicketInfo {
+pub async fn mint_display_ticket(state: &AppState, device_id: Option<String>) -> DisplayTicketInfo {
     let bytes: [u8; 8] = rand::random();
     let viewer_id = format!("viewer-{}", hex::encode(bytes));
     let (ticket, ttl) = state

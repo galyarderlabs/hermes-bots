@@ -139,12 +139,15 @@ async fn main() {
     };
     tracing::info!("hermes-gateway listening on {listen}, forwarding to {origin}");
 
-    if let Err(e) = axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>())
-        .with_graceful_shutdown(async {
-            let _ = tokio::signal::ctrl_c().await;
-            tracing::info!("shutdown signal received");
-        })
-        .await
+    if let Err(e) = axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .with_graceful_shutdown(async {
+        let _ = tokio::signal::ctrl_c().await;
+        tracing::info!("shutdown signal received");
+    })
+    .await
     {
         eprintln!("hermes-gateway: server error: {e}");
         std::process::exit(1);
