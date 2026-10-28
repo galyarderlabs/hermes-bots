@@ -189,7 +189,7 @@
         </div>
         <div class="demo-main">
           <div class="demo-main-head">
-            <span class="bot-avatar xs" id="mainAvatar" style="background:#f5a03c;"><img src="assets/mascot.png" alt=""></span>
+            <span class="bot-avatar xs" id="mainAvatar"><img src="assets/bots/inbox-manager.png" alt=""></span>
             <div><b id="mainName">Inbox Manager</b><br><span id="mainJob">Sweeps the inbox, drafts the rest</span></div>
           </div>
           <div class="demo-thread" id="thread"></div>
@@ -219,10 +219,10 @@
         <p class="section-copy">Start with a job. Make it yours. Each bot keeps its own conversations, routines and history — and shows up in its own colour, like the family it is.</p>
       </div>
       <div class="card-grid-4">
-        <article class="card roster-card"><span class="bot-avatar" style="background:#f5a03c;"><img src="assets/mascot.png" alt="Research Scout"></span><h3>Research Scout</h3><p>Researches a list overnight, scores it, and drafts in your voice. Nothing sent without you.</p><p style="margin-top:12px;"><span class="chip">Nightly 1am</span><span class="chip">40 researched</span></p></article>
-        <article class="card roster-card"><span class="bot-avatar" style="background:#6a6bf5;"><img src="assets/mascot.png" alt="Inbox Manager"></span><h3>Inbox Manager</h3><p>Sweeps the inbox, archives the noise, drafts the rest, and flags the one thread that actually needs you.</p><p style="margin-top:12px;"><span class="chip">Weekdays 6am</span><span class="chip">Inbox at zero</span></p></article>
-        <article class="card roster-card"><span class="bot-avatar" style="background:#9b5cf6;"><img src="assets/mascot.png" alt="Account Watcher"></span><h3>Account Watcher</h3><p>Remembers the account: who approves, what terms they sign, and what was promised last time.</p><p style="margin-top:12px;"><span class="chip">Every week</span><span class="chip">5 drafts parked</span></p></article>
-        <article class="card roster-card"><span class="bot-avatar" style="background:#3b82f6;"><img src="assets/mascot.png" alt="Task Runner"></span><h3>Task Runner</h3><p>Recurring work on a schedule — morning sweep, month-end close, pipeline refresh — with a result card every run.</p><p style="margin-top:12px;"><span class="chip">Hourly</span><span class="chip">Last run done</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar"><img src="assets/bots/research-scout.png" alt="Research Scout"></span><h3>Research Scout</h3><p>Researches a list overnight, scores it, and drafts in your voice. Nothing sent without you.</p><p style="margin-top:12px;"><span class="chip">Nightly 1am</span><span class="chip">40 researched</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar"><img src="assets/bots/inbox-manager.png" alt="Inbox Manager"></span><h3>Inbox Manager</h3><p>Sweeps the inbox, archives the noise, drafts the rest, and flags the one thread that actually needs you.</p><p style="margin-top:12px;"><span class="chip">Weekdays 6am</span><span class="chip">Inbox at zero</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar"><img src="assets/bots/account-watcher.png" alt="Account Watcher"></span><h3>Account Watcher</h3><p>Remembers the account: who approves, what terms they sign, and what was promised last time.</p><p style="margin-top:12px;"><span class="chip">Every week</span><span class="chip">5 drafts parked</span></p></article>
+        <article class="card roster-card"><span class="bot-avatar"><img src="assets/bots/task-runner.png" alt="Task Runner"></span><h3>Task Runner</h3><p>Recurring work on a schedule — morning sweep, month-end close, pipeline refresh — with a result card every run.</p><p style="margin-top:12px;"><span class="chip">Hourly</span><span class="chip">Last run done</span></p></article>
       </div>
       <p style="font-size:14px;color:var(--muted);margin-top:16px;">Starter job templates are the next step after v0.1.2 — today the app already shows each bot's own conversations, sessions and routines from the host.</p>
     </section>
@@ -271,7 +271,7 @@
         </div>
         <div class="phone" aria-hidden="true">
           <div class="phone__status"><span>9:41</span><span class="phone__island"></span></div>
-          <div class="phone__header"><span class="phone__back">‹</span><span class="bot-avatar xs" style="background:#6a6bf5;"><img src="assets/mascot.png" alt=""></span><span class="phone__name">Inbox Manager</span></div>
+          <div class="phone__header"><span class="phone__back">‹</span><span class="bot-avatar xs"><img src="assets/bots/inbox-manager.png" alt=""></span><span class="phone__name">Inbox Manager</span></div>
           <div class="phone__thread">
             <div class="phone__time">Today 6:00 AM</div>
             <div class="phone__bubble phone__bubble--bot">Morning sweep done. 41 threads read since Friday.</div>
@@ -336,10 +336,10 @@
 </footer>
 <script>
   var BOTS = [
-    { id: "inbox", name: "Inbox Manager", job: "Sweeps the inbox, drafts the rest", color: "#6a6bf5", preview: "Inbox at zero, 5 drafts parked", prompt: "Sweep the inbox and draft replies. Nothing sent without me.", reply: "Done. 41 threads read, 26 archived, 9 replied. 5 drafts are parked for your read — the renewal is the only one that needs you today.", card: [["Archived", "26 newsletters + receipts"], ["Replied", "9 routine threads"], ["Held", "5 drafts for your read"]], routines: [{ n: "Morning sweep", w: "Weekdays 6am", r: "Inbox at zero, 5 drafts parked" }, { n: "Reply Zero", w: "Hourly", r: "No thread older than 1 hour unanswered" }] },
-    { id: "research", name: "Research Scout", job: "Researches overnight, drafts in your voice", color: "#f5a03c", preview: "40 accounts researched, 18 drafts queued", prompt: "Work the research list overnight, my voice, nothing sent without me.", reply: "Understood. I will research, score, and draft. Everything lands in a review list at 6am — nothing goes out until you approve it.", card: [["Researched", "40 accounts · 22 with a live signal"], ["Drafted", "18 emails + 9 notes"], ["Skipped", "4 · already in pipeline"]], routines: [{ n: "Overnight sourcing", w: "Nightly 1am", r: "40 accounts researched, 18 drafts queued" }, { n: "Reply sweep", w: "Weekdays 8am", r: "Follow-ups queued for review" }] },
-    { id: "account", name: "Account Watcher", job: "Remembers every account, every promise", color: "#9b5cf6", preview: "Nora's renewal held for your read", prompt: "Who needs a follow-up this week?", reply: "Three accounts went quiet this week. Nora's renewal is the urgent one — draft is ready, terms match last quarter. The other two can wait until Monday.", card: [["Follow-ups", "3 accounts went quiet"], ["Urgent", "Nora's renewal, draft ready"], ["Waiting", "2 accounts, Monday is fine"]], routines: [{ n: "Account check", w: "Every week", r: "3 quiet accounts flagged" }, { n: "Renewal watch", w: "Every month", r: "Nora's renewal held for your read" }] },
-    { id: "task", name: "Task Runner", job: "Recurring work, reported every run", color: "#3b82f6", preview: "Month-end close done, 2 items flagged", prompt: "Run the month-end close and flag anything odd.", reply: "Month-end close is done. Everything reconciles except two items — both are timing differences, not errors. Summary is in the thread.", card: [["Reconciled", "All accounts except 2"], ["Flagged", "2 timing differences"], ["Filed", "Summary + receipts attached"]], routines: [{ n: "Month-end close", w: "Every month", r: "Done, 2 items flagged" }, { n: "Pipeline refresh", w: "Every week", r: "12 deals moved, 3 stalled" }] }
+    { id: "inbox", name: "Inbox Manager", job: "Sweeps the inbox, drafts the rest", color: "#6a6bf5", avatar: "assets/bots/inbox-manager.png", preview: "Inbox at zero, 5 drafts parked", prompt: "Sweep the inbox and draft replies. Nothing sent without me.", reply: "Done. 41 threads read, 26 archived, 9 replied. 5 drafts are parked for your read — the renewal is the only one that needs you today.", card: [["Archived", "26 newsletters + receipts"], ["Replied", "9 routine threads"], ["Held", "5 drafts for your read"]], routines: [{ n: "Morning sweep", w: "Weekdays 6am", r: "Inbox at zero, 5 drafts parked" }, { n: "Reply Zero", w: "Hourly", r: "No thread older than 1 hour unanswered" }] },
+    { id: "research", name: "Research Scout", job: "Researches overnight, drafts in your voice", color: "#f5a03c", avatar: "assets/bots/research-scout.png", preview: "40 accounts researched, 18 drafts queued", prompt: "Work the research list overnight, my voice, nothing sent without me.", reply: "Understood. I will research, score, and draft. Everything lands in a review list at 6am — nothing goes out until you approve it.", card: [["Researched", "40 accounts · 22 with a live signal"], ["Drafted", "18 emails + 9 notes"], ["Skipped", "4 · already in pipeline"]], routines: [{ n: "Overnight sourcing", w: "Nightly 1am", r: "40 accounts researched, 18 drafts queued" }, { n: "Reply sweep", w: "Weekdays 8am", r: "Follow-ups queued for review" }] },
+    { id: "account", name: "Account Watcher", job: "Remembers every account, every promise", color: "#9b5cf6", avatar: "assets/bots/account-watcher.png", preview: "Nora's renewal held for your read", prompt: "Who needs a follow-up this week?", reply: "Three accounts went quiet this week. Nora's renewal is the urgent one — draft is ready, terms match last quarter. The other two can wait until Monday.", card: [["Follow-ups", "3 accounts went quiet"], ["Urgent", "Nora's renewal, draft ready"], ["Waiting", "2 accounts, Monday is fine"]], routines: [{ n: "Account check", w: "Every week", r: "3 quiet accounts flagged" }, { n: "Renewal watch", w: "Every month", r: "Nora's renewal held for your read" }] },
+    { id: "task", name: "Task Runner", job: "Recurring work, reported every run", color: "#3b82f6", avatar: "assets/bots/task-runner.png", preview: "Month-end close done, 2 items flagged", prompt: "Run the month-end close and flag anything odd.", reply: "Month-end close is done. Everything reconciles except two items — both are timing differences, not errors. Summary is in the thread.", card: [["Reconciled", "All accounts except 2"], ["Flagged", "2 timing differences"], ["Filed", "Summary + receipts attached"]], routines: [{ n: "Month-end close", w: "Every month", r: "Done, 2 items flagged" }, { n: "Pipeline refresh", w: "Every week", r: "12 deals moved, 3 stalled" }] }
   ];
   var current = BOTS[0];
   var threadEl = document.getElementById("thread");
@@ -352,7 +352,8 @@
     current = bot;
     document.getElementById("mainName").textContent = bot.name;
     document.getElementById("mainJob").textContent = bot.job;
-    document.getElementById("mainAvatar").style.background = bot.color;
+    document.getElementById("mainAvatar").style.background = "transparent";
+    document.querySelector("#mainAvatar img").src = bot.avatar;
     listEl.querySelectorAll(".botrow").forEach(function (b) { b.classList.toggle("active", b.dataset.id === bot.id); });
     threadEl.innerHTML = "";
     timeRow("Today 6:00 AM");
@@ -369,7 +370,7 @@
   }
   BOTS.forEach(function (bot) {
     var b = document.createElement("button"); b.className = "botrow"; b.dataset.id = bot.id;
-    b.innerHTML = '<span class="bot-avatar sm" style="background:' + bot.color + ';"><img src="assets/mascot.png" alt=""></span><span style="text-align:left;"><b>' + esc(bot.name) + "</b><span>" + esc(bot.preview) + "</span></span>";
+    b.innerHTML = '<span class="bot-avatar sm"><img src="' + bot.avatar + '" alt=""></span><span style="text-align:left;"><b>' + esc(bot.name) + "</b><span>" + esc(bot.preview) + "</span></span>";
     b.onclick = function () { renderBot(bot); };
     listEl.appendChild(b);
   });
