@@ -211,7 +211,7 @@
   .stat-label { margin-top:6px; color:rgba(255,255,255,.75); font-size:13.5px; }
   .cta-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
   .cta-actions .button { flex:1 1 0; }
-  /* repo card, Rakazo repo-card (static) */
+  /* repo card, Rakazo repo-card (live commits from GitHub API, static fallback rows) */
   .repo-card { overflow:hidden; border:1px solid var(--panel-line); border-radius:var(--radius-card); background:var(--panel); color:var(--panel-copy); box-shadow:var(--shadow-demo); font-size:14px; }
   .repo-card__head { display:flex; align-items:center; gap:10px; padding:18px 22px; border-bottom:1px solid var(--panel-line); }
   .repo-card__name { font-weight:600; color:#fff; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -221,6 +221,8 @@
   .repo-card__dot { width:8px; height:8px; flex:none; border-radius:999px; background:var(--success); }
   .repo-card__title { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .repo-card__changes time { flex:none; color:var(--panel-muted); width:52px; text-align:right; }
+  .repo-card__changes a.repo-card__title { color:inherit; text-decoration:none; }
+  .repo-card__changes a.repo-card__title:hover { text-decoration:underline; }
   .open-source { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); align-items:center; gap:56px; }
   /* faq */
   .home-faq { display:grid; gap:16px; margin-top:36px; }
@@ -1249,6 +1251,41 @@
       try { await navigator.clipboard.writeText(prompt); label.textContent = copied; window.setTimeout(function () { label.textContent = idle; }, 2400); }
       catch (e) { label.textContent = failed; }
     };
+  })();
+  (function () {
+    var list = document.querySelector('.repo-card__changes');
+    if (!list) return;
+    fetch('https://api.github.com/repos/galyarderlabs/hermes-bots/commits?per_page=4')
+      .then(function (r) { if (!r.ok) throw new Error('github ' + r.status); return r.json(); })
+      .then(function (data) {
+        if (!Array.isArray(data) || !data.length) return;
+        var rows = [];
+        for (var i = 0; i < data.length; i++) {
+          var c = data[i];
+          if (!c || !c.commit || !c.commit.message || !c.html_url || !c.commit.author || !c.commit.author.date) return;
+          rows.push(c);
+        }
+        if (!rows.length) return;
+        var frag = document.createDocumentFragment();
+        rows.forEach(function (c) {
+          var li = document.createElement('li');
+          var dot = document.createElement('span');
+          dot.className = 'repo-card__dot';
+          var a = document.createElement('a');
+          a.className = 'repo-card__title';
+          a.href = c.html_url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = c.commit.message.split('\n')[0];
+          var t = document.createElement('time');
+          t.textContent = new Date(c.commit.author.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+          li.appendChild(dot); li.appendChild(a); li.appendChild(t);
+          frag.appendChild(li);
+        });
+        list.textContent = '';
+        list.appendChild(frag);
+      })
+      .catch(function () { /* keep the static fallback rows */ });
   })();
 </script>
 </body>
