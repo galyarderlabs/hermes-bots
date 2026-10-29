@@ -57,8 +57,9 @@ Triggers: push to `main`, pull requests to `main`.
 
 Working directory `gateway/`, Rust stable toolchain: `cargo fmt
 --check`, `cargo clippy -- -D warnings`, `cargo test`,
-`cargo build --release`. This gate exists because cargo is not
-installed on the dev machine — CI is the compile proof for the gateway.
+`cargo build --release`. Cargo is installed on the dev machine too
+(1.99.1), so these commands are verified locally before push; CI
+remains the gate on every push.
 If `gateway/` is absent, these steps fail honestly; there is no stub.
 
 ### `lint-gates.yml` — design-contract gates (single home, no duplication)

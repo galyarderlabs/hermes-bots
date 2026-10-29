@@ -710,7 +710,7 @@
         <div class="repo-card">
           <div class="repo-card__head"><span class="repo-card__name">galyarderlabs/hermes-bots</span><span class="repo-card__meta">AGPL-3.0</span></div>
           <ol class="repo-card__changes">
-            <li><span class="repo-card__dot"></span><span class="repo-card__title">v0.1.2 — pratinjau debug, rute home + maskot</span><time>28 Okt</time></li>
+            <li><span class="repo-card__dot"></span><span class="repo-card__title">v0.1.3 — pairing QR, kredensial per perangkat</span><time>28 Okt</time></li>
             <li><span class="repo-card__dot"></span><span class="repo-card__title">Landing page dibangun ulang dengan bahasa desain Rakazo</span><time>28 Okt</time></li>
             <li><span class="repo-card__dot"></span><span class="repo-card__title">Potret per bot, satu ikon per bot</span><time>28 Okt</time></li>
             <li><span class="repo-card__dot"></span><span class="repo-card__title">Demo threads ditulis ulang Hermes-original</span><time>28 Okt</time></li>
@@ -727,10 +727,10 @@
       <div class="home-faq">
         <details class="faq-item"><summary>Apakah ini sudah bisa diandalkan?</summary><div class="faq-answer"><div><p>Belum. Ini masih pratinjau: aplikasinya sendiri berjalan, tapi koneksi live ke host Hermes asli belum terverifikasi, dan beberapa bagian (suara, pemilih berkas, push, layout tablet) belum tersambung.</p></div></div></details>
         <details class="faq-item"><summary>Apakah aplikasi melihat kunci atau kata sandiku?</summary><div class="faq-answer"><div><p>Tidak. Host-mu memegang semua itu. Aplikasi hp hanya berbicara dengan host — tidak pernah meminta kunci provider.</p></div></div></details>
-        <details class="faq-item"><summary>Apakah ini bekerja tanpa host Hermes?</summary><div class="faq-answer"><div><p>Tidak. Tanpa host yang terpasang, aplikasi menampilkan “Connect Hermes first”. Ini remote control untuk bot-botmu, bukan bot itu sendiri.</p></div></div></details>
+        <details class="faq-item"><summary>Apakah ini bekerja tanpa host Hermes?</summary><div class="faq-answer"><div><p>Tidak. Instalasi baru membuka onboarding; tanpa host yang terpasang, tab Bots menampilkan “Connect Hermes first”. Ini remote control untuk bot-botmu, bukan bot itu sendiri.</p></div></div></details>
         <details class="faq-item"><summary>Apakah aku harus berada di jaringan yang sama?</summary><div class="faq-answer"><div><p>Hp dan host-mu sebaiknya berada di jaringan privat yang sama (Tailscale adalah cara yang disarankan). Kamu memasukkan alamat host sekali saja, di Settings.</p></div></div></details>
       </div>
-      <details class="builders"><summary>Untuk pembangun — cara kerjanya disusun</summary><p style="margin-top:12px;">Aplikasi hp (Expo React Native) → gateway Rust di host → host Hermes. Satu WebSocket yang awet membawa chat, sesi, tugas, dan persetujuan; sebuah niat disimpan sebelum dikirim, dan penyimpanan yang gagal berarti tidak ada yang terkirim. Gateway: <code>cd gateway &amp;&amp; cargo build --release</code>. Pairing (PKCE) masih berupa stub di pratinjau ini — itu ganjalan pertama pada host live.</p></details>
+      <details class="builders"><summary>Untuk pembangun — cara kerjanya disusun</summary><p style="margin-top:12px;">Aplikasi hp (Expo React Native) → gateway Rust di host → host Hermes. Satu WebSocket yang awet membawa chat, sesi, tugas, dan persetujuan; sebuah niat disimpan sebelum dikirim, dan penyimpanan yang gagal berarti tidak ada yang terkirim. Gateway: <code>cd gateway &amp;&amp; cargo build --release</code>. Pairing berbasis QR dengan kredensial per perangkat — pindai, periksa fingerprint, dan hp mendapat kredensialnya sendiri.</p></details>
     </section>
 
     <section class="stats-band">
@@ -743,7 +743,7 @@
         </div>
       </div>
       <div class="stats-grid">
-        <div><div class="stat-value">v0.1.2</div><div class="stat-label">Build pratinjau</div></div>
+        <div><div class="stat-value">v0.1.3</div><div class="stat-label">Build pratinjau</div></div>
         <div><div class="stat-value">AGPL-3.0</div><div class="stat-label">Lisensi</div></div>
         <div><div class="stat-value">Sumber terbuka</div><div class="stat-label">Bebas, tanpa batasan</div></div>
         <div><div class="stat-value">Host-mu</div><div class="stat-label">Mesinmu</div></div>

@@ -56,7 +56,8 @@ a Rust gateway on the host, plus the Android preview app on the phone.
 
 ## What is verified, and what is not
 
-- Verified: the preview app launches to the Bots tab, the landing
+- Verified: the preview app launches to the onboarding splash when
+  unpaired and straight to the Bots tab when already paired, the landing
   page at https://galyarderlabs.github.io/hermes-bots/ is live, and
   the gateway passes its checks.
 - Not yet verified: a live connection to a real Hermes host, and the

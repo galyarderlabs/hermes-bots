@@ -13,7 +13,9 @@ import { fontSize, spacing } from '../../src/theme/tokens';
 
 // Create via blueprint or custom cron expression. Blueprint fields render
 // from the host's field descriptors (enum/text/time/weekdays, help text,
-// defaults). deliver defaults to bot-chat:{profile}.
+// defaults) as read-only reference: the host's instantiate field key is
+// not confirmed, so field edits are not sent yet — do not guess the key.
+// deliver defaults to bot-chat:{profile}.
 export default function NewTaskScreen() {
   const { palette } = useTheme();
   const { gateway } = useConnection();
@@ -35,11 +37,22 @@ export default function NewTaskScreen() {
   }, [gateway]);
 
   const create = async () => {
-    if (!gateway || !profile || !prompt.trim()) return;
+    if (!gateway || !profile) return;
     try {
-      if (mode === 'Blueprint' && blueprintKey) {
-        await gateway.cronInstantiateBlueprint({ blueprint: blueprintKey, prompt: prompt.trim(), profile }, profile);
+      if (mode === 'Blueprint') {
+        // Blueprint mode creates ONE job via instantiate — never also
+        // cronCreate (that double-created a second custom job).
+        if (!blueprintKey) return;
+        const inst = (await gateway.cronInstantiateBlueprint(
+          { blueprint: blueprintKey, ...(prompt.trim() ? { prompt: prompt.trim() } : {}), profile },
+          profile,
+        )) as { job_id?: string; id?: string };
+        const instId = inst.job_id ?? inst.id;
+        if (instId) router.replace(`/tasks/${encodeURIComponent(instId)}`);
+        else router.replace('/(tabs)/tasks');
+        return;
       }
+      if (!prompt.trim()) return;
       const res = (await gateway.cronCreate(
         {
           prompt: prompt.trim(),
@@ -71,8 +84,16 @@ export default function NewTaskScreen() {
               <GlassButton key={b.key} title={`${b.title} — ${b.description}`} variant={blueprintKey === b.key ? 'prominent' : 'soft'} onPress={() => setBlueprintKey(b.key)} />
             ))}
             {blueprint?.fields.map((f) => (
-              <GlassInput key={f.name} label={f.label} placeholder={f.help} defaultValue={f.default ?? ''} />
+              <View key={f.name} style={styles.field}>
+                <Text style={[styles.fieldLabel, { color: palette.text }]}>{f.label}</Text>
+                <Text style={[styles.fieldValue, { color: palette.secondary }]}>{f.default ?? '—'}</Text>
+              </View>
             ))}
+            {blueprint && blueprint.fields.length > 0 ? (
+              <Text style={[styles.fieldNote, { color: palette.secondary }]}>
+                These fields are shown for reference — editing them is not sent to the host yet.
+              </Text>
+            ) : null}
           </>
         ) : (
           <>
@@ -85,7 +106,7 @@ export default function NewTaskScreen() {
           </>
         )}
         {error ? <GlassAlert tone="error" message={error} /> : null}
-        <GlassButton title="Create task" variant="prominent" disabled={!profile || !prompt.trim()} onPress={() => void create()} />
+        <GlassButton title="Create task" variant="prominent" disabled={mode === 'Blueprint' ? !profile || !blueprintKey : !profile || !prompt.trim()} onPress={() => void create()} />
       </View>
     </ScrollView>
   );
@@ -94,4 +115,8 @@ export default function NewTaskScreen() {
 const styles = StyleSheet.create({
   wrap: { padding: spacing.lg, gap: spacing.md },
   title: { fontSize: fontSize.headline, fontWeight: '600' },
+  field: { gap: 4 },
+  fieldLabel: { fontSize: fontSize.body, fontWeight: '600' },
+  fieldValue: { fontSize: fontSize.body },
+  fieldNote: { fontSize: fontSize.caption },
 });

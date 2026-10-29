@@ -332,3 +332,49 @@ below. Do not present this as production-ready against a live host.
    so nothing was committed or pushed here, per the task. The
    coordinator owns merge + push. `node_modules/` is present locally
    (real install for the lockfile) and is git-ignored.
+
+## Correction 2026-10-29 (full-repo audit, all files all lines)
+
+Supersedes, without overwriting, the sections above where they
+disagree. This file's rule stands: each agent appends its own headed
+section; never overwrite another agent's section.
+
+- Cargo IS installed on the dev machine now (1.99.1):
+  `cargo fmt --check`, `cargo clippy -- -D warnings`, `cargo test`
+  (12/12), `cargo build --release` all verified locally for the
+  gateway on 2026-10-29. The "not compiled locally" notes in the
+  Gateway section and the gateway README's old CI-verification
+  section are stale.
+- This checkout IS a git repository (main branch, pushes to
+  galyarderlabs/hermes-bots); the "no .git found" notes (incl.
+  coordinator flag 3) are stale.
+- Tests: 8 files, 63 tests (was 7 files, 53 at port time).
+- App icon artwork is real (assets/icon.png, 458,234 B, same bytes
+  as favicon; mascot.png 531,407 B) — the "placeholder 1x1 PNGs" note
+  is stale.
+- QR pairing (v0.1.3) supersedes all "Native PKCE pairing is a stub
+  / placeholder credential" claims: pairing is implemented with
+  per-device credentials + sealed box + fingerprint check. What is
+  still pending is the end-to-end test on a real phone + host, not
+  the implementation.
+- Coordinator flag 1 (probe-vs-proxy auth ordering) is RESOLVED by
+  design: pre-pairing discovery uses the public `/api/gbots`
+  endpoint; `/api/status` requires a device credential, which exists
+  only after pairing. No unauthenticated proxy probe is needed.
+- GlassToast DOES exist (src/components/glassyui/GlassToast.tsx,
+  provider wired in app/_layout.tsx) — it was in the Tier-1 set all
+  along.
+- Unused Tier-1 components (no imports outside their own files):
+  GlassMenu, GlassSheet, GlassProgress, GlassTabs — kept as the
+  design-system set; the app uses expo-router Tabs, not GlassTabs.
+- Clarify round-trip: the approval modal renders the card but does
+  not resolve a live pending server request, and no onServerRequest
+  handler is registered — server clarify requests are answered {}
+  immediately by design (never stall). Wiring the modal to the
+  pending request needs a live host to verify and is still open.
+- tasks/new blueprint mode: fixed 2026-10-29 (no more double
+  creation, no more dead create button). Blueprint field VALUES are
+  still not sent — the host's instantiate field key is unconfirmed,
+  so fields render read-only for reference until the contract is
+  known. Do not guess the key.
+- The display/RFB stub and About-host-version notes remain accurate.

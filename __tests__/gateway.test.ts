@@ -89,6 +89,13 @@ describe('terminal events', () => {
     // Only the timeout resolved it, with the timeout error shape.
     expect(resolved).toBe(true);
   });
+
+  it('an unexpected socket drop resolves turn waiters immediately, not at the timeout', async () => {
+    const { client } = clientWithSocket();
+    const waiting = client.waitForTerminal('s1', 600000);
+    (client as unknown as { handleClose: () => void }).handleClose();
+    await expect(waiting).resolves.toMatchObject({ type: 'error', payload: { message: 'connection_closed' } });
+  });
 });
 
 describe('session held elsewhere', () => {

@@ -1,5 +1,5 @@
 // Top-level navigation tabs: Bots / Sessions / Tasks. Tabs navigate, never act.
-// The selected bubble springs under normal motion and jumps under reduced motion.
+// Selection changes instantly (no animated indicator in this implementation).
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '../../theme/theme-context';

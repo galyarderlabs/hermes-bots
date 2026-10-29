@@ -200,10 +200,23 @@ export class GatewayClient {
     });
     socket.onmessage = (ev) => this.handleRaw(ev.data);
     socket.onclose = () => this.handleClose();
-    await openPromise;
-    const ready = await readyPromise;
-    this.reconnectAttempt = 0;
-    return ready;
+    try {
+      await openPromise;
+      const ready = await readyPromise;
+      this.reconnectAttempt = 0;
+      return ready;
+    } catch (e) {
+      // A failed connect must not leave an open socket or a stale ready
+      // waiter behind: close, drop the socket, clear the waiters.
+      try {
+        socket.close();
+      } catch {
+        /* already closed */
+      }
+      if (this.socket === socket) this.socket = null;
+      this.readyWaiters = [];
+      throw e;
+    }
   }
 
   /** Reconnect with exponential backoff. Never re-sends a turn. */
@@ -274,6 +287,15 @@ export class GatewayClient {
       p.reject(err);
     }
     this.pending.clear();
+    // A dropped socket is a disconnect for turn waiters too: resolve
+    // them now instead of leaving them until the 10-minute turn timeout.
+    for (const waiters of this.terminalWaiters.values()) {
+      for (const w of waiters) {
+        clearTimeout(w.timer);
+        w.resolve({ type: 'error', payload: { message: 'connection_closed' } });
+      }
+    }
+    this.terminalWaiters.clear();
   }
 
   /** Entry point for raw socket data; also used directly by tests. */

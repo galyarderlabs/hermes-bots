@@ -3,3 +3,7 @@ node_modules/
 dist/
 *.log
 android/
+# Rust gateway build output + lockfile stay local: the gateway is built
+# from source in CI, and the lockfile is not part of the repo contract.
+gateway/target/
+gateway/Cargo.lock

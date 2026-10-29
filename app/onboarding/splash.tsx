@@ -7,7 +7,7 @@ import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
-import { brand, radius, spacing } from '../../src/theme/tokens';
+import { brand, lightPalette, radius, spacing } from '../../src/theme/tokens';
 
 export default function SplashScreen() {
   return (
@@ -28,7 +28,7 @@ export default function SplashScreen() {
               style={styles.primary}
               onPress={() => router.push('/onboarding/welcome')}
             >
-              <Text style={styles.primaryText}>Get started</Text>
+              <Text style={[styles.primaryText, { color: lightPalette.onAccent }]}>Get started</Text>
             </Pressable>
             <Pressable
               style={styles.secondary}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.capsule,
     alignItems: 'center',
   },
-  primaryText: { color: '#ffffff', fontSize: 18, fontWeight: '700' },
+  primaryText: { fontSize: 18, fontWeight: '700' },
   secondary: {
     backgroundColor: brand.glass,
     borderWidth: 1,

@@ -17,7 +17,9 @@ export function normalizeCronJob(raw: Record<string, unknown>): CronJob | null {
   const schedule = raw.schedule_display ?? raw.schedule;
   return {
     ...job,
-    schedule: typeof schedule === 'string' ? schedule : (schedule as { display?: string; expr?: string })?.display ?? (schedule as { expr?: string })?.expr ?? job.schedule,
+    // A schedule object without display/expr must never reach a Text
+    // badge as an object: fall back to empty, never to job.schedule.
+    schedule: typeof schedule === 'string' ? schedule : (schedule as { display?: string; expr?: string })?.display ?? (schedule as { expr?: string })?.expr ?? '',
   };
 }
 

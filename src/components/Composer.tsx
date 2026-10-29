@@ -6,6 +6,7 @@
 import { useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
+import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../theme/theme-context';
 import { fontSize, radius, spacing } from '../theme/tokens';
 import { GlassTextarea } from './glassyui/GlassTextarea';
@@ -87,7 +88,7 @@ export function Composer({
             onPressOut={() => endHold(false)}
             style={styles.iconBtn}
           >
-            <Text style={[styles.icon, { color: holding ? palette.invalid : palette.accent }]}>🎤</Text>
+            <Ionicons name="mic-outline" size={22} color={holding ? palette.invalid : palette.accent} />
           </Pressable>
           {sending ? (
             <Pressable accessibilityRole="button" accessibilityLabel="Stop generating" onPress={onStop} style={[styles.sendBtn, { backgroundColor: palette.invalid }]}>

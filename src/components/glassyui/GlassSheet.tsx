@@ -1,6 +1,7 @@
-// Bottom sheet: drag down to dismiss, grabber shown, one sheet at a time,
-// an obvious way out besides Done. On phones this backs the sheet screens;
-// full-screen routes are used where the spec requires a full screen.
+// Bottom sheet: scrim tap or the Close button dismisses it, grabber
+// shown, one sheet at a time, an obvious way out besides Done. On
+// phones this backs the sheet screens; full-screen routes are used
+// where the spec requires a full screen.
 import type { ReactNode } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../../theme/theme-context';

@@ -375,7 +375,22 @@ pub async fn attachment_handler(
         use futures_util::StreamExt as _;
         while let Some(msg) = socket.next().await {
             match msg {
-                Ok(TungMessage::Text(text)) => return Some(text),
+                Ok(TungMessage::Text(text)) => {
+                    // The host may push events (e.g. gateway.ready) on a
+                    // fresh connection before answering file.attach: only
+                    // the JSON-RPC reply carrying our id (1) is the
+                    // answer. Anything else is skipped, still inside the
+                    // timeout. A non-JSON frame can never be the reply.
+                    let text_str: &str = &text;
+                    let is_reply = serde_json::from_str::<serde_json::Value>(text_str)
+                        .ok()
+                        .and_then(|v| v.get("id").and_then(|id| id.as_u64()))
+                        == Some(1);
+                    if is_reply {
+                        return Some(text);
+                    }
+                    continue;
+                }
                 Ok(TungMessage::Ping(_)) => {
                     let _ = socket.send(TungMessage::Pong(bytes::Bytes::new())).await;
                 }

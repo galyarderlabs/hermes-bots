@@ -43,7 +43,7 @@ host remains the sole authority for agents, credentials, approvals, tools,
 sessions, files, and history.
 
 - **App** — Expo React Native (TypeScript, Expo Router, FlashList, Hermes
-  JS engine), glass UI with a dark-first design system.
+  JS engine), glass UI with dark and light appearances (default follows the device).
 - **Gateway** — a small Rust (Axum) proxy that runs next to the Hermes
   host and forwards REST and WebSocket traffic to it, with bounded
   backpressure, single-use WebSocket tickets, and metadata-only push.
@@ -90,8 +90,8 @@ debug build on every push to `main`.
 | Area | State |
 |---|---|
 | Gateway client, roster, chat, groups, tasks, capabilities, bot settings, connection probe, turn journal | Implemented, host-unverified |
-| Native PKCE pairing | Stub — pairing stores a placeholder credential; do not rely on it yet |
-| Pre-pairing probe vs proxy auth ordering | Unresolved: the gateway requires a device credential on `/api/status`, but no token exists before pairing, so a probe via the proxy returns 401 (direct-to-host works) |
+| QR pairing (v0.1.3) | Implemented — per-device credentials, sealed-box exchange, fingerprint check before any credential is sent; end-to-end test on a real phone + host still pending |
+| Pre-pairing probe vs proxy auth ordering | By design: pre-pairing discovery uses the public `/api/gbots` endpoint; `/api/status` requires a device credential, which exists only after pairing |
 | `turn.recover` / `turn.status`, exact approval method name | Unconfirmed against a live host's `gateway.ready`; the client reconciles from the transcript instead |
 | Display viewer | Thumbnail + read-only fallback only, no take-control |
 | Voice input, file picker, app-side push, tablet three-pane layout, final app icon | Not implemented yet |

@@ -54,7 +54,7 @@ export default function WelcomeScreen() {
           style={styles.button}
           onPress={() => router.push('/settings/connection')}
         >
-          <Text style={styles.buttonText}>Let&apos;s start →</Text>
+          <Text style={[styles.buttonText, { color: lightPalette.onAccent }]}>Let&apos;s start →</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
@@ -90,5 +90,5 @@ const styles = StyleSheet.create({
     borderRadius: radius.capsule,
     alignItems: 'center',
   },
-  buttonText: { color: '#ffffff', fontSize: 18, fontWeight: '700' },
+  buttonText: { fontSize: 18, fontWeight: '700' },
 });

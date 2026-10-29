@@ -17,9 +17,8 @@ cargo build --release
 # binary: target/release/hermes-gateway
 ```
 
-Requires a Rust toolchain (cargo). See "CI verification" below: this
-dev machine has no cargo, so local compilation was NOT possible here;
-CI is the compile gate.
+Requires a Rust toolchain (cargo). CI runs fmt, clippy, tests, and a
+release build on every push; the same commands run locally before push.
 
 ## Run (next to Hermes)
 
@@ -231,37 +230,25 @@ and latency only — never tokens, headers, bodies, or message content.
 | RFB bridge | **STUB** — ticket + lease gate real, frame forwarding TODO(RFB) |
 | Turn re-attach | **Conditional** — only if `gateway.ready` advertises `turn.recover`/`turn.status`; otherwise transcript reconcile (client-side) |
 
-## CI verification (read this before merging)
+## Verification
 
-Cargo is **not** installed on the dev machine where this code was
-written, so the gateway was **not** compiled locally. CI must be the
-compile gate. The following must run in CI (from `app/gateway/`):
+CI runs the compile gate on every push (from `app/gateway/`):
 
 ```sh
-cargo build --release
-cargo test
 cargo fmt --check
+cargo clippy -- -D warnings
+cargo test
+cargo build --release
 ```
 
-Known compile-risk notes for the CI reader (conservative choices were
-made, but verify):
-
-1. Axum 0.8 `Message::Text` carries `Utf8Bytes`, not `String` —
-   `ws.rs` converts via deref (`let line: &str = &text;`) and
-   `Message::Text(line.into())`. If axum's `Utf8Bytes` API differs,
-   adjust these two spots.
-2. Upstream WS dial with an `Authorization` header uses
-   `http::Request::builder().body(())` passed to
-   `tokio_tungstenite::connect_async` (its `IntoClientRequest` impl for
-   `http::Request<()>`). If that impl is absent in tungstenite 0.26,
-   fall back to a URL-only dial and document the host-auth consequence.
-3. `axum::body::to_bytes(body, limit)` and the `{*rest}` wildcard route
-   syntax are axum 0.8 surface; if CI pins a different axum minor,
-   re-check both.
-4. `tokio-tungstenite` is used with default features only, so the
-   upstream is assumed to be `ws://` (loopback). `wss://` upstream
-   support needs a TLS feature (e.g. `rustls-tls-native-roots`) added
-   and verified in CI before anyone points `HERMES_ORIGIN` at https.
+The same commands are verified locally before push (cargo 1.99.1 on
+the dev machine). The axum 0.8 / tungstenite surface choices in this
+code (Utf8Bytes deref in `ws.rs`, upstream dial via
+`http::Request<()>` into `connect_async`, `to_bytes` + `{*rest}`
+wildcard routes, default-features tungstenite = `ws://` upstream
+only) are all compiled and passing in CI; `wss://` upstream support
+still needs a TLS feature (e.g. `rustls-tls-native-roots`) added and
+verified before anyone points `HERMES_ORIGIN` at https.
 
 No live-host verification was claimed: there is no live Hermes host
 available from this machine, so end-to-end behaviour (real host

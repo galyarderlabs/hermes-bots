@@ -27,6 +27,10 @@ describe('normalization', () => {
     const out = normalizeCronJob({ job_id: 'j', schedule_display: 'Every hour', schedule: { expr: '0 * * * *' } });
     expect(out?.schedule).toBe('Every hour');
   });
+  it('a schedule object without display or expr becomes empty, never an object', () => {
+    const out = normalizeCronJob({ job_id: 'j', schedule: { foo: 'bar' } });
+    expect(out?.schedule).toBe('');
+  });
 });
 
 describe('reconcileTaskJobs', () => {

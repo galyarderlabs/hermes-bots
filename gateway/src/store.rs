@@ -9,7 +9,6 @@
 //! HERMES_HOST_BEARER). Losing the server keys means every device must
 //! re-pair; the store never regenerates them silently.
 
-use std::path::Path;
 use std::sync::{Arc, Mutex};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -76,11 +75,13 @@ pub fn hash_bytes(value: &[u8]) -> String {
 
 impl PairStore {
     pub fn open(path: &str) -> Result<PairStore, String> {
-        let existed = Path::new(path).exists();
         let conn =
             Connection::open(path).map_err(|e| format!("cannot open device store {path}: {e}"))?;
+        // The store holds device tokens and keys: enforce 0600 on every
+        // open, not only on creation — a pre-existing file must not keep
+        // looser permissions from an earlier umask or copy.
         #[cfg(unix)]
-        if !existed {
+        {
             use std::os::unix::fs::PermissionsExt;
             let _ = std::fs::set_permissions(path, std::fs::Permissions::from_mode(0o600));
         }
