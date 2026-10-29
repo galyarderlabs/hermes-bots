@@ -11,6 +11,8 @@ export default function RootLayout() {
         <GlassToastProvider>
           <Stack screenOptions={{ headerShown: true }}>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="onboarding/splash" options={{ headerShown: false }} />
+            <Stack.Screen name="onboarding/welcome" options={{ headerShown: false }} />
             <Stack.Screen name="chat/[sessionId]" options={{ title: 'Chat' }} />
             <Stack.Screen name="chat/new" options={{ title: 'New chat' }} />
             <Stack.Screen name="group/[groupName]" options={{ title: 'Group chat' }} />

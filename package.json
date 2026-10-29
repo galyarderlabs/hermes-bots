@@ -1,1 +1,42 @@
-{"main":"expo-router/entry","name":"hermes-bots","private":true,"scripts":{"android":"expo run:android","ios":"expo run:ios","start":"expo start","test":"vitest run","typecheck":"tsc --noEmit","web":"expo start --web"},"version":"0.3.0","dependencies":{"@react-native-async-storage/async-storage":"^3.1.1","@shopify/flash-list":"^2.3.3","blakejs":"^1.2.1","expo":"^58.0.19","expo-blur":"^58.0.5","expo-camera":"^58.0.13","expo-haptics":"^58.0.7","expo-image":"^58.0.17","expo-notifications":"^58.1.6","expo-router":"^58.0.26","expo-secure-store":"^58.0.2","expo-status-bar":"^58.0.4","react":"^19.3.1","react-native":"^0.88.0","react-native-reanimated":"^4.7.1","react-native-safe-area-context":"^5.10.1","tweetnacl":"^1.0.3"},"devDependencies":{"@types/react":"^19.3.0","typescript":"^7.0.2","vitest":"^5.0.5"}}
+{
+  "main": "expo-router/entry",
+  "name": "hermes-bots",
+  "private": true,
+  "scripts": {
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "start": "expo start",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "web": "expo start --web"
+  },
+  "version": "0.3.0",
+  "dependencies": {
+    "@expo/metro-runtime": "~58.0.15",
+    "@expo/vector-icons": "^15.1.1",
+    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@shopify/flash-list": "^2.3.3",
+    "blakejs": "^1.2.1",
+    "expo": "^58.0.19",
+    "expo-blur": "^58.0.5",
+    "expo-camera": "^58.0.13",
+    "expo-haptics": "^58.0.7",
+    "expo-image": "^58.0.17",
+    "expo-notifications": "^58.1.6",
+    "expo-router": "^58.0.26",
+    "expo-secure-store": "^58.0.2",
+    "expo-status-bar": "^58.0.4",
+    "react": "^19.3.1",
+    "react-dom": "19.3.0",
+    "react-native": "^0.88.0",
+    "react-native-reanimated": "^4.7.1",
+    "react-native-safe-area-context": "^5.10.1",
+    "react-native-web": "^0.21.4",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

@@ -74,6 +74,19 @@ export const lightPalette: Palette = {
   onAccent: '#ffffff',
 };
 
+// Board brand colors (GBots flow board, light theme). These live here
+// because tokens.ts is the only file allowed raw color literals.
+// Board-sampled approximations, adjustable: button blue, wordmark navy,
+// tagline slate, frosted secondary button, icon tile.
+export const brand = {
+  blue: '#2563eb',
+  navy: '#0a1e4e',
+  tagline: '#55688a',
+  glass: 'rgba(255,255,255,0.6)',
+  glassBorder: 'rgba(255,255,255,0.85)',
+  iconBg: '#dbeafe',
+} as const;
+
 export const spacing = { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, xxxl: 32, huge: 48 } as const;
 
 export const radius = {
