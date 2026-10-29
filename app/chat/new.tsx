@@ -17,10 +17,12 @@ export default function NewChatScreen() {
   const { gateway } = useConnection();
   const { profiles, error } = useRoster(false);
   const [creating, setCreating] = useState<string | null>(null);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   const create = async (profile: string) => {
     if (!gateway) return;
     setCreating(profile);
+    setCreateError(null);
     try {
       const res = (await gateway.request('session.create', {
         profile,
@@ -34,8 +36,7 @@ export default function NewChatScreen() {
       router.replace(`/chat/${encodeURIComponent(id)}`);
     } catch (e) {
       setCreating(null);
-      // Error surfaces via the alert below through a re-render guard:
-      (globalThis as Record<string, unknown>).__newChatError = e instanceof Error ? e.message : 'Could not create a chat.';
+      setCreateError(e instanceof Error ? e.message : 'Could not create a chat.');
     }
   };
 
@@ -43,6 +44,7 @@ export default function NewChatScreen() {
     <View style={[styles.wrap, { backgroundColor: palette.bg }]}>
       <Text style={[styles.title, { color: palette.text }]}>Pick a bot for a new chat</Text>
       {error ? <GlassAlert tone="error" message={error} /> : null}
+      {createError ? <GlassAlert tone="error" message={createError} /> : null}
       <FlatList
         data={profiles}
         keyExtractor={(p) => p.name}

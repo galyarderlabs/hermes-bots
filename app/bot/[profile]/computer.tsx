@@ -57,7 +57,9 @@ export default function ComputerScreen() {
     <View style={[styles.wrap, { backgroundColor: palette.bg }]}>
       <Text style={[styles.title, { color: palette.text }]}>Computer · {profile}</Text>
       {error ? <GlassAlert tone="error" message={error} /> : null}
-      {!status ? (
+      {!gateway ? (
+        <GlassAlert tone="warning" message="Connect a host first to view this display." />
+      ) : !status ? (
         <Text style={[styles.body, { color: palette.secondary }]}>Checking display status…</Text>
       ) : pane?.kind === 'unsupported' ? (
         <GlassAlert tone="warning" message="Display control is not supported on this host." />

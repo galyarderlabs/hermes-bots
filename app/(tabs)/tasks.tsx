@@ -37,7 +37,12 @@ export default function TasksTab() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!gateway) return;
+    if (!gateway) {
+      // No gateway (unpaired or disconnected): do not strand the tab on
+      // skeletons forever — show the empty state instead.
+      setLoading(false);
+      return;
+    }
     let alive = true;
     gateway
       .cronList()

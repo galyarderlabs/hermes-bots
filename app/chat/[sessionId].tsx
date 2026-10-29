@@ -55,7 +55,12 @@ export default function ChatScreen() {
 
   // Live event routing for this session + transcript load.
   useEffect(() => {
-    if (!gateway) return;
+    if (!gateway) {
+      // No gateway: do not strand the screen on the loading spinner
+      // forever — show the empty state instead.
+      setLoading(false);
+      return;
+    }
     let alive = true;
     gateway
       .request('session.resume', { session_id: sessionId })
