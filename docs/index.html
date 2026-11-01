@@ -237,8 +237,7 @@
   details.builders summary { cursor:pointer; font-weight:600; color:var(--ink); }
   details.builders code { background:var(--surface-soft); padding:2px 7px; border-radius:6px; }
   /* footer, Rakazo site-footer */
-  .site-footer { margin-top:70px; background:linear-gradient(rgba(10,30,78,0.65), rgba(10,30,78,0.65)), url('assets/footer-landscape.webp') center bottom / cover no-repeat; }
-  .site-footer__inner { display:flex; justify-content:space-between; gap:48px; max-width:1080px; margin:0 auto; padding:60px 24px 70px; }
+  .site-footer { display:flex; justify-content:space-between; gap:48px; margin-top:70px; padding:90px 0 100px; background:linear-gradient(rgba(10,30,78,0.65), rgba(10,30,78,0.65)), url('assets/footer-landscape.webp') center bottom / cover no-repeat; }
   .site-footer .brand { color:#fff; }
   .site-footer__brand { display:flex; flex-direction:column; align-items:flex-start; gap:16px; }
   .site-footer__legal { display:flex; flex-wrap:wrap; gap:4px 16px; color:rgba(255,255,255,0.6); font-size:13.5px; }
@@ -262,7 +261,7 @@
     .chat-mock-row .chat-mock { flex:0 0 min(340px,86vw); scroll-snap-align:start; }
     .stats-band { grid-template-columns:minmax(0,1fr); padding:32px; }
     .cta-actions { flex-direction:column; }
-    .site-footer__inner { flex-direction:column; }
+    .site-footer { flex-direction:column; }
   }
   @media (max-width: 900px) {
     .site-header__right { gap:10px; }
@@ -752,10 +751,8 @@
       </div>
     </section>
   </main>
-</div>
 
-<footer class="site-footer">
-  <div class="site-footer__inner">
+  <footer class="site-footer">
     <div class="site-footer__brand">
       <a class="brand" href="#"><img src="assets/mascot.png" alt="GBots mascot" loading="lazy" decoding="async"> GBots</a>
       <div class="lang-picker" id="langPicker">
@@ -772,8 +769,8 @@
       <div class="site-footer__column"><h2>Company</h2><ul><li><a href="https://galyarderlabs.com">About</a></li><li><a href="mailto:contact@galyarderlabs.com?subject=Galyarder%20Labs">Support</a></li><li><a href="https://galyarderlabs.com/privacy-policy">Privacy</a></li><li><a href="https://galyarderlabs.com/terms-of-service">Terms</a></li></ul></div>
       <div class="site-footer__column"><h2>Project</h2><ul><li><a href="https://github.com/galyarderlabs/hermes-bots/blob/main/LICENSE">License</a></li><li><a href="https://github.com/CodeUpdaterBot/Hermes-Mobile-App">Reference</a></li><li><a href="https://github.com/galyarderlabs/hermes-bots/tree/main/docs">Landing source</a></li></ul></div>
     </nav>
-  </div>
-</footer>
+  </footer>
+</div>
 <script>
   /* ProductDemo port: Rakazo ProductDemo.tsx state machine, vanilla JS.
      Substitutions only: bot portraits for color avatars, GBots bot names,
