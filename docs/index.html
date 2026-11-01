@@ -237,9 +237,11 @@
   details.builders summary { cursor:pointer; font-weight:600; color:var(--ink); }
   details.builders code { background:var(--surface-soft); padding:2px 7px; border-radius:6px; }
   /* footer, Rakazo site-footer */
-  .site-footer { display:flex; justify-content:space-between; gap:48px; margin-top:70px; padding:60px 0 70px; border-top:1px solid var(--line); }
+  .site-footer { background:#0a1e4e; }
+  .site-footer__inner { display:flex; justify-content:space-between; gap:48px; max-width:1080px; margin:0 auto; padding:60px 24px 70px; }
+  .site-footer .brand { color:#fff; }
   .site-footer__brand { display:flex; flex-direction:column; align-items:flex-start; gap:16px; }
-  .site-footer__legal { display:flex; flex-wrap:wrap; gap:4px 16px; color:#a0a0a0; font-size:13.5px; }
+  .site-footer__legal { display:flex; flex-wrap:wrap; gap:4px 16px; color:rgba(255,255,255,0.6); font-size:13.5px; }
   .lang-picker { position:relative; }
   .lang-picker__btn { border:1px solid var(--line-2); border-radius:999px; background:var(--surface); color:var(--body); padding:6px 12px; font-size:13.5px; font-weight:500; cursor:pointer; }
   .lang-picker__panel { display:none; position:absolute; bottom:calc(100% + 8px); left:0; min-width:180px; border:1px solid var(--line-2); border-radius:12px; background:var(--surface); box-shadow:var(--shadow-soft); padding:6px; z-index:5; }
@@ -248,9 +250,9 @@
   .lang-picker__panel a:hover { background:var(--surface-soft); color:var(--ink); }
   .lang-picker__current { color:var(--muted); }
   .site-footer__columns { display:grid; grid-template-columns:repeat(3,minmax(140px,auto)); gap:48px; }
-  .site-footer__column h2 { margin:0 0 14px; color:var(--ink); font-size:14px; font-weight:500; }
-  .site-footer__column ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; color:var(--muted); font-size:14px; }
-  .site-footer__column a:hover { color:var(--ink); }
+  .site-footer__column h2 { margin:0 0 14px; color:#fff; font-size:14px; font-weight:500; }
+  .site-footer__column ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; color:rgba(255,255,255,0.72); font-size:14px; }
+  .site-footer__column a:hover { color:#fff; }
   .footer-landscape { width:100%; height:auto; }
   @media (max-width: 960px) {
     .channels, .open-source, .platforms { grid-template-columns:minmax(0,1fr); gap:40px; justify-items:center; }
@@ -261,7 +263,7 @@
     .chat-mock-row .chat-mock { flex:0 0 min(340px,86vw); scroll-snap-align:start; }
     .stats-band { grid-template-columns:minmax(0,1fr); padding:32px; }
     .cta-actions { flex-direction:column; }
-    .site-footer { flex-direction:column; }
+    .site-footer__inner { flex-direction:column; }
   }
   @media (max-width: 900px) {
     .site-header__right { gap:10px; }
@@ -751,8 +753,10 @@
       </div>
     </section>
   </main>
+</div>
 
-  <footer class="site-footer">
+<footer class="site-footer">
+  <div class="site-footer__inner">
     <div class="site-footer__brand">
       <a class="brand" href="#"><img src="assets/mascot.png" alt="GBots mascot"> GBots</a>
       <div class="lang-picker" id="langPicker">
@@ -769,8 +773,8 @@
       <div class="site-footer__column"><h2>Company</h2><ul><li><a href="https://galyarderlabs.com">About</a></li><li><a href="mailto:contact@galyarderlabs.com?subject=Galyarder%20Labs">Support</a></li><li><a href="https://galyarderlabs.com/privacy-policy">Privacy</a></li><li><a href="https://galyarderlabs.com/terms-of-service">Terms</a></li></ul></div>
       <div class="site-footer__column"><h2>Project</h2><ul><li><a href="https://github.com/galyarderlabs/hermes-bots/blob/main/LICENSE">License</a></li><li><a href="https://github.com/CodeUpdaterBot/Hermes-Mobile-App">Reference</a></li><li><a href="https://github.com/galyarderlabs/hermes-bots/tree/main/docs">Landing source</a></li></ul></div>
     </nav>
-  </footer>
-</div>
+  </div>
+</footer>
 <img class="footer-landscape" src="assets/footer-landscape.webp" alt="GBots mascot running through a golden field by the sea" loading="lazy">
 <script>
   /* ProductDemo port: Rakazo ProductDemo.tsx state machine, vanilla JS.
