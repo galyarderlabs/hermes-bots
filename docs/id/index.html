@@ -251,6 +251,7 @@
   .site-footer__column h2 { margin:0 0 14px; color:var(--ink); font-size:14px; font-weight:500; }
   .site-footer__column ul { display:grid; gap:10px; margin:0; padding:0; list-style:none; color:var(--muted); font-size:14px; }
   .site-footer__column a:hover { color:var(--ink); }
+  .footer-landscape { width:100%; height:auto; }
   @media (max-width: 960px) {
     .channels, .open-source, .platforms { grid-template-columns:minmax(0,1fr); gap:40px; justify-items:center; }
   /* Centered grid items size to content and can overflow both sides when wider than the track (repo card was 452px in a 312px track). Cap them at the track. */
@@ -770,6 +771,7 @@
     </nav>
   </footer>
 </div>
+<img class="footer-landscape" src="../assets/footer-landscape.webp" alt="Maskot GBots berlari di ladang gandum tepi laut" loading="lazy">
 <script>
   /* ProductDemo port: Rakazo ProductDemo.tsx state machine, vanilla JS.
      Substitutions only: bot portraits for color avatars, GBots bot names,
